@@ -1,27 +1,28 @@
-import { ComponentFormFieldStore } from '../modules/component.form.field.store'
+import { WithIdentity } from '@queelag/core'
+import { ComponentFormFieldStore } from './component.form.field.store'
 
-class ComponentFormFieldCollector<T extends ComponentFormFieldStore<any, any>> {
-  data: Map<string, T>
-  dummy: T
+export class ComponentFormFieldCollector<T extends Element, U extends WithIdentity, V extends ComponentFormFieldStore<T, U>> {
+  data: Map<string, V>
+  dummy: V
 
-  constructor(dummy: T) {
+  constructor(dummy: V) {
     this.data = new Map()
     this.dummy = dummy
   }
 
-  setAndReturnDelete(store: T): () => void {
+  setAndReturnDelete(store: V): () => void {
     this.set(store)
     return () => this.delete(store)
   }
 
-  set(store: T): void {
+  set(store: V): void {
     this.data.set(store.id, store)
     this.data.set(this.toKey(store.store, store.path), store)
   }
 
-  get(id: string): T
-  get<U extends object>(store: U, path: string): T
-  get(...args: any[]): T {
+  get(id: string): V
+  get(store: U, path: string): V
+  get(...args: any[]): V {
     switch (true) {
       case typeof args[0] === 'string':
         return this.data.get(args[0]) || this.dummy
@@ -32,14 +33,12 @@ class ComponentFormFieldCollector<T extends ComponentFormFieldStore<any, any>> {
     }
   }
 
-  delete(store: T): void {
+  delete(store: V): void {
     this.data.delete(store.id)
     this.data.delete(this.toKey(store.store, store.path))
   }
 
-  private toKey(store: T, path: string): string {
+  private toKey(store: U, path: keyof U): string {
     return store['id'] + '_' + path
   }
 }
-
-export default ComponentFormFieldCollector

@@ -2,13 +2,13 @@ import { ID, IDUtils, noop } from '@queelag/core'
 import { MutableRefObject } from 'react'
 import { Dummy } from './dummy'
 
-export class ComponentStore<T extends HTMLElement> {
+export class ComponentStore<T extends Element> {
   id: ID
   name: string
   ref: MutableRefObject<T>
 
-  constructor(name: string, id: ID = IDUtils.prefixed(name), ref: MutableRefObject<T> = Dummy.ref, update: () => void = noop) {
-    this.id = id
+  constructor(name: string, id: ID = '', ref: MutableRefObject<T> = Dummy.ref, update: () => void = noop) {
+    this.id = id || IDUtils.prefixed(name)
     this.name = name
     this.ref = ref
     this.update = update

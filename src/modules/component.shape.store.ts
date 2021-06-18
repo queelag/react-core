@@ -1,13 +1,12 @@
+import { ID } from '@queelag/core'
 import { MutableRefObject } from 'react'
-import { OptionalID } from '../../../core/dist'
 import { Shape } from '../definitions/enums'
 import { ComponentStore } from './component.store'
-import { Dummy } from './dummy'
 
-class ComponentShapeStore<T extends HTMLElement> extends ComponentStore<T> {
+export class ComponentShapeStore<T extends Element> extends ComponentStore<T> {
   shape: Shape
 
-  constructor(name: string, id: OptionalID, ref: MutableRefObject<T> = Dummy.ref, shape: Shape = Shape.NONE, update?: () => void) {
+  constructor(name: string, id?: ID, ref?: MutableRefObject<T>, shape: Shape = Shape.NONE, update?: () => void) {
     super(name, id, ref, update)
 
     this.shape = shape
@@ -33,5 +32,3 @@ class ComponentShapeStore<T extends HTMLElement> extends ComponentStore<T> {
     return this.shape === Shape.SQUIRCLE
   }
 }
-
-export default ComponentShapeStore

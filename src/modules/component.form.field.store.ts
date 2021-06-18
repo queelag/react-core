@@ -1,29 +1,29 @@
-import { Localization, ObjectUtils, OptionalID } from '@queelag/core'
+import { ID, Localization, ObjectUtils } from '@queelag/core'
 import Joi, { AnySchema, ValidationResult } from 'joi'
 import { makeObservable, observable } from 'mobx'
 import { MutableRefObject } from 'react'
 import { Layer } from '../definitions/enums'
-import ComponentLayerStore from './component.layer.store'
+import { ComponentLayerStore } from './component.layer.store'
 import { Dummy } from './dummy'
 
-export class ComponentFormFieldStore<T extends HTMLElement, U extends object> extends ComponentLayerStore<T> {
+export class ComponentFormFieldStore<T extends Element, U extends object> extends ComponentLayerStore<T> {
   label: string
-  path: string
+  path: keyof U
   required: boolean
-  schema: AnySchema
+  _schema: AnySchema
   store: U
   touched: boolean
   validation: ValidationResult
 
   constructor(
     name: string,
-    id: OptionalID,
+    id: ID = '',
     label: string = '',
     layer: Layer = Layer.ZERO,
-    path: string,
+    path: keyof U,
     ref: MutableRefObject<T> = Dummy.ref,
     required: boolean = false,
-    schema: AnySchema = Joi.any(),
+    _schema: AnySchema = Joi.any(),
     store: U,
     touched: boolean = false,
     update?: () => void
@@ -33,10 +33,10 @@ export class ComponentFormFieldStore<T extends HTMLElement, U extends object> ex
     this.label = label
     this.path = path
     this.required = required
-    this.schema = schema
+    this._schema = _schema
     this.store = store
     this.touched = touched
-    this.validation = schema.validate(this.value)
+    this.validation = _schema.validate(this.value)
 
     makeObservable(this, { touched: observable, validation: observable })
   }
@@ -46,12 +46,12 @@ export class ComponentFormFieldStore<T extends HTMLElement, U extends object> ex
     this.validation = this.schema.validate(this.value)
   }
 
-  generateSchema(): AnySchema {
-    return this.required ? Joi.any().required() : Joi.any()
-  }
-
   get error(): string {
     return this.validation.error ? this.validation.error.message.replace(/"[a-z]+"/, `"${Localization.get(this.label)}"`) : ''
+  }
+
+  get schema(): AnySchema {
+    return this._schema
   }
 
   get value(): any {
@@ -72,5 +72,9 @@ export class ComponentFormFieldStore<T extends HTMLElement, U extends object> ex
 
   get isValid(): boolean {
     return this.validation.error === undefined
+  }
+
+  set schema(value: AnySchema) {
+    this._schema = value
   }
 }
