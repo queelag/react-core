@@ -15,6 +15,26 @@ export type BottomTabberItem = {
   name: string
 }
 
+export type ColorPickerConfigurationValue = {
+  any: (color: Color) => [string, string, string, string]
+  gray: [string, string, string, string]
+  mono: string
+  monoInverted: string
+}
+
+export type ColorPickerConfiguration = {
+  background: ColorPickerConfigurationValue
+  border: ColorPickerConfigurationValue
+  divide: ColorPickerConfigurationValue
+  feedback: {
+    error: Color
+    information: Color
+    success: Color
+    warning: Color
+  }
+  text: ColorPickerConfigurationValue
+}
+
 export type ContextMenuItem = {
   icon: (props: IconProps) => JSX.Element
   onClick: () => any

@@ -12,10 +12,16 @@ import { InputStore } from './input.store'
 import { SelectStore } from './select.store'
 
 export class FormStore extends ComponentLayerStore<HTMLFormElement> {
-  constructor(id: ID = '', layer: Layer = Layer.TWO, onSubmit: () => any = noop, ref: MutableRefObject<HTMLFormElement>, update: () => void = noop) {
+  constructor(
+    id: ID = '',
+    layer: Layer = Layer.TWO,
+    onSubmit: (event: FormEvent<HTMLFormElement>) => any = noop,
+    ref: MutableRefObject<HTMLFormElement>,
+    update: () => void = noop
+  ) {
     super(ComponentName.FORM, id, layer, ref, update)
 
-    this._onSubmit = onSubmit
+    this.onSubmit = onSubmit
   }
 
   private _onSubmit(event: FormEvent<HTMLFormElement>): any {}
@@ -73,16 +79,18 @@ export class FormStore extends ComponentLayerStore<HTMLFormElement> {
     )
   }
 
-  set onSubmit(value: (event: FormEvent<HTMLFormElement>) => any) {
+  set onSubmit(onSubmit: (event: FormEvent<HTMLFormElement>) => any) {
     this._onSubmit = async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault()
+
+      console.log(this.checkboxes, this.inputs, this.inputFiles, this.selects)
 
       this.checkboxes.forEach((v: CheckboxStore<any>) => v.touch())
       this.inputs.forEach((v: InputStore<any>) => v.touch())
       this.inputFiles.forEach((v: InputFileStore<any>) => v.touch())
       this.selects.forEach((v: SelectStore<any>) => v.touch())
 
-      this.isValid && (await tcp(() => value(event)))
+      this.isValid && (await tcp(() => onSubmit(event)))
 
       this.inputs.forEach((v: InputStore<any>) => v.inputElement.blur())
     }

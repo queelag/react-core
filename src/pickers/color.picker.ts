@@ -1,18 +1,20 @@
 import { Color, FeedbackType, Layer } from '../definitions/enums'
+import { ColorPickerConfiguration } from '../definitions/types'
+import { Dummy } from '../modules/dummy'
 
 class ColorPicker {
+  static configuration: ColorPickerConfiguration = Dummy.colorPickerConfiguration
+
   static byFeedbackType(type: FeedbackType): Color {
     switch (type) {
       case FeedbackType.ERROR:
-        return Color.RED
+        return this.configuration.feedback.error
       case FeedbackType.INFORMATION:
-        return Color.BLUE
+        return this.configuration.feedback.information
       case FeedbackType.SUCCESS:
-        return Color.GREEN
+        return this.configuration.feedback.success
       case FeedbackType.WARNING:
-        return Color.YELLOW
-      default:
-        return Color.GRAY
+        return this.configuration.feedback.warning
     }
   }
 
@@ -28,8 +30,16 @@ class ColorPicker {
     return this.border(this.byFeedbackType(type), layer)
   }
 
+  static borderByString(color: string, layer?: Layer): string {
+    return Object.keys(Color).includes(color) ? this.border(color as Color, layer) : color
+  }
+
   static divideByFeedbackType(type: FeedbackType, layer?: Layer): string {
     return this.divide(this.byFeedbackType(type), layer)
+  }
+
+  static divideByString(color: string, layer?: Layer): string {
+    return Object.keys(Color).includes(color) ? this.divide(color as Color, layer) : color
   }
 
   static textByFeedbackType(type: FeedbackType, layer?: Layer): string {
@@ -45,28 +55,28 @@ class ColorPicker {
       case Color.GRAY:
         switch (layer) {
           case Layer.ZERO:
-            return 'bg-gray-100 dark:bg-black'
+            return this.configuration.background.gray[0]
           case Layer.ONE:
-            return 'bg-white dark:bg-gray-900'
+            return this.configuration.background.gray[1]
           case Layer.TWO:
-            return 'bg-gray-100 dark:bg-gray-800'
+            return this.configuration.background.gray[2]
           case Layer.THREE:
-            return 'bg-gray-200 dark:bg-gray-700'
+            return this.configuration.background.gray[3]
         }
       case Color.MONO:
-        return 'bg-white dark:bg-black'
+        return this.configuration.background.mono
       case Color.MONO_INVERTED:
-        return 'bg-black dark:bg-white'
+        return this.configuration.background.monoInverted
       default:
         switch (layer) {
           case Layer.ZERO:
-            return `bg-${color.toLowerCase()}-100`
+            return this.configuration.background.any(color)[0]
           case Layer.ONE:
-            return `bg-${color.toLowerCase()}-200`
+            return this.configuration.background.any(color)[1]
           case Layer.TWO:
-            return `bg-${color.toLowerCase()}-300`
+            return this.configuration.background.any(color)[2]
           case Layer.THREE:
-            return `bg-${color.toLowerCase()}-400`
+            return this.configuration.background.any(color)[3]
         }
     }
   }
@@ -76,20 +86,29 @@ class ColorPicker {
       case Color.GRAY:
         switch (layer) {
           case Layer.ZERO:
-            return 'border-white dark:border-gray-900'
+            return this.configuration.border.gray[0]
           case Layer.ONE:
-            return 'border-gray-100 dark:border-gray-800'
+            return this.configuration.border.gray[1]
           case Layer.TWO:
-            return 'border-gray-200 dark:border-gray-700'
+            return this.configuration.border.gray[2]
           case Layer.THREE:
-            return 'border-gray-300 dark:border-gray-600'
+            return this.configuration.border.gray[3]
         }
       case Color.MONO:
-        return 'border-black dark:border-white'
+        return this.configuration.border.mono
       case Color.MONO_INVERTED:
-        return 'border-white dark:border-black'
+        return this.configuration.border.monoInverted
       default:
-        return `border-${color.toLowerCase()}-600`
+        switch (layer) {
+          case Layer.ZERO:
+            return this.configuration.border.any(color)[0]
+          case Layer.ONE:
+            return this.configuration.border.any(color)[1]
+          case Layer.TWO:
+            return this.configuration.border.any(color)[2]
+          case Layer.THREE:
+            return this.configuration.border.any(color)[3]
+        }
     }
   }
 
@@ -98,20 +117,29 @@ class ColorPicker {
       case Color.GRAY:
         switch (layer) {
           case Layer.ZERO:
-            return 'divide-white dark:divide-gray-900'
+            return this.configuration.divide.gray[0]
           case Layer.ONE:
-            return 'divide-gray-100 dark:divide-gray-800'
+            return this.configuration.divide.gray[1]
           case Layer.TWO:
-            return 'divide-gray-200 dark:divide-gray-700'
+            return this.configuration.divide.gray[2]
           case Layer.THREE:
-            return 'divide-gray-300 dark:divide-gray-600'
+            return this.configuration.divide.gray[3]
         }
       case Color.MONO:
-        return 'divide-black dark:divide-white'
+        return this.configuration.divide.mono
       case Color.MONO_INVERTED:
-        return 'divide-white dark:divide-black'
+        return this.configuration.divide.monoInverted
       default:
-        return `divide-${color.toLowerCase()}-600`
+        switch (layer) {
+          case Layer.ZERO:
+            return this.configuration.divide.any(color)[0]
+          case Layer.ONE:
+            return this.configuration.divide.any(color)[1]
+          case Layer.TWO:
+            return this.configuration.divide.any(color)[2]
+          case Layer.THREE:
+            return this.configuration.divide.any(color)[3]
+        }
     }
   }
 
@@ -120,28 +148,28 @@ class ColorPicker {
       case Color.GRAY:
         switch (layer) {
           case Layer.ZERO:
-            return 'text-gray-500 dark:text-gray-300'
+            return this.configuration.text.gray[0]
           case Layer.ONE:
-            return 'text-gray-400 dark:text-gray-400'
+            return this.configuration.text.gray[1]
           case Layer.TWO:
-            return 'text-gray-500 dark:text-gray-500'
+            return this.configuration.text.gray[2]
           case Layer.THREE:
-            return 'text-gray-600 dark:text-gray-600'
+            return this.configuration.text.gray[3]
         }
       case Color.MONO:
-        return 'text-black dark:text-white'
+        return this.configuration.background.mono
       case Color.MONO_INVERTED:
-        return 'text-white dark:text-black'
+        return this.configuration.background.monoInverted
       default:
         switch (layer) {
           case Layer.ZERO:
-            return `text-${color.toLowerCase()}-600`
+            return this.configuration.text.any(color)[0]
           case Layer.ONE:
-            return `text-${color.toLowerCase()}-700`
+            return this.configuration.text.any(color)[1]
           case Layer.TWO:
-            return `text-${color.toLowerCase()}-800`
+            return this.configuration.text.any(color)[2]
           case Layer.THREE:
-            return `text-${color.toLowerCase()}-900`
+            return this.configuration.text.any(color)[3]
         }
     }
   }

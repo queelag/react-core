@@ -1,7 +1,7 @@
 import { AnySchema } from 'joi'
 import { ListChildComponentProps } from 'react-window'
 import { RouterStore } from '../stores/router.store'
-import { ButtonType, Color, DividerType, FeedbackType, InputFileMode, InputType, Layer, SelectMode, Shape } from './enums'
+import { ButtonType, Color, DividerType, FeedbackType, InputFileMode, InputType, Layer, Orientation, SelectMode, Shape } from './enums'
 import {
   BottomSheetItem,
   BottomTabberItem,
@@ -19,7 +19,7 @@ export type AlertProps = {
   description?: string
   title?: string
   type: FeedbackType
-} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+} & HTMLDivProps
 
 export type AvatarProps = {
   background?: string
@@ -30,62 +30,56 @@ export type AvatarProps = {
   size?: number
   source?: string
   text?: string
-} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+} & HTMLDivProps
 
 export type BadgeProps = {
   value: number
-} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
-
-export type BoldProps = {
-  color?: Color
-  inject?: any[]
-  layer?: Layer
-  path?: string
-} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
+} & HTMLDivProps
 
 export type BottomSheetProps = {
   items?: BottomSheetItem[]
   name: string
   title?: string
-} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+} & HTMLDivProps
 
 export type BottomTabberProps = {
   items: BottomTabberItem[]
   router: RouterStore
-} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+} & HTMLDivProps
 
 export type ButtonProps = {
+  background?: Color
   color?: Color
   icon?: (props: IconProps) => JSX.Element
   layer?: Layer
-  onClick: () => any
   shape?: Shape
+  spinning?: boolean
   submit?: boolean
   title?: string
   type?: ButtonType
-} & Omit<React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, 'type'>
+} & Omit<HTMLButtonProps, 'type'>
 
 export type CardProps = {
   header?: JSX.Element
   layer?: Layer
   footer?: JSX.Element
   title?: string
-} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+} & HTMLDivProps
 
 export type CheckboxProps<T extends object> = {
   disabled?: boolean
   label?: string
   layer?: Layer
-  path: string
+  path: keyof T
   required?: boolean
   store: T
   touched?: boolean
-} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+} & HTMLDivProps
 
 export type ContextMenuProps = {
   items: ContextMenuItem[]
   name: string
-} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+} & HTMLDivProps
 
 export type DialogProps = {
   button?: Partial<ButtonProps>
@@ -96,22 +90,37 @@ export type DividerProps = {
   color?: Color
   layer?: Layer
   type?: DividerType
-} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+} & HTMLDivProps
 
 export type EmptyProps = {
   layer?: Layer
-} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+} & HTMLDivProps
 
 export type FormProps = {
   layer?: Layer
   onSubmit: () => any
-} & Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLFormElement>, HTMLFormElement>, 'onSubmit'>
+} & Omit<HTMLFormProps, 'onSubmit'>
 
 export type HeaderProps = {
   logo?: JSX.Element
   router: RouterStore
   title?: string
-} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+} & HTMLDivProps
+
+export type HTMLAnchorProps = React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>
+export type HTMLButtonProps = React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
+export type HTMLDivProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+export type HTMLDListProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDListElement>, HTMLDListElement>
+export type HTMLElementProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
+export type HTMLImageProps = React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>
+export type HTMLInputProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
+export type HTMLLabelProps = React.DetailedHTMLProps<React.LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement>
+export type HTMLLIProps = React.DetailedHTMLProps<React.LiHTMLAttributes<HTMLLIElement>, HTMLLIElement>
+export type HTMLFormProps = React.DetailedHTMLProps<React.FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>
+export type HTMLOListProps = React.DetailedHTMLProps<React.OlHTMLAttributes<HTMLOListElement>, HTMLOListElement>
+export type HTMLParagraphProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>
+export type HTMLSpanProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>
+export type HTMLUListProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLUListElement>, HTMLUListElement>
 
 export type IconProps = {
   color?: string
@@ -128,17 +137,17 @@ export type ImageProps = {
   shape?: Shape
   size: number
   source: string
-} & Omit<React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>, 'src'>
+} & Omit<HTMLImageProps, 'src'>
 
 export type InputFileProps<T extends object> = {
   label?: string
   layer?: Layer
   mode?: InputFileMode
   onChangeCallback?: () => any
-  path: string
+  path: keyof T
   required?: boolean
   store: T
-} & Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onChange'>
+} & Omit<HTMLInputProps, 'onChange'>
 
 export type InputProps<T extends object> = {
   label?: string
@@ -146,7 +155,7 @@ export type InputProps<T extends object> = {
   onBlurCallback?: () => any
   onChangeCallback?: () => any
   onFocusCallback?: () => any
-  path: string
+  path: keyof T
   prefix?: JSX.Element
   required?: boolean
   schema?: AnySchema
@@ -154,19 +163,19 @@ export type InputProps<T extends object> = {
   suffix?: JSX.Element
   touched?: boolean
   type?: InputType
-} & Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onBlur' | 'onChange' | 'onFocus' | 'type'>
+} & Omit<HTMLInputProps, 'onBlur' | 'onChange' | 'onFocus' | 'type'>
 
 export type LabelProps = {
   color?: Color
   inject?: any[]
   layer?: Layer
   path?: string
-} & React.DetailedHTMLProps<React.LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement>
+} & HTMLLabelProps
 
 export type ListProps<T> = {
   items: T[]
   renderItem: (v: T, k: number) => JSX.Element
-} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+} & HTMLDivProps
 
 export type ListItemProps = {
   avatar?: string | JSX.Element
@@ -175,22 +184,22 @@ export type ListItemProps = {
   isLast?: boolean
   layer?: Layer
   title: string | JSX.Element
-} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+} & HTMLDivProps
 
 export type LoadingProps = {
   title: string
-} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+} & HTMLDivProps
 
 export type ModalProps = {
   button?: ButtonProps
   name: string
   title?: string
-} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+} & HTMLDivProps
 
 export type OnboardingProps = {
   items: OnboardingItem[]
   onEnd: () => any
-} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+} & HTMLDivProps
 
 export type ParentProps = {
   children: JSX.Element
@@ -207,11 +216,11 @@ export type ResultProps = {
   image?: string
   title: string
   type?: FeedbackType
-} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+} & HTMLDivProps
 
 export type RouterProps = {
   store: RouterStore
-} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+} & HTMLDivProps
 
 export type SelectProps<T extends object> = {
   disabled?: boolean
@@ -219,36 +228,29 @@ export type SelectProps<T extends object> = {
   layer?: Layer
   mode?: SelectMode
   options: SelectOption[]
-  path: string
+  path: keyof T
   placeholder?: string
   required?: boolean
   store: T
-} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+} & HTMLDivProps
 
 export type SettingProps = {
   description: string
   layer?: Layer
   title: string
-} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+} & HTMLDivProps
 
 export type SidebarProps = {
   footer?: JSX.Element
   items: SidebarItem[]
   logo: JSX.Element
   router: RouterStore
-} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
-
-export type SpanProps = {
-  color?: Color
-  inject?: any[]
-  layer?: Layer
-  path?: string
-} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>
+} & HTMLDivProps
 
 export type SpinnerProps = {
   color?: string
   size?: number
-} & Omit<React.SVGProps<SVGSVGElement>, 'fill' | 'stroke'>
+} & Omit<SVGElementProps, 'fill' | 'stroke'>
 
 export type StatisticProps = {
   feedback?: FeedbackType
@@ -258,39 +260,43 @@ export type StatisticProps = {
   reference?: StatisticValue
   title: string
   value: StatisticValue
-} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+} & HTMLDivProps
+
+export type SVGElementProps = React.SVGProps<SVGSVGElement>
 
 export type SwitchProps<T extends object> = {
   disabled?: boolean
   label?: string
   layer?: Layer
   onChangeCallback?: (value: boolean) => any
-  path: string
+  path: keyof T
   store: T
-} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+} & HTMLDivProps
 
 export type TagProps = {
-  color: Color
+  background?: Color
+  color?: Color
   destroyable?: boolean
   icon?: (props: IconProps) => JSX.Element
   layer?: Layer
   onDestroyCallback?: () => any
   text: string
-} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+} & HTMLDivProps
 
 export type TopTabberProps = {
   active?: string
   items: TopTabberItem[]
-} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+} & HTMLDivProps
 
 export type VirtualizedListProps<T> = {
   dummy: JSX.Element
+  empty: JSX.Element
   gutter?: number
-  itemClassName?: string
+  itemParentProps?: HTMLDivProps
   items: T[]
-  layer?: Layer
+  orientation?: Orientation
   renderItem: (v: T, k: number) => JSX.Element
-} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+} & HTMLDivProps
 
 export type VirtualizedListItemProps<T> = {
   renderItem: (v: T, k: number) => JSX.Element
@@ -302,4 +308,4 @@ export type WizardProps = {
   name: string
   onStepChange?: WizardOnStepChange
   steps: WizardStepPartial[]
-} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+} & HTMLDivProps

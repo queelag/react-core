@@ -1,13 +1,47 @@
 import { MutableRefObject } from 'react'
 import { Blank } from '../components/Blank'
 import { Parent } from '../components/Parent'
-import { BottomTabberItem, InputFileItem, Route, SidebarItem, TopTabberItem, WizardStep } from '../definitions/types'
+import { Color } from '../definitions/enums'
+import {
+  BottomTabberItem,
+  ColorPickerConfiguration,
+  ColorPickerConfigurationValue,
+  InputFileItem,
+  Route,
+  SidebarItem,
+  TopTabberItem,
+  WizardStep
+} from '../definitions/types'
 
 export class Dummy {
   static get bottomTabberItem(): BottomTabberItem {
     return {
       icon: Blank,
       name: ''
+    }
+  }
+
+  static get colorPickerConfiguration(): ColorPickerConfiguration {
+    return {
+      background: this.colorPickerConfigurationValue,
+      border: this.colorPickerConfigurationValue,
+      divide: this.colorPickerConfigurationValue,
+      feedback: {
+        error: Color.RED,
+        information: Color.BLUE,
+        success: Color.GREEN,
+        warning: Color.YELLOW
+      },
+      text: this.colorPickerConfigurationValue
+    }
+  }
+
+  static get colorPickerConfigurationValue(): ColorPickerConfigurationValue {
+    return {
+      any: () => ['', '', '', ''],
+      gray: ['', '', '', ''],
+      mono: '',
+      monoInverted: ''
     }
   }
 

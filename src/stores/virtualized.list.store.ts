@@ -1,65 +1,102 @@
-import { ID, noop, NumberUtils, ObjectUtils } from '@queelag/core'
+import { ID, Logger, noop, NumberUtils, ObjectUtils } from '@queelag/core'
 import { MutableRefObject } from 'react'
-import { ComponentName, Layer } from '../definitions/enums'
-import { ComponentLayerStore } from '../modules/component.layer.store'
+import { ComponentName, Orientation } from '../definitions/enums'
+import { ComponentStore } from '../modules/component.store'
 import { Dummy } from '../modules/dummy'
 
-export class VirtualizedListStore<T> extends ComponentLayerStore<HTMLDivElement> {
+export class VirtualizedListStore<T> extends ComponentStore<HTMLDivElement> {
   dummyRef: MutableRefObject<HTMLDivElement>
-  elementHeight: number
   gutter: number
   items: T[]
   itemElementHeight: number
+  itemElementWidth: number
+  orientation: Orientation
+  parentElementHeight: number
+  parentElementWidth: number
 
   constructor(
     dummyRef: MutableRefObject<HTMLDivElement> = Dummy.ref,
     gutter: number = 0,
     id: ID = '',
     items: T[] = [],
-    layer: Layer = Layer.ZERO,
+    orientation: Orientation = Orientation.VERTICAL,
     ref: MutableRefObject<HTMLDivElement> = Dummy.ref,
     update: () => void = noop
   ) {
-    super(ComponentName.VIRTUALIZED_LIST, id, layer, ref, update)
+    super(ComponentName.VIRTUALIZED_LIST, id, ref, update)
 
     this.dummyRef = dummyRef
-    this.elementHeight = 0
+    this.parentElementHeight = 0
+    this.parentElementWidth = 0
     this.gutter = gutter
     this.items = items
     this.itemElementHeight = 0
+    this.itemElementWidth = 0
+    this.orientation = orientation
   }
 
   itemKey = (index: number): any => {
     return typeof this.items[index] === 'object' ? ObjectUtils.get(this.items[index] as any, 'id', index) : index
   }
 
-  findElementHeightByParents(): number {
-    let element: Element | null, height: number
+  readItemElementHeightOrWidth(): void {
+    switch (this.orientation) {
+      case Orientation.HORIZONTAL:
+        this.itemElementWidth = NumberUtils.parseFloat(getComputedStyle(this.dummyRef.current).width) + this.gutter
+        Logger.debug(this.id, 'readItemElementHeightOrWidth', `The item element width has been set to ${this.itemElementWidth}.`)
 
-    element = this.element
-    if (element.parentElement === null) return 0
+        break
+      case Orientation.VERTICAL:
+        this.itemElementHeight = NumberUtils.parseFloat(getComputedStyle(this.dummyRef.current).height) + this.gutter
+        Logger.debug(this.id, 'readItemElementHeightOrWidth', `The item element height has been set to ${this.itemElementHeight}.`)
 
-    while (true) {
-      height = NumberUtils.parseFloat(getComputedStyle(element.parentElement || document.createElement('div')).height)
-      if (height > 0) break
-
-      element = element.parentElement
-      if (element === null) return 0
+        break
     }
 
-    return height
+    this.update()
   }
 
-  findItemElementHeightByDummy(): number {
-    return NumberUtils.parseFloat(getComputedStyle(this.dummyRef.current).height) + this.gutter
+  readParentElementHeightOrWidth(): void {
+    let element: Element | null, height: number, width: number
+
+    element = this.element
+    if (element.parentElement === null) return Logger.error(this.id, 'readElementHeightOrWidth', `The element has no parent.`)
+
+    while (true) {
+      switch (this.orientation) {
+        case Orientation.HORIZONTAL:
+          height = NumberUtils.parseFloat(getComputedStyle(element.parentElement || document.createElement('div')).height)
+          if (height > 0) {
+            this.parentElementHeight = height
+            Logger.debug(this.id, 'readElementHeightOrWidth', `The parent element height has been set to ${height}.`)
+
+            return this.update()
+          }
+
+          break
+        case Orientation.VERTICAL:
+          width = NumberUtils.parseFloat(getComputedStyle(element.parentElement || document.createElement('div')).width)
+          if (width > 0) {
+            this.parentElementWidth = width
+            Logger.debug(this.id, 'readElementHeightOrWidth', `The parent element width has been set to ${width}.`)
+
+            return this.update()
+          }
+
+          break
+      }
+
+      element = element.parentElement
+      if (element === null) return Logger.debug(this.id, 'readElementHeightOrWidth', `The parent element has no parent.`)
+    }
   }
 
-  get elementWidth(): number {
-    return NumberUtils.parseFloat(getComputedStyle(this.element).width)
+  get elementHeight(): number | string {
+    return this.isOrientationVertical ? this.parentElementHeight : '100%'
   }
 
-  get renderableItemElements(): number {
-    return Math.round(this.elementHeight / this.itemElementHeight)
+  get elementWidth(): number | string {
+    return this.isOrientationHorizontal ? this.parentElementWidth : '100%'
   }
 
   get hasItems(): boolean {
@@ -68,5 +105,13 @@ export class VirtualizedListStore<T> extends ComponentLayerStore<HTMLDivElement>
 
   get isItemsEmpty(): boolean {
     return this.items.length <= 0
+  }
+
+  get isOrientationHorizontal(): boolean {
+    return this.orientation === Orientation.HORIZONTAL
+  }
+
+  get isOrientationVertical(): boolean {
+    return this.orientation === Orientation.VERTICAL
   }
 }

@@ -1,4 +1,4 @@
-import { ID, Localization, ObjectUtils } from '@queelag/core'
+import { ID, ObjectUtils } from '@queelag/core'
 import Joi, { AnySchema, ValidationResult } from 'joi'
 import { makeObservable, observable } from 'mobx'
 import { MutableRefObject } from 'react'
@@ -44,10 +44,12 @@ export class ComponentFormFieldStore<T extends Element, U extends object> extend
   touch(): void {
     this.touched = true
     this.validation = this.schema.validate(this.value)
+
+    this.update()
   }
 
   get error(): string {
-    return this.validation.error ? this.validation.error.message.replace(/"[a-z]+"/, `"${Localization.get(this.label)}"`) : ''
+    return this.validation.error ? this.validation.error.message.replace(/"[a-z]+"/, `This field`) : ''
   }
 
   get schema(): AnySchema {

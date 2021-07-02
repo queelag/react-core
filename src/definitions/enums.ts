@@ -125,6 +125,11 @@ export enum Layer {
   THREE = 3
 }
 
+export enum Orientation {
+  HORIZONTAL = 'HORIZONTAL',
+  VERTICAL = 'VERTICAL'
+}
+
 export enum SelectMode {
   MULTIPLE = 'MULTIPLE',
   SINGLE = 'SINGLE'

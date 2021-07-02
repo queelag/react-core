@@ -1,4 +1,4 @@
-import { ID, tcp } from '@queelag/core'
+import { ID, noop, tcp } from '@queelag/core'
 import { MouseEvent } from 'react'
 import { ButtonType, ComponentName, Layer, Shape } from '../definitions/enums'
 import { ComponentLayerShapeStore } from '../modules/component.layer.shape.store'
@@ -12,8 +12,9 @@ export class ButtonStore extends ComponentLayerShapeStore<HTMLButtonElement> {
     disabled: boolean = false,
     id: ID = '',
     layer: Layer = Layer.ONE,
-    onClick: () => any,
+    onClick: (event: MouseEvent<HTMLButtonElement>) => any = noop,
     shape: Shape = Shape.RECTANGLE,
+    spinning: boolean = false,
     type: ButtonType = ButtonType.SECONDARY,
     update: () => void
   ) {
@@ -21,32 +22,14 @@ export class ButtonStore extends ComponentLayerShapeStore<HTMLButtonElement> {
 
     this.disabled = disabled
     this.onClick = onClick
-    this.spinning = false
+    this.spinning = spinning
     this.type = type
   }
 
   private _onClick = (event: MouseEvent<HTMLButtonElement>): any => {}
 
   get onClick(): (event: MouseEvent<HTMLButtonElement>) => any {
-    return async (event: MouseEvent<HTMLButtonElement>) => {
-      event.stopPropagation()
-
-      if (this.isDisabled) {
-        return
-      }
-
-      this.disabled = true
-      this.spinning = true
-
-      this.update()
-
-      await tcp(() => this._onClick(event))
-
-      this.disabled = false
-      this.spinning = false
-
-      this.update()
-    }
+    return this._onClick
   }
 
   get isDisabled(): boolean {
@@ -70,6 +53,24 @@ export class ButtonStore extends ComponentLayerShapeStore<HTMLButtonElement> {
   }
 
   set onClick(onClick: (event: MouseEvent<HTMLButtonElement>) => any) {
-    this._onClick = onClick
+    this._onClick = async (event: MouseEvent<HTMLButtonElement>) => {
+      event.stopPropagation()
+
+      if (this.isDisabled) {
+        return
+      }
+
+      this.disabled = true
+      this.spinning = true
+
+      this.update()
+
+      await tcp(() => onClick(event))
+
+      this.disabled = false
+      this.spinning = false
+
+      this.update()
+    }
   }
 }

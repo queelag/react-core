@@ -1,9 +1,8 @@
 import { ID, noop, NumberUtils } from '@queelag/core'
 import { Buffer } from 'buffer'
 import Joi, { AnySchema } from 'joi'
-import { makeObservable, observable } from 'mobx'
 import { ChangeEvent, MutableRefObject } from 'react'
-import { Color, ComponentName, InputType, Layer } from '../definitions/enums'
+import { ComponentName, InputType, Layer } from '../definitions/enums'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
 import { Dummy } from '../modules/dummy'
 
@@ -29,8 +28,6 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
     this.focused = false
     this.obscured = true
     this.type = type
-
-    makeObservable(this, { focused: observable, obscured: observable })
   }
 
   detachInputFromReact(autoFocus: boolean = false): void {
@@ -74,6 +71,8 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
 
     this.touched = true
     this.validation = this.schema.validate(this.value)
+
+    this.update()
   }
 
   onFocus = (): void => {
@@ -100,10 +99,8 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
     if (this.isTypeBuffer) {
       this.inputElement.type = this.obscured ? 'password' : 'text'
     }
-  }
 
-  get color(): Color {
-    return this.isErrorVisible ? Color.RED : Color.MONO
+    this.update()
   }
 
   get inputElement(): HTMLInputElement {
