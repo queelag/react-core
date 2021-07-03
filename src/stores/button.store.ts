@@ -1,7 +1,9 @@
 import { ID, noop, tcp } from '@queelag/core'
-import { MouseEvent } from 'react'
+import { MouseEvent, MutableRefObject } from 'react'
 import { ButtonType, ComponentName, Layer, Shape } from '../definitions/enums'
+import { ButtonProps } from '../definitions/props'
 import { ComponentLayerShapeStore } from '../modules/component.layer.shape.store'
+import { Dummy } from '../modules/dummy'
 
 export class ButtonStore extends ComponentLayerShapeStore<HTMLButtonElement> {
   disabled: boolean
@@ -13,12 +15,13 @@ export class ButtonStore extends ComponentLayerShapeStore<HTMLButtonElement> {
     id: ID = '',
     layer: Layer = Layer.ONE,
     onClick: (event: MouseEvent<HTMLButtonElement>) => any = noop,
+    ref: MutableRefObject<HTMLButtonElement> = Dummy.ref,
     shape: Shape = Shape.RECTANGLE,
     spinning: boolean = false,
     type: ButtonType = ButtonType.SECONDARY,
     update: () => void
   ) {
-    super(ComponentName.BUTTON, id, layer, undefined, shape, update)
+    super(ComponentName.BUTTON, id, layer, ref, shape, update)
 
     this.disabled = disabled
     this.onClick = onClick
@@ -36,8 +39,16 @@ export class ButtonStore extends ComponentLayerShapeStore<HTMLButtonElement> {
     return this.disabled === true
   }
 
+  get isEnabled(): boolean {
+    return this.disabled === false
+  }
+
   get isSpinning(): boolean {
     return this.spinning === true
+  }
+
+  get isNotSpinning(): boolean {
+    return this.spinning === false
   }
 
   get isTypePrimary(): boolean {
@@ -74,3 +85,5 @@ export class ButtonStore extends ComponentLayerShapeStore<HTMLButtonElement> {
     }
   }
 }
+
+export const BUTTON_STORE_KEYS: (keyof ButtonProps & keyof ButtonStore)[] = ['disabled', 'id', 'layer', 'onClick', 'shape', 'spinning', 'type']

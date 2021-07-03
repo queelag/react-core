@@ -1,6 +1,7 @@
 import { ID, noop, NumberUtils } from '@queelag/core'
 import { MutableRefObject } from 'react'
 import { ComponentName } from '../definitions/enums'
+import { OnboardingProps } from '../definitions/props'
 import { OnboardingItem } from '../definitions/types'
 import { ComponentStore } from '../modules/component.store'
 
@@ -40,3 +41,5 @@ export class OnboardingStore extends ComponentStore<HTMLDivElement> {
     return this.active === this.items.length
   }
 }
+
+export const ONBOARDING_STORE_KEYS: (keyof OnboardingProps & keyof OnboardingStore)[] = ['id', 'items', 'onEnd']

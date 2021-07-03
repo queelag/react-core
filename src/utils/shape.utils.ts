@@ -4,18 +4,17 @@ import { CSSProperties } from 'react'
 import { createSquircle } from 'squircleyjs'
 import { ComponentName, Shape } from '../definitions/enums'
 
-class ShapeUtils {
+export class ShapeUtils {
   private static squircleCache: Map<string, ID> = new Map()
 
-  static findStyle(shape: Shape, size: number, curvature: number = 0.75, radius: number = 2): CSSProperties {
+  static findStyle(shape: Shape, size: number, curvature: number = 0.75): CSSProperties {
     switch (shape) {
       case Shape.CIRCLE:
         return { borderRadius: 9999 }
       case Shape.NONE:
-        return {}
       case Shape.RECTANGLE:
       case Shape.SQUARE:
-        return { borderRadius: radius }
+        return {}
       case Shape.SQUIRCLE:
         let potential: string | undefined, svg: SVGElement | Error, id: string
 
@@ -67,5 +66,3 @@ class ShapeUtils {
     return 'SQUIRCLES_CONTAINER'
   }
 }
-
-export default ShapeUtils

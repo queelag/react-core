@@ -1,4 +1,7 @@
+import { ID, noop } from '@queelag/core'
+import { MutableRefObject } from 'react'
 import { ComponentName } from '../definitions/enums'
+import { BottomTabberProps } from '../definitions/props'
 import { BottomTabberItem } from '../definitions/types'
 import { ComponentStore } from '../modules/component.store'
 import { Dummy } from '../modules/dummy'
@@ -8,8 +11,15 @@ export class BottomTabberStore extends ComponentStore<HTMLDivElement> {
   items: BottomTabberItem[]
   router: RouterStore
 
-  constructor(items: BottomTabberItem[] = [], name: string = ComponentName.BOTTOM_TABBER, router: RouterStore = new RouterStore()) {
-    super(name)
+  constructor(
+    id: ID = '',
+    items: BottomTabberItem[] = [],
+    name: string = ComponentName.BOTTOM_TABBER,
+    ref: MutableRefObject<HTMLDivElement> = Dummy.ref,
+    router: RouterStore = new RouterStore(),
+    update: () => void = noop
+  ) {
+    super(name, id, ref, update)
 
     this.items = items
     this.router = router
@@ -27,3 +37,5 @@ export class BottomTabberStore extends ComponentStore<HTMLDivElement> {
     return this.items.findIndex((v: BottomTabberItem) => v.name === name)
   }
 }
+
+export const BOTTOM_TABBER_STORE_KEYS: (keyof BottomTabberProps & keyof BottomTabberStore)[] = ['id', 'items', 'router']

@@ -1,6 +1,7 @@
 import { ID, noop } from '@queelag/core'
 import { MutableRefObject } from 'react'
 import { ComponentName } from '../definitions/enums'
+import { TopTabberProps } from '../definitions/props'
 import { TopTabberItem } from '../definitions/types'
 import { ComponentStore } from '../modules/component.store'
 import { Dummy } from '../modules/dummy'
@@ -39,3 +40,5 @@ export class TopTabberStore extends ComponentStore<HTMLDivElement> {
     return this.items[this.findItemIndexByName(name) + 1] || this.items[this.items.length - 1]
   }
 }
+
+export const TOP_TABBER_STORE_KEYS: (keyof TopTabberProps & keyof TopTabberStore)[] = ['active', 'id', 'items']

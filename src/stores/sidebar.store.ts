@@ -1,6 +1,7 @@
 import { ID, noop } from '@queelag/core'
 import { MutableRefObject } from 'react'
 import { ComponentName } from '../definitions/enums'
+import { SidebarProps } from '../definitions/props'
 import { SidebarItem } from '../definitions/types'
 import { ComponentStore } from '../modules/component.store'
 import { Dummy } from '../modules/dummy'
@@ -35,3 +36,5 @@ export class SidebarStore extends ComponentStore<HTMLDivElement> {
     return this.items.findIndex((v: SidebarItem) => v.name === name)
   }
 }
+
+export const SIDEBAR_STORE_KEYS: (keyof SidebarProps & keyof SidebarStore)[] = ['id', 'items', 'router']

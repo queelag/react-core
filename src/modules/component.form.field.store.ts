@@ -1,6 +1,5 @@
 import { ID, ObjectUtils } from '@queelag/core'
 import Joi, { AnySchema, ValidationResult } from 'joi'
-import { makeObservable, observable } from 'mobx'
 import { MutableRefObject } from 'react'
 import { Layer } from '../definitions/enums'
 import { ComponentLayerStore } from './component.layer.store'
@@ -10,7 +9,7 @@ export class ComponentFormFieldStore<T extends Element, U extends object> extend
   label: string
   path: keyof U
   required: boolean
-  _schema: AnySchema
+  protected _schema: AnySchema = Joi.any()
   store: U
   touched: boolean
   validation: ValidationResult
@@ -23,7 +22,7 @@ export class ComponentFormFieldStore<T extends Element, U extends object> extend
     path: keyof U,
     ref: MutableRefObject<T> = Dummy.ref,
     required: boolean = false,
-    _schema: AnySchema = Joi.any(),
+    schema: AnySchema = Joi.any(),
     store: U,
     touched: boolean = false,
     update?: () => void
@@ -33,12 +32,10 @@ export class ComponentFormFieldStore<T extends Element, U extends object> extend
     this.label = label
     this.path = path
     this.required = required
-    this._schema = _schema
+    this.schema = schema
     this.store = store
     this.touched = touched
-    this.validation = _schema.validate(this.value)
-
-    makeObservable(this, { touched: observable, validation: observable })
+    this.validation = schema.validate(this.value)
   }
 
   touch(): void {
@@ -76,7 +73,7 @@ export class ComponentFormFieldStore<T extends Element, U extends object> extend
     return this.validation.error === undefined
   }
 
-  set schema(value: AnySchema) {
-    this._schema = value
+  set schema(schema: AnySchema) {
+    this._schema = schema
   }
 }

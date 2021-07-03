@@ -1,7 +1,8 @@
 import { ID, noop } from '@queelag/core'
-import Joi from 'joi'
+import Joi, { AnySchema } from 'joi'
 import { MutableRefObject } from 'react'
 import { ComponentName, Layer, SelectMode } from '../definitions/enums'
+import { SelectProps } from '../definitions/props'
 import { SelectOption } from '../definitions/types'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
 import { Dummy } from '../modules/dummy'
@@ -51,7 +52,7 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
     return (this.options.find((v: SelectOption) => v.value === value) || { label: '', value: '' }).label
   }
 
-  get schema(): Joi.AnySchema {
+  get schema(): AnySchema {
     switch (this.mode) {
       case SelectMode.MULTIPLE:
         return this.required ? Joi.array().min(1).required() : Joi.array()
@@ -76,4 +77,10 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
   get isModeSingle(): boolean {
     return this.mode === SelectMode.SINGLE
   }
+
+  set schema(schema: AnySchema) {
+    this._schema = schema
+  }
 }
+
+export const SELECT_STORE_KEYS: (keyof SelectProps<any> & keyof SelectStore<any>)[] = ['id', 'label', 'layer', 'mode', 'options', 'path', 'required', 'store']

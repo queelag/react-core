@@ -3,6 +3,7 @@ import { Buffer } from 'buffer'
 import Joi, { AnySchema } from 'joi'
 import { ChangeEvent, MutableRefObject } from 'react'
 import { ComponentName, InputType, Layer } from '../definitions/enums'
+import { InputProps } from '../definitions/props'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
 import { Dummy } from '../modules/dummy'
 
@@ -167,3 +168,15 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
     return this.isTypeBuffer || this.isTypePassword
   }
 }
+
+export const INPUT_STORE_KEYS: (keyof InputProps<any> & keyof InputStore<any>)[] = [
+  'id',
+  'label',
+  'layer',
+  'path',
+  'required',
+  'schema',
+  'store',
+  'touched',
+  'type'
+]

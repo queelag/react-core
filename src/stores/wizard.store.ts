@@ -1,6 +1,7 @@
 import { ID, noop, NumberUtils, tcp } from '@queelag/core'
 import { MutableRefObject } from 'react'
 import { ComponentName, DirectionHorizontal } from '../definitions/enums'
+import { WizardProps } from '../definitions/props'
 import { WizardOnStepChange, WizardStep, WizardStepPartial } from '../definitions/types'
 import { ComponentStore } from '../modules/component.store'
 import { Dummy } from '../modules/dummy'
@@ -116,3 +117,5 @@ export class WizardStore extends ComponentStore<HTMLDivElement> {
     return this.findStepIndexByName(this.active) === this.steps.length - 1
   }
 }
+
+export const WIZARD_STORE_KEYS: (keyof WizardProps & keyof WizardStore)[] = ['active', 'id', 'onStepChange', 'steps']

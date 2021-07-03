@@ -1,24 +1,21 @@
-import { rv } from '@queelag/core'
-import { makeObservable, observable } from 'mobx'
+import { ID, noop, rv } from '@queelag/core'
+import { MutableRefObject } from 'react'
 import { Parent } from '../components/Parent'
 import { ComponentName } from '../definitions/enums'
+import { RouterProps } from '../definitions/props'
 import { Route, RoutePartial } from '../definitions/types'
 import { ComponentStore } from '../modules/component.store'
 import { Dummy } from '../modules/dummy'
 
 export class RouterStore extends ComponentStore<HTMLDivElement> {
-  name: string
   history: string[]
   routes: Route[]
 
-  constructor(name: string = '', routes: RoutePartial[] = []) {
-    super(ComponentName.ROUTER)
+  constructor(id: ID = '', ref: MutableRefObject<HTMLDivElement> = Dummy.ref, routes: RoutePartial[] = [], update: () => void = noop) {
+    super(ComponentName.ROUTER, id, ref, update)
 
-    this.name = name
     this.history = []
     this.routes = this.toFlatRoutes(routes, { ...Dummy.route, component: Parent })
-
-    makeObservable(this, { history: observable })
 
     this.registerPopstateEventListener()
     this.history.push(this.findRouteByLocation().name)
@@ -38,12 +35,16 @@ export class RouterStore extends ComponentStore<HTMLDivElement> {
     this.replaceHistoryState(route)
 
     clear && this.clear()
+
+    this.update()
   }
 
   back = (): void => {
     if (this.canGoBack) {
       this.history.pop()
       this.replaceHistoryState(this.last)
+
+      this.update()
     }
   }
 
@@ -119,3 +120,5 @@ export class RouterStore extends ComponentStore<HTMLDivElement> {
     return this.routes.find((v: Route) => v.name === this.history[this.history.length - 1]) || Dummy.route
   }
 }
+
+export const ROUTER_STORE_KEYS: (keyof RouterProps & keyof RouterStore)[] = ['id']

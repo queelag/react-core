@@ -5,6 +5,7 @@ import { InputCollector } from '../collectors/input.collector'
 import { InputFileCollector } from '../collectors/input.file.collector'
 import { SelectCollector } from '../collectors/select.collector'
 import { ComponentName, Layer } from '../definitions/enums'
+import { FormProps } from '../definitions/props'
 import { ComponentLayerStore } from '../modules/component.layer.store'
 import { CheckboxStore } from './checkbox.store'
 import { InputFileStore } from './input.file.store'
@@ -83,8 +84,6 @@ export class FormStore extends ComponentLayerStore<HTMLFormElement> {
     this._onSubmit = async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault()
 
-      console.log(this.checkboxes, this.inputs, this.inputFiles, this.selects)
-
       this.checkboxes.forEach((v: CheckboxStore<any>) => v.touch())
       this.inputs.forEach((v: InputStore<any>) => v.touch())
       this.inputFiles.forEach((v: InputFileStore<any>) => v.touch())
@@ -96,3 +95,5 @@ export class FormStore extends ComponentLayerStore<HTMLFormElement> {
     }
   }
 }
+
+export const FORM_STORE_KEYS: (keyof FormProps & keyof FormStore)[] = ['id', 'layer', 'onSubmit']

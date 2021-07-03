@@ -1,6 +1,7 @@
 import { ID, noop } from '@queelag/core'
 import { MouseEvent, MutableRefObject } from 'react'
 import { ComponentName, Layer } from '../definitions/enums'
+import { TagProps } from '../definitions/props'
 import { ComponentLayerStore } from '../modules/component.layer.store'
 import { Dummy } from '../modules/dummy'
 
@@ -28,3 +29,5 @@ export class TagStore extends ComponentLayerStore<HTMLDivElement> {
     return this.destroyed === false
   }
 }
+
+export const TAG_STORE_KEYS: (keyof TagProps & keyof TagStore)[] = ['id', 'layer']

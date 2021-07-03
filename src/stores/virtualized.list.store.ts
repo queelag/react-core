@@ -1,6 +1,7 @@
 import { ID, Logger, noop, NumberUtils, ObjectUtils } from '@queelag/core'
 import { MutableRefObject } from 'react'
 import { ComponentName, Orientation } from '../definitions/enums'
+import { VirtualizedListProps } from '../definitions/props'
 import { ComponentStore } from '../modules/component.store'
 import { Dummy } from '../modules/dummy'
 
@@ -115,3 +116,5 @@ export class VirtualizedListStore<T> extends ComponentStore<HTMLDivElement> {
     return this.orientation === Orientation.VERTICAL
   }
 }
+
+export const VIRTUALIZED_LIST_STORE_KEYS: (keyof VirtualizedListProps<any> & keyof VirtualizedListStore<any>)[] = ['gutter', 'id', 'items', 'orientation']

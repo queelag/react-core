@@ -2,6 +2,7 @@ import { ID, noop } from '@queelag/core'
 import Joi from 'joi'
 import { MutableRefObject } from 'react'
 import { ComponentName, Layer } from '../definitions/enums'
+import { SwitchProps } from '../definitions/props'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
 import { Dummy } from '../modules/dummy'
 
@@ -59,3 +60,5 @@ export class SwitchStore<T extends object> extends ComponentFormFieldStore<HTMLD
     return this.value === true
   }
 }
+
+export const SWITCH_STORE_KEYS: (keyof SwitchProps<any> & keyof SwitchStore<any>)[] = ['disabled', 'id', 'label', 'layer', 'onChangeCallback', 'path', 'store']

@@ -2,7 +2,7 @@ import { Color, FeedbackType, Layer } from '../definitions/enums'
 import { ColorPickerConfiguration } from '../definitions/types'
 import { Dummy } from '../modules/dummy'
 
-class ColorPicker {
+export class ColorPicker {
   static configuration: ColorPickerConfiguration = Dummy.colorPickerConfiguration
 
   static byFeedbackType(type: FeedbackType): Color {
@@ -183,5 +183,3 @@ class ColorPicker {
     }
   }
 }
-
-export default ColorPicker

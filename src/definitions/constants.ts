@@ -7,6 +7,7 @@ import {
   ButtonProps,
   CardProps,
   CheckboxProps,
+  ColorDivProps,
   ContextMenuProps,
   DialogProps,
   DividerProps,
@@ -47,6 +48,7 @@ export const BOTTOM_TABBER_PROPS_KEYS: (keyof BottomTabberProps)[] = ['items', '
 export const BUTTON_PROPS_KEYS: (keyof ButtonProps)[] = ['background', 'color', 'icon', 'layer', 'shape', 'spinning', 'submit', 'title', 'type']
 export const CARD_PROPS_KEYS: (keyof CardProps)[] = ['header', 'layer', 'footer', 'title']
 export const CHECK_BOX_PROPS_KEYS: (keyof CheckboxProps<any>)[] = ['disabled', 'label', 'layer', 'path', 'required', 'store', 'touched']
+export const COLOR_DIV_PROPS_KEYS: (keyof ColorDivProps)[] = ['background', 'border', 'divide', 'layer', 'text']
 export const CONTEXT_MENU_PROPS_KEYS: (keyof ContextMenuProps)[] = ['items', 'name']
 export const DIALOG_PROPS_KEYS: (keyof DialogProps)[] = ['button', 'onClickConfirm']
 export const DIVIDER_PROPS_KEYS: (keyof DividerProps)[] = ['color', 'layer', 'type']

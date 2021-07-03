@@ -2,6 +2,7 @@ import { ID, noop } from '@queelag/core'
 import Joi, { AnySchema } from 'joi'
 import { MutableRefObject } from 'react'
 import { ComponentName, Layer } from '../definitions/enums'
+import { CheckboxProps } from '../definitions/props'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
 import { Dummy } from '../modules/dummy'
 
@@ -47,4 +48,20 @@ export class CheckboxStore<U extends object> extends ComponentFormFieldStore<HTM
   get isEnabled(): boolean {
     return this.disabled === false
   }
+
+  set schema(schema: AnySchema) {
+    this._schema = schema
+  }
 }
+
+export const CHECK_BOX_STORE_KEYS: (keyof CheckboxProps<any> & keyof CheckboxStore<any>)[] = [
+  'disabled',
+  'id',
+  'label',
+  'layer',
+  'onClick',
+  'path',
+  'required',
+  'store',
+  'touched'
+]

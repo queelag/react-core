@@ -76,6 +76,14 @@ export type CheckboxProps<T extends object> = {
   touched?: boolean
 } & HTMLDivProps
 
+export type ColorDivProps = {
+  background?: Color
+  border?: Color
+  divide?: Color
+  layer?: Layer
+  text?: Color
+} & HTMLDivProps
+
 export type ContextMenuProps = {
   items: ContextMenuItem[]
   name: string
@@ -135,7 +143,7 @@ export type IconProps = {
 export type ImageProps = {
   fallback?: (props: any) => JSX.Element
   shape?: Shape
-  size: number
+  size?: number
   source: string
 } & Omit<HTMLImageProps, 'src'>
 
@@ -173,6 +181,7 @@ export type LabelProps = {
 } & HTMLLabelProps
 
 export type ListProps<T> = {
+  empty: JSX.Element
   items: T[]
   renderItem: (v: T, k: number) => JSX.Element
 } & HTMLDivProps

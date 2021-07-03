@@ -1,19 +1,20 @@
 import { ObjectUtils, StoreUtils } from '@queelag/core'
 import React, { useEffect, useMemo, useRef } from 'react'
 import { FixedSizeList, Layout, ListChildComponentProps } from 'react-window'
+import { VIRTUALIZED_LIST_PROPS_KEYS } from '../definitions/constants'
 import { VirtualizedListProps } from '../definitions/props'
 import { useForceUpdate } from '../hooks/use.force.update'
-import { VirtualizedListStore } from '../stores/virtualized.list.store'
+import { VirtualizedListStore, VIRTUALIZED_LIST_STORE_KEYS } from '../stores/virtualized.list.store'
 
 function VirtualizedList<T>(props: VirtualizedListProps<T>) {
-  const dummyRef = useRef(document.createElement('div'))
-  const ref = useRef(document.createElement('div'))
   const update = useForceUpdate()
+  const ref = useRef(document.createElement('div'))
+  const dummyRef = useRef(document.createElement('div'))
   const store = useMemo(() => new VirtualizedListStore(dummyRef, props.gutter, props.id, props.items, props.orientation, ref, update), [])
 
   useEffect(() => {
-    StoreUtils.updateKeys(store, props, ['gutter', 'id', 'items', 'orientation'], update)
-  }, [props.gutter, props.id, props.items, props.orientation])
+    StoreUtils.updateKeys(store, props, VIRTUALIZED_LIST_STORE_KEYS, update)
+  }, ObjectUtils.pickToArray(props, VIRTUALIZED_LIST_STORE_KEYS))
 
   useEffect(() => {
     store.readItemElementHeightOrWidth()
@@ -31,8 +32,9 @@ function VirtualizedList<T>(props: VirtualizedListProps<T>) {
 
   return (
     <div
-      {...ObjectUtils.omit(props, 'dummy', 'empty', 'gutter', 'itemParentProps', 'items', 'orientation', 'renderItem')}
+      {...ObjectUtils.omit(props, VIRTUALIZED_LIST_PROPS_KEYS)}
       id={store.id}
+      ref={ref}
       style={{
         ...props.style,
         overflow: 'hidden'

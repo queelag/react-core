@@ -1,8 +1,8 @@
 import { ID, noop, tc, tcp } from '@queelag/core'
 import { Buffer } from 'buffer'
 import Joi from 'joi'
-import { MutableRefObject } from 'react'
 import { ComponentName, Shape } from '../definitions/enums'
+import { ImageProps } from '../definitions/props'
 import Cache from '../modules/cache'
 import { ComponentShapeStore } from '../modules/component.shape.store'
 import { Schema } from '../modules/schema'
@@ -14,8 +14,8 @@ export class ImageStore extends ComponentShapeStore<HTMLImageElement> {
 
   private _source: string
 
-  constructor(id: ID, ref: MutableRefObject<HTMLImageElement>, shape: Shape = Shape.NONE, source: string, update: () => void = noop) {
-    super(ComponentName.IMAGE, id, ref, shape, update)
+  constructor(id: ID = '', shape: Shape = Shape.NONE, source: string, update: () => void = noop) {
+    super(ComponentName.IMAGE, id, undefined, shape, update)
 
     this.base64 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='
     this.error = false
@@ -90,3 +90,5 @@ export class ImageStore extends ComponentShapeStore<HTMLImageElement> {
     })()
   }
 }
+
+export const IMAGE_STORE_KEYS: (keyof ImageProps & keyof ImageStore)[] = ['id', 'shape', 'source']

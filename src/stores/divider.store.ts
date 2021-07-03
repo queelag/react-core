@@ -1,6 +1,7 @@
 import { ID, noop } from '@queelag/core'
 import { MutableRefObject } from 'react'
 import { ComponentName, DividerType, Layer } from '../definitions/enums'
+import { DividerProps } from '../definitions/props'
 import { ComponentLayerStore } from '../modules/component.layer.store'
 import { Dummy } from '../modules/dummy'
 
@@ -27,3 +28,5 @@ export class DividerStore extends ComponentLayerStore<HTMLDivElement> {
     return this.type === DividerType.VERTICAL
   }
 }
+
+export const DIVIDER_STORE_KEYS: (keyof DividerProps & keyof DividerStore)[] = ['id', 'layer', 'type']

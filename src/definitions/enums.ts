@@ -6,25 +6,25 @@ export enum ButtonType {
 }
 
 export enum Color {
-  AMBER = 'AMBER',
-  BLUE = 'BLUE',
-  CYAN = 'CYAN',
-  EMERALD = 'EMERALD',
-  FUCHSIA = 'FUCHSIA',
-  GRAY = 'GRAY',
-  GREEN = 'GREEN',
-  INDIGO = 'INDIGO',
-  LIME = 'LIME',
-  MONO = 'MONO',
-  MONO_INVERTED = 'MONO_INVERTED',
-  ORANGE = 'ORANGE',
-  PINK = 'PINK',
-  PURPLE = 'PURPLE',
-  RED = 'RED',
-  ROSE = 'ROSE',
-  TEAL = 'TEAL',
-  VIOLET = 'VIOLET',
-  YELLOW = 'YELLOW'
+  AMBER = 'amber',
+  BLUE = 'blue',
+  CYAN = 'cyan',
+  EMERALD = 'emerald',
+  FUCHSIA = 'fuchsia',
+  GRAY = 'gray',
+  GREEN = 'green',
+  INDIGO = 'indigo',
+  LIME = 'lime',
+  MONO = 'mono',
+  MONO_INVERTED = 'mono_inverted',
+  ORANGE = 'orange',
+  PINK = 'pink',
+  PURPLE = 'purple',
+  RED = 'red',
+  ROSE = 'rose',
+  TEAL = 'teal',
+  VIOLET = 'violet',
+  YELLOW = 'yellow'
 }
 
 export enum ComponentName {

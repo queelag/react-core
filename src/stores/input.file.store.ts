@@ -1,8 +1,9 @@
 import { ID, IDUtils, noop, tcp } from '@queelag/core'
 import { Buffer } from 'buffer'
-import Joi, { ArraySchema, ObjectSchema } from 'joi'
+import Joi, { AnySchema, ArraySchema, ObjectSchema } from 'joi'
 import { ChangeEvent, MutableRefObject } from 'react'
 import { ComponentName, InputFileMode, Layer } from '../definitions/enums'
+import { InputFileProps } from '../definitions/props'
 import { InputFileItem } from '../definitions/types'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
 import { Dummy } from '../modules/dummy'
@@ -134,4 +135,10 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
   get isModeSingle(): boolean {
     return this.mode === InputFileMode.SINGLE
   }
+
+  set schema(schema: AnySchema) {
+    this._schema = schema
+  }
 }
+
+export const INPUT_FILE_STORE_KEYS: (keyof InputFileProps<any> & keyof InputFileStore<any>)[] = ['id', 'label', 'layer', 'mode', 'path', 'required', 'store']
