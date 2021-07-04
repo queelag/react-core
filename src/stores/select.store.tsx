@@ -1,5 +1,4 @@
 import { ID, noop } from '@queelag/core'
-import Joi, { AnySchema } from 'joi'
 import { MutableRefObject } from 'react'
 import { ComponentName, Layer, SelectMode } from '../definitions/enums'
 import { SelectProps } from '../definitions/props'
@@ -24,7 +23,7 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
     touched: boolean = false,
     update: () => void = noop
   ) {
-    super(ComponentName.SELECT, id, label, layer, path, ref, required, Joi.any(), store, touched, update)
+    super(ComponentName.SELECT, id, label, layer, path, ref, required, Dummy.schema, store, touched, update)
 
     this.mode = mode
     this.options = options
@@ -52,13 +51,14 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
     return (this.options.find((v: SelectOption) => v.value === value) || { label: '', value: '' }).label
   }
 
-  get schema(): AnySchema {
-    switch (this.mode) {
-      case SelectMode.MULTIPLE:
-        return this.required ? Joi.array().min(1).required() : Joi.array()
-      case SelectMode.SINGLE:
-        return this.required ? Joi.any().required() : Joi.any()
-    }
+  get schema(): any {
+    return Dummy.schema
+    // switch (this.mode) {
+    //   case SelectMode.MULTIPLE:
+    //     return this.required ? Joi.array().min(1).required() : Joi.array()
+    //   case SelectMode.SINGLE:
+    //     return this.required ? Joi.any().required() : Joi.any()
+    // }
   }
 
   get value(): any {
@@ -78,7 +78,7 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
     return this.mode === SelectMode.SINGLE
   }
 
-  set schema(schema: AnySchema) {
+  set schema(schema: any) {
     this._schema = schema
   }
 }

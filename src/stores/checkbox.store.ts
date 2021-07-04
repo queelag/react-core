@@ -1,5 +1,4 @@
 import { ID, noop } from '@queelag/core'
-import Joi, { BooleanSchema } from 'joi'
 import { MutableRefObject } from 'react'
 import { ComponentName, Layer } from '../definitions/enums'
 import { CheckboxProps } from '../definitions/props'
@@ -22,7 +21,7 @@ export class CheckboxStore<U extends object> extends ComponentFormFieldStore<HTM
     touched: boolean = false,
     update: () => void = noop
   ) {
-    super(name, id, label, layer, path, ref, required, Joi.any(), store, touched, update)
+    super(name, id, label, layer, path, ref, required, Dummy.schema, store, touched, update)
 
     this.disabled = disabled
     this.validation = this.schema.validate(this.value)
@@ -37,8 +36,9 @@ export class CheckboxStore<U extends object> extends ComponentFormFieldStore<HTM
     }
   }
 
-  get schema(): BooleanSchema {
-    return this.required ? Joi.boolean().truthy() : Joi.boolean()
+  get schema(): any {
+    return Dummy.schema
+    // return this.required ? Joi.boolean().truthy() : Joi.boolean()
   }
 
   get value(): boolean {
@@ -49,7 +49,7 @@ export class CheckboxStore<U extends object> extends ComponentFormFieldStore<HTM
     return this.disabled === false
   }
 
-  set schema(schema: BooleanSchema) {
+  set schema(schema: any) {
     this._schema = schema
   }
 }

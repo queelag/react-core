@@ -1,5 +1,4 @@
 import { ID, ObjectUtils } from '@queelag/core'
-import Joi, { AnySchema, ValidationResult } from 'joi'
 import { MutableRefObject } from 'react'
 import { Layer } from '../definitions/enums'
 import { ComponentLayerStore } from './component.layer.store'
@@ -9,10 +8,10 @@ export class ComponentFormFieldStore<T extends Element, U extends object> extend
   label: string
   path: keyof U
   required: boolean
-  protected _schema: AnySchema = Joi.any()
+  protected _schema: any = {}
   store: U
   touched: boolean
-  validation: ValidationResult
+  validation: any
 
   constructor(
     name: string,
@@ -22,7 +21,7 @@ export class ComponentFormFieldStore<T extends Element, U extends object> extend
     path: keyof U,
     ref: MutableRefObject<T> = Dummy.ref,
     required: boolean = false,
-    schema: AnySchema = Joi.any(),
+    schema: any = Dummy.schema,
     store: U,
     touched: boolean = false,
     update?: () => void
@@ -49,7 +48,7 @@ export class ComponentFormFieldStore<T extends Element, U extends object> extend
     return this.validation.error ? this.validation.error.message.replace(/"[a-z]+"/, `This field`) : ''
   }
 
-  get schema(): AnySchema {
+  get schema(): any {
     return this._schema
   }
 
@@ -73,7 +72,7 @@ export class ComponentFormFieldStore<T extends Element, U extends object> extend
     return this.validation.error === undefined
   }
 
-  set schema(schema: AnySchema) {
+  set schema(schema: any) {
     this._schema = schema
   }
 }

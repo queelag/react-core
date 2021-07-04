@@ -1,13 +1,11 @@
 import { ID, IDUtils, noop, tcp } from '@queelag/core'
 import { Buffer } from 'buffer'
-import Joi, { ArraySchema, ObjectSchema } from 'joi'
 import { ChangeEvent, MutableRefObject } from 'react'
 import { ComponentName, InputFileMode, Layer } from '../definitions/enums'
 import { InputFileProps } from '../definitions/props'
 import { InputFileItem } from '../definitions/types'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
 import { Dummy } from '../modules/dummy'
-import { Schema } from '../modules/schema'
 
 export class InputFileStore<T extends object> extends ComponentFormFieldStore<HTMLInputElement, T> {
   mode: InputFileMode
@@ -24,7 +22,7 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
     touched: boolean = false,
     update: () => void = noop
   ) {
-    super(ComponentName.INPUT_FILE, id, label, layer, path, ref, required, Joi.any(), store, touched, update)
+    super(ComponentName.INPUT_FILE, id, label, layer, path, ref, required, Dummy.schema, store, touched, update)
 
     this.mode = mode
     this.validation = this.schema.validate(this.value)
@@ -102,13 +100,14 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
     }
   }
 
-  get schema(): ArraySchema | ObjectSchema {
-    switch (this.mode) {
-      case InputFileMode.MULTIPLE:
-        return Joi.array().items(this.required ? Schema.inputFileItemRequired : Schema.inputFileItemOptional)
-      case InputFileMode.SINGLE:
-        return this.required ? Schema.inputFileItemRequired : Schema.inputFileItemOptional
-    }
+  get schema(): any {
+    return Dummy.schema
+    // switch (this.mode) {
+    //   case InputFileMode.MULTIPLE:
+    //     return Joi.array().items(this.required ? Schema.inputFileItemRequired : Schema.inputFileItemOptional)
+    //   case InputFileMode.SINGLE:
+    //     return this.required ? Schema.inputFileItemRequired : Schema.inputFileItemOptional
+    // }
   }
 
   get value(): InputFileItem | InputFileItem[] {
@@ -136,7 +135,7 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
     return this.mode === InputFileMode.SINGLE
   }
 
-  set schema(schema: ArraySchema | ObjectSchema) {
+  set schema(schema: any) {
     this._schema = schema
   }
 }

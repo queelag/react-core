@@ -68,6 +68,10 @@ export class Dummy {
     }
   }
 
+  static get schema(): any {
+    return { validate: () => ({}) }
+  }
+
   static get sidebarItem(): SidebarItem {
     return {
       icon: Blank,

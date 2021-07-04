@@ -1,5 +1,4 @@
 import { ID, noop } from '@queelag/core'
-import Joi from 'joi'
 import { MutableRefObject } from 'react'
 import { ComponentName, Layer } from '../definitions/enums'
 import { SwitchProps } from '../definitions/props'
@@ -21,7 +20,7 @@ export class SwitchStore<T extends object> extends ComponentFormFieldStore<HTMLD
     store: T = {} as any,
     update: () => void = noop
   ) {
-    super(ComponentName.SWITCH, id, label, layer, path, ref, false, Joi.any(), store, false, update)
+    super(ComponentName.SWITCH, id, label, layer, path, ref, false, Dummy.schema, store, false, update)
 
     this.disabled = disabled
     this.touchStartTranslated = 0

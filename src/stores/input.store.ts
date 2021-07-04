@@ -1,6 +1,5 @@
 import { ID, noop, NumberUtils } from '@queelag/core'
 import { Buffer } from 'buffer'
-import Joi, { AnySchema } from 'joi'
 import { ChangeEvent, MutableRefObject } from 'react'
 import { ComponentName, InputType, Layer } from '../definitions/enums'
 import { InputProps } from '../definitions/props'
@@ -18,7 +17,7 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
     layer: Layer = Layer.TWO,
     path: keyof T = '' as any,
     ref: MutableRefObject<HTMLInputElement> = Dummy.ref,
-    schema: AnySchema = Joi.any(),
+    schema: any = Dummy.schema,
     store: T = {} as any,
     touched: boolean = false,
     type: InputType = InputType.TEXT,

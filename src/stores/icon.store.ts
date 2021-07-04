@@ -1,10 +1,8 @@
 import { ID, noop, tcp } from '@queelag/core'
-import Joi from 'joi'
 import { Color, ComponentName, Layer } from '../definitions/enums'
 import { IconProps } from '../definitions/props'
 import Cache from '../modules/cache'
 import { ComponentLayerStore } from '../modules/component.layer.store'
-import { Schema } from '../modules/schema'
 import { ColorPicker } from '../pickers/color.picker'
 
 export class IconStore extends ComponentLayerStore<SVGElement> {
@@ -56,7 +54,8 @@ export class IconStore extends ComponentLayerStore<SVGElement> {
   set svg(svg: string) {
     ;(async () => {
       switch (true) {
-        case Schema.isValid(Joi.string().uri({ allowRelative: true }), svg):
+        case Boolean(false):
+          // case Schema.isValid(Joi.string().uri({ allowRelative: true }), svg):
           let cached: string | undefined, response: Response | Error, text: string | Error
 
           cached = Cache.icons.get(svg)

@@ -1,4 +1,3 @@
-import { AnySchema } from 'joi'
 import { ListChildComponentProps } from 'react-window'
 import { RouterStore } from '../stores/router.store'
 import { ButtonType, Color, DividerType, FeedbackType, InputFileMode, InputType, Layer, Orientation, SelectMode, Shape } from './enums'
@@ -166,7 +165,7 @@ export type InputProps<T extends object> = {
   path: keyof T
   prefix?: JSX.Element
   required?: boolean
-  schema?: AnySchema
+  schema?: any
   store: T
   suffix?: JSX.Element
   touched?: boolean

@@ -1,11 +1,9 @@
 import { ID, noop, tc, tcp } from '@queelag/core'
 import { Buffer } from 'buffer'
-import Joi from 'joi'
 import { ComponentName, Shape } from '../definitions/enums'
 import { ImageProps } from '../definitions/props'
 import Cache from '../modules/cache'
 import { ComponentShapeStore } from '../modules/component.shape.store'
-import { Schema } from '../modules/schema'
 
 export class ImageStore extends ComponentShapeStore<HTMLImageElement> {
   base64: string
@@ -55,7 +53,8 @@ export class ImageStore extends ComponentShapeStore<HTMLImageElement> {
           this.source = value
 
           break
-        case Schema.isValid(Joi.string().uri({ allowRelative: true }), value):
+        case Boolean(false):
+          // case Schema.isValid(Joi.string().uri({ allowRelative: true }), value):
           let cached: string | undefined, response: Response | Error, buffer: ArrayBuffer | Error, base64: string | Error, type: string | null
 
           cached = Cache.images.get(value)
