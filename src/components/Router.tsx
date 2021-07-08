@@ -5,7 +5,7 @@ import { ROUTER_PROPS_KEYS } from '../definitions/constants'
 import { RouterProps } from '../definitions/props'
 import { useForceUpdate } from '../hooks/use.force.update'
 
-function Router(props: RouterProps) {
+export function Router(props: RouterProps) {
   const update = useForceUpdate()
   const ref = useRef(document.createElement('div'))
 
@@ -31,5 +31,3 @@ function Router(props: RouterProps) {
     </div>
   )
 }
-
-export default Router

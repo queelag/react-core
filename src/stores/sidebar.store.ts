@@ -25,7 +25,7 @@ export class SidebarStore extends ComponentStore<HTMLDivElement> {
   }
 
   onClickItem(item: SidebarItem): void {
-    this.router.goto(item.name, true)
+    this.router.redirect(item.name)
   }
 
   findItemByName(name: string): SidebarItem {

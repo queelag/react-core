@@ -1,5 +1,5 @@
 import { ObjectUtils, StoreUtils } from '@queelag/core'
-import React, { useEffect, useMemo } from 'react'
+import React, { Fragment, useEffect, useMemo } from 'react'
 import { IMAGE_PROPS_KEYS } from '../definitions/constants'
 import { ImageProps } from '../definitions/props'
 import { useForceUpdate } from '../hooks/use.force.update'
@@ -17,13 +17,24 @@ export function Image(props: ImageProps) {
   return (
     <>
       {store.hasNoError && (
-        <img
-          {...ObjectUtils.omit(props, IMAGE_PROPS_KEYS)}
-          id={store.id}
-          onError={store.onError}
-          src={store.source}
-          style={{ ...props.style, ...(props.size && { ...ShapeUtils.findStyle(store.shape, props.size), height: props.size, width: props.size }) }}
-        />
+        <Fragment>
+          {store.source.length > 0 && (
+            <img
+              {...ObjectUtils.omit(props, IMAGE_PROPS_KEYS)}
+              id={store.id}
+              onError={store.onError}
+              src={store.source}
+              style={{ ...props.style, ...(props.size && { ...ShapeUtils.findStyle(store.shape, props.size), height: props.size, width: props.size }) }}
+            />
+          )}
+          {store.source.length <= 0 && (
+            <div
+              {...ObjectUtils.omit(props, IMAGE_PROPS_KEYS)}
+              id={store.id}
+              style={{ ...props.style, ...(props.size && { ...ShapeUtils.findStyle(store.shape, props.size), height: props.size, width: props.size }) }}
+            />
+          )}
+        </Fragment>
       )}
       {store.hasError && (
         <>

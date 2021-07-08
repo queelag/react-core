@@ -59,16 +59,20 @@ export type Route = {
   children: RouteChild[]
   component: RouteComponent
   name: string
+  parameters: RouteParameters
   parent: RouteComponent
   path: string
   redirect: [] | [string, string]
+  regex: RegExp
 }
 
 export type RouteChild = Omit<Route, 'children'>
 
+export type RouteParameters = { [k: string]: string }
+
 export type RoutePartial = {
   children?: RoutePartialChild[]
-} & Optional<Omit<Route, 'children' | 'path'>, 'parent' | 'redirect'>
+} & Optional<Omit<Route, 'children' | 'parameters' | 'path' | 'regex'>, 'parent' | 'redirect'>
 
 export type RoutePartialChild = Omit<RoutePartial, 'children'>
 

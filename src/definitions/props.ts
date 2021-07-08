@@ -6,6 +6,7 @@ import {
   BottomTabberItem,
   ContextMenuItem,
   OnboardingItem,
+  RouteParameters,
   SelectOption,
   SidebarItem,
   StatisticValue,
@@ -214,6 +215,8 @@ export type ParentProps = {
 }
 
 export type RedirectProps = {
+  clear?: boolean
+  parameters?: RouteParameters
   to: string
   store: RouterStore
 }

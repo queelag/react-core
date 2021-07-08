@@ -62,9 +62,11 @@ export class Dummy {
       children: [],
       component: Blank,
       name: '',
+      parameters: {},
       path: '',
       parent: Parent,
-      redirect: []
+      redirect: [],
+      regex: new RegExp('')
     }
   }
 

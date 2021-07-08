@@ -5,7 +5,7 @@ import { ListProps } from '../definitions/props'
 import { useForceUpdate } from '../hooks/use.force.update'
 import { ListStore, LIST_STORE_KEYS } from '../stores/list.store'
 
-function List<T>(props: ListProps<T>) {
+export function List<T>(props: ListProps<T>) {
   const update = useForceUpdate()
   const ref = useRef(document.createElement('ul'))
   const store = useMemo(() => new ListStore(props.id, props.items, ref, update), [])
@@ -22,5 +22,3 @@ function List<T>(props: ListProps<T>) {
     </ul>
   )
 }
-
-export default List

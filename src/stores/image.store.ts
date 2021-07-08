@@ -1,8 +1,8 @@
-import { ID, noop, tc, tcp } from '@queelag/core'
+import { ID, Logger, noop, rv, tc, tcp } from '@queelag/core'
 import { Buffer } from 'buffer'
 import { ComponentName, Shape } from '../definitions/enums'
 import { ImageProps } from '../definitions/props'
-import Cache from '../modules/cache'
+import { Cache } from '../modules/cache'
 import { ComponentShapeStore } from '../modules/component.shape.store'
 
 export class ImageStore extends ComponentShapeStore<HTMLImageElement> {
@@ -23,9 +23,9 @@ export class ImageStore extends ComponentShapeStore<HTMLImageElement> {
     this._source = this.toBase64Source(this.base64, this.type)
   }
 
-  onError = (error: React.SyntheticEvent<HTMLImageElement>) => {
-    // console.error(error)
+  onError = (error?: React.SyntheticEvent<HTMLImageElement>): void => {
     this.error = true
+    Logger.error(this.id, 'onError', `The error has been set to true.`, error)
 
     this.update()
   }
@@ -46,41 +46,40 @@ export class ImageStore extends ComponentShapeStore<HTMLImageElement> {
     return this.error === false
   }
 
-  set source(value: string) {
+  set source(source: string) {
+    console.log('SOURCE', source, /^(https?:\/\/|\/)/.test(source))
     ;(async () => {
       switch (true) {
-        case value.includes('base64'):
-          this.source = value
-
-          break
-        case Boolean(false):
-          // case Schema.isValid(Joi.string().uri({ allowRelative: true }), value):
+        case /^(https?:\/\/|\/)/.test(source):
           let cached: string | undefined, response: Response | Error, buffer: ArrayBuffer | Error, base64: string | Error, type: string | null
 
-          cached = Cache.images.get(value)
-          if (cached) return (this._source = cached)
+          console.log('SOURCE', source)
 
-          response = await tcp(() => window.fetch(value))
-          if (response instanceof Error) return
+          cached = Cache.images.get(source)
+          if (cached) return (this.source = cached)
+
+          response = await tcp(() => window.fetch(source))
+          if (response instanceof Error) return this.onError()
 
           buffer = await tcp(() => (response as Response).arrayBuffer())
-          if (buffer instanceof Error) return
+          if (buffer instanceof Error) return this.onError()
 
           base64 = tc(() => Buffer.from(buffer as ArrayBuffer).toString('base64'))
-          if (base64 instanceof Error) return
+          if (base64 instanceof Error) return this.onError()
 
           type = response.headers.get('content-type')
-          if (!type) return
+          if (!type) return rv(() => Logger.error(this.id, 'setSource', `Failed to find the content-type header`, (response as Response).headers))
 
           this.base64 = base64
-          this.source = this.toBase64Source(base64, type)
+          this._source = this.toBase64Source(base64, type)
           this.type = type
 
-          Cache.images.set(value, this.toBase64Source(base64, type))
+          Cache.images.set(source, this.toBase64Source(base64, type))
 
           break
+        case source.includes('base64'):
         default:
-          this.source = value
+          this._source = source
 
           break
       }

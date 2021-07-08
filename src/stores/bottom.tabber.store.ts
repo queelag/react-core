@@ -26,7 +26,7 @@ export class BottomTabberStore extends ComponentStore<HTMLDivElement> {
   }
 
   onClickItem(item: BottomTabberItem): void {
-    this.router.goto(item.name, true)
+    this.router.redirect(item.name)
   }
 
   findItemByName(name: string): BottomTabberItem {
