@@ -1,7 +1,7 @@
 import { ListChildComponentProps } from 'react-window'
 import * as S from 'superstruct'
 import { RouterStore } from '../stores/router.store'
-import { ButtonType, Color, DividerType, FeedbackType, InputFileMode, InputType, Layer, Orientation, SelectMode, Shape } from './enums'
+import { ButtonType, Color, DividerType, FeedbackType, InputFileMode, InputType, Layer, Orientation, SelectMode, Shape, Size } from './enums'
 import {
   BottomSheetItem,
   BottomTabberItem,
@@ -54,6 +54,7 @@ export type ButtonProps = {
   icon?: (props: IconProps) => JSX.Element
   layer?: Layer
   shape?: Shape
+  size?: Size
   spinning?: boolean
   submit?: boolean
   title?: string

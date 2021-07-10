@@ -1,12 +1,13 @@
-import { ID } from '@queelag/core'
+import { ID, noop } from '@queelag/core'
 import { MutableRefObject } from 'react'
 import { Shape } from '../definitions/enums'
 import { ComponentStore } from './component.store'
+import { Dummy } from './dummy'
 
 export class ComponentShapeStore<T extends Element> extends ComponentStore<T> {
   shape: Shape
 
-  constructor(name: string, id?: ID, ref?: MutableRefObject<T>, shape: Shape = Shape.NONE, update?: () => void) {
+  constructor(name: string, id: ID = '', ref: MutableRefObject<T> = Dummy.ref, shape: Shape = Shape.NONE, update: () => void = noop) {
     super(name, id, ref, update)
 
     this.shape = shape

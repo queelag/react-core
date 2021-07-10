@@ -1,12 +1,13 @@
 import { ID, noop } from '@queelag/core'
 import { MutableRefObject } from 'react'
-import { Layer, Shape } from '../definitions/enums'
+import { Layer, Shape, Size } from '../definitions/enums'
 import { ComponentStore } from './component.store'
 import { Dummy } from './dummy'
 
-export class ComponentLayerShapeStore<T extends Element> extends ComponentStore<T> {
+export class ComponentLayerShapeSizeStore<T extends Element> extends ComponentStore<T> {
   layer: Layer
   shape: Shape
+  size: Size
 
   constructor(
     name: string,
@@ -14,12 +15,14 @@ export class ComponentLayerShapeStore<T extends Element> extends ComponentStore<
     layer: Layer = Layer.ZERO,
     ref: MutableRefObject<T> = Dummy.ref,
     shape: Shape = Shape.NONE,
+    size: Size = Size.MEDIUM,
     update: () => void = noop
   ) {
     super(name, id, ref, update)
 
     this.layer = layer
     this.shape = shape
+    this.size = size
   }
 
   get isLayerZero(): boolean {
@@ -56,5 +59,17 @@ export class ComponentLayerShapeStore<T extends Element> extends ComponentStore<
 
   get isShapeSquircle(): boolean {
     return this.shape === Shape.SQUIRCLE
+  }
+
+  get isSizeLarge(): boolean {
+    return this.size === Size.LARGE
+  }
+
+  get isSizeMedium(): boolean {
+    return this.size == Size.MEDIUM
+  }
+
+  get isSizeSmall(): boolean {
+    return this.size === Size.SMALL
   }
 }

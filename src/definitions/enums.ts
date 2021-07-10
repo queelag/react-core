@@ -1,5 +1,6 @@
 export enum ButtonType {
   NONE = 'NONE',
+  OUTLINE = 'OUTLINE',
   PRIMARY = 'PRIMARY',
   SECONDARY = 'SECONDARY',
   TEXT = 'TEXT'
@@ -141,6 +142,12 @@ export enum Shape {
   RECTANGLE = 'RECTANGLE',
   SQUARE = 'SQUARE',
   SQUIRCLE = 'SQUIRCLE'
+}
+
+export enum Size {
+  LARGE = 'LARGE',
+  MEDIUM = 'MEDIUM',
+  SMALL = 'SMALL'
 }
 
 export enum Theme {

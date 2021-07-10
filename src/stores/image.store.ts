@@ -48,13 +48,10 @@ export class ImageStore extends ComponentShapeStore<HTMLImageElement> {
   }
 
   set source(source: string) {
-    console.log('SOURCE', source, /^(https?:\/\/|\/)/.test(source))
     ;(async () => {
       switch (true) {
         case /^(https?:\/\/|\/)/.test(source):
           let cached: string | undefined, response: Response | Error, buffer: ArrayBuffer | Error, base64: string | Error, type: string | null
-
-          console.log('SOURCE', source)
 
           cached = Cache.images.get(source)
           if (cached) return (this.source = cached)

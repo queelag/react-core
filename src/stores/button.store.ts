@@ -1,11 +1,11 @@
 import { ID, noop, tcp } from '@queelag/core'
 import { MouseEvent, MutableRefObject } from 'react'
-import { ButtonType, ComponentName, Layer, Shape } from '../definitions/enums'
+import { ButtonType, ComponentName, Layer, Shape, Size } from '../definitions/enums'
 import { ButtonProps } from '../definitions/props'
-import { ComponentLayerShapeStore } from '../modules/component.layer.shape.store'
+import { ComponentLayerShapeSizeStore } from '../modules/component.layer.shape.size.store'
 import { Dummy } from '../modules/dummy'
 
-export class ButtonStore extends ComponentLayerShapeStore<HTMLButtonElement> {
+export class ButtonStore extends ComponentLayerShapeSizeStore<HTMLButtonElement> {
   disabled: boolean
   spinning: boolean
   type: ButtonType
@@ -17,11 +17,12 @@ export class ButtonStore extends ComponentLayerShapeStore<HTMLButtonElement> {
     onClick: (event: MouseEvent<HTMLButtonElement>) => any = noop,
     ref: MutableRefObject<HTMLButtonElement> = Dummy.ref,
     shape: Shape = Shape.RECTANGLE,
+    size: Size = Size.MEDIUM,
     spinning: boolean = false,
-    type: ButtonType = ButtonType.SECONDARY,
+    type: ButtonType = ButtonType.OUTLINE,
     update: () => void
   ) {
-    super(ComponentName.BUTTON, id, layer, ref, shape, update)
+    super(ComponentName.BUTTON, id, layer, ref, shape, size, update)
 
     this.disabled = disabled
     this.onClick = onClick
@@ -49,6 +50,14 @@ export class ButtonStore extends ComponentLayerShapeStore<HTMLButtonElement> {
 
   get isNotSpinning(): boolean {
     return this.spinning === false
+  }
+
+  get isTypeNone(): boolean {
+    return this.type === ButtonType.NONE
+  }
+
+  get isTypeOutline(): boolean {
+    return this.type === ButtonType.OUTLINE
   }
 
   get isTypePrimary(): boolean {
@@ -86,4 +95,4 @@ export class ButtonStore extends ComponentLayerShapeStore<HTMLButtonElement> {
   }
 }
 
-export const BUTTON_STORE_KEYS: (keyof ButtonProps & keyof ButtonStore)[] = ['disabled', 'id', 'layer', 'onClick', 'shape', 'spinning', 'type']
+export const BUTTON_STORE_KEYS: (keyof ButtonProps & keyof ButtonStore)[] = ['disabled', 'id', 'layer', 'onClick', 'shape', 'size', 'spinning', 'type']

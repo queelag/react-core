@@ -30,13 +30,14 @@ export function Avatar(props: AvatarProps) {
         justifyContent: 'center',
         overflow: 'hidden',
         position: 'relative',
+        textAlign: 'center',
         width: store.size
       }}
     >
       {props.icon && <props.icon color={store.color} size={store.size / 2} style={{ position: 'absolute' }} />}
       {props.source && <Image size={store.size} source={props.source} style={{ zIndex: 10 }} />}
       {props.text && (
-        <b className={ReactUtils.joinClassNames(props.className, store.color)} style={{ fontSize: store.size / 2 }}>
+        <b className={ReactUtils.joinClassNames(store.color)} style={{ fontSize: store.size / 3, position: 'absolute', textTransform: 'uppercase' }}>
           {props.text}
         </b>
       )}
