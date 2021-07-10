@@ -25,7 +25,8 @@
     "typescript": "4.3.5"
   },
   "license": "MIT",
-  "main": "index.js",
+  "main": "index.cjs",
+  "module": "index.mjs",
   "name": "@queelag/react-core",
   "scripts": {
     "test": "yarn jest --coverage",
@@ -33,5 +34,6 @@
     "tarball": "yarn version && cp package.json dist/. && cd dist && yarn pack",
     "deploy": "yarn test && yarn build && yarn tarball && yarn publish dist/*.tgz --access public"
   },
+  "sideEffects": false,
   "version": "1.0.0"
 }

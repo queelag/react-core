@@ -1,5 +1,6 @@
 import { ID, Logger, noop, rv, tc, tcp } from '@queelag/core'
 import { Buffer } from 'buffer'
+import { SyntheticEvent } from 'react'
 import { ComponentName, Shape } from '../definitions/enums'
 import { ImageProps } from '../definitions/props'
 import { Cache } from '../modules/cache'
@@ -23,7 +24,7 @@ export class ImageStore extends ComponentShapeStore<HTMLImageElement> {
     this._source = this.toBase64Source(this.base64, this.type)
   }
 
-  onError = (error?: React.SyntheticEvent<HTMLImageElement>): void => {
+  onError = (error?: SyntheticEvent<HTMLImageElement>): void => {
     this.error = true
     Logger.error(this.id, 'onError', `The error has been set to true.`, error)
 
