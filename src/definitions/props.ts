@@ -1,4 +1,5 @@
 import { ListChildComponentProps } from 'react-window'
+import * as S from 'superstruct'
 import { RouterStore } from '../stores/router.store'
 import { ButtonType, Color, DividerType, FeedbackType, InputFileMode, InputType, Layer, Orientation, SelectMode, Shape } from './enums'
 import {
@@ -166,7 +167,7 @@ export type InputProps<T extends object> = {
   path: keyof T
   prefix?: JSX.Element
   required?: boolean
-  schema?: any
+  schema?: S.Struct
   store: T
   suffix?: JSX.Element
   touched?: boolean

@@ -1,11 +1,13 @@
 import { ID, IDUtils, noop, tcp } from '@queelag/core'
 import { Buffer } from 'buffer'
 import { ChangeEvent, MutableRefObject } from 'react'
+import * as S from 'superstruct'
 import { ComponentName, InputFileMode, Layer } from '../definitions/enums'
 import { InputFileProps } from '../definitions/props'
 import { InputFileItem } from '../definitions/types'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
 import { Dummy } from '../modules/dummy'
+import { Schema } from '../modules/schema'
 
 export class InputFileStore<T extends object> extends ComponentFormFieldStore<HTMLInputElement, T> {
   mode: InputFileMode
@@ -100,14 +102,13 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
     }
   }
 
-  get schema(): any {
-    return Dummy.schema
-    // switch (this.mode) {
-    //   case InputFileMode.MULTIPLE:
-    //     return Joi.array().items(this.required ? Schema.inputFileItemRequired : Schema.inputFileItemOptional)
-    //   case InputFileMode.SINGLE:
-    //     return this.required ? Schema.inputFileItemRequired : Schema.inputFileItemOptional
-    // }
+  get schema(): S.Describe<InputFileItem> | S.Struct<InputFileItem[]> {
+    switch (this.mode) {
+      case InputFileMode.MULTIPLE:
+        return S.array(this.required ? Schema.inputFileItemRequired : Schema.inputFileItemOptional)
+      case InputFileMode.SINGLE:
+        return this.required ? Schema.inputFileItemRequired : Schema.inputFileItemOptional
+    }
   }
 
   get value(): InputFileItem | InputFileItem[] {

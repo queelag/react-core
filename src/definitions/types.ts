@@ -80,8 +80,10 @@ export type RouteComponent = (props: any) => JSX.Element
 
 export type SelectOption = {
   label: string
-  value: any
+  value: SelectOptionValue
 }
+
+export type SelectOptionValue = string
 
 export type SidebarItem = {
   icon: (props: IconProps) => JSX.Element

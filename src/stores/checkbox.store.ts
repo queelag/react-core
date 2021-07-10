@@ -1,5 +1,6 @@
 import { ID, noop } from '@queelag/core'
 import { MutableRefObject } from 'react'
+import * as S from 'superstruct'
 import { ComponentName, Layer } from '../definitions/enums'
 import { CheckboxProps } from '../definitions/props'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
@@ -36,9 +37,8 @@ export class CheckboxStore<U extends object> extends ComponentFormFieldStore<HTM
     }
   }
 
-  get schema(): any {
-    return Dummy.schema
-    // return this.required ? Joi.boolean().truthy() : Joi.boolean()
+  get schema(): S.Struct<boolean> {
+    return this.required ? S.refine(S.boolean(), 'true', (v: boolean) => v === true) : S.boolean()
   }
 
   get value(): boolean {
@@ -49,7 +49,7 @@ export class CheckboxStore<U extends object> extends ComponentFormFieldStore<HTM
     return this.disabled === false
   }
 
-  set schema(schema: any) {
+  set schema(schema: S.Struct<boolean>) {
     this._schema = schema
   }
 }

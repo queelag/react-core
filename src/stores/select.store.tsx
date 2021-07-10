@@ -1,8 +1,9 @@
 import { ID, noop } from '@queelag/core'
 import { MutableRefObject } from 'react'
+import * as S from 'superstruct'
 import { ComponentName, Layer, SelectMode } from '../definitions/enums'
 import { SelectProps } from '../definitions/props'
-import { SelectOption } from '../definitions/types'
+import { SelectOption, SelectOptionValue } from '../definitions/types'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
 import { Dummy } from '../modules/dummy'
 
@@ -30,9 +31,12 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
   }
 
   onClickOption = (option: SelectOption): void => {
+    let value: any
+
     switch (this.mode) {
       case SelectMode.MULTIPLE:
-        this.store[this.path] = this.value.includes(option.value) ? this.value.filter((v: any) => v !== option.value) : (this.value.concat(option.value) as any)
+        value = this.value as SelectOptionValue[]
+        this.store[this.path] = value.includes(option.value) ? value.filter((v: SelectOptionValue) => v !== option.value) : value.concat(option.value)
         break
       case SelectMode.SINGLE:
         this.store[this.path] = option.value as any
@@ -43,25 +47,24 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
     this.validation = this.schema.validate(this.value)
   }
 
-  onClickRemove = (value: any): any => {
+  onClickRemove = (value: SelectOption): void => {
     this.onClickOption(value)
   }
 
-  findLabelByValue(value: any): string {
+  findLabelByValue(value: SelectOptionValue): string {
     return (this.options.find((v: SelectOption) => v.value === value) || { label: '', value: '' }).label
   }
 
-  get schema(): any {
-    return Dummy.schema
-    // switch (this.mode) {
-    //   case SelectMode.MULTIPLE:
-    //     return this.required ? Joi.array().min(1).required() : Joi.array()
-    //   case SelectMode.SINGLE:
-    //     return this.required ? Joi.any().required() : Joi.any()
-    // }
+  get schema(): S.Struct<SelectOptionValue> | S.Struct<SelectOptionValue[]> {
+    switch (this.mode) {
+      case SelectMode.MULTIPLE:
+        return this.required ? S.size(S.array(S.string()), 1, Infinity) : S.array(S.string())
+      case SelectMode.SINGLE:
+        return this.required ? S.size(S.string(), 1, Infinity) : S.string()
+    }
   }
 
-  get value(): any {
+  get value(): SelectOptionValue | SelectOptionValue[] {
     switch (this.mode) {
       case SelectMode.MULTIPLE:
         return (this.store[this.path] as any) || []

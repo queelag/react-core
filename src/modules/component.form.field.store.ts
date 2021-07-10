@@ -1,5 +1,6 @@
 import { ID, ObjectUtils } from '@queelag/core'
 import { MutableRefObject } from 'react'
+import * as S from 'superstruct'
 import { Layer } from '../definitions/enums'
 import { ComponentLayerStore } from './component.layer.store'
 import { Dummy } from './dummy'
@@ -8,10 +9,10 @@ export class ComponentFormFieldStore<T extends Element, U extends object> extend
   label: string
   path: keyof U
   required: boolean
-  protected _schema: any = {}
+  protected _schema: S.Struct<any, any> = Dummy.schema
   store: U
   touched: boolean
-  validation: any
+  validation: [S.StructError | undefined, any]
 
   constructor(
     name: string,
@@ -21,7 +22,7 @@ export class ComponentFormFieldStore<T extends Element, U extends object> extend
     path: keyof U,
     ref: MutableRefObject<T> = Dummy.ref,
     required: boolean = false,
-    schema: any = Dummy.schema,
+    schema: S.Struct = Dummy.schema,
     store: U,
     touched: boolean = false,
     update?: () => void
@@ -45,10 +46,10 @@ export class ComponentFormFieldStore<T extends Element, U extends object> extend
   }
 
   get error(): string {
-    return this.validation.error ? this.validation.error.message.replace(/"[a-z]+"/, `This field`) : ''
+    return this.validation[0] ? this.validation[0].message : ''
   }
 
-  get schema(): any {
+  get schema(): S.Struct<any, any> {
     return this._schema
   }
 
@@ -61,7 +62,7 @@ export class ComponentFormFieldStore<T extends Element, U extends object> extend
   }
 
   get hasError(): boolean {
-    return this.validation.error !== undefined
+    return this.validation[0] !== undefined
   }
 
   get isErrorVisible(): boolean {
@@ -69,10 +70,10 @@ export class ComponentFormFieldStore<T extends Element, U extends object> extend
   }
 
   get isValid(): boolean {
-    return this.validation.error === undefined
+    return this.validation[0] === undefined
   }
 
-  set schema(schema: any) {
+  set schema(schema: S.Struct<any, any>) {
     this._schema = schema
   }
 }

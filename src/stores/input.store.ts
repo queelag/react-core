@@ -1,6 +1,7 @@
 import { ID, noop, NumberUtils } from '@queelag/core'
 import { Buffer } from 'buffer'
 import { ChangeEvent, MutableRefObject } from 'react'
+import * as S from 'superstruct'
 import { ComponentName, InputType, Layer } from '../definitions/enums'
 import { InputProps } from '../definitions/props'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
@@ -17,7 +18,7 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
     layer: Layer = Layer.TWO,
     path: keyof T = '' as any,
     ref: MutableRefObject<HTMLInputElement> = Dummy.ref,
-    schema: any = Dummy.schema,
+    schema: S.Struct<any, any> = Dummy.schema,
     store: T = {} as any,
     touched: boolean = false,
     type: InputType = InputType.TEXT,

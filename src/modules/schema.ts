@@ -1,23 +1,20 @@
+import * as S from 'superstruct'
+import { InputFileItem } from '../definitions/types'
+
 export class Schema {
-  static isValid(schema: any, value: any): boolean {
-    return schema.validate(value).error === undefined
+  static get inputFileItemOptional(): S.Describe<InputFileItem> {
+    return S.object({
+      data: S.string(),
+      id: S.string(),
+      name: S.string()
+    })
   }
 
-  static get inputFileItemOptional(): any {
-    return {}
-    // return Joi.object({
-    //   data: Joi.string().base64().allow(''),
-    //   id: Joi.string().allow(''),
-    //   name: Joi.string().allow('')
-    // })
-  }
-
-  static get inputFileItemRequired(): any {
-    return {}
-    // return Joi.object({
-    //   data: Joi.string().base64().required(),
-    //   id: Joi.string().required(),
-    //   name: Joi.string().required()
-    // })
+  static get inputFileItemRequired(): S.Describe<InputFileItem> {
+    return S.object({
+      data: S.size(S.string(), 1, Infinity),
+      id: S.size(S.string(), 1, Infinity),
+      name: S.size(S.string(), 1, Infinity)
+    })
   }
 }

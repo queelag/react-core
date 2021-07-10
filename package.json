@@ -7,7 +7,8 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-window": "^1.8.6",
-    "squircleyjs": "^1.1.0"
+    "squircleyjs": "^1.1.0",
+    "superstruct": "^0.15.2"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "^7.17.1",
