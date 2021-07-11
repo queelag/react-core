@@ -1,4 +1,4 @@
-import { ID, Logger, rv } from '@queelag/core'
+import { ID, Logger, rv, URLUtils } from '@queelag/core'
 import { Parent } from '../components/Parent'
 import { ComponentName } from '../definitions/enums'
 import { RouterProps } from '../definitions/props'
@@ -83,6 +83,11 @@ export class RouterStore extends ComponentStore<HTMLDivElement> {
   }
 
   private registerPopstateEventListener = (): void => {
+    if (this.routes.length <= 0) {
+      Logger.warn('RouterStore', 'registerPopstateEventListener', `There are no routes, the popstate event will not be registered.`)
+      return
+    }
+
     window.history.pushState({}, '', window.location.href)
     window.addEventListener('popstate', () => {
       window.history.pushState({}, '', window.location.href)
@@ -93,18 +98,14 @@ export class RouterStore extends ComponentStore<HTMLDivElement> {
   }
 
   private replaceHistoryState(route: Route, parameters: RouteParameters): void {
-    let path: string
+    let data: any, title: string, url: string
 
-    path = route.path
-    Logger.debug('RouterStore', 'replaceHistoryState', `The path has been set to ${route.path}.`)
+    data = {}
+    title = route.name
+    url = this.toRouteURL(route, parameters)
 
-    Object.entries(parameters).forEach((v: [string, string]) => {
-      path = path.replace(':' + v[0], v[1])
-      Logger.debug('RouterStore', 'replaceHistoryState', `The parameter ${v[0]} has been set to ${v[1]}.`, v, path)
-    })
-
-    window.history.replaceState({}, route.name, [window.location.origin, path, window.location.search].join('/'))
-    Logger.debug('RouterStore', 'replaceHistoryState', `The history state has been replaced.`)
+    window.history.replaceState(data, title, url)
+    Logger.debug('RouterStore', 'replaceHistoryState', `The history state has been replaced.`, [data, title, url])
   }
 
   findRedirectDestinationByRoute(route: Route): Route {
@@ -117,6 +118,10 @@ export class RouterStore extends ComponentStore<HTMLDivElement> {
 
   findRouteByName(name: string): Route {
     return this.routes.find((v: Route) => v.name === name) || Dummy.route
+  }
+
+  findRouteURLByName(name: string, parameters: RouteParameters): string {
+    return this.toRouteURL(this.findRouteByName(name), parameters)
   }
 
   findRouteByLocation(): Route {
@@ -158,6 +163,20 @@ export class RouterStore extends ComponentStore<HTMLDivElement> {
 
       return [...r, route, ...this.toFlatRoutes(v.children || [], route)]
     }, [])
+  }
+
+  toRouteURL(route: Route, parameters: RouteParameters): string {
+    let path: string
+
+    path = route.path
+    Logger.debug('RouterStore', 'toRoutePathWithParameters', `The path has been set to ${route.path}.`)
+
+    Object.entries(parameters).forEach((v: [string, string]) => {
+      path = path.replace(':' + v[0], v[1])
+      Logger.debug('RouterStore', 'replaceHistoryState', `The parameter ${v[0]} has been set to ${v[1]}.`, v, path)
+    })
+
+    return URLUtils.concat(window.location.origin, path, window.location.search)
   }
 
   canGoto(name: string): boolean {
