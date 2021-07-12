@@ -10,7 +10,7 @@ import { Image } from './Image'
 export function Avatar(props: AvatarProps) {
   const update = useForceUpdate()
   const ref = useRef(document.createElement('div'))
-  const store = useMemo(() => new AvatarStore(props.background, props.color, props.id, props.layer, ref, props.shape, props.size, update), [])
+  const store = useMemo(() => new AvatarStore(props.background, props.color, props.id, props.layer, props.ratio, ref, props.shape, props.size, update), [])
 
   useEffect(() => {
     StoreUtils.updateKeys(store, props, AVATAR_STORE_KEYS, update)
@@ -34,7 +34,7 @@ export function Avatar(props: AvatarProps) {
         width: store.size
       }}
     >
-      {props.icon && <props.icon color={store.color} size={store.size / 2} style={{ position: 'absolute' }} />}
+      {props.icon && <props.icon color={store.color} size={store.size / store.ratio} style={{ position: 'absolute' }} thickness={props.thickness} />}
       {props.source && <Image size={store.size} source={props.source} style={{ zIndex: 10 }} />}
       {props.text && (
         <b className={ReactUtils.joinClassNames(store.color)} style={{ fontSize: store.size / 3, position: 'absolute', textTransform: 'uppercase' }}>

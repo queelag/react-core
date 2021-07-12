@@ -41,7 +41,7 @@ import {
 } from './props'
 
 export const ALERT_PROPS_KEYS: (keyof AlertProps)[] = ['description', 'title', 'type']
-export const AVATAR_PROPS_KEYS: (keyof AvatarProps)[] = ['background', 'color', 'icon', 'layer', 'shape', 'size', 'source', 'text']
+export const AVATAR_PROPS_KEYS: (keyof AvatarProps)[] = ['background', 'color', 'icon', 'layer', 'ratio', 'shape', 'size', 'source', 'text', 'thickness']
 export const BACKDROP_PROPS_KEYS: (keyof BackdropProps)[] = ['opacity']
 export const BADGE_PROPS_KEYS: (keyof BadgeProps)[] = ['value']
 export const BOTTOM_SHEET_PROPS_KEYS: (keyof BottomSheetProps)[] = ['items', 'name', 'title']

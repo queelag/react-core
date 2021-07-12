@@ -27,10 +27,12 @@ export type AvatarProps = {
   color?: string
   icon?: (props: IconProps) => JSX.Element
   layer?: Layer
+  ratio?: number
   shape?: Shape
   size?: number
   source?: string
   text?: string
+  thickness?: number
 } & HTMLDivProps
 
 export type BackdropProps = {

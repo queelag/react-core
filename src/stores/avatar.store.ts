@@ -9,6 +9,7 @@ import { ColorPicker } from '../pickers/color.picker'
 export class AvatarStore extends ComponentLayerShapeStore<HTMLDivElement> {
   private _background: string = ''
   private _color: string = ''
+  ratio: number
   size: number
 
   constructor(
@@ -16,6 +17,7 @@ export class AvatarStore extends ComponentLayerShapeStore<HTMLDivElement> {
     color: string = Color.MONO,
     id: ID = '',
     layer: Layer = Layer.ZERO,
+    ratio: number = 2,
     ref: MutableRefObject<HTMLDivElement> = Dummy.ref,
     shape: Shape = Shape.CIRCLE,
     size: number = 48,
@@ -25,6 +27,7 @@ export class AvatarStore extends ComponentLayerShapeStore<HTMLDivElement> {
 
     this.background = background
     this.color = color
+    this.ratio = ratio
     this.size = size
   }
 
@@ -45,4 +48,4 @@ export class AvatarStore extends ComponentLayerShapeStore<HTMLDivElement> {
   }
 }
 
-export const AVATAR_STORE_KEYS: (keyof AvatarProps & keyof AvatarStore)[] = ['background', 'color', 'layer', 'shape', 'size']
+export const AVATAR_STORE_KEYS: (keyof AvatarProps & keyof AvatarStore)[] = ['background', 'color', 'layer', 'ratio', 'shape', 'size']
