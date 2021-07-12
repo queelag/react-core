@@ -1,6 +1,7 @@
 import {
   AlertProps,
   AvatarProps,
+  BackdropProps,
   BadgeProps,
   BottomSheetProps,
   BottomTabberProps,
@@ -24,9 +25,8 @@ import {
   LoadingProps,
   ModalProps,
   OnboardingProps,
-  RedirectProps,
   ResultProps,
-  RouterProps,
+  RouterRendererProps,
   SelectProps,
   SettingProps,
   SidebarProps,
@@ -42,6 +42,7 @@ import {
 
 export const ALERT_PROPS_KEYS: (keyof AlertProps)[] = ['description', 'title', 'type']
 export const AVATAR_PROPS_KEYS: (keyof AvatarProps)[] = ['background', 'color', 'icon', 'layer', 'shape', 'size', 'source', 'text']
+export const BACKDROP_PROPS_KEYS: (keyof BackdropProps)[] = ['opacity']
 export const BADGE_PROPS_KEYS: (keyof BadgeProps)[] = ['value']
 export const BOTTOM_SHEET_PROPS_KEYS: (keyof BottomSheetProps)[] = ['items', 'name', 'title']
 export const BOTTOM_TABBER_PROPS_KEYS: (keyof BottomTabberProps)[] = ['items', 'router']
@@ -56,7 +57,7 @@ export const EMPTY_PROPS_KEYS: (keyof EmptyProps)[] = ['layer']
 export const FORM_PROPS_KEYS: (keyof FormProps)[] = ['layer']
 export const HEADER_PROPS_KEYS: (keyof HeaderProps)[] = ['logo', 'router', 'title']
 export const ICON_PROPS_KEYS: (keyof IconProps)[] = ['color', 'fill', 'layer', 'size', 'stroke', 'svg', 'thickness']
-export const IMAGE_PROPS_KEYS: (keyof ImageProps)[] = ['fallback', 'shape', 'size', 'source']
+export const IMAGE_PROPS_KEYS: (keyof ImageProps)[] = ['fallback', 'heightRatio', 'shape', 'size', 'source', 'widthRatio']
 export const INPUT_FILE_PROPS_KEYS: (keyof InputFileProps<any>)[] = ['label', 'layer', 'mode', 'onChangeCallback', 'path', 'required', 'store']
 export const INPUT_PROPS_KEYS: (keyof InputProps<any>)[] = [
   'label',
@@ -79,9 +80,8 @@ export const LIST_ITEM_PROPS_KEYS: (keyof ListItemProps)[] = ['avatar', 'descrip
 export const LOADING_PROPS_KEYS: (keyof LoadingProps)[] = ['title']
 export const MODAL_PROPS_KEYS: (keyof ModalProps)[] = ['button', 'name', 'title']
 export const ONBOARDING_PROPS_KEYS: (keyof OnboardingProps)[] = ['items', 'onEnd']
-export const REDIRECT_PROPS_KEYS: (keyof RedirectProps)[] = ['to', 'store']
 export const RESULT_PROPS_KEYS: (keyof ResultProps)[] = ['description', 'icon', 'image', 'title', 'type']
-export const ROUTER_PROPS_KEYS: (keyof RouterProps)[] = ['store']
+export const ROUTER_PROPS_KEYS: (keyof RouterRendererProps)[] = ['fallback', 'map']
 export const SELECT_PROPS_KEYS: (keyof SelectProps<any>)[] = ['disabled', 'label', 'layer', 'mode', 'options', 'path', 'placeholder', 'required', 'store']
 export const SETTING_PROPS_KEYS: (keyof SettingProps)[] = ['description', 'layer', 'title']
 export const SIDEBAR_PROPS_KEYS: (keyof SidebarProps)[] = ['footer', 'items', 'logo', 'router']

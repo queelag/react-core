@@ -1,5 +1,5 @@
 import { ObjectUtils, StoreUtils } from '@queelag/core'
-import React, { Fragment, useEffect, useMemo } from 'react'
+import React, { Fragment, useEffect, useMemo, useRef } from 'react'
 import { IMAGE_PROPS_KEYS } from '../definitions/constants'
 import { ImageProps } from '../definitions/props'
 import { useForceUpdate } from '../hooks/use.force.update'
@@ -8,7 +8,23 @@ import { ShapeUtils } from '../utils/shape.utils'
 
 export function Image(props: ImageProps) {
   const update = useForceUpdate()
-  const store = useMemo(() => new ImageStore(props.id, props.shape, props.source, update), [])
+  const ref = useRef(document.createElement('img'))
+  const store = useMemo(() => new ImageStore(props.id, ref, props.shape, props.source, update), [])
+
+  const style = {
+    ...props.style,
+    ...ShapeUtils.findStyle(store.shape, props.size || 0),
+    height: props.height || props.size || store.height || undefined,
+    width: props.width || props.size || store.width || undefined
+  }
+
+  const onLoad = () => {
+    if (props.heightRatio) {
+      store.setHeight(store.elementWidth * props.heightRatio)
+    } else if (props.widthRatio) {
+      store.setWidth(store.elementHeight * props.widthRatio)
+    }
+  }
 
   useEffect(() => {
     StoreUtils.updateKeys(store, props, IMAGE_STORE_KEYS, update)
@@ -23,43 +39,20 @@ export function Image(props: ImageProps) {
               {...ObjectUtils.omit(props, IMAGE_PROPS_KEYS)}
               id={store.id}
               onError={store.onError}
+              onLoad={onLoad}
+              ref={ref}
               src={store.source}
-              style={{ ...props.style, ...(props.size && { ...ShapeUtils.findStyle(store.shape, props.size), height: props.size, width: props.size }) }}
+              style={style}
             />
           )}
-          {store.source.length <= 0 && (
-            <div
-              {...ObjectUtils.omit(props, IMAGE_PROPS_KEYS)}
-              id={store.id}
-              style={{ ...props.style, ...(props.size && { ...ShapeUtils.findStyle(store.shape, props.size), height: props.size, width: props.size }) }}
-            />
-          )}
+          {store.source.length <= 0 && <div {...ObjectUtils.omit(props, IMAGE_PROPS_KEYS)} id={store.id} ref={ref} style={style} />}
         </Fragment>
       )}
       {store.hasError && (
         <>
-          {typeof props.fallback === 'string' && (
-            <img
-              {...ObjectUtils.omit(props, IMAGE_PROPS_KEYS)}
-              id={store.id}
-              src={props.fallback}
-              style={{ ...props.style, ...(props.size && { ...ShapeUtils.findStyle(store.shape, props.size), height: props.size, width: props.size }) }}
-            />
-          )}
-          {typeof props.fallback === 'function' && (
-            <props.fallback
-              {...ObjectUtils.omit(props, IMAGE_PROPS_KEYS)}
-              id={store.id}
-              style={{ ...props.style, ...(props.size && { ...ShapeUtils.findStyle(store.shape, props.size), height: props.size, width: props.size }) }}
-            />
-          )}
-          {typeof props.fallback === 'undefined' && (
-            <div
-              {...ObjectUtils.omit(props, IMAGE_PROPS_KEYS)}
-              id={store.id}
-              style={{ ...props.style, ...(props.size && { ...ShapeUtils.findStyle(store.shape, props.size), height: props.size, width: props.size }) }}
-            />
-          )}
+          {typeof props.fallback === 'string' && <img {...ObjectUtils.omit(props, IMAGE_PROPS_KEYS)} id={store.id} src={props.fallback} style={style} />}
+          {typeof props.fallback === 'function' && <props.fallback {...ObjectUtils.omit(props, IMAGE_PROPS_KEYS)} id={store.id} style={style} />}
+          {typeof props.fallback === 'undefined' && <div {...ObjectUtils.omit(props, IMAGE_PROPS_KEYS)} id={store.id} style={style} />}
         </>
       )}
     </>

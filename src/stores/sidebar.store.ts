@@ -1,21 +1,21 @@
 import { ID, noop } from '@queelag/core'
 import { MutableRefObject } from 'react'
+import createRouter, { Router } from 'router5'
 import { ComponentName } from '../definitions/enums'
 import { SidebarProps } from '../definitions/props'
 import { SidebarItem } from '../definitions/types'
 import { ComponentStore } from '../modules/component.store'
 import { Dummy } from '../modules/dummy'
-import { RouterStore } from './router.store'
 
 export class SidebarStore extends ComponentStore<HTMLDivElement> {
   items: SidebarItem[]
-  router: RouterStore
+  router: Router
 
   constructor(
     id: ID = '',
     items: SidebarItem[] = [],
     ref: MutableRefObject<HTMLDivElement> = Dummy.ref,
-    router: RouterStore = new RouterStore(),
+    router: Router = createRouter(),
     update: () => void = noop
   ) {
     super(ComponentName.SIDEBAR, id, ref, update)
@@ -25,7 +25,7 @@ export class SidebarStore extends ComponentStore<HTMLDivElement> {
   }
 
   onClickItem(item: SidebarItem): void {
-    this.router.redirect(item.name)
+    this.router.navigate(item.name)
   }
 
   findItemByName(name: string): SidebarItem {

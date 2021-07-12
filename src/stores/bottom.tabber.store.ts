@@ -1,22 +1,22 @@
 import { ID, noop } from '@queelag/core'
 import { MutableRefObject } from 'react'
+import createRouter, { Router } from 'router5'
 import { ComponentName } from '../definitions/enums'
 import { BottomTabberProps } from '../definitions/props'
 import { BottomTabberItem } from '../definitions/types'
 import { ComponentStore } from '../modules/component.store'
 import { Dummy } from '../modules/dummy'
-import { RouterStore } from './router.store'
 
 export class BottomTabberStore extends ComponentStore<HTMLDivElement> {
   items: BottomTabberItem[]
-  router: RouterStore
+  router: Router
 
   constructor(
     id: ID = '',
     items: BottomTabberItem[] = [],
     name: string = ComponentName.BOTTOM_TABBER,
     ref: MutableRefObject<HTMLDivElement> = Dummy.ref,
-    router: RouterStore = new RouterStore(),
+    router: Router = createRouter(),
     update: () => void = noop
   ) {
     super(name, id, ref, update)
@@ -26,7 +26,7 @@ export class BottomTabberStore extends ComponentStore<HTMLDivElement> {
   }
 
   onClickItem(item: BottomTabberItem): void {
-    this.router.redirect(item.name)
+    this.router.navigate(item.name)
   }
 
   findItemByName(name: string): BottomTabberItem {

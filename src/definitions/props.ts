@@ -1,13 +1,13 @@
+import { RouteContext } from 'react-router5/dist/types'
 import { ListChildComponentProps } from 'react-window'
+import { Router } from 'router5'
 import * as S from 'superstruct'
-import { RouterStore } from '../stores/router.store'
 import { ButtonType, Color, DividerType, FeedbackType, InputFileMode, InputType, Layer, Orientation, SelectMode, Shape, Size } from './enums'
 import {
   BottomSheetItem,
   BottomTabberItem,
   ContextMenuItem,
   OnboardingItem,
-  RouteParameters,
   SelectOption,
   SidebarItem,
   StatisticValue,
@@ -33,6 +33,10 @@ export type AvatarProps = {
   text?: string
 } & HTMLDivProps
 
+export type BackdropProps = {
+  opacity?: number
+} & HTMLDivProps
+
 export type BadgeProps = {
   value: number
 } & HTMLDivProps
@@ -45,7 +49,7 @@ export type BottomSheetProps = {
 
 export type BottomTabberProps = {
   items: BottomTabberItem[]
-  router: RouterStore
+  router: Router
 } & HTMLDivProps
 
 export type ButtonProps = {
@@ -113,7 +117,7 @@ export type FormProps = {
 
 export type HeaderProps = {
   logo?: JSX.Element
-  router: RouterStore
+  router: Router
   title?: string
 } & HTMLDivProps
 
@@ -144,9 +148,11 @@ export type IconProps = {
 
 export type ImageProps = {
   fallback?: (props: any) => JSX.Element
+  heightRatio?: number
   shape?: Shape
   size?: number
   source: string
+  widthRatio?: number
 } & Omit<HTMLImageProps, 'src'>
 
 export type InputFileProps<T extends object> = {
@@ -216,13 +222,6 @@ export type ParentProps = {
   children: JSX.Element
 }
 
-export type RedirectProps = {
-  clear?: boolean
-  parameters?: RouteParameters
-  to: string
-  store: RouterStore
-}
-
 export type ResultProps = {
   description?: string
   icon?: (props: IconProps) => JSX.Element
@@ -231,8 +230,10 @@ export type ResultProps = {
   type?: FeedbackType
 } & HTMLDivProps
 
-export type RouterProps = {
-  store: RouterStore
+export type RouterRendererProps = {
+  context: RouteContext
+  fallback?: (props: { context: RouteContext }) => JSX.Element
+  map: Map<string, (props: { context: RouteContext }) => JSX.Element>
 } & HTMLDivProps
 
 export type SelectProps<T extends object> = {
@@ -257,7 +258,7 @@ export type SidebarProps = {
   footer?: JSX.Element
   items: SidebarItem[]
   logo: JSX.Element
-  router: RouterStore
+  router: Router
 } & HTMLDivProps
 
 export type SpinnerProps = {

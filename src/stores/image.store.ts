@@ -1,25 +1,30 @@
-import { ID, Logger, noop, rv, tc, tcp } from '@queelag/core'
+import { ID, Logger, noop, NumberUtils, rv, tc, tcp } from '@queelag/core'
 import { Buffer } from 'buffer'
-import { SyntheticEvent } from 'react'
+import { MutableRefObject, SyntheticEvent } from 'react'
 import { ComponentName, Shape } from '../definitions/enums'
 import { ImageProps } from '../definitions/props'
 import { Cache } from '../modules/cache'
 import { ComponentShapeStore } from '../modules/component.shape.store'
+import { Dummy } from '../modules/dummy'
 
 export class ImageStore extends ComponentShapeStore<HTMLImageElement> {
   base64: string
   error: boolean
+  height: number
   type: string
+  width: number
 
   private _source: string
 
-  constructor(id: ID = '', shape: Shape = Shape.NONE, source: string, update: () => void = noop) {
-    super(ComponentName.IMAGE, id, undefined, shape, update)
+  constructor(id: ID = '', ref: MutableRefObject<HTMLImageElement> = Dummy.ref, shape: Shape = Shape.NONE, source: string, update: () => void = noop) {
+    super(ComponentName.IMAGE, id, ref, shape, update)
 
     this.base64 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='
     this.error = false
+    this.height = 0
     this.type = 'image/png'
     this.source = source
+    this.width = 0
 
     this._source = this.toBase64Source(this.base64, this.type)
   }
@@ -31,8 +36,26 @@ export class ImageStore extends ComponentShapeStore<HTMLImageElement> {
     this.update()
   }
 
+  setHeight(height: number): void {
+    this.height = height
+    this.update()
+  }
+
+  setWidth(width: number): void {
+    this.width = width
+    this.update()
+  }
+
   toBase64Source(base64: string, type: string): string {
     return 'data:' + type + ';base64,' + base64
+  }
+
+  get elementHeight(): number {
+    return NumberUtils.parseFloat(getComputedStyle(this.element).height)
+  }
+
+  get elementWidth(): number {
+    return NumberUtils.parseFloat(getComputedStyle(this.element).width)
   }
 
   get source(): string {
