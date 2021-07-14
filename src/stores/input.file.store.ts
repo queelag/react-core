@@ -136,7 +136,7 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
     return this.mode === InputFileMode.SINGLE
   }
 
-  set schema(schema: any) {
+  set schema(schema: S.Describe<InputFileItem> | S.Struct<InputFileItem[]>) {
     this._schema = schema
   }
 }

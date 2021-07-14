@@ -57,6 +57,7 @@ export type BottomTabberProps = {
 export type ButtonProps = {
   background?: Color
   color?: Color
+  destructive?: boolean
   icon?: (props: IconProps) => JSX.Element
   layer?: Layer
   shape?: Shape
@@ -176,7 +177,7 @@ export type InputProps<T extends object> = {
   path: keyof T
   prefix?: JSX.Element
   required?: boolean
-  schema?: S.Struct
+  schema?: S.Struct<any, any>
   store: T
   suffix?: JSX.Element
   touched?: boolean

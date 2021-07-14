@@ -81,7 +81,7 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
     return this.mode === SelectMode.SINGLE
   }
 
-  set schema(schema: any) {
+  set schema(schema: S.Struct<SelectOptionValue> | S.Struct<SelectOptionValue[]>) {
     this._schema = schema
   }
 }
