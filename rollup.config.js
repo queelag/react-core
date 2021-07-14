@@ -2,7 +2,7 @@ import typescript from '@rollup/plugin-typescript'
 import { terser } from 'rollup-plugin-terser'
 
 export default {
-  external: ['@queelag/core', 'buffer', 'mobx', 'mobx-react', 'react', 'react-dom', 'react-window', 'squircleyjs', 'superstruct'],
+  external: ['@queelag/core', 'buffer', 'mobx', 'mobx-react', 'react', 'react-dom', 'react-router5', 'react-window', 'router5', 'squircleyjs', 'superstruct'],
   input: 'src/index.ts',
   output: [
     {
@@ -10,7 +10,8 @@ export default {
       format: 'cjs'
     },
     {
-      file: 'dist/index.mjs',
+      dir: 'dist',
+      preserveModules: true,
       format: 'esm'
     }
   ],
