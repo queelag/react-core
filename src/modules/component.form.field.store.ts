@@ -5,6 +5,9 @@ import { Layer } from '../definitions/enums'
 import { ComponentLayerStore } from './component.layer.store'
 import { Dummy } from './dummy'
 
+/**
+ * @category Module
+ */
 export class ComponentFormFieldStore<T extends Element, U extends object> extends ComponentLayerStore<T> {
   label: string
   path: keyof U

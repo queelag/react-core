@@ -5,6 +5,9 @@ import { SwitchProps } from '../definitions/props'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
 import { Dummy } from '../modules/dummy'
 
+/**
+ * @category Store
+ */
 export class SwitchStore<T extends object> extends ComponentFormFieldStore<HTMLDivElement, T> {
   disabled: boolean
   touchStartTranslated: number
@@ -60,4 +63,5 @@ export class SwitchStore<T extends object> extends ComponentFormFieldStore<HTMLD
   }
 }
 
+/** @category Constant */
 export const SWITCH_STORE_KEYS: (keyof SwitchProps<any> & keyof SwitchStore<any>)[] = ['disabled', 'id', 'label', 'layer', 'onChangeCallback', 'path', 'store']

@@ -5,6 +5,9 @@ import { ListProps } from '../definitions/props'
 import { useForceUpdate } from '../hooks/use.force.update'
 import { ListStore, LIST_STORE_KEYS } from '../stores/list.store'
 
+/**
+ * @category Component
+ */
 export function List<T>(props: ListProps<T>) {
   const update = useForceUpdate()
   const ref = useRef(document.createElement('ul'))

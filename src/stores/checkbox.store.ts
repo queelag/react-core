@@ -6,6 +6,9 @@ import { CheckboxProps } from '../definitions/props'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
 import { Dummy } from '../modules/dummy'
 
+/**
+ * @category Store
+ */
 export class CheckboxStore<U extends object> extends ComponentFormFieldStore<HTMLDivElement, U> {
   disabled: boolean
 
@@ -54,6 +57,7 @@ export class CheckboxStore<U extends object> extends ComponentFormFieldStore<HTM
   }
 }
 
+/** @category Constant */
 export const CHECK_BOX_STORE_KEYS: (keyof CheckboxProps<any> & keyof CheckboxStore<any>)[] = [
   'disabled',
   'id',

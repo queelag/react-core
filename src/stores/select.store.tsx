@@ -7,6 +7,9 @@ import { SelectOption, SelectOptionValue } from '../definitions/types'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
 import { Dummy } from '../modules/dummy'
 
+/**
+ * @category Store
+ */
 export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLDivElement, T> {
   mode: SelectMode
   options: SelectOption[]
@@ -86,4 +89,5 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
   }
 }
 
+/** @category Constant */
 export const SELECT_STORE_KEYS: (keyof SelectProps<any> & keyof SelectStore<any>)[] = ['id', 'label', 'layer', 'mode', 'options', 'path', 'required', 'store']

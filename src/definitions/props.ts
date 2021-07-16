@@ -16,12 +16,14 @@ import {
   WizardStepPartial
 } from './types'
 
+/** @category Prop */
 export type AlertProps = {
   description?: string
   title?: string
   type: FeedbackType
 } & HTMLDivProps
 
+/** @category Prop */
 export type AvatarProps = {
   background?: string
   color?: string
@@ -35,25 +37,30 @@ export type AvatarProps = {
   thickness?: number
 } & HTMLDivProps
 
+/** @category Prop */
 export type BackdropProps = {
   opacity?: number
 } & HTMLDivProps
 
+/** @category Prop */
 export type BadgeProps = {
   value: number
 } & HTMLDivProps
 
+/** @category Prop */
 export type BottomSheetProps = {
   items?: BottomSheetItem[]
   name: string
   title?: string
 } & HTMLDivProps
 
+/** @category Prop */
 export type BottomTabberProps = {
   items: BottomTabberItem[]
   router: Router
 } & HTMLDivProps
 
+/** @category Prop */
 export type ButtonProps = {
   background?: Color
   color?: Color
@@ -68,6 +75,7 @@ export type ButtonProps = {
   type?: ButtonType
 } & Omit<HTMLButtonProps, 'type'>
 
+/** @category Prop */
 export type CardProps = {
   header?: JSX.Element
   layer?: Layer
@@ -75,6 +83,7 @@ export type CardProps = {
   title?: string
 } & HTMLDivProps
 
+/** @category Prop */
 export type CheckboxProps<T extends object> = {
   disabled?: boolean
   label?: string
@@ -85,6 +94,7 @@ export type CheckboxProps<T extends object> = {
   touched?: boolean
 } & HTMLDivProps
 
+/** @category Prop */
 export type ColorDivProps = {
   background?: Color
   border?: Color
@@ -93,52 +103,73 @@ export type ColorDivProps = {
   text?: Color
 } & HTMLDivProps
 
+/** @category Prop */
 export type ContextMenuProps = {
   items: ContextMenuItem[]
   name: string
 } & HTMLDivProps
 
+/** @category Prop */
 export type DialogProps = {
   button?: Partial<ButtonProps>
   onClickConfirm: () => any
 } & Omit<ModalProps, 'button'>
 
+/** @category Prop */
 export type DividerProps = {
   color?: Color
   layer?: Layer
   type?: DividerType
 } & HTMLDivProps
 
+/** @category Prop */
 export type EmptyProps = {
   layer?: Layer
 } & HTMLDivProps
 
+/** @category Prop */
 export type FormProps = {
   layer?: Layer
   onSubmit: () => any
 } & Omit<HTMLFormProps, 'onSubmit'>
 
+/** @category Prop */
 export type HeaderProps = {
   logo?: JSX.Element
   router: Router
   title?: string
 } & HTMLDivProps
 
+/** @category Prop */
 export type HTMLAnchorProps = React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>
+/** @category Prop */
 export type HTMLButtonProps = React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
+/** @category Prop */
 export type HTMLDivProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+/** @category Prop */
 export type HTMLDListProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDListElement>, HTMLDListElement>
+/** @category Prop */
 export type HTMLElementProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
+/** @category Prop */
 export type HTMLImageProps = React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>
+/** @category Prop */
 export type HTMLInputProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
+/** @category Prop */
 export type HTMLLabelProps = React.DetailedHTMLProps<React.LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement>
+/** @category Prop */
 export type HTMLLIProps = React.DetailedHTMLProps<React.LiHTMLAttributes<HTMLLIElement>, HTMLLIElement>
+/** @category Prop */
 export type HTMLFormProps = React.DetailedHTMLProps<React.FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>
+/** @category Prop */
 export type HTMLOListProps = React.DetailedHTMLProps<React.OlHTMLAttributes<HTMLOListElement>, HTMLOListElement>
+/** @category Prop */
 export type HTMLParagraphProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>
+/** @category Prop */
 export type HTMLSpanProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>
+/** @category Prop */
 export type HTMLUListProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLUListElement>, HTMLUListElement>
 
+/** @category Prop */
 export type IconProps = {
   color?: string
   fill?: boolean
@@ -149,6 +180,7 @@ export type IconProps = {
   thickness?: number
 } & Omit<React.SVGProps<SVGSVGElement>, 'fill' | 'stroke'>
 
+/** @category Prop */
 export type ImageProps = {
   fallback?: (props: any) => JSX.Element
   heightRatio?: number
@@ -158,6 +190,7 @@ export type ImageProps = {
   widthRatio?: number
 } & Omit<HTMLImageProps, 'src'>
 
+/** @category Prop */
 export type InputFileProps<T extends object> = {
   label?: string
   layer?: Layer
@@ -168,6 +201,7 @@ export type InputFileProps<T extends object> = {
   store: T
 } & Omit<HTMLInputProps, 'onChange'>
 
+/** @category Prop */
 export type InputProps<T extends object> = {
   label?: string
   layer?: Layer
@@ -184,6 +218,7 @@ export type InputProps<T extends object> = {
   type?: InputType
 } & Omit<HTMLInputProps, 'onBlur' | 'onChange' | 'onFocus' | 'type'>
 
+/** @category Prop */
 export type LabelProps = {
   color?: Color
   inject?: any[]
@@ -191,12 +226,14 @@ export type LabelProps = {
   path?: string
 } & HTMLLabelProps
 
+/** @category Prop */
 export type ListProps<T> = {
   empty: JSX.Element
   items: T[]
   renderItem: (v: T, k: number) => JSX.Element
 } & HTMLDivProps
 
+/** @category Prop */
 export type ListItemProps = {
   avatar?: string | JSX.Element
   description?: string | JSX.Element
@@ -206,25 +243,30 @@ export type ListItemProps = {
   title: string | JSX.Element
 } & HTMLDivProps
 
+/** @category Prop */
 export type LoadingProps = {
   title: string
 } & HTMLDivProps
 
+/** @category Prop */
 export type ModalProps = {
   button?: ButtonProps
   name: string
   title?: string
 } & HTMLDivProps
 
+/** @category Prop */
 export type OnboardingProps = {
   items: OnboardingItem[]
   onEnd: () => any
 } & HTMLDivProps
 
+/** @category Prop */
 export type ParentProps = {
   children: JSX.Element
 }
 
+/** @category Prop */
 export type ResultProps = {
   description?: string
   icon?: (props: IconProps) => JSX.Element
@@ -233,12 +275,14 @@ export type ResultProps = {
   type?: FeedbackType
 } & HTMLDivProps
 
+/** @category Prop */
 export type RouterRendererProps = {
   context: RouteContext
   fallback?: (props: { context: RouteContext }) => JSX.Element
   map: Map<string, (props: { context: RouteContext }) => JSX.Element>
 } & HTMLDivProps
 
+/** @category Prop */
 export type SelectProps<T extends object> = {
   disabled?: boolean
   label: string
@@ -251,12 +295,14 @@ export type SelectProps<T extends object> = {
   store: T
 } & HTMLDivProps
 
+/** @category Prop */
 export type SettingProps = {
   description: string
   layer?: Layer
   title: string
 } & HTMLDivProps
 
+/** @category Prop */
 export type SidebarProps = {
   footer?: JSX.Element
   items: SidebarItem[]
@@ -264,11 +310,13 @@ export type SidebarProps = {
   router: Router
 } & HTMLDivProps
 
+/** @category Prop */
 export type SpinnerProps = {
   color?: string
   size?: number
 } & Omit<SVGElementProps, 'fill' | 'stroke'>
 
+/** @category Prop */
 export type StatisticProps = {
   feedback?: FeedbackType
   icon?: (props: IconProps) => JSX.Element
@@ -279,8 +327,10 @@ export type StatisticProps = {
   value: StatisticValue
 } & HTMLDivProps
 
+/** @category Prop */
 export type SVGElementProps = React.SVGProps<SVGSVGElement>
 
+/** @category Prop */
 export type SwitchProps<T extends object> = {
   disabled?: boolean
   label?: string
@@ -290,6 +340,7 @@ export type SwitchProps<T extends object> = {
   store: T
 } & HTMLDivProps
 
+/** @category Prop */
 export type TagProps = {
   background?: Color
   color?: Color
@@ -300,11 +351,13 @@ export type TagProps = {
   text: string
 } & HTMLDivProps
 
+/** @category Prop */
 export type TopTabberProps = {
   active?: string
   items: TopTabberItem[]
 } & HTMLDivProps
 
+/** @category Prop */
 export type VirtualizedListProps<T> = {
   dummy: JSX.Element
   empty: JSX.Element
@@ -315,10 +368,12 @@ export type VirtualizedListProps<T> = {
   renderItem: (v: T, k: number) => JSX.Element
 } & HTMLDivProps
 
+/** @category Prop */
 export type VirtualizedListItemProps<T> = {
   renderItem: (v: T, k: number) => JSX.Element
 } & ListChildComponentProps
 
+/** @category Prop */
 export type WizardProps = {
   active?: string
   epilogue: string

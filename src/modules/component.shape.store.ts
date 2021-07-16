@@ -4,6 +4,9 @@ import { Shape } from '../definitions/enums'
 import { ComponentStore } from './component.store'
 import { Dummy } from './dummy'
 
+/**
+ * @category Module
+ */
 export class ComponentShapeStore<T extends Element> extends ComponentStore<T> {
   shape: Shape
 

@@ -7,6 +7,9 @@ import { InputProps } from '../definitions/props'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
 import { Dummy } from '../modules/dummy'
 
+/**
+ * @category Store
+ */
 export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLInputElement, T> {
   focused: boolean
   obscured: boolean
@@ -169,6 +172,7 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
   }
 }
 
+/** @category Constant */
 export const INPUT_STORE_KEYS: (keyof InputProps<any> & keyof InputStore<any>)[] = [
   'id',
   'label',

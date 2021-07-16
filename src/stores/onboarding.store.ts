@@ -5,6 +5,9 @@ import { OnboardingProps } from '../definitions/props'
 import { OnboardingItem } from '../definitions/types'
 import { ComponentStore } from '../modules/component.store'
 
+/**
+ * @category Store
+ */
 export class OnboardingStore extends ComponentStore<HTMLDivElement> {
   active: number
   items: OnboardingItem[]
@@ -42,4 +45,5 @@ export class OnboardingStore extends ComponentStore<HTMLDivElement> {
   }
 }
 
+/** @category Constant */
 export const ONBOARDING_STORE_KEYS: (keyof OnboardingProps & keyof OnboardingStore)[] = ['id', 'items', 'onEnd']

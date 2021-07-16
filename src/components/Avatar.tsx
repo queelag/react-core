@@ -7,6 +7,9 @@ import { AvatarStore, AVATAR_STORE_KEYS } from '../stores/avatar.store'
 import { ShapeUtils } from '../utils/shape.utils'
 import { Image } from './Image'
 
+/**
+ * @category Component
+ */
 export function Avatar(props: AvatarProps) {
   const update = useForceUpdate()
   const ref = useRef(document.createElement('div'))

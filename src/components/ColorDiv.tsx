@@ -4,6 +4,9 @@ import { COLOR_DIV_PROPS_KEYS } from '../definitions/constants'
 import { ColorDivProps } from '../definitions/props'
 import { ColorPicker } from '../pickers/color.picker'
 
+/**
+ * @category Component
+ */
 export function ColorDiv(props: ColorDivProps) {
   return (
     <div

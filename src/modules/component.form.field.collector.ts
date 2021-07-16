@@ -1,6 +1,9 @@
 import { WithIdentity } from '@queelag/core'
 import { ComponentFormFieldStore } from './component.form.field.store'
 
+/**
+ * @category Module
+ */
 export class ComponentFormFieldCollector<T extends Element, U extends WithIdentity, V extends ComponentFormFieldStore<T, U>> {
   data: Map<string, V>
   dummy: V

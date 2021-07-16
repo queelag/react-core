@@ -7,6 +7,9 @@ import { BottomTabberItem } from '../definitions/types'
 import { ComponentStore } from '../modules/component.store'
 import { Dummy } from '../modules/dummy'
 
+/**
+ * @category Store
+ */
 export class BottomTabberStore extends ComponentStore<HTMLDivElement> {
   items: BottomTabberItem[]
   router: Router
@@ -38,4 +41,5 @@ export class BottomTabberStore extends ComponentStore<HTMLDivElement> {
   }
 }
 
+/** @category Constant */
 export const BOTTOM_TABBER_STORE_KEYS: (keyof BottomTabberProps & keyof BottomTabberStore)[] = ['id', 'items', 'router']

@@ -7,6 +7,9 @@ import { Cache } from '../modules/cache'
 import { ComponentShapeStore } from '../modules/component.shape.store'
 import { Dummy } from '../modules/dummy'
 
+/**
+ * @category Store
+ */
 export class ImageStore extends ComponentShapeStore<HTMLImageElement> {
   base64: string
   error: boolean
@@ -110,4 +113,5 @@ export class ImageStore extends ComponentShapeStore<HTMLImageElement> {
   }
 }
 
+/** @category Constant */
 export const IMAGE_STORE_KEYS: (keyof ImageProps & keyof ImageStore)[] = ['id', 'shape', 'source']

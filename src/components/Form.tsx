@@ -5,6 +5,9 @@ import { FormProps } from '../definitions/props'
 import { useForceUpdate } from '../hooks/use.force.update'
 import { FormStore, FORM_STORE_KEYS } from '../stores/form.store'
 
+/**
+ * @category Component
+ */
 export function Form(props: FormProps) {
   const update = useForceUpdate()
   const ref = useRef(document.createElement('form'))

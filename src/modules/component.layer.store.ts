@@ -4,6 +4,9 @@ import { Layer } from '../definitions/enums'
 import { ComponentStore } from './component.store'
 import { Dummy } from './dummy'
 
+/**
+ * @category Module
+ */
 export class ComponentLayerStore<T extends Element> extends ComponentStore<T> {
   layer: Layer
 

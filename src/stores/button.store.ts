@@ -5,6 +5,9 @@ import { ButtonProps } from '../definitions/props'
 import { ComponentLayerShapeSizeStore } from '../modules/component.layer.shape.size.store'
 import { Dummy } from '../modules/dummy'
 
+/**
+ * @category Store
+ */
 export class ButtonStore extends ComponentLayerShapeSizeStore<HTMLButtonElement> {
   disabled: boolean
   spinning: boolean
@@ -95,4 +98,5 @@ export class ButtonStore extends ComponentLayerShapeSizeStore<HTMLButtonElement>
   }
 }
 
+/** @category Constant */
 export const BUTTON_STORE_KEYS: (keyof ButtonProps & keyof ButtonStore)[] = ['disabled', 'id', 'layer', 'onClick', 'shape', 'size', 'spinning', 'type']

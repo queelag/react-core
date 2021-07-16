@@ -3,6 +3,9 @@ import React from 'react'
 import { BACKDROP_PROPS_KEYS } from '../definitions/constants'
 import { BackdropProps } from '../definitions/props'
 
+/**
+ * @category Component
+ */
 export function Backdrop(props: BackdropProps) {
   return (
     <div

@@ -14,6 +14,7 @@ import {
   WizardStep
 } from '../definitions/types'
 
+/** @internal */
 export class Dummy {
   static get bottomTabberItem(): BottomTabberItem {
     return {

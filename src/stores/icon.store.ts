@@ -5,6 +5,9 @@ import { Cache } from '../modules/cache'
 import { ComponentLayerStore } from '../modules/component.layer.store'
 import { ColorPicker } from '../pickers/color.picker'
 
+/**
+ * @category Store
+ */
 export class IconStore extends ComponentLayerStore<SVGElement> {
   mounted: boolean
   size: number
@@ -87,4 +90,5 @@ export class IconStore extends ComponentLayerStore<SVGElement> {
   }
 }
 
+/** @category Constant */
 export const ICON_STORE_KEYS: (keyof IconProps & keyof IconStore)[] = ['color', 'id', 'layer', 'size', 'svg', 'thickness']

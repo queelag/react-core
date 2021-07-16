@@ -5,6 +5,9 @@ import { DividerProps } from '../definitions/props'
 import { ComponentLayerStore } from '../modules/component.layer.store'
 import { Dummy } from '../modules/dummy'
 
+/**
+ * @category Store
+ */
 export class DividerStore extends ComponentLayerStore<HTMLDivElement> {
   type: DividerType
 
@@ -29,4 +32,5 @@ export class DividerStore extends ComponentLayerStore<HTMLDivElement> {
   }
 }
 
+/** @category Constant */
 export const DIVIDER_STORE_KEYS: (keyof DividerProps & keyof DividerStore)[] = ['id', 'layer', 'type']

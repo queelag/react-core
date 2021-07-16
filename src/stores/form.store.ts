@@ -12,6 +12,9 @@ import { InputFileStore } from './input.file.store'
 import { InputStore } from './input.store'
 import { SelectStore } from './select.store'
 
+/**
+ * @category Store
+ */
 export class FormStore extends ComponentLayerStore<HTMLFormElement> {
   constructor(
     id: ID = '',
@@ -96,4 +99,5 @@ export class FormStore extends ComponentLayerStore<HTMLFormElement> {
   }
 }
 
+/** @category Constant */
 export const FORM_STORE_KEYS: (keyof FormProps & keyof FormStore)[] = ['id', 'layer', 'onSubmit']

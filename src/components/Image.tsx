@@ -6,6 +6,9 @@ import { useForceUpdate } from '../hooks/use.force.update'
 import { ImageStore, IMAGE_STORE_KEYS } from '../stores/image.store'
 import { ShapeUtils } from '../utils/shape.utils'
 
+/**
+ * @category Component
+ */
 export function Image(props: ImageProps) {
   const update = useForceUpdate()
   const ref = useRef(document.createElement('img'))

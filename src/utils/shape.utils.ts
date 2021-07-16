@@ -4,6 +4,9 @@ import { CSSProperties } from 'react'
 import { createSquircle } from 'squircleyjs'
 import { ComponentName, Shape } from '../definitions/enums'
 
+/**
+ * @category Utility
+ */
 export class ShapeUtils {
   private static squircleCache: Map<string, ID> = new Map()
 

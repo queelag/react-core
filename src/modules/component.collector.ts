@@ -1,5 +1,8 @@
 import { ComponentStore } from './component.store'
 
+/**
+ * @category Module
+ */
 export class ComponentCollector<T extends ComponentStore<any>> {
   data: Map<string, T> = new Map()
   dummy: T

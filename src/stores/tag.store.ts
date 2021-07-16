@@ -5,6 +5,9 @@ import { TagProps } from '../definitions/props'
 import { ComponentLayerStore } from '../modules/component.layer.store'
 import { Dummy } from '../modules/dummy'
 
+/**
+ * @category Store
+ */
 export class TagStore extends ComponentLayerStore<HTMLDivElement> {
   destroyed: boolean
 
@@ -30,4 +33,5 @@ export class TagStore extends ComponentLayerStore<HTMLDivElement> {
   }
 }
 
+/** @category Constant */
 export const TAG_STORE_KEYS: (keyof TagProps & keyof TagStore)[] = ['id', 'layer']

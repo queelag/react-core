@@ -7,6 +7,9 @@ import { SidebarItem } from '../definitions/types'
 import { ComponentStore } from '../modules/component.store'
 import { Dummy } from '../modules/dummy'
 
+/**
+ * @category Store
+ */
 export class SidebarStore extends ComponentStore<HTMLDivElement> {
   items: SidebarItem[]
   router: Router
@@ -37,4 +40,5 @@ export class SidebarStore extends ComponentStore<HTMLDivElement> {
   }
 }
 
+/** @category Constant */
 export const SIDEBAR_STORE_KEYS: (keyof SidebarProps & keyof SidebarStore)[] = ['id', 'items', 'router']

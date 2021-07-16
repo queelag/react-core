@@ -4,6 +4,9 @@ import { Size } from '../definitions/enums'
 import { ComponentStore } from './component.store'
 import { Dummy } from './dummy'
 
+/**
+ * @category Module
+ */
 export class ComponentSizeStore<T extends Element> extends ComponentStore<T> {
   size: Size
 

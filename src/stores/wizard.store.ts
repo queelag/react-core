@@ -6,6 +6,9 @@ import { WizardOnStepChange, WizardStep, WizardStepPartial } from '../definition
 import { ComponentStore } from '../modules/component.store'
 import { Dummy } from '../modules/dummy'
 
+/**
+ * @category Store
+ */
 export class WizardStore extends ComponentStore<HTMLDivElement> {
   active: string
   steps: WizardStep[]
@@ -118,4 +121,5 @@ export class WizardStore extends ComponentStore<HTMLDivElement> {
   }
 }
 
+/** @category Constant */
 export const WIZARD_STORE_KEYS: (keyof WizardProps & keyof WizardStore)[] = ['active', 'id', 'onStepChange', 'steps']

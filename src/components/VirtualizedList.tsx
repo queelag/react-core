@@ -6,6 +6,9 @@ import { VirtualizedListProps } from '../definitions/props'
 import { useForceUpdate } from '../hooks/use.force.update'
 import { VirtualizedListStore, VIRTUALIZED_LIST_STORE_KEYS } from '../stores/virtualized.list.store'
 
+/**
+ * @category Component
+ */
 export function VirtualizedList<T>(props: VirtualizedListProps<T>) {
   const update = useForceUpdate()
   const ref = useRef(document.createElement('div'))

@@ -6,6 +6,9 @@ import { ComponentLayerShapeStore } from '../modules/component.layer.shape.store
 import { Dummy } from '../modules/dummy'
 import { ColorPicker } from '../pickers/color.picker'
 
+/**
+ * @category Store
+ */
 export class AvatarStore extends ComponentLayerShapeStore<HTMLDivElement> {
   private _background: string = ''
   private _color: string = ''
@@ -48,4 +51,5 @@ export class AvatarStore extends ComponentLayerShapeStore<HTMLDivElement> {
   }
 }
 
+/** @category Constant */
 export const AVATAR_STORE_KEYS: (keyof AvatarProps & keyof AvatarStore)[] = ['background', 'color', 'layer', 'ratio', 'shape', 'size']

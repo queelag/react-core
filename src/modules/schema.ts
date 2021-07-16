@@ -1,6 +1,9 @@
 import * as S from 'superstruct'
 import { InputFileItem } from '../definitions/types'
 
+/**
+ * @category Module
+ */
 export class Schema {
   static get inputFileItemOptional(): S.Describe<InputFileItem> {
     return S.object({

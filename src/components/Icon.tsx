@@ -5,6 +5,9 @@ import { IconProps } from '../definitions/props'
 import { useForceUpdate } from '../hooks/use.force.update'
 import { IconStore, ICON_STORE_KEYS } from '../stores/icon.store'
 
+/**
+ * @category Component
+ */
 export function Icon(props: IconProps) {
   const update = useForceUpdate()
   const store = useMemo(() => new IconStore(props.color, props.id, props.layer, props.size, props.svg, props.thickness, update), [])

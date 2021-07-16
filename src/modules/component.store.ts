@@ -2,6 +2,9 @@ import { ID, IDUtils, noop } from '@queelag/core'
 import { MutableRefObject } from 'react'
 import { Dummy } from './dummy'
 
+/**
+ * @category Module
+ */
 export class ComponentStore<T extends Element> {
   id: ID
   name: string

@@ -1,5 +1,8 @@
 import { Logger } from '@queelag/core'
 
+/**
+ * @category Controller
+ */
 export class VisibilityController {
   data: Map<string, number>
 

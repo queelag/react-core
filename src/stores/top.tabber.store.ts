@@ -6,6 +6,9 @@ import { TopTabberItem } from '../definitions/types'
 import { ComponentStore } from '../modules/component.store'
 import { Dummy } from '../modules/dummy'
 
+/**
+ * @category Store
+ */
 export class TopTabberStore extends ComponentStore<HTMLDivElement> {
   active: string
   items: TopTabberItem[]
@@ -41,4 +44,5 @@ export class TopTabberStore extends ComponentStore<HTMLDivElement> {
   }
 }
 
+/** @category Constant */
 export const TOP_TABBER_STORE_KEYS: (keyof TopTabberProps & keyof TopTabberStore)[] = ['active', 'id', 'items']

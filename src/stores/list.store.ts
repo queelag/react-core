@@ -5,6 +5,9 @@ import { ListProps } from '../definitions/props'
 import { ComponentStore } from '../modules/component.store'
 import { Dummy } from '../modules/dummy'
 
+/**
+ * @category Store
+ */
 export class ListStore<T> extends ComponentStore<HTMLUListElement> {
   items: T[]
 
@@ -23,4 +26,5 @@ export class ListStore<T> extends ComponentStore<HTMLUListElement> {
   }
 }
 
+/** @category Constant */
 export const LIST_STORE_KEYS: (keyof ListProps<any> & keyof ListStore<any>)[] = ['id', 'items']
