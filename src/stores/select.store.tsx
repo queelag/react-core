@@ -1,38 +1,34 @@
-import { ID, noop } from '@queelag/core'
-import { MutableRefObject } from 'react'
 import * as S from 'superstruct'
-import { ComponentName, Layer, SelectMode } from '../definitions/enums'
-import { SelectProps } from '../definitions/props'
+import { ComponentName, SelectMode } from '../definitions/enums'
+import { ComponentFormFieldProps, SelectProps } from '../definitions/props'
 import { SelectOption, SelectOptionValue } from '../definitions/types'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
-import { Dummy } from '../modules/dummy'
 
 /**
+ * An abstraction for Select stores, handles SINGLE and MULTIPLE modes.
+ *
  * @category Store
  */
 export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLDivElement, T> {
+  /**
+   * A {@link SelectMode} which determines how the internal logic behaves.
+   */
   mode: SelectMode
+  /**
+   * An array of {@link SelectOption}.
+   */
   options: SelectOption[]
 
-  constructor(
-    id: ID = '',
-    label: string = '',
-    layer: Layer = Layer.TWO,
-    mode: SelectMode = SelectMode.SINGLE,
-    options: SelectOption[] = [],
-    path: keyof T = '' as any,
-    ref: MutableRefObject<HTMLDivElement> = Dummy.ref,
-    required: boolean = false,
-    store: T = {} as any,
-    touched: boolean = false,
-    update: () => void = noop
-  ) {
-    super(ComponentName.SELECT, id, label, layer, path, ref, required, Dummy.schema, store, touched, update)
+  constructor(props: SelectProps<T> & ComponentFormFieldProps<HTMLDivElement, T>) {
+    super(ComponentName.SELECT, props)
 
-    this.mode = mode
-    this.options = options
+    this.mode = props.mode || SelectMode.SINGLE
+    this.options = props.options
   }
 
+  /**
+   * Sets the option value to store[path] if the mode is SINGLE otherwise pushes or removes it if the mode is MULTIPLE.
+   */
   onClickOption = (option: SelectOption): void => {
     let value: any
 
@@ -50,14 +46,20 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
     this.validation = this.schema.validate(this.value)
   }
 
-  onClickRemove = (value: SelectOption): void => {
-    this.onClickOption(value)
+  /**
+   * Removes an option from store[path] if the mode is MULTIPLE.
+   */
+  onClickRemove = (option: SelectOption): void => {
+    this.onClickOption(option)
   }
 
   findLabelByValue(value: SelectOptionValue): string {
     return (this.options.find((v: SelectOption) => v.value === value) || { label: '', value: '' }).label
   }
 
+  /**
+   * A custom schema based on the mode.
+   */
   get schema(): S.Struct<SelectOptionValue> | S.Struct<SelectOptionValue[]> {
     switch (this.mode) {
       case SelectMode.MULTIPLE:
@@ -67,6 +69,9 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
     }
   }
 
+  /**
+   * A value read from store[path].
+   */
   get value(): SelectOptionValue | SelectOptionValue[] {
     switch (this.mode) {
       case SelectMode.MULTIPLE:
@@ -84,6 +89,7 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
     return this.mode === SelectMode.SINGLE
   }
 
+  /** @internal */
   set schema(schema: S.Struct<SelectOptionValue> | S.Struct<SelectOptionValue[]>) {
     this._schema = schema
   }

@@ -1,27 +1,34 @@
-import { ID, noop } from '@queelag/core'
-import { MutableRefObject } from 'react'
 import { ComponentName } from '../definitions/enums'
-import { TopTabberProps } from '../definitions/props'
+import { ComponentProps, TopTabberProps } from '../definitions/props'
 import { TopTabberItem } from '../definitions/types'
 import { ComponentStore } from '../modules/component.store'
 import { Dummy } from '../modules/dummy'
 
 /**
+ * An abstraction for TopTabber stores, handles cursors and items.
+ *
  * @category Store
  */
 export class TopTabberStore extends ComponentStore<HTMLDivElement> {
+  /**
+   * A string which determines the active item name.
+   */
   active: string
+  /**
+   * An array of {@link TopTabberItem.}
+   */
   items: TopTabberItem[]
-  start: number
 
-  constructor(active: string = '', id: ID = '', items: TopTabberItem[] = [], ref: MutableRefObject<HTMLDivElement>, update: () => void = noop) {
-    super(ComponentName.TOP_TABBER, id, ref, update)
+  constructor(props: TopTabberProps & ComponentProps<HTMLDivElement>) {
+    super(ComponentName.TOP_TABBER, props)
 
-    this.active = active || items[0].name
-    this.items = items
-    this.start = 0
+    this.active = props.active || props.items[0].name
+    this.items = props.items
   }
 
+  /**
+   * Sets item as active.
+   */
   onClickItem(item: TopTabberItem): void {
     this.active = item.name
     this.update()

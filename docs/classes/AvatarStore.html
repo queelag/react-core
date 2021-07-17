@@ -65,6 +65,13 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>An abstraction for Avatar stores, handles colors and sizes.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -91,8 +98,6 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="AvatarStore.html#_background" class="tsd-kind-icon">_background</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="AvatarStore.html#_color" class="tsd-kind-icon">_color</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="AvatarStore.html#id" class="tsd-kind-icon">id</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="AvatarStore.html#layer" class="tsd-kind-icon">layer</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="AvatarStore.html#name" class="tsd-kind-icon">name</a></li>
@@ -105,8 +110,8 @@
 						<section class="tsd-index-section ">
 							<h3>Accessors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="AvatarStore.html#background" class="tsd-kind-icon">background</a></li>
-								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="AvatarStore.html#color" class="tsd-kind-icon">color</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="AvatarStore.html#background" class="tsd-kind-icon">background</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="AvatarStore.html#color" class="tsd-kind-icon">color</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="AvatarStore.html#element" class="tsd-kind-icon">element</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="AvatarStore.html#isLayerOne" class="tsd-kind-icon">is<wbr>Layer<wbr>One</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="AvatarStore.html#isLayerThree" class="tsd-kind-icon">is<wbr>Layer<wbr>Three</a></li>
@@ -134,56 +139,20 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Avatar<wbr>Store<span class="tsd-signature-symbol">(</span>background<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, color<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, id<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, layer<span class="tsd-signature-symbol">?: </span><a href="../enums/Layer.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Layer</a>, ratio<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, ref<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">MutableRefObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span>, shape<span class="tsd-signature-symbol">?: </span><a href="../enums/Shape.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Shape</a>, size<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, update<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="AvatarStore.html" class="tsd-signature-type" data-tsd-kind="Class">AvatarStore</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Avatar<wbr>Store<span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>background<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>color<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>layer<span class="tsd-signature-symbol">?: </span><a href="../enums/Layer.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Layer</a><span class="tsd-signature-symbol">; </span>ratio<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>shape<span class="tsd-signature-symbol">?: </span><a href="../enums/Shape.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Shape</a><span class="tsd-signature-symbol">; </span>size<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>source<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>text<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>thickness<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>icon<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> &amp; </span><a href="../index.html#OmitRef" class="tsd-signature-type" data-tsd-kind="Type alias">OmitRef</a><span class="tsd-signature-symbol">&lt;</span><a href="../index.html#HTMLDivProps" class="tsd-signature-type" data-tsd-kind="Type alias">HTMLDivProps</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><a href="../index.html#ComponentProps" class="tsd-signature-type" data-tsd-kind="Type alias">ComponentProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>layer<span class="tsd-signature-symbol">?: </span><a href="../enums/Layer.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Layer</a><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>shape<span class="tsd-signature-symbol">?: </span><a href="../enums/Shape.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Shape</a><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="AvatarStore.html" class="tsd-signature-type" data-tsd-kind="Class">AvatarStore</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Overrides <a href="ComponentLayerShapeStore.html">ComponentLayerShapeStore</a>.<a href="ComponentLayerShapeStore.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/avatar.store.ts#L18">stores/avatar.store.ts:18</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/avatar.store.ts#L25">stores/avatar.store.ts:25</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>background: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></h5>
-								</li>
-								<li>
-									<h5>color: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></h5>
-								</li>
-								<li>
-									<h5>id: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;&#x27;</span></h5>
-								</li>
-								<li>
-									<h5>layer: <a href="../enums/Layer.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Layer</a><span class="tsd-signature-symbol"> = ...</span></h5>
-								</li>
-								<li>
-									<h5>ratio: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 2</span></h5>
-								</li>
-								<li>
-									<h5>ref: <span class="tsd-signature-type">MutableRefObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></h5>
-								</li>
-								<li>
-									<h5>shape: <a href="../enums/Shape.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Shape</a><span class="tsd-signature-symbol"> = ...</span></h5>
-								</li>
-								<li>
-									<h5>size: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 48</span></h5>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> update: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter-signature">
-											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-											</ul>
-											<ul class="tsd-descriptions">
-												<li class="tsd-description">
-													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-												</li>
-											</ul>
-										</li>
-									</ul>
+									<h5>props: <span class="tsd-signature-symbol">{ </span>background<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>color<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>layer<span class="tsd-signature-symbol">?: </span><a href="../enums/Layer.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Layer</a><span class="tsd-signature-symbol">; </span>ratio<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>shape<span class="tsd-signature-symbol">?: </span><a href="../enums/Shape.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Shape</a><span class="tsd-signature-symbol">; </span>size<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>source<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>text<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>thickness<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>icon<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> &amp; </span><a href="../index.html#OmitRef" class="tsd-signature-type" data-tsd-kind="Type alias">OmitRef</a><span class="tsd-signature-symbol">&lt;</span><a href="../index.html#HTMLDivProps" class="tsd-signature-type" data-tsd-kind="Type alias">HTMLDivProps</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><a href="../index.html#ComponentProps" class="tsd-signature-type" data-tsd-kind="Type alias">ComponentProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>layer<span class="tsd-signature-symbol">?: </span><a href="../enums/Layer.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Layer</a><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>shape<span class="tsd-signature-symbol">?: </span><a href="../enums/Shape.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Shape</a><span class="tsd-signature-symbol"> }</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="AvatarStore.html" class="tsd-signature-type" data-tsd-kind="Class">AvatarStore</a></h4>
@@ -193,26 +162,6 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="_background" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _background</h3>
-					<div class="tsd-signature tsd-kind-icon">_background<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;&#x27;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/avatar.store.ts#L13">stores/avatar.store.ts:13</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="_color" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _color</h3>
-					<div class="tsd-signature tsd-kind-icon">_color<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;&#x27;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/avatar.store.ts#L14">stores/avatar.store.ts:14</a></li>
-						</ul>
-					</aside>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="id" class="tsd-anchor"></a>
 					<h3>id</h3>
@@ -220,9 +169,14 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="ComponentLayerShapeStore.html">ComponentLayerShapeStore</a>.<a href="ComponentLayerShapeStore.html#id">id</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.store.ts#L9">modules/component.store.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.store.ts#L16">modules/component.store.ts:16</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A string which identifies a component.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="layer" class="tsd-anchor"></a>
@@ -231,7 +185,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="ComponentLayerShapeStore.html">ComponentLayerShapeStore</a>.<a href="ComponentLayerShapeStore.html#layer">layer</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.layer.shape.store.ts#L11">modules/component.layer.shape.store.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.layer.shape.store.ts#L9">modules/component.layer.shape.store.ts:9</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -242,9 +196,14 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="ComponentLayerShapeStore.html">ComponentLayerShapeStore</a>.<a href="ComponentLayerShapeStore.html#name">name</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.store.ts#L10">modules/component.store.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.store.ts#L20">modules/component.store.ts:20</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A string which helps identify a component, used as a prefix for the id.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="ratio" class="tsd-anchor"></a>
@@ -252,20 +211,30 @@
 					<div class="tsd-signature tsd-kind-icon">ratio<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/avatar.store.ts#L15">stores/avatar.store.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/avatar.store.ts#L19">stores/avatar.store.ts:19</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A number which determines the icon size ratio to the size.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="ref" class="tsd-anchor"></a>
 					<h3>ref</h3>
-					<div class="tsd-signature tsd-kind-icon">ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">MutableRefObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">LegacyRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">MutableRefObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="ComponentLayerShapeStore.html">ComponentLayerShapeStore</a>.<a href="ComponentLayerShapeStore.html#ref">ref</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.store.ts#L11">modules/component.store.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.store.ts#L24">modules/component.store.ts:24</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A ref with T interface.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="shape" class="tsd-anchor"></a>
@@ -274,7 +243,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="ComponentLayerShapeStore.html">ComponentLayerShapeStore</a>.<a href="ComponentLayerShapeStore.html#shape">shape</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.layer.shape.store.ts#L12">modules/component.layer.shape.store.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.layer.shape.store.ts#L10">modules/component.layer.shape.store.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -284,74 +253,59 @@
 					<div class="tsd-signature tsd-kind-icon">size<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/avatar.store.ts#L16">stores/avatar.store.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/avatar.store.ts#L23">stores/avatar.store.ts:23</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A number which determines both height and width.</p>
+						</div>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Accessors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
 					<a name="background" class="tsd-anchor"></a>
 					<h3>background</h3>
-					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> background<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> background<span class="tsd-signature-symbol">(</span>background<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/avatar.store.ts#L37">stores/avatar.store.ts:37</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/avatar.store.ts#L37">stores/avatar.store.ts:37</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Picks a layered background color from background.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
-						</li>
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/avatar.store.ts#L45">stores/avatar.store.ts:45</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>background: <span class="tsd-signature-type">string</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
 					<a name="color" class="tsd-anchor"></a>
 					<h3>color</h3>
-					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> color<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> color<span class="tsd-signature-symbol">(</span>color<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/avatar.store.ts#L41">stores/avatar.store.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/avatar.store.ts#L44">stores/avatar.store.ts:44</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Picks a layered text color from color.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
-						</li>
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/avatar.store.ts#L49">stores/avatar.store.ts:49</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>color: <span class="tsd-signature-type">string</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -365,9 +319,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.store.ts#L22">modules/component.store.ts:22</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.store.ts#L41">modules/component.store.ts:41</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns a DOM element from the ref.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
 						</li>
 					</ul>
@@ -382,7 +341,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.layer.shape.store.ts#L32">modules/component.layer.shape.store.ts:32</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.layer.shape.store.ts#L23">modules/component.layer.shape.store.ts:23</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -399,7 +358,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.layer.shape.store.ts#L40">modules/component.layer.shape.store.ts:40</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.layer.shape.store.ts#L31">modules/component.layer.shape.store.ts:31</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -416,7 +375,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.layer.shape.store.ts#L36">modules/component.layer.shape.store.ts:36</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.layer.shape.store.ts#L27">modules/component.layer.shape.store.ts:27</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -433,7 +392,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.layer.shape.store.ts#L28">modules/component.layer.shape.store.ts:28</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.layer.shape.store.ts#L19">modules/component.layer.shape.store.ts:19</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -450,7 +409,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.layer.shape.store.ts#L44">modules/component.layer.shape.store.ts:44</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.layer.shape.store.ts#L35">modules/component.layer.shape.store.ts:35</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -467,7 +426,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.layer.shape.store.ts#L48">modules/component.layer.shape.store.ts:48</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.layer.shape.store.ts#L39">modules/component.layer.shape.store.ts:39</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -484,7 +443,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.layer.shape.store.ts#L52">modules/component.layer.shape.store.ts:52</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.layer.shape.store.ts#L43">modules/component.layer.shape.store.ts:43</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -501,7 +460,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.layer.shape.store.ts#L56">modules/component.layer.shape.store.ts:56</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.layer.shape.store.ts#L47">modules/component.layer.shape.store.ts:47</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -518,7 +477,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.layer.shape.store.ts#L60">modules/component.layer.shape.store.ts:60</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.layer.shape.store.ts#L51">modules/component.layer.shape.store.ts:51</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -539,9 +498,14 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="ComponentLayerShapeStore.html">ComponentLayerShapeStore</a>.<a href="ComponentLayerShapeStore.html#update">update</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.store.ts#L20">modules/component.store.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.store.ts#L36">modules/component.store.ts:36</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Forces a re-render.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -566,12 +530,6 @@
 							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
 								<a href="AvatarStore.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="AvatarStore.html#_background" class="tsd-kind-icon">_background</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="AvatarStore.html#_color" class="tsd-kind-icon">_color</a>
-							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="AvatarStore.html#id" class="tsd-kind-icon">id</a>
 							</li>
@@ -593,10 +551,10 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="AvatarStore.html#size" class="tsd-kind-icon">size</a>
 							</li>
-							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="AvatarStore.html#background" class="tsd-kind-icon">background</a>
 							</li>
-							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="AvatarStore.html#color" class="tsd-kind-icon">color</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
@@ -657,15 +615,11 @@
 				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
-			</ul>
-			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
 			</ul>
 		</div>
 	</div>

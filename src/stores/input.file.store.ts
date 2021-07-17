@@ -1,38 +1,35 @@
-import { ID, IDUtils, noop, tcp } from '@queelag/core'
+import { IDUtils, tcp } from '@queelag/core'
 import { Buffer } from 'buffer'
-import { ChangeEvent, MutableRefObject } from 'react'
+import { ChangeEvent } from 'react'
 import * as S from 'superstruct'
-import { ComponentName, InputFileMode, Layer } from '../definitions/enums'
-import { InputFileProps } from '../definitions/props'
+import { ComponentName, InputFileMode } from '../definitions/enums'
+import { ComponentFormFieldProps, InputFileProps } from '../definitions/props'
 import { InputFileItem } from '../definitions/types'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
 import { Dummy } from '../modules/dummy'
 import { Schema } from '../modules/schema'
 
 /**
+ * An abstraction for InputFile stores, handles SINGLE and MULTIPLE modes.
+ *
  * @category Store
  */
 export class InputFileStore<T extends object> extends ComponentFormFieldStore<HTMLInputElement, T> {
+  /**
+   * An {@link InputFileMode} which determines how the internal logic will behave.
+   */
   mode: InputFileMode
 
-  constructor(
-    id: ID = '',
-    label: string = '',
-    layer: Layer = Layer.ZERO,
-    mode: InputFileMode = InputFileMode.SINGLE,
-    path: keyof T = '' as any,
-    ref: MutableRefObject<HTMLInputElement> = Dummy.ref,
-    required: boolean = false,
-    store: T = {} as any,
-    touched: boolean = false,
-    update: () => void = noop
-  ) {
-    super(ComponentName.INPUT_FILE, id, label, layer, path, ref, required, Dummy.schema, store, touched, update)
+  constructor(props: InputFileProps<T> & ComponentFormFieldProps<HTMLInputElement, T>) {
+    super(ComponentName.INPUT_FILE, props)
 
-    this.mode = mode
+    this.mode = props.mode || InputFileMode.SINGLE
     this.validation = this.schema.validate(this.value)
   }
 
+  /**
+   * Updates store[path] with an {@link InputFileItem} if the mode is SINGLE otherwise updates it with an array of them.
+   */
   onChange = async (event: ChangeEvent<HTMLInputElement>): Promise<void> => {
     switch (this.mode) {
       case InputFileMode.MULTIPLE:
@@ -83,6 +80,9 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
     this.validation = this.schema.validate(this.value)
   }
 
+  /**
+   * Resets store[path] if the mode is SINGLE otherwise filters out the item.
+   */
   onRemove = async (item: InputFileItem): Promise<void> => {
     switch (this.mode) {
       case InputFileMode.MULTIPLE:
@@ -96,6 +96,9 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
     this.validation = this.schema.validate(this.value)
   }
 
+  /**
+   * Returns an array of {@link InputFileItem} from store[path].
+   */
   get files(): InputFileItem[] {
     switch (this.mode) {
       case InputFileMode.MULTIPLE:
@@ -105,6 +108,9 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
     }
   }
 
+  /**
+   * A custom schema which validates the value against {@link InputFileItem}.
+   */
   get schema(): S.Describe<InputFileItem> | S.Struct<InputFileItem[]> {
     switch (this.mode) {
       case InputFileMode.MULTIPLE:
@@ -114,6 +120,9 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
     }
   }
 
+  /**
+   * A value read from store[path].
+   */
   get value(): InputFileItem | InputFileItem[] {
     switch (this.mode) {
       case InputFileMode.MULTIPLE:
@@ -139,6 +148,7 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
     return this.mode === InputFileMode.SINGLE
   }
 
+  /** @internal */
   set schema(schema: S.Describe<InputFileItem> | S.Struct<InputFileItem[]>) {
     this._schema = schema
   }

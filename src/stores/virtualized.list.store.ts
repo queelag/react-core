@@ -1,48 +1,71 @@
-import { ID, Logger, noop, NumberUtils, ObjectUtils } from '@queelag/core'
+import { Logger, NumberUtils, ObjectUtils } from '@queelag/core'
 import { MutableRefObject } from 'react'
 import { ComponentName, Orientation } from '../definitions/enums'
-import { VirtualizedListProps } from '../definitions/props'
+import { ComponentProps, VirtualizedListProps } from '../definitions/props'
 import { ComponentStore } from '../modules/component.store'
-import { Dummy } from '../modules/dummy'
 
 /**
+ * An abstraction for VirtualizedList stores, handles gutter, items, orientations and sizes.
+ *
  * @category Store
  */
-export class VirtualizedListStore<T> extends ComponentStore<HTMLDivElement> {
+export class VirtualizedListStore<T> extends ComponentStore<HTMLUListElement> {
+  /**
+   * A ref of the dummy item element.
+   */
   dummyRef: MutableRefObject<HTMLDivElement>
+  /**
+   * A number which determines the spacing between items.
+   */
   gutter: number
+  /**
+   * An array of T.
+   */
   items: T[]
+  /**
+   * A number of the computed dummy item element height.
+   */
   itemElementHeight: number
+  /**
+   * A number which determines the item element width.
+   */
   itemElementWidth: number
+  /**
+   * An {@link Orientation} which determines how sizes are calculated.
+   */
   orientation: Orientation
+  /**
+   * A number which determines the parent element height.
+   */
   parentElementHeight: number
+  /**
+   * A number which determines the parent element width.
+   */
   parentElementWidth: number
 
-  constructor(
-    dummyRef: MutableRefObject<HTMLDivElement> = Dummy.ref,
-    gutter: number = 0,
-    id: ID = '',
-    items: T[] = [],
-    orientation: Orientation = Orientation.VERTICAL,
-    ref: MutableRefObject<HTMLDivElement> = Dummy.ref,
-    update: () => void = noop
-  ) {
-    super(ComponentName.VIRTUALIZED_LIST, id, ref, update)
+  constructor(props: VirtualizedListProps<T> & ComponentProps<HTMLUListElement> & { dummyRef: MutableRefObject<HTMLDivElement> }) {
+    super(ComponentName.VIRTUALIZED_LIST, props)
 
-    this.dummyRef = dummyRef
+    this.dummyRef = props.dummyRef
     this.parentElementHeight = 0
     this.parentElementWidth = 0
-    this.gutter = gutter
-    this.items = items
+    this.gutter = props.gutter || 0
+    this.items = props.items
     this.itemElementHeight = 0
     this.itemElementWidth = 0
-    this.orientation = orientation
+    this.orientation = props.orientation || Orientation.VERTICAL
   }
 
+  /**
+   * Searches for an id key inside of items[index] otherwise uses the index.
+   */
   itemKey = (index: number): any => {
     return typeof this.items[index] === 'object' ? ObjectUtils.get(this.items[index] as any, 'id', index) : index
   }
 
+  /**
+   * Computes the item element width if the orientation is HORIZONTAL otherwise if the orientation is VERTICAL computes its height.
+   */
   readItemElementHeightOrWidth(): void {
     switch (this.orientation) {
       case Orientation.HORIZONTAL:
@@ -60,6 +83,9 @@ export class VirtualizedListStore<T> extends ComponentStore<HTMLDivElement> {
     this.update()
   }
 
+  /**
+   * Computes the parent element width if the orientation is HORIZONTAL otherwise if the orientation is VERTICAL computes its height.
+   */
   readParentElementHeightOrWidth(): void {
     let element: Element | null, height: number, width: number
 
@@ -95,10 +121,16 @@ export class VirtualizedListStore<T> extends ComponentStore<HTMLDivElement> {
     }
   }
 
+  /**
+   * Returns the parent element height if the orientation is VERTICAL otherwise returns 100%.
+   */
   get elementHeight(): number | string {
     return this.isOrientationVertical ? this.parentElementHeight : '100%'
   }
 
+  /**
+   * Returns the parent element width if the orientation is HORIZONTAL otherwise returns 100%.
+   */
   get elementWidth(): number | string {
     return this.isOrientationHorizontal ? this.parentElementWidth : '100%'
   }

@@ -1,33 +1,35 @@
-import { ID, noop } from '@queelag/core'
-import { MutableRefObject } from 'react'
-import createRouter, { Router } from 'router5'
+import { Router } from 'router5'
 import { ComponentName } from '../definitions/enums'
-import { BottomTabberProps } from '../definitions/props'
+import { BottomTabberProps, ComponentProps } from '../definitions/props'
 import { BottomTabberItem } from '../definitions/types'
 import { ComponentStore } from '../modules/component.store'
 import { Dummy } from '../modules/dummy'
 
 /**
+ * An abstraction for BottomTabber stores, handles items and router navigation.
+ *
  * @category Store
  */
 export class BottomTabberStore extends ComponentStore<HTMLDivElement> {
+  /**
+   * An array of {@link BottomTabberItem}.
+   */
   items: BottomTabberItem[]
+  /**
+   * A router5 instance.
+   */
   router: Router
 
-  constructor(
-    id: ID = '',
-    items: BottomTabberItem[] = [],
-    name: string = ComponentName.BOTTOM_TABBER,
-    ref: MutableRefObject<HTMLDivElement> = Dummy.ref,
-    router: Router = createRouter(),
-    update: () => void = noop
-  ) {
-    super(name, id, ref, update)
+  constructor(props: BottomTabberProps & ComponentProps<HTMLDivElement>) {
+    super(ComponentName.BOTTOM_TABBER, props)
 
-    this.items = items
-    this.router = router
+    this.items = props.items
+    this.router = props.router
   }
 
+  /**
+   * Navigates to the item route.
+   */
   onClickItem(item: BottomTabberItem): void {
     this.router.navigate(item.name)
   }

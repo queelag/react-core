@@ -65,6 +65,13 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>An abstraction for TopTabber stores, handles cursors and items.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -96,7 +103,6 @@
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="TopTabberStore.html#items" class="tsd-kind-icon">items</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="TopTabberStore.html#name" class="tsd-kind-icon">name</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="TopTabberStore.html#ref" class="tsd-kind-icon">ref</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="TopTabberStore.html#start" class="tsd-kind-icon">start</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -125,44 +131,20 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Top<wbr>Tabber<wbr>Store<span class="tsd-signature-symbol">(</span>active<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, id<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, items<span class="tsd-signature-symbol">?: </span><a href="../index.html#TopTabberItem" class="tsd-signature-type" data-tsd-kind="Type alias">TopTabberItem</a><span class="tsd-signature-symbol">[]</span>, ref<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MutableRefObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span>, update<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="TopTabberStore.html" class="tsd-signature-type" data-tsd-kind="Class">TopTabberStore</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Top<wbr>Tabber<wbr>Store<span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>active<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>items<span class="tsd-signature-symbol">: </span><a href="../index.html#TopTabberItem" class="tsd-signature-type" data-tsd-kind="Type alias">TopTabberItem</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">ClassAttributes</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">HTMLAttributes</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><a href="../index.html#ComponentProps" class="tsd-signature-type" data-tsd-kind="Type alias">ComponentProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="TopTabberStore.html" class="tsd-signature-type" data-tsd-kind="Class">TopTabberStore</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Overrides <a href="ComponentStore.html">ComponentStore</a>.<a href="ComponentStore.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/top.tabber.store.ts#L17">stores/top.tabber.store.ts:17</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/top.tabber.store.ts#L22">stores/top.tabber.store.ts:22</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>active: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;&#x27;</span></h5>
-								</li>
-								<li>
-									<h5>id: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;&#x27;</span></h5>
-								</li>
-								<li>
-									<h5>items: <a href="../index.html#TopTabberItem" class="tsd-signature-type" data-tsd-kind="Type alias">TopTabberItem</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></h5>
-								</li>
-								<li>
-									<h5>ref: <span class="tsd-signature-type">MutableRefObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span></h5>
-								</li>
-								<li>
-									<h5>update: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> = ...</span></h5>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter-signature">
-											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-											</ul>
-											<ul class="tsd-descriptions">
-												<li class="tsd-description">
-													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-												</li>
-											</ul>
-										</li>
-									</ul>
+									<h5>props: <span class="tsd-signature-symbol">{ </span>active<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>items<span class="tsd-signature-symbol">: </span><a href="../index.html#TopTabberItem" class="tsd-signature-type" data-tsd-kind="Type alias">TopTabberItem</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">ClassAttributes</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">HTMLAttributes</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><a href="../index.html#ComponentProps" class="tsd-signature-type" data-tsd-kind="Type alias">ComponentProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="TopTabberStore.html" class="tsd-signature-type" data-tsd-kind="Class">TopTabberStore</a></h4>
@@ -178,9 +160,14 @@
 					<div class="tsd-signature tsd-kind-icon">active<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/top.tabber.store.ts#L13">stores/top.tabber.store.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/top.tabber.store.ts#L16">stores/top.tabber.store.ts:16</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A string which determines the active item name.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="id" class="tsd-anchor"></a>
@@ -189,9 +176,14 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="ComponentStore.html">ComponentStore</a>.<a href="ComponentStore.html#id">id</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.store.ts#L9">modules/component.store.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.store.ts#L16">modules/component.store.ts:16</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A string which identifies a component.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="items" class="tsd-anchor"></a>
@@ -199,9 +191,14 @@
 					<div class="tsd-signature tsd-kind-icon">items<span class="tsd-signature-symbol">:</span> <a href="../index.html#TopTabberItem" class="tsd-signature-type" data-tsd-kind="Type alias">TopTabberItem</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/top.tabber.store.ts#L14">stores/top.tabber.store.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/top.tabber.store.ts#L20">stores/top.tabber.store.ts:20</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>An array of {@link TopTabberItem.}</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="name" class="tsd-anchor"></a>
@@ -210,30 +207,30 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="ComponentStore.html">ComponentStore</a>.<a href="ComponentStore.html#name">name</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.store.ts#L10">modules/component.store.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.store.ts#L20">modules/component.store.ts:20</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A string which helps identify a component, used as a prefix for the id.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="ref" class="tsd-anchor"></a>
 					<h3>ref</h3>
-					<div class="tsd-signature tsd-kind-icon">ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">MutableRefObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">LegacyRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">MutableRefObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="ComponentStore.html">ComponentStore</a>.<a href="ComponentStore.html#ref">ref</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.store.ts#L11">modules/component.store.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.store.ts#L24">modules/component.store.ts:24</a></li>
 						</ul>
 					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="start" class="tsd-anchor"></a>
-					<h3>start</h3>
-					<div class="tsd-signature tsd-kind-icon">start<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/top.tabber.store.ts#L15">stores/top.tabber.store.ts:15</a></li>
-						</ul>
-					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A ref with T interface.</p>
+						</div>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -248,9 +245,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.store.ts#L22">modules/component.store.ts:22</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.store.ts#L41">modules/component.store.ts:41</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns a DOM element from the ref.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
 						</li>
 					</ul>
@@ -268,7 +270,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/top.tabber.store.ts#L30">stores/top.tabber.store.ts:30</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/top.tabber.store.ts#L37">stores/top.tabber.store.ts:37</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -291,7 +293,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/top.tabber.store.ts#L34">stores/top.tabber.store.ts:34</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/top.tabber.store.ts#L41">stores/top.tabber.store.ts:41</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -314,7 +316,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/top.tabber.store.ts#L42">stores/top.tabber.store.ts:42</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/top.tabber.store.ts#L49">stores/top.tabber.store.ts:49</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -337,7 +339,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/top.tabber.store.ts#L38">stores/top.tabber.store.ts:38</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/top.tabber.store.ts#L45">stores/top.tabber.store.ts:45</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -360,9 +362,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/top.tabber.store.ts#L25">stores/top.tabber.store.ts:25</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/top.tabber.store.ts#L32">stores/top.tabber.store.ts:32</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets item as active.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -384,9 +391,14 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="ComponentStore.html">ComponentStore</a>.<a href="ComponentStore.html#update">update</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.store.ts#L20">modules/component.store.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.store.ts#L36">modules/component.store.ts:36</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Forces a re-render.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -425,9 +437,6 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="TopTabberStore.html#ref" class="tsd-kind-icon">ref</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="TopTabberStore.html#start" class="tsd-kind-icon">start</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
 								<a href="TopTabberStore.html#element" class="tsd-kind-icon">element</a>
@@ -475,15 +484,11 @@
 				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
-			</ul>
-			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
 			</ul>
 		</div>
 	</div>

@@ -1,25 +1,44 @@
 import { ID, IDUtils, noop } from '@queelag/core'
-import { MutableRefObject } from 'react'
+import { LegacyRef, MutableRefObject } from 'react'
+import { ComponentProps } from '../definitions/props'
 import { Dummy } from './dummy'
 
 /**
+ * An abstraction for component stores.
+ *
  * @category Module
+ * @template T The DOM element.
  */
 export class ComponentStore<T extends Element> {
+  /**
+   * A string which identifies a component.
+   */
   id: ID
+  /**
+   * A string which helps identify a component, used as a prefix for the id.
+   */
   name: string
-  ref: MutableRefObject<T>
+  /**
+   * A ref with T interface.
+   */
+  ref: LegacyRef<T> | MutableRefObject<T>
 
-  constructor(name: string, id: ID = '', ref: MutableRefObject<T> = Dummy.ref, update: () => void = noop) {
-    this.id = id || IDUtils.prefixed(name)
+  constructor(name: string, props: ComponentProps<T>) {
+    this.id = props.id || IDUtils.prefixed(name)
     this.name = name
-    this.ref = ref
-    this.update = update
+    this.ref = props.ref || Dummy.ref
+    this.update = props.update || noop
   }
 
+  /**
+   * Forces a re-render.
+   */
   update(): void {}
 
+  /**
+   * Returns a DOM element from the ref.
+   */
   get element(): T {
-    return this.ref.current
+    return (this.ref as MutableRefObject<T>).current || this.ref || document.createElement('div')
   }
 }

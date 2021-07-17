@@ -1,32 +1,35 @@
-import { ID, noop } from '@queelag/core'
-import { MutableRefObject } from 'react'
-import createRouter, { Router } from 'router5'
+import { Router } from 'router5'
 import { ComponentName } from '../definitions/enums'
-import { SidebarProps } from '../definitions/props'
+import { ComponentProps, SidebarProps } from '../definitions/props'
 import { SidebarItem } from '../definitions/types'
 import { ComponentStore } from '../modules/component.store'
 import { Dummy } from '../modules/dummy'
 
 /**
+ * An abstraction for Sidebar stores, handles items and navigation.
+ *
  * @category Store
  */
 export class SidebarStore extends ComponentStore<HTMLDivElement> {
+  /**
+   * An array of {@link SidebarItem}.
+   */
   items: SidebarItem[]
+  /**
+   * A router5 instance.
+   */
   router: Router
 
-  constructor(
-    id: ID = '',
-    items: SidebarItem[] = [],
-    ref: MutableRefObject<HTMLDivElement> = Dummy.ref,
-    router: Router = createRouter(),
-    update: () => void = noop
-  ) {
-    super(ComponentName.SIDEBAR, id, ref, update)
+  constructor(props: SidebarProps & ComponentProps<HTMLDivElement>) {
+    super(ComponentName.SIDEBAR, props)
 
-    this.items = items
-    this.router = router
+    this.items = props.items
+    this.router = props.router
   }
 
+  /**
+   * Navigates to the item route.
+   */
   onClickItem(item: SidebarItem): void {
     this.router.navigate(item.name)
   }

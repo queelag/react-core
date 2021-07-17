@@ -8,7 +8,7 @@ import {
   ButtonProps,
   CardProps,
   CheckboxProps,
-  ColorDivProps,
+  ColorableDivProps,
   ContextMenuProps,
   DialogProps,
   DividerProps,
@@ -59,7 +59,7 @@ export const CARD_PROPS_KEYS: (keyof CardProps)[] = ['header', 'layer', 'footer'
 /** @category Constant */
 export const CHECK_BOX_PROPS_KEYS: (keyof CheckboxProps<any>)[] = ['disabled', 'label', 'layer', 'path', 'required', 'store', 'touched']
 /** @category Constant */
-export const COLOR_DIV_PROPS_KEYS: (keyof ColorDivProps)[] = ['background', 'border', 'divide', 'layer', 'text']
+export const COLOR_DIV_PROPS_KEYS: (keyof ColorableDivProps)[] = ['background', 'border', 'divide', 'layer', 'text']
 /** @category Constant */
 export const CONTEXT_MENU_PROPS_KEYS: (keyof ContextMenuProps)[] = ['items', 'name']
 /** @category Constant */
@@ -75,7 +75,11 @@ export const HEADER_PROPS_KEYS: (keyof HeaderProps)[] = ['logo', 'router', 'titl
 /** @category Constant */
 export const ICON_PROPS_KEYS: (keyof IconProps)[] = ['color', 'fill', 'layer', 'size', 'stroke', 'svg', 'thickness']
 /** @category Constant */
-export const IMAGE_PROPS_KEYS: (keyof ImageProps)[] = ['fallback', 'heightRatio', 'shape', 'size', 'source', 'widthRatio']
+export const IMAGE_EMPTY_BASE64: string = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='
+/** @category Constant */
+export const IMAGE_EMPTY_TYPE: string = 'image/png'
+/** @category Constant */
+export const IMAGE_PROPS_KEYS: (keyof ImageProps)[] = ['fallback', 'orientation', 'ratio', 'shape', 'size', 'source']
 /** @category Constant */
 export const INPUT_FILE_PROPS_KEYS: (keyof InputFileProps<any>)[] = ['label', 'layer', 'mode', 'onChangeCallback', 'path', 'required', 'store']
 /** @category Constant */
@@ -115,13 +119,13 @@ export const SELECT_PROPS_KEYS: (keyof SelectProps<any>)[] = ['disabled', 'label
 /** @category Constant */
 export const SETTING_PROPS_KEYS: (keyof SettingProps)[] = ['description', 'layer', 'title']
 /** @category Constant */
-export const SIDEBAR_PROPS_KEYS: (keyof SidebarProps)[] = ['footer', 'items', 'logo', 'router']
+export const SIDEBAR_PROPS_KEYS: (keyof SidebarProps)[] = ['footer', 'items', 'router']
 /** @category Constant */
 export const SPINNER_PROPS_KEYS: (keyof SpinnerProps)[] = ['color', 'size']
 /** @category Constant */
 export const STATISTIC_PROPS_KEYS: (keyof StatisticProps)[] = ['feedback', 'icon', 'layer', 'progress', 'reference', 'title', 'value']
 /** @category Constant */
-export const SWITCH_PROPS_KEYS: (keyof SwitchProps<any>)[] = ['disabled', 'label', 'layer', 'onChangeCallback', 'path', 'store']
+export const SWITCH_PROPS_KEYS: (keyof SwitchProps<any>)[] = ['disabled', 'label', 'layer', 'path', 'store']
 /** @category Constant */
 export const TAG_PROPS_KEYS: (keyof TagProps)[] = ['background', 'color', 'destroyable', 'icon', 'layer', 'onDestroyCallback', 'text']
 /** @category Constant */
@@ -139,4 +143,4 @@ export const VIRTUALIZED_LIST_PROPS_KEYS: (keyof VirtualizedListProps<any>)[] = 
 /** @category Constant */
 export const VIRTUALIZED_LIST_ITEM_PROPS_KEYS: (keyof VirtualizedListItemProps<any>)[] = ['renderItem']
 /** @category Constant */
-export const WIZARD_PROPS_KEYS: (keyof WizardProps)[] = ['active', 'epilogue', 'name', 'onStepChange', 'steps']
+export const WIZARD_PROPS_KEYS: (keyof WizardProps)[] = ['active', 'onStepChange', 'steps']

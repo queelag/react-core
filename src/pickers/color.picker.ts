@@ -3,11 +3,19 @@ import { ColorPickerConfiguration } from '../definitions/types'
 import { Dummy } from '../modules/dummy'
 
 /**
+ * Picks layered background, border, divide and text colors from a configuration, also supports color based on the {@link FeedbackType}.
+ *
  * @category Picker
  */
 export class ColorPicker {
+  /**
+   * A {@link ColorPickerConfiguration} which determines the colors that will be used.
+   */
   static configuration: ColorPickerConfiguration = Dummy.colorPickerConfiguration
 
+  /**
+   * Picks a layered color from a {@link FeedbackType}.
+   */
   static byFeedbackType(type: FeedbackType): Color {
     switch (type) {
       case FeedbackType.ERROR:
@@ -21,162 +29,129 @@ export class ColorPicker {
     }
   }
 
+  /**
+   * Picks a layered background color from a {@link FeedbackType}
+   */
   static backgroundByFeedbackType(type: FeedbackType, layer?: Layer): string {
     return this.background(this.byFeedbackType(type), layer)
   }
 
+  /**
+   * Picks a layered background color from a string
+   */
   static backgroundByString(color: string, layer?: Layer): string {
     return Object.keys(Color).includes(color) ? this.background(color as Color, layer) : color
   }
 
+  /**
+   * Picks a layered border color from a {@link FeedbackType}
+   */
   static borderByFeedbackType(type: FeedbackType, layer?: Layer): string {
     return this.border(this.byFeedbackType(type), layer)
   }
 
+  /**
+   * Picks a layered border color from a string
+   */
   static borderByString(color: string, layer?: Layer): string {
     return Object.keys(Color).includes(color) ? this.border(color as Color, layer) : color
   }
 
+  /**
+   * Picks a layered divide color from a {@link FeedbackType}
+   */
   static divideByFeedbackType(type: FeedbackType, layer?: Layer): string {
     return this.divide(this.byFeedbackType(type), layer)
   }
 
+  /**
+   * Picks a layered divide color from a string
+   */
   static divideByString(color: string, layer?: Layer): string {
     return Object.keys(Color).includes(color) ? this.divide(color as Color, layer) : color
   }
 
+  /**
+   * Picks a layered text color from a {@link FeedbackType}
+   */
   static textByFeedbackType(type: FeedbackType, layer?: Layer): string {
     return this.text(this.byFeedbackType(type), layer)
   }
 
+  /**
+   * Picks a layered text color from a string
+   */
   static textByString(color: string, layer?: Layer): string {
     return Object.keys(Color).includes(color) ? this.text(color as Color, layer) : color
   }
 
+  /**
+   * Picks a layered background color.
+   */
   static background(color: Color = Color.MONO, layer: Layer = Layer.ZERO): string {
     switch (color) {
       case Color.GRAY:
-        switch (layer) {
-          case Layer.ZERO:
-            return this.configuration.background.gray[0]
-          case Layer.ONE:
-            return this.configuration.background.gray[1]
-          case Layer.TWO:
-            return this.configuration.background.gray[2]
-          case Layer.THREE:
-            return this.configuration.background.gray[3]
-        }
+        return this.configuration.background.gray[layer]
       case Color.MONO:
         return this.configuration.background.mono
       case Color.MONO_INVERTED:
         return this.configuration.background.monoInverted
       default:
-        switch (layer) {
-          case Layer.ZERO:
-            return this.configuration.background.any(color)[0]
-          case Layer.ONE:
-            return this.configuration.background.any(color)[1]
-          case Layer.TWO:
-            return this.configuration.background.any(color)[2]
-          case Layer.THREE:
-            return this.configuration.background.any(color)[3]
-        }
+        return this.configuration.background.any(color)[layer]
     }
   }
 
+  /**
+   * Picks a layered border color.
+   */
   static border(color: Color = Color.MONO, layer: Layer = Layer.ZERO): string {
     switch (color) {
       case Color.GRAY:
-        switch (layer) {
-          case Layer.ZERO:
-            return this.configuration.border.gray[0]
-          case Layer.ONE:
-            return this.configuration.border.gray[1]
-          case Layer.TWO:
-            return this.configuration.border.gray[2]
-          case Layer.THREE:
-            return this.configuration.border.gray[3]
-        }
+        return this.configuration.border.gray[layer]
       case Color.MONO:
         return this.configuration.border.mono
       case Color.MONO_INVERTED:
         return this.configuration.border.monoInverted
       default:
-        switch (layer) {
-          case Layer.ZERO:
-            return this.configuration.border.any(color)[0]
-          case Layer.ONE:
-            return this.configuration.border.any(color)[1]
-          case Layer.TWO:
-            return this.configuration.border.any(color)[2]
-          case Layer.THREE:
-            return this.configuration.border.any(color)[3]
-        }
+        return this.configuration.border.any(color)[layer]
     }
   }
 
+  /**
+   * Picks a layered divide color.
+   */
   static divide(color: Color = Color.MONO, layer: Layer = Layer.ZERO): string {
     switch (color) {
       case Color.GRAY:
-        switch (layer) {
-          case Layer.ZERO:
-            return this.configuration.divide.gray[0]
-          case Layer.ONE:
-            return this.configuration.divide.gray[1]
-          case Layer.TWO:
-            return this.configuration.divide.gray[2]
-          case Layer.THREE:
-            return this.configuration.divide.gray[3]
-        }
+        return this.configuration.divide.gray[layer]
       case Color.MONO:
         return this.configuration.divide.mono
       case Color.MONO_INVERTED:
         return this.configuration.divide.monoInverted
       default:
-        switch (layer) {
-          case Layer.ZERO:
-            return this.configuration.divide.any(color)[0]
-          case Layer.ONE:
-            return this.configuration.divide.any(color)[1]
-          case Layer.TWO:
-            return this.configuration.divide.any(color)[2]
-          case Layer.THREE:
-            return this.configuration.divide.any(color)[3]
-        }
+        return this.configuration.divide.any(color)[layer]
     }
   }
 
+  /**
+   * Picks a layered text color.
+   */
   static text(color: Color = Color.MONO, layer: Layer = Layer.ZERO): string {
     switch (color) {
       case Color.GRAY:
-        switch (layer) {
-          case Layer.ZERO:
-            return this.configuration.text.gray[0]
-          case Layer.ONE:
-            return this.configuration.text.gray[1]
-          case Layer.TWO:
-            return this.configuration.text.gray[2]
-          case Layer.THREE:
-            return this.configuration.text.gray[3]
-        }
+        return this.configuration.text.gray[layer]
       case Color.MONO:
         return this.configuration.background.mono
       case Color.MONO_INVERTED:
         return this.configuration.background.monoInverted
       default:
-        switch (layer) {
-          case Layer.ZERO:
-            return this.configuration.text.any(color)[0]
-          case Layer.ONE:
-            return this.configuration.text.any(color)[1]
-          case Layer.TWO:
-            return this.configuration.text.any(color)[2]
-          case Layer.THREE:
-            return this.configuration.text.any(color)[3]
-        }
+        return this.configuration.text.any(color)[layer]
     }
   }
 
+  /**
+   * Picks an inverted of color.
+   */
   static inverted(color: Color): Color {
     switch (color) {
       case Color.MONO:

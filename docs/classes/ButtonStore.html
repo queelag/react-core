@@ -65,6 +65,13 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>An abstraction for Button stores, handles disabled and spinning statuses.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -127,13 +134,12 @@
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="ButtonStore.html#isTypePrimary" class="tsd-kind-icon">is<wbr>Type<wbr>Primary</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="ButtonStore.html#isTypeSecondary" class="tsd-kind-icon">is<wbr>Type<wbr>Secondary</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="ButtonStore.html#isTypeText" class="tsd-kind-icon">is<wbr>Type<wbr>Text</a></li>
-								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="ButtonStore.html#onClick" class="tsd-kind-icon">on<wbr>Click</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="ButtonStore.html#onClick" class="tsd-kind-icon">on<wbr>Click</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section ">
+						<section class="tsd-index-section tsd-is-inherited">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="ButtonStore.html#_onClick" class="tsd-kind-icon">_on<wbr>Click</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="ButtonStore.html#update" class="tsd-kind-icon">update</a></li>
 							</ul>
 						</section>
@@ -146,77 +152,20 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Button<wbr>Store<span class="tsd-signature-symbol">(</span>disabled<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, id<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, layer<span class="tsd-signature-symbol">?: </span><a href="../enums/Layer.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Layer</a>, onClick<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLButtonElement</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span>, ref<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">MutableRefObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLButtonElement</span><span class="tsd-signature-symbol">&gt;</span>, shape<span class="tsd-signature-symbol">?: </span><a href="../enums/Shape.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Shape</a>, size<span class="tsd-signature-symbol">?: </span><a href="../enums/Size.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Size</a>, spinning<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, type<span class="tsd-signature-symbol">?: </span><a href="../enums/ButtonType.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ButtonType</a>, update<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ButtonStore.html" class="tsd-signature-type" data-tsd-kind="Class">ButtonStore</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Button<wbr>Store<span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>background<span class="tsd-signature-symbol">?: </span><a href="../enums/Color.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Color</a><span class="tsd-signature-symbol">; </span>color<span class="tsd-signature-symbol">?: </span><a href="../enums/Color.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Color</a><span class="tsd-signature-symbol">; </span>destructive<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>layer<span class="tsd-signature-symbol">?: </span><a href="../enums/Layer.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Layer</a><span class="tsd-signature-symbol">; </span>shape<span class="tsd-signature-symbol">?: </span><a href="../enums/Shape.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Shape</a><span class="tsd-signature-symbol">; </span>size<span class="tsd-signature-symbol">?: </span><a href="../enums/Size.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Size</a><span class="tsd-signature-symbol">; </span>spinning<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>submit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>title<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">?: </span><a href="../enums/ButtonType.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ButtonType</a><span class="tsd-signature-symbol">; </span>icon<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">Omit</span><span class="tsd-signature-symbol">&lt;</span><a href="../index.html#HTMLButtonProps" class="tsd-signature-type" data-tsd-kind="Type alias">HTMLButtonProps</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;type&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><a href="../index.html#ComponentProps" class="tsd-signature-type" data-tsd-kind="Type alias">ComponentProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLButtonElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>layer<span class="tsd-signature-symbol">?: </span><a href="../enums/Layer.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Layer</a><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>shape<span class="tsd-signature-symbol">?: </span><a href="../enums/Shape.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Shape</a><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>size<span class="tsd-signature-symbol">?: </span><a href="../enums/Size.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Size</a><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ButtonStore.html" class="tsd-signature-type" data-tsd-kind="Class">ButtonStore</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Overrides <a href="ComponentLayerShapeSizeStore.html">ComponentLayerShapeSizeStore</a>.<a href="ComponentLayerShapeSizeStore.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/button.store.ts#L16">stores/button.store.ts:16</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/button.store.ts#L26">stores/button.store.ts:26</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>disabled: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></h5>
-								</li>
-								<li>
-									<h5>id: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;&#x27;</span></h5>
-								</li>
-								<li>
-									<h5>layer: <a href="../enums/Layer.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Layer</a><span class="tsd-signature-symbol"> = ...</span></h5>
-								</li>
-								<li>
-									<h5>onClick: <span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLButtonElement</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = ...</span></h5>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter-signature">
-											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLButtonElement</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
-											</ul>
-											<ul class="tsd-descriptions">
-												<li class="tsd-description">
-													<h4 class="tsd-parameters-title">Parameters</h4>
-													<ul class="tsd-parameters">
-														<li>
-															<h5>event: <span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLButtonElement</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">&gt;</span></h5>
-														</li>
-													</ul>
-													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
-												</li>
-											</ul>
-										</li>
-									</ul>
-								</li>
-								<li>
-									<h5>ref: <span class="tsd-signature-type">MutableRefObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLButtonElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></h5>
-								</li>
-								<li>
-									<h5>shape: <a href="../enums/Shape.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Shape</a><span class="tsd-signature-symbol"> = ...</span></h5>
-								</li>
-								<li>
-									<h5>size: <a href="../enums/Size.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Size</a><span class="tsd-signature-symbol"> = ...</span></h5>
-								</li>
-								<li>
-									<h5>spinning: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></h5>
-								</li>
-								<li>
-									<h5>type: <a href="../enums/ButtonType.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ButtonType</a><span class="tsd-signature-symbol"> = ...</span></h5>
-								</li>
-								<li>
-									<h5>update: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></h5>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter-signature">
-											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-											</ul>
-											<ul class="tsd-descriptions">
-												<li class="tsd-description">
-													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-												</li>
-											</ul>
-										</li>
-									</ul>
+									<h5>props: <span class="tsd-signature-symbol">{ </span>background<span class="tsd-signature-symbol">?: </span><a href="../enums/Color.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Color</a><span class="tsd-signature-symbol">; </span>color<span class="tsd-signature-symbol">?: </span><a href="../enums/Color.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Color</a><span class="tsd-signature-symbol">; </span>destructive<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>layer<span class="tsd-signature-symbol">?: </span><a href="../enums/Layer.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Layer</a><span class="tsd-signature-symbol">; </span>shape<span class="tsd-signature-symbol">?: </span><a href="../enums/Shape.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Shape</a><span class="tsd-signature-symbol">; </span>size<span class="tsd-signature-symbol">?: </span><a href="../enums/Size.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Size</a><span class="tsd-signature-symbol">; </span>spinning<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>submit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>title<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">?: </span><a href="../enums/ButtonType.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ButtonType</a><span class="tsd-signature-symbol">; </span>icon<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">Omit</span><span class="tsd-signature-symbol">&lt;</span><a href="../index.html#HTMLButtonProps" class="tsd-signature-type" data-tsd-kind="Type alias">HTMLButtonProps</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;type&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><a href="../index.html#ComponentProps" class="tsd-signature-type" data-tsd-kind="Type alias">ComponentProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLButtonElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>layer<span class="tsd-signature-symbol">?: </span><a href="../enums/Layer.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Layer</a><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>shape<span class="tsd-signature-symbol">?: </span><a href="../enums/Shape.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Shape</a><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>size<span class="tsd-signature-symbol">?: </span><a href="../enums/Size.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Size</a><span class="tsd-signature-symbol"> }</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="ButtonStore.html" class="tsd-signature-type" data-tsd-kind="Class">ButtonStore</a></h4>
@@ -232,9 +181,14 @@
 					<div class="tsd-signature tsd-kind-icon">disabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/button.store.ts#L12">stores/button.store.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/button.store.ts#L16">stores/button.store.ts:16</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A boolean which determines if this button is disabled or not.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="id" class="tsd-anchor"></a>
@@ -243,9 +197,14 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="ComponentLayerShapeSizeStore.html">ComponentLayerShapeSizeStore</a>.<a href="ComponentLayerShapeSizeStore.html#id">id</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.store.ts#L9">modules/component.store.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.store.ts#L16">modules/component.store.ts:16</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A string which identifies a component.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="layer" class="tsd-anchor"></a>
@@ -254,7 +213,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="ComponentLayerShapeSizeStore.html">ComponentLayerShapeSizeStore</a>.<a href="ComponentLayerShapeSizeStore.html#layer">layer</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.layer.shape.size.store.ts#L11">modules/component.layer.shape.size.store.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.layer.shape.size.store.ts#L9">modules/component.layer.shape.size.store.ts:9</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -265,20 +224,30 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="ComponentLayerShapeSizeStore.html">ComponentLayerShapeSizeStore</a>.<a href="ComponentLayerShapeSizeStore.html#name">name</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.store.ts#L10">modules/component.store.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.store.ts#L20">modules/component.store.ts:20</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A string which helps identify a component, used as a prefix for the id.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="ref" class="tsd-anchor"></a>
 					<h3>ref</h3>
-					<div class="tsd-signature tsd-kind-icon">ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">MutableRefObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLButtonElement</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">LegacyRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLButtonElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">MutableRefObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLButtonElement</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="ComponentLayerShapeSizeStore.html">ComponentLayerShapeSizeStore</a>.<a href="ComponentLayerShapeSizeStore.html#ref">ref</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.store.ts#L11">modules/component.store.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.store.ts#L24">modules/component.store.ts:24</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A ref with T interface.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="shape" class="tsd-anchor"></a>
@@ -287,7 +256,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="ComponentLayerShapeSizeStore.html">ComponentLayerShapeSizeStore</a>.<a href="ComponentLayerShapeSizeStore.html#shape">shape</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.layer.shape.size.store.ts#L12">modules/component.layer.shape.size.store.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.layer.shape.size.store.ts#L10">modules/component.layer.shape.size.store.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -298,7 +267,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="ComponentLayerShapeSizeStore.html">ComponentLayerShapeSizeStore</a>.<a href="ComponentLayerShapeSizeStore.html#size">size</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.layer.shape.size.store.ts#L13">modules/component.layer.shape.size.store.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.layer.shape.size.store.ts#L11">modules/component.layer.shape.size.store.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -308,9 +277,14 @@
 					<div class="tsd-signature tsd-kind-icon">spinning<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/button.store.ts#L13">stores/button.store.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/button.store.ts#L20">stores/button.store.ts:20</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A boolean which determines if this button is spinning or not.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="type" class="tsd-anchor"></a>
@@ -318,9 +292,14 @@
 					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <a href="../enums/ButtonType.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ButtonType</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/button.store.ts#L14">stores/button.store.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/button.store.ts#L24">stores/button.store.ts:24</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A <a href="../enums/ButtonType.html">ButtonType</a>, useful for handling custom styles.</p>
+						</div>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -335,9 +314,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.store.ts#L22">modules/component.store.ts:22</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.store.ts#L41">modules/component.store.ts:41</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns a DOM element from the ref.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
 						</li>
 					</ul>
@@ -352,7 +336,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/button.store.ts#L42">stores/button.store.ts:42</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/button.store.ts#L45">stores/button.store.ts:45</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -369,7 +353,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/button.store.ts#L46">stores/button.store.ts:46</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/button.store.ts#L49">stores/button.store.ts:49</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -386,7 +370,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.layer.shape.size.store.ts#L35">modules/component.layer.shape.size.store.ts:35</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.layer.shape.size.store.ts#L25">modules/component.layer.shape.size.store.ts:25</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -403,7 +387,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.layer.shape.size.store.ts#L43">modules/component.layer.shape.size.store.ts:43</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.layer.shape.size.store.ts#L33">modules/component.layer.shape.size.store.ts:33</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -420,7 +404,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.layer.shape.size.store.ts#L39">modules/component.layer.shape.size.store.ts:39</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.layer.shape.size.store.ts#L29">modules/component.layer.shape.size.store.ts:29</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -437,7 +421,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.layer.shape.size.store.ts#L31">modules/component.layer.shape.size.store.ts:31</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.layer.shape.size.store.ts#L21">modules/component.layer.shape.size.store.ts:21</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -454,7 +438,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/button.store.ts#L54">stores/button.store.ts:54</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/button.store.ts#L57">stores/button.store.ts:57</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -471,7 +455,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.layer.shape.size.store.ts#L47">modules/component.layer.shape.size.store.ts:47</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.layer.shape.size.store.ts#L37">modules/component.layer.shape.size.store.ts:37</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -488,7 +472,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.layer.shape.size.store.ts#L51">modules/component.layer.shape.size.store.ts:51</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.layer.shape.size.store.ts#L41">modules/component.layer.shape.size.store.ts:41</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -505,7 +489,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.layer.shape.size.store.ts#L55">modules/component.layer.shape.size.store.ts:55</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.layer.shape.size.store.ts#L45">modules/component.layer.shape.size.store.ts:45</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -522,7 +506,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.layer.shape.size.store.ts#L59">modules/component.layer.shape.size.store.ts:59</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.layer.shape.size.store.ts#L49">modules/component.layer.shape.size.store.ts:49</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -539,7 +523,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.layer.shape.size.store.ts#L63">modules/component.layer.shape.size.store.ts:63</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.layer.shape.size.store.ts#L53">modules/component.layer.shape.size.store.ts:53</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -556,7 +540,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.layer.shape.size.store.ts#L67">modules/component.layer.shape.size.store.ts:67</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.layer.shape.size.store.ts#L57">modules/component.layer.shape.size.store.ts:57</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -573,7 +557,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.layer.shape.size.store.ts#L71">modules/component.layer.shape.size.store.ts:71</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.layer.shape.size.store.ts#L61">modules/component.layer.shape.size.store.ts:61</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -590,7 +574,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.layer.shape.size.store.ts#L75">modules/component.layer.shape.size.store.ts:75</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.layer.shape.size.store.ts#L65">modules/component.layer.shape.size.store.ts:65</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -607,7 +591,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/button.store.ts#L50">stores/button.store.ts:50</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/button.store.ts#L53">stores/button.store.ts:53</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -624,7 +608,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/button.store.ts#L58">stores/button.store.ts:58</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/button.store.ts#L61">stores/button.store.ts:61</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -641,7 +625,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/button.store.ts#L62">stores/button.store.ts:62</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/button.store.ts#L65">stores/button.store.ts:65</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -658,7 +642,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/button.store.ts#L66">stores/button.store.ts:66</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/button.store.ts#L69">stores/button.store.ts:69</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -675,7 +659,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/button.store.ts#L70">stores/button.store.ts:70</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/button.store.ts#L73">stores/button.store.ts:73</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -692,27 +676,31 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/button.store.ts#L74">stores/button.store.ts:74</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/button.store.ts#L77">stores/button.store.ts:77</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
 					<a name="onClick" class="tsd-anchor"></a>
 					<h3>on<wbr>Click</h3>
-					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> onClick<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLButtonElement</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span></li>
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> onClick<span class="tsd-signature-symbol">(</span>onClick<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLButtonElement</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/button.store.ts#L38">stores/button.store.ts:38</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/button.store.ts#L41">stores/button.store.ts:41</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>An event triggered by clicking on this button.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLButtonElement</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span></h4>
 							<ul class="tsd-parameters">
 								<li class="tsd-parameter-signature">
@@ -721,6 +709,11 @@
 									</ul>
 									<ul class="tsd-descriptions">
 										<li class="tsd-description">
+											<div class="tsd-comment tsd-typography">
+												<div class="lead">
+													<p>An event triggered by clicking on this button.</p>
+												</div>
+											</div>
 											<h4 class="tsd-parameters-title">Parameters</h4>
 											<ul class="tsd-parameters">
 												<li>
@@ -733,66 +726,11 @@
 								</li>
 							</ul>
 						</li>
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/button.store.ts#L78">stores/button.store.ts:78</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>onClick: <span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLButtonElement</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">any</span></h5>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter-signature">
-											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLButtonElement</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
-											</ul>
-											<ul class="tsd-descriptions">
-												<li class="tsd-description">
-													<h4 class="tsd-parameters-title">Parameters</h4>
-													<ul class="tsd-parameters">
-														<li>
-															<h5>event: <span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLButtonElement</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">&gt;</span></h5>
-														</li>
-													</ul>
-													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
-												</li>
-											</ul>
-										</li>
-									</ul>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
 					</ul>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group ">
+			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-					<a name="_onClick" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _on<wbr>Click</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">_on<wbr>Click<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLButtonElement</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/button.store.ts#L36">stores/button.store.ts:36</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>event: <span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLButtonElement</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">&gt;</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
-						</li>
-					</ul>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 					<a name="update" class="tsd-anchor"></a>
 					<h3>update</h3>
@@ -804,9 +742,14 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="ComponentLayerShapeSizeStore.html">ComponentLayerShapeSizeStore</a>.<a href="ComponentLayerShapeSizeStore.html#update">update</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.store.ts#L20">modules/component.store.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.store.ts#L36">modules/component.store.ts:36</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Forces a re-render.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -924,11 +867,8 @@
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="ButtonStore.html#isTypeText" class="tsd-kind-icon">is<wbr>Type<wbr>Text</a>
 							</li>
-							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="ButtonStore.html#onClick" class="tsd-kind-icon">on<wbr>Click</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="ButtonStore.html#_onClick" class="tsd-kind-icon">_on<wbr>Click</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="ButtonStore.html#update" class="tsd-kind-icon">update</a>
@@ -958,15 +898,11 @@
 				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
-			</ul>
-			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
 			</ul>
 		</div>
 	</div>

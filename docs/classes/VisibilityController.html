@@ -65,6 +65,46 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>A generic controller for handling visibility states.</p>
+					</div>
+					<p>Usage:</p>
+					<pre><code class="language-typescript"><span style="color: #D73A49">import</span><span style="color: #24292E"> React, { useEffect } </span><span style="color: #D73A49">from</span><span style="color: #24292E"> </span><span style="color: #032F62">&#039;react&#039;</span>
+<span style="color: #D73A49">import</span><span style="color: #24292E"> { Backdrop, ModalProps, VisibilityController } </span><span style="color: #D73A49">from</span><span style="color: #24292E"> </span><span style="color: #032F62">&#039;@queelag/react-core&#039;</span>
+<span style="color: #D73A49">import</span><span style="color: #24292E"> { makeObservable, observer } </span><span style="color: #D73A49">from</span><span style="color: #24292E"> </span><span style="color: #032F62">&#039;mobx&#039;</span>
+
+<span style="color: #D73A49">class</span><span style="color: #24292E"> </span><span style="color: #6F42C1">_ModalController</span><span style="color: #24292E"> </span><span style="color: #D73A49">extends</span><span style="color: #24292E"> </span><span style="color: #6F42C1">VisibilityController</span><span style="color: #24292E"> {</span>
+<span style="color: #24292E">  </span><span style="color: #D73A49">constructor</span><span style="color: #24292E">() {</span>
+<span style="color: #24292E">    </span><span style="color: #005CC5">super</span><span style="color: #24292E">()</span>
+<span style="color: #24292E">    </span><span style="color: #6F42C1">makeObservable</span><span style="color: #24292E">(</span><span style="color: #005CC5">this</span><span style="color: #24292E">, { data: observable })</span>
+<span style="color: #24292E">  }</span>
+<span style="color: #24292E">}</span>
+
+<span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">ModalController</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #D73A49">new</span><span style="color: #24292E"> </span><span style="color: #6F42C1">_ModalController</span><span style="color: #24292E">()</span>
+
+<span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">Modal</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #6F42C1">observer</span><span style="color: #24292E">((</span><span style="color: #E36209">props</span><span style="color: #D73A49">:</span><span style="color: #24292E"> </span><span style="color: #6F42C1">ModalProps</span><span style="color: #24292E">) </span><span style="color: #D73A49">=&gt;</span><span style="color: #24292E"> {</span>
+<span style="color: #24292E">  </span><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #6F42C1">onClickBackdrop</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> () </span><span style="color: #D73A49">=&gt;</span><span style="color: #24292E"> ModalController.</span><span style="color: #6F42C1">hide</span><span style="color: #24292E">(props.name)</span>
+
+<span style="color: #24292E">  </span><span style="color: #6F42C1">useEffect</span><span style="color: #24292E">(() </span><span style="color: #D73A49">=&gt;</span><span style="color: #24292E"> {</span>
+<span style="color: #24292E">    ModalController.</span><span style="color: #6F42C1">show</span><span style="color: #24292E">(props.name)</span>
+<span style="color: #24292E">  }, [])</span>
+
+<span style="color: #24292E">  </span><span style="color: #D73A49">if</span><span style="color: #24292E"> (ModalController.</span><span style="color: #6F42C1">isHidden</span><span style="color: #24292E">(props.name)) {</span>
+<span style="color: #24292E">    </span><span style="color: #D73A49">return</span><span style="color: #24292E"> </span><span style="color: #005CC5">null</span>
+<span style="color: #24292E">  }</span>
+
+<span style="color: #24292E">  </span><span style="color: #D73A49">return</span><span style="color: #24292E"> (</span>
+<span style="color: #24292E">    </span><span style="color: #D73A49">&lt;</span><span style="color: #24292E">div className</span><span style="color: #D73A49">=</span><span style="color: #032F62">&quot;container&quot;</span><span style="color: #24292E"> style</span><span style="color: #D73A49">=</span><span style="color: #24292E">{{ position: </span><span style="color: #032F62">&#039;relative&#039;</span><span style="color: #24292E"> }}</span><span style="color: #D73A49">&gt;</span>
+<span style="color: #24292E">      </span><span style="color: #D73A49">&lt;</span><span style="color: #24292E">Backdrop onClick</span><span style="color: #D73A49">=</span><span style="color: #24292E">{onClickBackdrop} </span><span style="color: #D73A49">/&gt;</span>
+<span style="color: #24292E">      </span><span style="color: #D73A49">&lt;</span><span style="color: #24292E">div className</span><span style="color: #D73A49">=</span><span style="color: #032F62">&quot;content&quot;</span><span style="color: #24292E"> style</span><span style="color: #D73A49">=</span><span style="color: #24292E">{{ position: </span><span style="color: #032F62">&#039;absolute&#039;</span><span style="color: #24292E"> }} </span><span style="color: #D73A49">/&gt;</span>
+<span style="color: #24292E">    </span><span style="color: #D73A49">&lt;/</span><span style="color: #24292E">div</span><span style="color: #D73A49">&gt;</span>
+<span style="color: #24292E">  )</span>
+<span style="color: #24292E">})</span>
+</code></pre>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -84,12 +124,6 @@
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
-							<h3>Properties</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="VisibilityController.html#data" class="tsd-kind-icon">data</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
 							<h3>Accessors</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-static"><a href="VisibilityController.html#HIDDEN" class="tsd-kind-icon">HIDDEN</a></li>
@@ -101,7 +135,6 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="VisibilityController.html#get" class="tsd-kind-icon">get</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="VisibilityController.html#hide" class="tsd-kind-icon">hide</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="VisibilityController.html#isHidden" class="tsd-kind-icon">is<wbr>Hidden</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="VisibilityController.html#isHiding" class="tsd-kind-icon">is<wbr>Hiding</a></li>
@@ -126,25 +159,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/controllers/visibility.controller.ts#L9">controllers/visibility.controller.ts:9</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/controllers/visibility.controller.ts#L48">controllers/visibility.controller.ts:48</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="VisibilityController.html" class="tsd-signature-type" data-tsd-kind="Class">VisibilityController</a></h4>
 						</li>
 					</ul>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="data" class="tsd-anchor"></a>
-					<h3>data</h3>
-					<div class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/controllers/visibility.controller.ts#L7">controllers/visibility.controller.ts:7</a></li>
-						</ul>
-					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -159,7 +179,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/controllers/visibility.controller.ts#L65">controllers/visibility.controller.ts:65</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/controllers/visibility.controller.ts#L126">controllers/visibility.controller.ts:126</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -176,7 +196,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/controllers/visibility.controller.ts#L69">controllers/visibility.controller.ts:69</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/controllers/visibility.controller.ts#L130">controllers/visibility.controller.ts:130</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -193,7 +213,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/controllers/visibility.controller.ts#L77">controllers/visibility.controller.ts:77</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/controllers/visibility.controller.ts#L138">controllers/visibility.controller.ts:138</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -210,7 +230,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/controllers/visibility.controller.ts#L73">controllers/visibility.controller.ts:73</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/controllers/visibility.controller.ts#L134">controllers/visibility.controller.ts:134</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -220,29 +240,6 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-					<a name="get" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> get</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">get<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/controllers/visibility.controller.ts#L45">controllers/visibility.controller.ts:45</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>name: <span class="tsd-signature-type">string</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-						</li>
-					</ul>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="hide" class="tsd-anchor"></a>
 					<h3>hide</h3>
@@ -253,9 +250,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/controllers/visibility.controller.ts#L13">controllers/visibility.controller.ts:13</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/controllers/visibility.controller.ts#L55">controllers/visibility.controller.ts:55</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets name to HIDING, after delay time sets name to HIDDEN.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -279,9 +281,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/controllers/visibility.controller.ts#L53">controllers/visibility.controller.ts:53</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/controllers/visibility.controller.ts#L108">controllers/visibility.controller.ts:108</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Checks if name is HIDDEN.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -302,9 +309,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/controllers/visibility.controller.ts#L49">controllers/visibility.controller.ts:49</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/controllers/visibility.controller.ts#L101">controllers/visibility.controller.ts:101</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Checks if name is HIDING.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -325,9 +337,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/controllers/visibility.controller.ts#L61">controllers/visibility.controller.ts:61</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/controllers/visibility.controller.ts#L122">controllers/visibility.controller.ts:122</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Checks if name is SHOWING.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -348,9 +365,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/controllers/visibility.controller.ts#L57">controllers/visibility.controller.ts:57</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/controllers/visibility.controller.ts#L115">controllers/visibility.controller.ts:115</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Checks if name is VISIBLE.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -371,9 +393,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/controllers/visibility.controller.ts#L27">controllers/visibility.controller.ts:27</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/controllers/visibility.controller.ts#L72">controllers/visibility.controller.ts:72</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets name to VISIBLE, after delay time sets name to SHOWING.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -397,9 +424,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/controllers/visibility.controller.ts#L41">controllers/visibility.controller.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/controllers/visibility.controller.ts#L89">controllers/visibility.controller.ts:89</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Shows name if it&#39;s hidden or hides it if it&#39;s shown.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -433,9 +465,6 @@
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
 								<a href="VisibilityController.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="VisibilityController.html#data" class="tsd-kind-icon">data</a>
-							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-static">
 								<a href="VisibilityController.html#HIDDEN" class="tsd-kind-icon">HIDDEN</a>
 							</li>
@@ -447,9 +476,6 @@
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-static">
 								<a href="VisibilityController.html#VISIBLE" class="tsd-kind-icon">VISIBLE</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="VisibilityController.html#get" class="tsd-kind-icon">get</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="VisibilityController.html#hide" class="tsd-kind-icon">hide</a>
@@ -497,15 +523,11 @@
 				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
-			</ul>
-			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
 			</ul>
 		</div>
 	</div>

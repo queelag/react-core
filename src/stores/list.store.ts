@@ -1,20 +1,22 @@
-import { ID, noop } from '@queelag/core'
-import { MutableRefObject } from 'react'
 import { ComponentName } from '../definitions/enums'
-import { ListProps } from '../definitions/props'
+import { ComponentProps, ListProps } from '../definitions/props'
 import { ComponentStore } from '../modules/component.store'
-import { Dummy } from '../modules/dummy'
 
 /**
+ * An abstraction for List stores, handles items.
+ *
  * @category Store
  */
 export class ListStore<T> extends ComponentStore<HTMLUListElement> {
+  /**
+   * An array of T.
+   */
   items: T[]
 
-  constructor(id: ID = '', items: T[], ref: MutableRefObject<HTMLUListElement> = Dummy.ref, update: () => void = noop) {
-    super(ComponentName.LIST, id, ref, update)
+  constructor(props: ListProps<T> & ComponentProps<HTMLUListElement>) {
+    super(ComponentName.LIST, props)
 
-    this.items = items
+    this.items = props.items
   }
 
   get hasItems(): boolean {

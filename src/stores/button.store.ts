@@ -1,40 +1,43 @@
-import { ID, noop, tcp } from '@queelag/core'
-import { MouseEvent, MutableRefObject } from 'react'
-import { ButtonType, ComponentName, Layer, Shape, Size } from '../definitions/enums'
-import { ButtonProps } from '../definitions/props'
+import { noop, tcp } from '@queelag/core'
+import { MouseEvent } from 'react'
+import { ButtonType, ComponentName } from '../definitions/enums'
+import { ButtonProps, ComponentLayerShapeSizeProps } from '../definitions/props'
 import { ComponentLayerShapeSizeStore } from '../modules/component.layer.shape.size.store'
-import { Dummy } from '../modules/dummy'
 
 /**
+ * An abstraction for Button stores, handles disabled and spinning statuses.
+ *
  * @category Store
  */
 export class ButtonStore extends ComponentLayerShapeSizeStore<HTMLButtonElement> {
+  /**
+   * A boolean which determines if this button is disabled or not.
+   */
   disabled: boolean
+  /**
+   * A boolean which determines if this button is spinning or not.
+   */
   spinning: boolean
+  /**
+   * A {@link ButtonType}, useful for handling custom styles.
+   */
   type: ButtonType
 
-  constructor(
-    disabled: boolean = false,
-    id: ID = '',
-    layer: Layer = Layer.ONE,
-    onClick: (event: MouseEvent<HTMLButtonElement>) => any = noop,
-    ref: MutableRefObject<HTMLButtonElement> = Dummy.ref,
-    shape: Shape = Shape.RECTANGLE,
-    size: Size = Size.MEDIUM,
-    spinning: boolean = false,
-    type: ButtonType = ButtonType.OUTLINE,
-    update: () => void
-  ) {
-    super(ComponentName.BUTTON, id, layer, ref, shape, size, update)
+  constructor(props: ButtonProps & ComponentLayerShapeSizeProps<HTMLButtonElement>) {
+    super(ComponentName.BUTTON, props)
 
-    this.disabled = disabled
-    this.onClick = onClick
-    this.spinning = spinning
-    this.type = type
+    this.disabled = props.disabled || false
+    this.onClick = props.onClick || noop
+    this.spinning = props.spinning || false
+    this.type = props.type || ButtonType.OUTLINE
   }
 
+  /** @internal */
   private _onClick = (event: MouseEvent<HTMLButtonElement>): any => {}
 
+  /**
+   * An event triggered by clicking on this button.
+   */
   get onClick(): (event: MouseEvent<HTMLButtonElement>) => any {
     return this._onClick
   }
@@ -75,6 +78,7 @@ export class ButtonStore extends ComponentLayerShapeSizeStore<HTMLButtonElement>
     return this.type === ButtonType.TEXT
   }
 
+  /** @internal */
   set onClick(onClick: (event: MouseEvent<HTMLButtonElement>) => any) {
     this._onClick = async (event: MouseEvent<HTMLButtonElement>) => {
       event.stopPropagation()

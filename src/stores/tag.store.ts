@@ -1,22 +1,28 @@
-import { ID, noop } from '@queelag/core'
-import { MouseEvent, MutableRefObject } from 'react'
-import { ComponentName, Layer } from '../definitions/enums'
-import { TagProps } from '../definitions/props'
+import { MouseEvent } from 'react'
+import { ComponentName } from '../definitions/enums'
+import { ComponentLayerProps, TagProps } from '../definitions/props'
 import { ComponentLayerStore } from '../modules/component.layer.store'
-import { Dummy } from '../modules/dummy'
 
 /**
+ * An abstraction for Tag stores, handles destruction.
+ *
  * @category Store
  */
 export class TagStore extends ComponentLayerStore<HTMLDivElement> {
+  /**
+   * A boolean which determines if this tag has been destroyed or not.
+   */
   destroyed: boolean
 
-  constructor(id: ID = '', layer: Layer = Layer.ZERO, ref: MutableRefObject<HTMLDivElement> = Dummy.ref, update: () => void = noop) {
-    super(ComponentName.TAG, id, layer, ref, update)
+  constructor(props: TagProps & ComponentLayerProps<HTMLDivElement>) {
+    super(ComponentName.TAG, props)
 
     this.destroyed = false
   }
 
+  /**
+   * Destroys this tag.
+   */
   onClickDestroy = (event: MouseEvent) => {
     event.stopPropagation()
 

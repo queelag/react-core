@@ -1,83 +1,77 @@
-import { ID, noop, NumberUtils, tcp } from '@queelag/core'
-import { MutableRefObject } from 'react'
+import { noop, tcp } from '@queelag/core'
 import { ComponentName, DirectionHorizontal } from '../definitions/enums'
-import { WizardProps } from '../definitions/props'
-import { WizardOnStepChange, WizardStep, WizardStepPartial } from '../definitions/types'
+import { ComponentProps, WizardProps } from '../definitions/props'
+import { WizardStep, WizardStepPartial } from '../definitions/types'
 import { ComponentStore } from '../modules/component.store'
 import { Dummy } from '../modules/dummy'
 
 /**
+ * An abstraction for Wizard stores, handles cursors and steps.
+ *
  * @category Store
  */
 export class WizardStore extends ComponentStore<HTMLDivElement> {
+  /**
+   * A string which determines the active step name.
+   */
   active: string
-  steps: WizardStep[]
+  /** @internal */
+  private _steps: WizardStep[] = []
 
-  constructor(
-    active: string = '',
-    id: ID = '',
-    onStepChange: WizardOnStepChange = noop,
-    ref: MutableRefObject<HTMLDivElement> = Dummy.ref,
-    steps: WizardStepPartial[] = [],
-    update: () => void = noop
-  ) {
-    super(ComponentName.WIZARD, id, ref, update)
+  constructor(props: WizardProps & ComponentProps<HTMLDivElement>) {
+    super(ComponentName.WIZARD, props)
 
-    this.active = active
-    this.onStepChange = onStepChange
-    this.steps = []
-    this.updateSteps(steps)
+    this.active = props.active || props.steps[0].name
+    this.onStepChange = props.onStepChange || noop
+    this.steps = props.steps
   }
 
-  updateSteps(steps: WizardStepPartial[]): void {
-    this.steps = steps.map((v: WizardStepPartial) => Object.assign({}, Dummy.wizardStep, v))
-  }
-
+  /**
+   * Goes to the next step.
+   */
   onClickNext = async () => {
     let previous: string
 
     previous = this.active
 
     if (this.step.canGoNext()) {
-      this.setActive(this.nextStep.name)
+      this.active = this.nextStep.name
+      this.update()
     }
 
     await tcp(() => this.onStepChange(previous, this.active, DirectionHorizontal.RIGHT))
   }
 
+  /**
+   * Goes to the previous step.
+   */
   onClickPrevious = async () => {
     let previous: string
 
     previous = this.active
 
     if (this.step.canGoBack()) {
-      this.setActive(this.previousStep.name)
+      this.active = this.previousStep.name
+      this.update()
     }
 
     await tcp(() => this.onStepChange(previous, this.active, DirectionHorizontal.LEFT))
   }
 
+  /**
+   * Triggers an onStepChange event with a LEFT horizontal direction from the first step to the first step.
+   */
   onClickExit = async () => {
     await tcp(() => this.onStepChange(this.steps[0].name, this.steps[0].name, DirectionHorizontal.LEFT))
   }
 
+  /**
+   * Triggered by the onClickPrevious, onClickNext and onClickExit events.
+   */
   onStepChange = (from: string, to: string, direction: DirectionHorizontal): any => {}
-
-  setActive(name: string): void {
-    this.active = name
-    this.update()
-  }
 
   findStepIndexByName(name: string): number {
     return this.steps.findIndex((v: WizardStep) => v.name === name)
-  }
-
-  findStepElementByIndex(index: number): HTMLDivElement {
-    return this.element.querySelector(`.step:nth-child(${index + 1})`) || document.createElement('div')
-  }
-
-  findBarElementByIndex(index: number): HTMLDivElement {
-    return this.element.querySelector(`.bar:nth-child(${index + 1})`) || document.createElement('div')
   }
 
   get index(): number {
@@ -96,20 +90,11 @@ export class WizardStore extends ComponentStore<HTMLDivElement> {
     return this.steps.find((v: WizardStep) => v.name === this.active) || Dummy.wizardStep
   }
 
-  get barElements(): NodeListOf<HTMLDivElement> {
-    return this.element.children[0]?.querySelectorAll('.bar') || []
-  }
-
-  get stepElements(): NodeListOf<HTMLDivElement> {
-    return this.wrapperElement.querySelectorAll('.step')
-  }
-
-  get wrapperElement(): HTMLDivElement {
-    return (this.element.children[1]?.children[0] as HTMLDivElement) || document.createElement('div')
-  }
-
-  get wrapperElementWidth(): number {
-    return NumberUtils.parseFloat(getComputedStyle(this.wrapperElement).width)
+  /**
+   * An array of {@link WizardStep}.
+   */
+  get steps(): WizardStep[] {
+    return this._steps
   }
 
   get isFirstStep(): boolean {
@@ -118,6 +103,10 @@ export class WizardStore extends ComponentStore<HTMLDivElement> {
 
   get isLastStep(): boolean {
     return this.findStepIndexByName(this.active) === this.steps.length - 1
+  }
+
+  set steps(steps: WizardStepPartial[]) {
+    this._steps = steps.map((v: WizardStepPartial) => Object.assign({}, Dummy.wizardStep, v))
   }
 }
 

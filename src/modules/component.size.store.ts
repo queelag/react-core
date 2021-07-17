@@ -1,8 +1,6 @@
-import { ID, noop } from '@queelag/core'
-import { MutableRefObject } from 'react'
 import { Size } from '../definitions/enums'
+import { ComponentSizeProps } from '../definitions/props'
 import { ComponentStore } from './component.store'
-import { Dummy } from './dummy'
 
 /**
  * @category Module
@@ -10,10 +8,10 @@ import { Dummy } from './dummy'
 export class ComponentSizeStore<T extends Element> extends ComponentStore<T> {
   size: Size
 
-  constructor(name: string, id: ID = '', ref: MutableRefObject<T> = Dummy.ref, size: Size = Size.MEDIUM, update: () => void = noop) {
-    super(name, id, ref, update)
+  constructor(name: string, props: ComponentSizeProps<T>) {
+    super(name, props)
 
-    this.size = size
+    this.size = props.size || Size.MEDIUM
   }
 
   get isSizeLarge(): boolean {

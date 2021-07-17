@@ -1,67 +1,52 @@
-import { ID, noop } from '@queelag/core'
-import { MutableRefObject } from 'react'
-import { ComponentName, Layer } from '../definitions/enums'
-import { SwitchProps } from '../definitions/props'
+import { ComponentName } from '../definitions/enums'
+import { ComponentFormFieldProps, SwitchProps } from '../definitions/props'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
-import { Dummy } from '../modules/dummy'
 
 /**
+ * An abstraction for Switch stores, handles value updates.
+ *
  * @category Store
  */
 export class SwitchStore<T extends object> extends ComponentFormFieldStore<HTMLDivElement, T> {
-  disabled: boolean
-  touchStartTranslated: number
-  touchStartX: number
-
-  constructor(
-    disabled: boolean = false,
-    id: ID = '',
-    label: string = '',
-    layer: Layer = Layer.TWO,
-    path: keyof T = '' as any,
-    ref: MutableRefObject<HTMLDivElement> = Dummy.ref,
-    store: T = {} as any,
-    update: () => void = noop
-  ) {
-    super(ComponentName.SWITCH, id, label, layer, path, ref, false, Dummy.schema, store, false, update)
-
-    this.disabled = disabled
-    this.touchStartTranslated = 0
-    this.touchStartX = 0
+  constructor(props: SwitchProps<T> & ComponentFormFieldProps<HTMLDivElement, T>) {
+    super(ComponentName.SWITCH, props)
   }
 
+  /** @internal */
   onChange = (value: boolean): void => {
     if (this.isEnabled) {
       this.store[this.path] = value as any
     }
   }
 
-  onChangeCallback = (value: boolean): any => {}
-
+  /**
+   * Sets the value to true if false and to false if true.
+   */
   onClick = (): void => {
     this.onChange(!this.value)
   }
 
+  /**
+   * A value read from store[path].
+   */
   get value(): boolean {
     return (this.store[this.path] as any) || false
   }
 
-  get isDisabled(): boolean {
-    return this.disabled === true
-  }
-
-  get isEnabled(): boolean {
-    return this.disabled === false
-  }
-
+  /**
+   * Checks if the value is false.
+   */
   get isOff(): boolean {
     return this.value === false
   }
 
+  /**
+   * Checks if the value is true.
+   */
   get isOn(): boolean {
     return this.value === true
   }
 }
 
 /** @category Constant */
-export const SWITCH_STORE_KEYS: (keyof SwitchProps<any> & keyof SwitchStore<any>)[] = ['disabled', 'id', 'label', 'layer', 'onChangeCallback', 'path', 'store']
+export const SWITCH_STORE_KEYS: (keyof SwitchProps<any> & keyof SwitchStore<any>)[] = ['disabled', 'id', 'label', 'layer', 'path', 'store']

@@ -1,8 +1,6 @@
-import { ID, noop } from '@queelag/core'
-import { MutableRefObject } from 'react'
 import { Layer, Shape, Size } from '../definitions/enums'
+import { ComponentLayerShapeSizeProps } from '../definitions/props'
 import { ComponentStore } from './component.store'
-import { Dummy } from './dummy'
 
 /**
  * @category Module
@@ -12,20 +10,12 @@ export class ComponentLayerShapeSizeStore<T extends Element> extends ComponentSt
   shape: Shape
   size: Size
 
-  constructor(
-    name: string,
-    id: ID = '',
-    layer: Layer = Layer.ZERO,
-    ref: MutableRefObject<T> = Dummy.ref,
-    shape: Shape = Shape.NONE,
-    size: Size = Size.MEDIUM,
-    update: () => void = noop
-  ) {
-    super(name, id, ref, update)
+  constructor(name: string, props: ComponentLayerShapeSizeProps<T>) {
+    super(name, props)
 
-    this.layer = layer
-    this.shape = shape
-    this.size = size
+    this.layer = props.layer || Layer.ZERO
+    this.shape = props.shape || Shape.NONE
+    this.size = props.size || Size.MEDIUM
   }
 
   get isLayerZero(): boolean {

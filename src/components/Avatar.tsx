@@ -1,5 +1,5 @@
 import { ObjectUtils, ReactUtils, StoreUtils } from '@queelag/core'
-import React, { useEffect, useMemo, useRef } from 'react'
+import React, { ForwardedRef, forwardRef, useEffect, useMemo } from 'react'
 import { AVATAR_PROPS_KEYS } from '../definitions/constants'
 import { AvatarProps } from '../definitions/props'
 import { useForceUpdate } from '../hooks/use.force.update'
@@ -8,12 +8,24 @@ import { ShapeUtils } from '../utils/shape.utils'
 import { Image } from './Image'
 
 /**
+ * A component that can display an icon, image or text.
+ *
+ * Usage:
+ *
+ * ```typescript
+ * import React from 'react'
+ * import { Avatar, Shape } from '@queelag/react-core'
+ *
+ * function App() {
+ *   return <Avatar image='https://website.com/linktoimage.png' shape={Shape.CIRCLE} />
+ * }
+ * ```
+ *
  * @category Component
  */
-export function Avatar(props: AvatarProps) {
+export const Avatar = forwardRef((props: AvatarProps, ref: ForwardedRef<HTMLDivElement>) => {
   const update = useForceUpdate()
-  const ref = useRef(document.createElement('div'))
-  const store = useMemo(() => new AvatarStore(props.background, props.color, props.id, props.layer, props.ratio, ref, props.shape, props.size, update), [])
+  const store = useMemo(() => new AvatarStore({ ...props, update }), [])
 
   useEffect(() => {
     StoreUtils.updateKeys(store, props, AVATAR_STORE_KEYS, update)
@@ -24,6 +36,7 @@ export function Avatar(props: AvatarProps) {
       {...ObjectUtils.omit(props, AVATAR_PROPS_KEYS)}
       className={ReactUtils.joinClassNames(props.className, store.background)}
       id={store.id}
+      ref={ref}
       style={{
         ...props.style,
         ...ShapeUtils.findStyle(store.shape, store.size),
@@ -46,4 +59,4 @@ export function Avatar(props: AvatarProps) {
       )}
     </div>
   )
-}
+})

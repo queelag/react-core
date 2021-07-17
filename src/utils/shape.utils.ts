@@ -5,12 +5,18 @@ import { createSquircle } from 'squircleyjs'
 import { ComponentName, Shape } from '../definitions/enums'
 
 /**
+ * Utils for anything related to shapes.
+ *
  * @category Utility
  */
 export class ShapeUtils {
+  /** @internal */
   private static squircleCache: Map<string, ID> = new Map()
 
-  static findStyle(shape: Shape, size: number, curvature: number = 0.75): CSSProperties {
+  /**
+   * Returns the appropriate styles for shape, size and curvature.
+   */
+  static findStyle(shape: Shape, size: number = 0, curvature: number = 0.75): CSSProperties {
     switch (shape) {
       case Shape.CIRCLE:
         return { borderRadius: 9999 }
@@ -47,10 +53,12 @@ export class ShapeUtils {
     }
   }
 
+  /** @internal */
   private static toSquircleCacheKey(size: number, curvature: number): string {
     return [size, curvature].join(',')
   }
 
+  /** @internal */
   private static get squirclesContainer(): HTMLDivElement {
     let element: HTMLDivElement
 
@@ -65,6 +73,7 @@ export class ShapeUtils {
     return document.body.appendChild(element)
   }
 
+  /** @internal */
   private static get squirclesContainerID(): string {
     return 'SQUIRCLES_CONTAINER'
   }

@@ -47,6 +47,8 @@ export type InputFileItem = {
   name: string
 }
 
+export type OmitRef<T> = Omit<T, 'ref'>
+
 export type OnboardingItem = {
   description: string
   picture: string

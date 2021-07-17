@@ -6,11 +6,24 @@ import { useForceUpdate } from '../hooks/use.force.update'
 import { IconStore, ICON_STORE_KEYS } from '../stores/icon.store'
 
 /**
+ * A svg component that safely renders any raw svg into it, allowing every possible customization.
+ *
+ * Usage:
+ *
+ * ```typescript
+ * import React from 'react'
+ * import { Icon } from '@queelag/react-core'
+ *
+ * function IconPlus() {
+ *   return <Icon svg='<svg>anything</svg>' stroke />
+ * }
+ * ```
+ *
  * @category Component
  */
 export function Icon(props: IconProps) {
   const update = useForceUpdate()
-  const store = useMemo(() => new IconStore(props.color, props.id, props.layer, props.size, props.svg, props.thickness, update), [])
+  const store = useMemo(() => new IconStore({ ...props, update }), [])
 
   useEffect(() => {
     StoreUtils.updateKeys(store, props, ICON_STORE_KEYS, update)
@@ -21,9 +34,9 @@ export function Icon(props: IconProps) {
       {...ObjectUtils.omit(props, ICON_PROPS_KEYS)}
       className={ReactUtils.joinClassNames(props.className, store.color)}
       dangerouslySetInnerHTML={{ __html: store.html }}
-      fill={props.fill ? 'currentColor' : 'none'}
+      fill={typeof props.fill === 'boolean' ? (props.fill ? 'currentColor' : 'none') : props.fill}
       height={store.size}
-      stroke={props.stroke ? 'currentColor' : 'none'}
+      stroke={typeof props.stroke === 'boolean' ? (props.stroke ? 'currentColor' : 'none') : props.stroke}
       strokeWidth={store.thickness}
       xmlns='http://www.w3.org/2000/svg'
       viewBox={store.viewbox}

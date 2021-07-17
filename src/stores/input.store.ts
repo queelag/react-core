@@ -1,58 +1,60 @@
-import { ID, noop, NumberUtils } from '@queelag/core'
+import { NumberUtils } from '@queelag/core'
 import { Buffer } from 'buffer'
-import { ChangeEvent, MutableRefObject } from 'react'
-import * as S from 'superstruct'
-import { ComponentName, InputType, Layer } from '../definitions/enums'
-import { InputProps } from '../definitions/props'
+import { ChangeEvent } from 'react'
+import { ComponentName, InputType } from '../definitions/enums'
+import { ComponentFormFieldProps, InputProps } from '../definitions/props'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
-import { Dummy } from '../modules/dummy'
 
 /**
+ * An abstraction for Input stores, handles focus, obscuration and types.
+ *
  * @category Store
  */
 export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLInputElement, T> {
+  /**
+   * A boolean which determines if this input is focused or not.
+   */
   focused: boolean
+  /**
+   * A boolean which determines if this input value is obscured or not.
+   */
   obscured: boolean
+  /**
+   * An {@link InputType} which determines how the internal logic behaves.
+   */
   type: InputType
 
-  constructor(
-    id: ID = '',
-    label: string = '',
-    layer: Layer = Layer.TWO,
-    path: keyof T = '' as any,
-    ref: MutableRefObject<HTMLInputElement> = Dummy.ref,
-    schema: S.Struct<any, any> = Dummy.schema,
-    store: T = {} as any,
-    touched: boolean = false,
-    type: InputType = InputType.TEXT,
-    update: () => void = noop
-  ) {
-    super(ComponentName.INPUT, id, label, layer, path, ref, false, schema, store, touched, update)
+  constructor(props: InputProps<T> & ComponentFormFieldProps<HTMLInputElement, T>) {
+    super(ComponentName.INPUT, props)
 
     this.focused = false
     this.obscured = true
-    this.type = type
+    this.type = props.type || InputType.TEXT
   }
 
+  /** @internal */
   detachInputFromReact(autoFocus: boolean = false): void {
     let input: HTMLInputElement
 
     input = document.createElement('input')
-    input.autocapitalize = this.inputElement.autocapitalize
-    input.autocomplete = this.inputElement.autocomplete
-    input.className = this.inputElement.className
-    input.placeholder = this.inputElement.placeholder
+    input.autocapitalize = this.element.autocapitalize
+    input.autocomplete = this.element.autocomplete
+    input.className = this.element.className
+    input.placeholder = this.element.placeholder
     input.type = this.lowercaseType
 
     input.addEventListener('blur', this.onBlur)
     input.addEventListener('change', this.onChange as any)
     input.addEventListener('focus', this.onFocus)
 
-    this.inputElement.replaceWith(input)
+    this.element.replaceWith(input)
 
     autoFocus && input.focus()
   }
 
+  /**
+   * Updates store[path] based on the type.
+   */
   onChange = (event: ChangeEvent<HTMLInputElement>): void => {
     switch (this.type) {
       case InputType.BUFFER:
@@ -79,38 +81,38 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
     this.update()
   }
 
+  /**
+   * Marks this field as focused.
+   */
   onFocus = (): void => {
     this.focused = true
     this.update()
   }
 
+  /**
+   * Marks this field as blurred.
+   */
   onBlur = (): void => {
     this.focused = false
     this.update()
   }
 
-  onClickIncreaseValue = (): void => {
-    this.onChange({ target: { value: ((this.value as number) + 1).toString() } } as any)
-  }
-
-  onClickDecreaseValue = (): void => {
-    this.onChange({ target: { value: ((this.value as number) - 1).toString() } } as any)
-  }
-
+  /**
+   * Enables obscuration if disabled and disables it if enabled.
+   */
   onClickToggleObscuration = (): void => {
     this.obscured = !this.obscured
 
     if (this.isTypeBuffer) {
-      this.inputElement.type = this.obscured ? 'password' : 'text'
+      this.element.type = this.obscured ? 'password' : 'text'
     }
 
     this.update()
   }
 
-  get inputElement(): HTMLInputElement {
-    return this.element.querySelector('input') || document.createElement('input')
-  }
-
+  /**
+   * Makes the type readable by the DOM.
+   */
   get lowercaseType(): string {
     switch (this.type) {
       case InputType.DATE:
@@ -131,6 +133,9 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
     }
   }
 
+  /**
+   * A value read from store[path].
+   */
   get value(): number | string | undefined {
     switch (this.type) {
       case InputType.BUFFER:

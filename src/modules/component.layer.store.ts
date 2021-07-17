@@ -1,8 +1,6 @@
-import { ID, noop } from '@queelag/core'
-import { MutableRefObject } from 'react'
 import { Layer } from '../definitions/enums'
+import { ComponentLayerProps } from '../definitions/props'
 import { ComponentStore } from './component.store'
-import { Dummy } from './dummy'
 
 /**
  * @category Module
@@ -10,10 +8,10 @@ import { Dummy } from './dummy'
 export class ComponentLayerStore<T extends Element> extends ComponentStore<T> {
   layer: Layer
 
-  constructor(name: string, id: ID = '', layer: Layer = Layer.ZERO, ref: MutableRefObject<T> = Dummy.ref, update: () => void = noop) {
-    super(name, id, ref, update)
+  constructor(name: string, props: ComponentLayerProps<T>) {
+    super(name, props)
 
-    this.layer = layer
+    this.layer = props.layer || Layer.ZERO
   }
 
   get isLayerZero(): boolean {

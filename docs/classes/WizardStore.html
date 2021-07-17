@@ -65,6 +65,13 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>An abstraction for Wizard stores, handles cursors and steps.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -95,13 +102,11 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="WizardStore.html#id" class="tsd-kind-icon">id</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="WizardStore.html#name" class="tsd-kind-icon">name</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="WizardStore.html#ref" class="tsd-kind-icon">ref</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="WizardStore.html#steps" class="tsd-kind-icon">steps</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Accessors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="WizardStore.html#barElements" class="tsd-kind-icon">bar<wbr>Elements</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="WizardStore.html#element" class="tsd-kind-icon">element</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="WizardStore.html#index" class="tsd-kind-icon">index</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="WizardStore.html#isFirstStep" class="tsd-kind-icon">is<wbr>First<wbr>Step</a></li>
@@ -109,24 +114,18 @@
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="WizardStore.html#nextStep" class="tsd-kind-icon">next<wbr>Step</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="WizardStore.html#previousStep" class="tsd-kind-icon">previous<wbr>Step</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="WizardStore.html#step" class="tsd-kind-icon">step</a></li>
-								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="WizardStore.html#stepElements" class="tsd-kind-icon">step<wbr>Elements</a></li>
-								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="WizardStore.html#wrapperElement" class="tsd-kind-icon">wrapper<wbr>Element</a></li>
-								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="WizardStore.html#wrapperElementWidth" class="tsd-kind-icon">wrapper<wbr>Element<wbr>Width</a></li>
+								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="WizardStore.html#steps" class="tsd-kind-icon">steps</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="WizardStore.html#findBarElementByIndex" class="tsd-kind-icon">find<wbr>Bar<wbr>Element<wbr>ByIndex</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="WizardStore.html#findStepElementByIndex" class="tsd-kind-icon">find<wbr>Step<wbr>Element<wbr>ByIndex</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="WizardStore.html#findStepIndexByName" class="tsd-kind-icon">find<wbr>Step<wbr>Index<wbr>ByName</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="WizardStore.html#onClickExit" class="tsd-kind-icon">on<wbr>Click<wbr>Exit</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="WizardStore.html#onClickNext" class="tsd-kind-icon">on<wbr>Click<wbr>Next</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="WizardStore.html#onClickPrevious" class="tsd-kind-icon">on<wbr>Click<wbr>Previous</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="WizardStore.html#onStepChange" class="tsd-kind-icon">on<wbr>Step<wbr>Change</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="WizardStore.html#setActive" class="tsd-kind-icon">set<wbr>Active</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="WizardStore.html#update" class="tsd-kind-icon">update</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="WizardStore.html#updateSteps" class="tsd-kind-icon">update<wbr>Steps</a></li>
 							</ul>
 						</section>
 					</div>
@@ -138,47 +137,20 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Wizard<wbr>Store<span class="tsd-signature-symbol">(</span>active<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, id<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, onStepChange<span class="tsd-signature-symbol">?: </span><a href="../index.html#WizardOnStepChange" class="tsd-signature-type" data-tsd-kind="Type alias">WizardOnStepChange</a>, ref<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">MutableRefObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span>, steps<span class="tsd-signature-symbol">?: </span><a href="../index.html#WizardStepPartial" class="tsd-signature-type" data-tsd-kind="Type alias">WizardStepPartial</a><span class="tsd-signature-symbol">[]</span>, update<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="WizardStore.html" class="tsd-signature-type" data-tsd-kind="Class">WizardStore</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Wizard<wbr>Store<span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>active<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>onStepChange<span class="tsd-signature-symbol">?: </span><a href="../index.html#WizardOnStepChange" class="tsd-signature-type" data-tsd-kind="Type alias">WizardOnStepChange</a><span class="tsd-signature-symbol">; </span>steps<span class="tsd-signature-symbol">: </span><a href="../index.html#WizardStepPartial" class="tsd-signature-type" data-tsd-kind="Type alias">WizardStepPartial</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">ClassAttributes</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">HTMLAttributes</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><a href="../index.html#ComponentProps" class="tsd-signature-type" data-tsd-kind="Type alias">ComponentProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="WizardStore.html" class="tsd-signature-type" data-tsd-kind="Class">WizardStore</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Overrides <a href="ComponentStore.html">ComponentStore</a>.<a href="ComponentStore.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/wizard.store.ts#L16">stores/wizard.store.ts:16</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/wizard.store.ts#L21">stores/wizard.store.ts:21</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>active: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;&#x27;</span></h5>
-								</li>
-								<li>
-									<h5>id: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;&#x27;</span></h5>
-								</li>
-								<li>
-									<h5>onStepChange: <a href="../index.html#WizardOnStepChange" class="tsd-signature-type" data-tsd-kind="Type alias">WizardOnStepChange</a><span class="tsd-signature-symbol"> = ...</span></h5>
-								</li>
-								<li>
-									<h5>ref: <span class="tsd-signature-type">MutableRefObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></h5>
-								</li>
-								<li>
-									<h5>steps: <a href="../index.html#WizardStepPartial" class="tsd-signature-type" data-tsd-kind="Type alias">WizardStepPartial</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></h5>
-								</li>
-								<li>
-									<h5>update: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> = ...</span></h5>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter-signature">
-											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-											</ul>
-											<ul class="tsd-descriptions">
-												<li class="tsd-description">
-													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-												</li>
-											</ul>
-										</li>
-									</ul>
+									<h5>props: <span class="tsd-signature-symbol">{ </span>active<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>onStepChange<span class="tsd-signature-symbol">?: </span><a href="../index.html#WizardOnStepChange" class="tsd-signature-type" data-tsd-kind="Type alias">WizardOnStepChange</a><span class="tsd-signature-symbol">; </span>steps<span class="tsd-signature-symbol">: </span><a href="../index.html#WizardStepPartial" class="tsd-signature-type" data-tsd-kind="Type alias">WizardStepPartial</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">ClassAttributes</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">HTMLAttributes</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><a href="../index.html#ComponentProps" class="tsd-signature-type" data-tsd-kind="Type alias">ComponentProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="WizardStore.html" class="tsd-signature-type" data-tsd-kind="Class">WizardStore</a></h4>
@@ -194,9 +166,14 @@
 					<div class="tsd-signature tsd-kind-icon">active<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/wizard.store.ts#L13">stores/wizard.store.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/wizard.store.ts#L17">stores/wizard.store.ts:17</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A string which determines the active step name.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="id" class="tsd-anchor"></a>
@@ -205,9 +182,14 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="ComponentStore.html">ComponentStore</a>.<a href="ComponentStore.html#id">id</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.store.ts#L9">modules/component.store.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.store.ts#L16">modules/component.store.ts:16</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A string which identifies a component.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="name" class="tsd-anchor"></a>
@@ -216,51 +198,34 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="ComponentStore.html">ComponentStore</a>.<a href="ComponentStore.html#name">name</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.store.ts#L10">modules/component.store.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.store.ts#L20">modules/component.store.ts:20</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A string which helps identify a component, used as a prefix for the id.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="ref" class="tsd-anchor"></a>
 					<h3>ref</h3>
-					<div class="tsd-signature tsd-kind-icon">ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">MutableRefObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">LegacyRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">MutableRefObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="ComponentStore.html">ComponentStore</a>.<a href="ComponentStore.html#ref">ref</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.store.ts#L11">modules/component.store.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.store.ts#L24">modules/component.store.ts:24</a></li>
 						</ul>
 					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="steps" class="tsd-anchor"></a>
-					<h3>steps</h3>
-					<div class="tsd-signature tsd-kind-icon">steps<span class="tsd-signature-symbol">:</span> <a href="../index.html#WizardStep" class="tsd-signature-type" data-tsd-kind="Type alias">WizardStep</a><span class="tsd-signature-symbol">[]</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/wizard.store.ts#L14">stores/wizard.store.ts:14</a></li>
-						</ul>
-					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A ref with T interface.</p>
+						</div>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Accessors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
-					<a name="barElements" class="tsd-anchor"></a>
-					<h3>bar<wbr>Elements</h3>
-					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> barElements<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">NodeListOf</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/wizard.store.ts#L99">stores/wizard.store.ts:99</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">NodeListOf</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
 					<a name="element" class="tsd-anchor"></a>
 					<h3>element</h3>
@@ -271,9 +236,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.store.ts#L22">modules/component.store.ts:22</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.store.ts#L41">modules/component.store.ts:41</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns a DOM element from the ref.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
 						</li>
 					</ul>
@@ -288,7 +258,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/wizard.store.ts#L83">stores/wizard.store.ts:83</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/wizard.store.ts#L77">stores/wizard.store.ts:77</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -305,7 +275,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/wizard.store.ts#L115">stores/wizard.store.ts:115</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/wizard.store.ts#L100">stores/wizard.store.ts:100</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -322,7 +292,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/wizard.store.ts#L119">stores/wizard.store.ts:119</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/wizard.store.ts#L104">stores/wizard.store.ts:104</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -339,7 +309,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/wizard.store.ts#L87">stores/wizard.store.ts:87</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/wizard.store.ts#L81">stores/wizard.store.ts:81</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="../index.html#WizardStep" class="tsd-signature-type" data-tsd-kind="Type alias">WizardStep</a></h4>
@@ -356,7 +326,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/wizard.store.ts#L91">stores/wizard.store.ts:91</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/wizard.store.ts#L85">stores/wizard.store.ts:85</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="../index.html#WizardStep" class="tsd-signature-type" data-tsd-kind="Type alias">WizardStep</a></h4>
@@ -373,113 +343,58 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/wizard.store.ts#L95">stores/wizard.store.ts:95</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/wizard.store.ts#L89">stores/wizard.store.ts:89</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="../index.html#WizardStep" class="tsd-signature-type" data-tsd-kind="Type alias">WizardStep</a></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
-					<a name="stepElements" class="tsd-anchor"></a>
-					<h3>step<wbr>Elements</h3>
-					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> stepElements<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">NodeListOf</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+					<a name="steps" class="tsd-anchor"></a>
+					<h3>steps</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> steps<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../index.html#WizardStep" class="tsd-signature-type" data-tsd-kind="Type alias">WizardStep</a><span class="tsd-signature-symbol">[]</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> steps<span class="tsd-signature-symbol">(</span>steps<span class="tsd-signature-symbol">: </span><a href="../index.html#WizardStepPartial" class="tsd-signature-type" data-tsd-kind="Type alias">WizardStepPartial</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/wizard.store.ts#L103">stores/wizard.store.ts:103</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/wizard.store.ts#L96">stores/wizard.store.ts:96</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">NodeListOf</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>An array of <a href="../index.html#WizardStep">WizardStep</a>.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="../index.html#WizardStep" class="tsd-signature-type" data-tsd-kind="Type alias">WizardStep</a><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
-					<a name="wrapperElement" class="tsd-anchor"></a>
-					<h3>wrapper<wbr>Element</h3>
-					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> wrapperElement<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLDivElement</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/wizard.store.ts#L107">stores/wizard.store.ts:107</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/wizard.store.ts#L108">stores/wizard.store.ts:108</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">HTMLDivElement</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
-					<a name="wrapperElementWidth" class="tsd-anchor"></a>
-					<h3>wrapper<wbr>Element<wbr>Width</h3>
-					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> wrapperElementWidth<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/wizard.store.ts#L111">stores/wizard.store.ts:111</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>An array of <a href="../index.html#WizardStep">WizardStep</a>.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>steps: <a href="../index.html#WizardStepPartial" class="tsd-signature-type" data-tsd-kind="Type alias">WizardStepPartial</a><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="findBarElementByIndex" class="tsd-anchor"></a>
-					<h3>find<wbr>Bar<wbr>Element<wbr>ByIndex</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">find<wbr>Bar<wbr>Element<wbr>ByIndex<span class="tsd-signature-symbol">(</span>index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLDivElement</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/wizard.store.ts#L79">stores/wizard.store.ts:79</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>index: <span class="tsd-signature-type">number</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">HTMLDivElement</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="findStepElementByIndex" class="tsd-anchor"></a>
-					<h3>find<wbr>Step<wbr>Element<wbr>ByIndex</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">find<wbr>Step<wbr>Element<wbr>ByIndex<span class="tsd-signature-symbol">(</span>index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLDivElement</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/wizard.store.ts#L75">stores/wizard.store.ts:75</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>index: <span class="tsd-signature-type">number</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">HTMLDivElement</span></h4>
-						</li>
-					</ul>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="findStepIndexByName" class="tsd-anchor"></a>
 					<h3>find<wbr>Step<wbr>Index<wbr>ByName</h3>
@@ -490,7 +405,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/wizard.store.ts#L71">stores/wizard.store.ts:71</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/wizard.store.ts#L73">stores/wizard.store.ts:73</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -513,9 +428,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/wizard.store.ts#L60">stores/wizard.store.ts:60</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/wizard.store.ts#L64">stores/wizard.store.ts:64</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Triggers an onStepChange event with a LEFT horizontal direction from the first step to the first step.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
@@ -530,9 +450,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/wizard.store.ts#L36">stores/wizard.store.ts:36</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/wizard.store.ts#L32">stores/wizard.store.ts:32</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Goes to the next step.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
@@ -547,9 +472,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/wizard.store.ts#L48">stores/wizard.store.ts:48</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/wizard.store.ts#L48">stores/wizard.store.ts:48</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Goes to the previous step.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
@@ -564,9 +494,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/wizard.store.ts#L64">stores/wizard.store.ts:64</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/wizard.store.ts#L71">stores/wizard.store.ts:71</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Triggered by the onClickPrevious, onClickNext and onClickExit events.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -583,29 +518,6 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="setActive" class="tsd-anchor"></a>
-					<h3>set<wbr>Active</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Active<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/wizard.store.ts#L66">stores/wizard.store.ts:66</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>name: <span class="tsd-signature-type">string</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 					<a name="update" class="tsd-anchor"></a>
 					<h3>update</h3>
@@ -617,32 +529,14 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="ComponentStore.html">ComponentStore</a>.<a href="ComponentStore.html#update">update</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.store.ts#L20">modules/component.store.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.store.ts#L36">modules/component.store.ts:36</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="updateSteps" class="tsd-anchor"></a>
-					<h3>update<wbr>Steps</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">update<wbr>Steps<span class="tsd-signature-symbol">(</span>steps<span class="tsd-signature-symbol">: </span><a href="../index.html#WizardStepPartial" class="tsd-signature-type" data-tsd-kind="Type alias">WizardStepPartial</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/wizard.store.ts#L32">stores/wizard.store.ts:32</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>steps: <a href="../index.html#WizardStepPartial" class="tsd-signature-type" data-tsd-kind="Type alias">WizardStepPartial</a><span class="tsd-signature-symbol">[]</span></h5>
-								</li>
-							</ul>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Forces a re-render.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -679,12 +573,6 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="WizardStore.html#ref" class="tsd-kind-icon">ref</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="WizardStore.html#steps" class="tsd-kind-icon">steps</a>
-							</li>
-							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
-								<a href="WizardStore.html#barElements" class="tsd-kind-icon">bar<wbr>Elements</a>
-							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
 								<a href="WizardStore.html#element" class="tsd-kind-icon">element</a>
 							</li>
@@ -706,20 +594,8 @@
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="WizardStore.html#step" class="tsd-kind-icon">step</a>
 							</li>
-							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
-								<a href="WizardStore.html#stepElements" class="tsd-kind-icon">step<wbr>Elements</a>
-							</li>
-							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
-								<a href="WizardStore.html#wrapperElement" class="tsd-kind-icon">wrapper<wbr>Element</a>
-							</li>
-							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
-								<a href="WizardStore.html#wrapperElementWidth" class="tsd-kind-icon">wrapper<wbr>Element<wbr>Width</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="WizardStore.html#findBarElementByIndex" class="tsd-kind-icon">find<wbr>Bar<wbr>Element<wbr>ByIndex</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="WizardStore.html#findStepElementByIndex" class="tsd-kind-icon">find<wbr>Step<wbr>Element<wbr>ByIndex</a>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+								<a href="WizardStore.html#steps" class="tsd-kind-icon">steps</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="WizardStore.html#findStepIndexByName" class="tsd-kind-icon">find<wbr>Step<wbr>Index<wbr>ByName</a>
@@ -736,14 +612,8 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="WizardStore.html#onStepChange" class="tsd-kind-icon">on<wbr>Step<wbr>Change</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="WizardStore.html#setActive" class="tsd-kind-icon">set<wbr>Active</a>
-							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="WizardStore.html#update" class="tsd-kind-icon">update</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="WizardStore.html#updateSteps" class="tsd-kind-icon">update<wbr>Steps</a>
 							</li>
 						</ul>
 					</li>
@@ -770,15 +640,11 @@
 				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
-			</ul>
-			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
 			</ul>
 		</div>
 	</div>

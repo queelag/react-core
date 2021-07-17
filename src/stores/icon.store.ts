@@ -1,59 +1,72 @@
-import { ID, noop, tcp } from '@queelag/core'
-import { Color, ComponentName, Layer } from '../definitions/enums'
-import { IconProps } from '../definitions/props'
+import { tcp } from '@queelag/core'
+import { Color, ComponentName } from '../definitions/enums'
+import { ComponentLayerProps, IconProps } from '../definitions/props'
 import { Cache } from '../modules/cache'
 import { ComponentLayerStore } from '../modules/component.layer.store'
 import { ColorPicker } from '../pickers/color.picker'
 
 /**
+ * An abstraction for Icon stores, handles caching and parsing of raw svg element.
+ *
  * @category Store
  */
 export class IconStore extends ComponentLayerStore<SVGElement> {
-  mounted: boolean
+  /** @internal */
+  private _color: string = ''
+  /**
+   * A number which determines height and width.
+   */
   size: number
+  /** @internal */
+  private _svg: string = ''
+  /**
+   * A number which determines the stroke thickness.
+   */
   thickness: number
 
-  private _color: string = ''
-  private _svg: string = ''
+  constructor(props: IconProps & ComponentLayerProps<SVGElement>) {
+    super(ComponentName.ICON, props)
 
-  constructor(
-    color: string = Color.MONO,
-    id: ID = '',
-    layer: Layer = Layer.ZERO,
-    size: number = 16,
-    svg: string = '',
-    thickness: number = 2,
-    update: () => void = noop
-  ) {
-    super(ComponentName.ICON, id, layer, undefined, update)
-
-    this.color = color
-    this.mounted = true
-    this.size = size
-    this.svg = svg
-    this.thickness = thickness
+    this.color = props.color || Color.MONO
+    this.size = props.size || 0
+    this.svg = props.svg || ''
+    this.thickness = props.thickness || 0
   }
 
+  /**
+   * Picks a layered text color from color.
+   */
   get color(): string {
     return ColorPicker.textByString(this._color, this.layer)
   }
 
+  /**
+   * Strips the raw svg of its parent element.
+   */
   get html(): string {
     return this.svg.replace(/<svg[^<]+>/m, '').replace(/<\/svg>/m, '')
   }
 
+  /**
+   * Returns the raw svg.
+   */
   get svg(): string {
     return this._svg
   }
 
+  /**
+   * Finds the viewBox attribute inside the raw svg parent element.
+   */
   get viewbox(): string {
     return (this.svg.match(/(viewbox|viewBox)=('|")[0-9.\s]+('|")/m) || [''])[0].slice(9, -1)
   }
 
+  /** @internal */
   set color(value: string) {
     this._color = value
   }
 
+  /** @internal */
   set svg(svg: string) {
     ;(async () => {
       switch (true) {

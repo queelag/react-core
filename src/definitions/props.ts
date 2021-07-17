@@ -1,12 +1,15 @@
+import { FormEvent, LegacyRef, MutableRefObject } from 'react'
 import { RouteContext } from 'react-router5/dist/types'
 import { ListChildComponentProps } from 'react-window'
 import { Router } from 'router5'
 import * as S from 'superstruct'
+import { ID } from '../../../core/dist'
 import { ButtonType, Color, DividerType, FeedbackType, InputFileMode, InputType, Layer, Orientation, SelectMode, Shape, Size } from './enums'
 import {
   BottomSheetItem,
   BottomTabberItem,
   ContextMenuItem,
+  OmitRef,
   OnboardingItem,
   SelectOption,
   SidebarItem,
@@ -31,11 +34,11 @@ export type AvatarProps = {
   layer?: Layer
   ratio?: number
   shape?: Shape
-  size?: number
+  size: number
   source?: string
   text?: string
   thickness?: number
-} & HTMLDivProps
+} & OmitRef<HTMLDivProps>
 
 /** @category Prop */
 export type BackdropProps = {
@@ -95,13 +98,44 @@ export type CheckboxProps<T extends object> = {
 } & HTMLDivProps
 
 /** @category Prop */
-export type ColorDivProps = {
+export type ColorableDivProps = {
   background?: Color
   border?: Color
   divide?: Color
   layer?: Layer
   text?: Color
 } & HTMLDivProps
+
+export type ComponentProps<T extends Element> = {
+  id?: ID
+  ref?: LegacyRef<T> | MutableRefObject<T>
+  update?: () => void
+}
+
+export type ComponentFormFieldProps<T extends Element, U extends object> = {
+  disabled?: boolean
+  label?: string
+  path: keyof U
+  required?: boolean
+  schema?: S.Struct<any, any>
+  store: U
+  touched?: boolean
+} & ComponentLayerProps<T>
+
+export type ComponentLayerProps<T extends Element> = {
+  layer?: Layer
+} & ComponentProps<T>
+
+export type ComponentLayerShapeProps<T extends Element> = ComponentProps<T> & ComponentLayerProps<T> & ComponentShapeProps<T>
+export type ComponentLayerShapeSizeProps<T extends Element> = ComponentProps<T> & ComponentLayerProps<T> & ComponentShapeProps<T> & ComponentSizeProps<T>
+
+export type ComponentShapeProps<T extends Element> = {
+  shape?: Shape
+} & ComponentProps<T>
+
+export type ComponentSizeProps<T extends Element> = {
+  size?: Size
+} & ComponentProps<T>
 
 /** @category Prop */
 export type ContextMenuProps = {
@@ -130,7 +164,7 @@ export type EmptyProps = {
 /** @category Prop */
 export type FormProps = {
   layer?: Layer
-  onSubmit: () => any
+  onSubmit: (event: FormEvent<HTMLFormElement>) => any
 } & Omit<HTMLFormProps, 'onSubmit'>
 
 /** @category Prop */
@@ -172,22 +206,22 @@ export type HTMLUListProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLUL
 /** @category Prop */
 export type IconProps = {
   color?: string
-  fill?: boolean
+  fill?: boolean | string
   layer?: Layer
   size?: number
-  stroke?: boolean
+  stroke?: boolean | string
   svg?: string
   thickness?: number
 } & Omit<React.SVGProps<SVGSVGElement>, 'fill' | 'stroke'>
 
 /** @category Prop */
 export type ImageProps = {
-  fallback?: (props: any) => JSX.Element
-  heightRatio?: number
+  fallback?: ((props: any) => JSX.Element) | string
+  orientation?: Orientation
+  ratio?: number
   shape?: Shape
   size?: number
   source: string
-  widthRatio?: number
 } & Omit<HTMLImageProps, 'src'>
 
 /** @category Prop */
@@ -228,10 +262,10 @@ export type LabelProps = {
 
 /** @category Prop */
 export type ListProps<T> = {
-  empty: JSX.Element
+  empty?: () => JSX.Element
   items: T[]
   renderItem: (v: T, k: number) => JSX.Element
-} & HTMLDivProps
+} & HTMLUListProps
 
 /** @category Prop */
 export type ListItemProps = {
@@ -285,7 +319,7 @@ export type RouterRendererProps = {
 /** @category Prop */
 export type SelectProps<T extends object> = {
   disabled?: boolean
-  label: string
+  label?: string
   layer?: Layer
   mode?: SelectMode
   options: SelectOption[]
@@ -306,7 +340,6 @@ export type SettingProps = {
 export type SidebarProps = {
   footer?: JSX.Element
   items: SidebarItem[]
-  logo: JSX.Element
   router: Router
 } & HTMLDivProps
 
@@ -335,7 +368,6 @@ export type SwitchProps<T extends object> = {
   disabled?: boolean
   label?: string
   layer?: Layer
-  onChangeCallback?: (value: boolean) => any
   path: keyof T
   store: T
 } & HTMLDivProps
@@ -359,14 +391,14 @@ export type TopTabberProps = {
 
 /** @category Prop */
 export type VirtualizedListProps<T> = {
-  dummy: JSX.Element
-  empty: JSX.Element
+  dummy: () => JSX.Element
+  empty?: () => JSX.Element
   gutter?: number
   itemParentProps?: HTMLDivProps
   items: T[]
   orientation?: Orientation
   renderItem: (v: T, k: number) => JSX.Element
-} & HTMLDivProps
+} & HTMLUListProps
 
 /** @category Prop */
 export type VirtualizedListItemProps<T> = {
@@ -376,8 +408,6 @@ export type VirtualizedListItemProps<T> = {
 /** @category Prop */
 export type WizardProps = {
   active?: string
-  epilogue: string
-  name: string
   onStepChange?: WizardOnStepChange
   steps: WizardStepPartial[]
 } & HTMLDivProps

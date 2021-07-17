@@ -1,37 +1,56 @@
-import { ID, Logger, noop, NumberUtils, rv, tc, tcp } from '@queelag/core'
+import { Logger, NumberUtils, rv, tc, tcp } from '@queelag/core'
 import { Buffer } from 'buffer'
-import { MutableRefObject, SyntheticEvent } from 'react'
-import { ComponentName, Shape } from '../definitions/enums'
-import { ImageProps } from '../definitions/props'
+import { CSSProperties, SyntheticEvent } from 'react'
+import { IMAGE_EMPTY_BASE64, IMAGE_EMPTY_TYPE } from '../definitions/constants'
+import { ComponentName, Orientation } from '../definitions/enums'
+import { ComponentShapeProps, ImageProps } from '../definitions/props'
 import { Cache } from '../modules/cache'
 import { ComponentShapeStore } from '../modules/component.shape.store'
-import { Dummy } from '../modules/dummy'
+import { ShapeUtils } from '../utils/shape.utils'
 
 /**
+ * An abstraction for Image stores, handles caching and ratios.
+ *
  * @category Store
  */
 export class ImageStore extends ComponentShapeStore<HTMLImageElement> {
+  /**
+   * A string which contains base64 data.
+   */
   base64: string
+  /**
+   * A boolean which determines if this image failed to load.
+   */
   error: boolean
-  height: number
+  /**
+   * An {@link Orientation} used to calculate the ratio.
+   */
+  orientation: Orientation
+  /**
+   * A number which determines ratioed height or width based on the orientation.
+   */
+  ratio: number
+  /** @internal */
+  private _source: string = this.toBase64URI(IMAGE_EMPTY_BASE64, IMAGE_EMPTY_TYPE)
+  /**
+   * A string which determines this image mime type.
+   */
   type: string
-  width: number
 
-  private _source: string
+  constructor(props: ImageProps & ComponentShapeProps<HTMLImageElement>) {
+    super(ComponentName.IMAGE, props)
 
-  constructor(id: ID = '', ref: MutableRefObject<HTMLImageElement> = Dummy.ref, shape: Shape = Shape.NONE, source: string, update: () => void = noop) {
-    super(ComponentName.IMAGE, id, ref, shape, update)
-
-    this.base64 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='
+    this.base64 = IMAGE_EMPTY_BASE64
     this.error = false
-    this.height = 0
-    this.type = 'image/png'
-    this.source = source
-    this.width = 0
-
-    this._source = this.toBase64Source(this.base64, this.type)
+    this.orientation = props.orientation || Orientation.HORIZONTAL
+    this.ratio = props.ratio || 0
+    this.type = IMAGE_EMPTY_TYPE
+    this.source = props.source
   }
 
+  /**
+   * An event triggered by a failure whilst loading this image.
+   */
   onError = (error?: SyntheticEvent<HTMLImageElement>): void => {
     this.error = true
     Logger.error(this.id, 'onError', `The error has been set to true.`, error)
@@ -39,40 +58,75 @@ export class ImageStore extends ComponentShapeStore<HTMLImageElement> {
     this.update()
   }
 
-  setHeight(height: number): void {
-    this.height = height
-    this.update()
+  /**
+   * Returns the appropriate styles.
+   */
+  getStyle(props: ImageProps): CSSProperties {
+    return {
+      ...props.style,
+      ...ShapeUtils.findStyle(this.shape, props.size),
+      height: props.height || props.size || this.height || undefined,
+      width: props.width || props.size || this.width || undefined
+    }
   }
 
-  setWidth(width: number): void {
-    this.width = width
-    this.update()
-  }
-
-  toBase64Source(base64: string, type: string): string {
+  /**
+   * Generates a base64 URI from the base64 data and its mime type.
+   */
+  toBase64URI(base64: string, type: string): string {
     return 'data:' + type + ';base64,' + base64
   }
 
+  /**
+   * Returns the computed height of this image element.
+   */
   get elementHeight(): number {
     return NumberUtils.parseFloat(getComputedStyle(this.element).height)
   }
 
+  /**
+   * Returns the computed width of this image element.
+   */
   get elementWidth(): number {
     return NumberUtils.parseFloat(getComputedStyle(this.element).width)
   }
 
+  /**
+   * Returns a base64 URI.
+   */
   get source(): string {
     return this._source
   }
 
+  /**
+   * Checks if this image failed to load.
+   */
   get hasError(): boolean {
     return this.error === true
   }
 
+  /**
+   * Checks if this image did not fail to load.
+   */
   get hasNoError(): boolean {
     return this.error === false
   }
 
+  /**
+   * Calculates a ratioed height based on this image element width if ratio is not zero.
+   */
+  get height(): number {
+    return this.ratio > 0 ? this.elementWidth * this.ratio : 0
+  }
+
+  /**
+   * Calculates a ratioed width based on this image element height if ratio is not zero.
+   */
+  get width(): number {
+    return this.ratio > 0 ? this.elementHeight * this.ratio : 0
+  }
+
+  /** @internal */
   set source(source: string) {
     ;(async () => {
       switch (true) {
@@ -95,10 +149,10 @@ export class ImageStore extends ComponentShapeStore<HTMLImageElement> {
           if (!type) return rv(() => Logger.error(this.id, 'setSource', `Failed to find the content-type header`, (response as Response).headers))
 
           this.base64 = base64
-          this._source = this.toBase64Source(base64, type)
+          this._source = this.toBase64URI(base64, type)
           this.type = type
 
-          Cache.images.set(source, this.toBase64Source(base64, type))
+          Cache.images.set(source, this._source)
 
           break
         case source.includes('base64'):

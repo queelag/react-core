@@ -2,6 +2,10 @@ import { ComponentFormFieldCollector } from '../modules/component.form.field.col
 import { SelectStore } from '../stores/select.store'
 
 /**
+ * The collector of {@link SelectStore} components, see {@link ComponentFormFieldCollector}.
+ *
  * @category Collector
  */
-export const SelectCollector = new ComponentFormFieldCollector<HTMLDivElement, any, SelectStore<any>>(new SelectStore())
+export const SelectCollector = new ComponentFormFieldCollector<HTMLDivElement, any, SelectStore<any>>(
+  new SelectStore({ options: [], path: 'a', store: { a: '' } })
+)

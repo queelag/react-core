@@ -7,13 +7,26 @@ import { useForceUpdate } from '../hooks/use.force.update'
 import { VirtualizedListStore, VIRTUALIZED_LIST_STORE_KEYS } from '../stores/virtualized.list.store'
 
 /**
+ * A virtualized unordered list, handles sizes and empty states.
+ *
+ * Usage:
+ *
+ * ```typescript
+ * import React from 'react'
+ * import { VirtualizedList } from '@queelag/react-core'
+ *
+ * function App() {
+ *   return <VirtualizedList dummy={() => <li>0</li>} items={[0, 1]} renderItem={(v: number) => <li key={v}>{v}</li>} />
+ * }
+ * ```
+ *
  * @category Component
  */
 export function VirtualizedList<T>(props: VirtualizedListProps<T>) {
   const update = useForceUpdate()
-  const ref = useRef(document.createElement('div'))
+  const ref = useRef(document.createElement('ul'))
   const dummyRef = useRef(document.createElement('div'))
-  const store = useMemo(() => new VirtualizedListStore(dummyRef, props.gutter, props.id, props.items, props.orientation, ref, update), [])
+  const store = useMemo(() => new VirtualizedListStore({ ...props, dummyRef, ref, update }), [])
 
   useEffect(() => {
     StoreUtils.updateKeys(store, props, VIRTUALIZED_LIST_STORE_KEYS, update)
@@ -34,7 +47,7 @@ export function VirtualizedList<T>(props: VirtualizedListProps<T>) {
   }, [])
 
   return (
-    <div
+    <ul
       {...ObjectUtils.omit(props, VIRTUALIZED_LIST_PROPS_KEYS)}
       id={store.id}
       ref={ref}
@@ -43,7 +56,7 @@ export function VirtualizedList<T>(props: VirtualizedListProps<T>) {
         overflow: 'hidden'
       }}
     >
-      {store.isItemsEmpty && props.empty}
+      {store.isItemsEmpty && props.empty && <props.empty />}
       {store.hasItems && (
         <FixedSizeList
           height={store.elementHeight}
@@ -55,14 +68,14 @@ export function VirtualizedList<T>(props: VirtualizedListProps<T>) {
         >
           {({ index, style }: ListChildComponentProps) => (
             <div {...props.itemParentProps} style={{ ...props.itemParentProps?.style, ...style }}>
-              {props.renderItem(store.items[index], index)}
+              <li>{props.renderItem(store.items[index], index)}</li>
             </div>
           )}
         </FixedSizeList>
       )}
-      <div ref={dummyRef} style={{ left: 0, pointerEvents: 'none', position: 'fixed', top: 0, visibility: 'hidden' }}>
+      <div ref={dummyRef} style={{ left: 0, opacity: 0, pointerEvents: 'none', position: 'absolute', top: 0 }}>
         {props.dummy}
       </div>
-    </div>
+    </ul>
   )
 }

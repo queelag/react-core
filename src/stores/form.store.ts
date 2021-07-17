@@ -1,11 +1,11 @@
-import { ID, noop, tcp } from '@queelag/core'
-import { FormEvent, MutableRefObject } from 'react'
+import { tcp } from '@queelag/core'
+import { FormEvent } from 'react'
 import { CheckboxCollector } from '../collectors/checkbox.collector'
 import { InputCollector } from '../collectors/input.collector'
 import { InputFileCollector } from '../collectors/input.file.collector'
 import { SelectCollector } from '../collectors/select.collector'
-import { ComponentName, Layer } from '../definitions/enums'
-import { FormProps } from '../definitions/props'
+import { ComponentName } from '../definitions/enums'
+import { ComponentLayerProps, FormProps } from '../definitions/props'
 import { ComponentLayerStore } from '../modules/component.layer.store'
 import { CheckboxStore } from './checkbox.store'
 import { InputFileStore } from './input.file.store'
@@ -13,28 +13,31 @@ import { InputStore } from './input.store'
 import { SelectStore } from './select.store'
 
 /**
+ * An abstraction for Form stores, handles validation of all child fields.
+ *
  * @category Store
  */
 export class FormStore extends ComponentLayerStore<HTMLFormElement> {
-  constructor(
-    id: ID = '',
-    layer: Layer = Layer.TWO,
-    onSubmit: (event: FormEvent<HTMLFormElement>) => any = noop,
-    ref: MutableRefObject<HTMLFormElement>,
-    update: () => void = noop
-  ) {
-    super(ComponentName.FORM, id, layer, ref, update)
+  constructor(props: FormProps & ComponentLayerProps<HTMLFormElement>) {
+    super(ComponentName.FORM, props)
 
-    this.onSubmit = onSubmit
+    this.onSubmit = props.onSubmit
   }
 
+  /** @internal */
   private _onSubmit(event: FormEvent<HTMLFormElement>): any {}
 
+  /**
+   * An event triggered by submitting this form.
+   */
   get onSubmit(): (event: FormEvent<HTMLFormElement>) => any {
     return this._onSubmit
   }
 
-  get checkboxes(): CheckboxStore<any>[] {
+  /**
+   * An array of child CheckBox stores.
+   */
+  get checkBoxStores(): CheckboxStore<any>[] {
     let stores: CheckboxStore<any>[] = []
 
     this.element.querySelectorAll(`[id^='${ComponentName.CHECKBOX}']`).forEach((v: Element) => {
@@ -44,7 +47,10 @@ export class FormStore extends ComponentLayerStore<HTMLFormElement> {
     return stores
   }
 
-  get inputs(): InputStore<any>[] {
+  /**
+   * An array of child Input stores.
+   */
+  get inputStores(): InputStore<any>[] {
     let stores: InputStore<any>[] = []
 
     this.element.querySelectorAll(`[id^='${ComponentName.INPUT}']`).forEach((v: Element) => {
@@ -54,7 +60,10 @@ export class FormStore extends ComponentLayerStore<HTMLFormElement> {
     return stores
   }
 
-  get inputFiles(): InputFileStore<any>[] {
+  /**
+   * An array of child InputFile stores.
+   */
+  get inputFileStores(): InputFileStore<any>[] {
     let stores: InputFileStore<any>[] = []
 
     this.element.querySelectorAll(`[id^='${ComponentName.INPUT_FILE}']`).forEach((v: Element) => {
@@ -64,7 +73,10 @@ export class FormStore extends ComponentLayerStore<HTMLFormElement> {
     return stores
   }
 
-  get selects(): SelectStore<any>[] {
+  /**
+   * An array of child Select stores.
+   */
+  get selectStores(): SelectStore<any>[] {
     let stores: SelectStore<any>[] = []
 
     this.element.querySelectorAll(`[id^='${ComponentName.SELECT}']`).forEach((v: Element) => {
@@ -74,27 +86,31 @@ export class FormStore extends ComponentLayerStore<HTMLFormElement> {
     return stores
   }
 
+  /**
+   * Checks if every child field is valid.
+   */
   get isValid(): boolean {
     return (
-      this.checkboxes.every((v: CheckboxStore<any>) => v.isValid) &&
-      this.inputs.every((v: InputStore<any>) => v.isValid) &&
-      this.inputFiles.every((v: InputFileStore<any>) => v.isValid) &&
-      this.selects.every((v: SelectStore<any>) => v.isValid)
+      this.checkBoxStores.every((v: CheckboxStore<any>) => v.isValid) &&
+      this.inputStores.every((v: InputStore<any>) => v.isValid) &&
+      this.inputFileStores.every((v: InputFileStore<any>) => v.isValid) &&
+      this.selectStores.every((v: SelectStore<any>) => v.isValid)
     )
   }
 
+  /** @internal */
   set onSubmit(onSubmit: (event: FormEvent<HTMLFormElement>) => any) {
     this._onSubmit = async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault()
 
-      this.checkboxes.forEach((v: CheckboxStore<any>) => v.touch())
-      this.inputs.forEach((v: InputStore<any>) => v.touch())
-      this.inputFiles.forEach((v: InputFileStore<any>) => v.touch())
-      this.selects.forEach((v: SelectStore<any>) => v.touch())
+      this.checkBoxStores.forEach((v: CheckboxStore<any>) => v.touch())
+      this.inputStores.forEach((v: InputStore<any>) => v.touch())
+      this.inputFileStores.forEach((v: InputFileStore<any>) => v.touch())
+      this.selectStores.forEach((v: SelectStore<any>) => v.touch())
 
       this.isValid && (await tcp(() => onSubmit(event)))
 
-      this.inputs.forEach((v: InputStore<any>) => v.inputElement.blur())
+      this.inputStores.forEach((v: InputStore<any>) => v.element.blur())
     }
   }
 }

@@ -65,6 +65,13 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>An abstraction for VirtualizedList stores, handles gutter, items, orientations and sizes.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-type-parameters">
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
@@ -77,7 +84,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="ComponentStore.html" class="tsd-signature-type" data-tsd-kind="Class">ComponentStore</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span>
+						<a href="ComponentStore.html" class="tsd-signature-type" data-tsd-kind="Class">ComponentStore</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLUListElement</span><span class="tsd-signature-symbol">&gt;</span>
 						<ul class="tsd-hierarchy">
 							<li>
 								<span class="target">VirtualizedListStore</span>
@@ -142,14 +149,14 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-has-type-parameter tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Virtualized<wbr>List<wbr>Store&lt;T&gt;<span class="tsd-signature-symbol">(</span>dummyRef<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">MutableRefObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span>, gutter<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, id<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, items<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span>, orientation<span class="tsd-signature-symbol">?: </span><a href="../enums/Orientation.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Orientation</a>, ref<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">MutableRefObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span>, update<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="VirtualizedListStore.html" class="tsd-signature-type" data-tsd-kind="Class">VirtualizedListStore</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Virtualized<wbr>List<wbr>Store&lt;T&gt;<span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>gutter<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>itemParentProps<span class="tsd-signature-symbol">?: </span><a href="../index.html#HTMLDivProps" class="tsd-signature-type" data-tsd-kind="Type alias">HTMLDivProps</a><span class="tsd-signature-symbol">; </span>items<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>orientation<span class="tsd-signature-symbol">?: </span><a href="../enums/Orientation.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Orientation</a><span class="tsd-signature-symbol">; </span>dummy<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>empty<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>renderItem<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">ClassAttributes</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLUListElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">HTMLAttributes</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLUListElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><a href="../index.html#ComponentProps" class="tsd-signature-type" data-tsd-kind="Type alias">ComponentProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLUListElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>dummyRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MutableRefObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="VirtualizedListStore.html" class="tsd-signature-type" data-tsd-kind="Class">VirtualizedListStore</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Overrides <a href="ComponentStore.html">ComponentStore</a>.<a href="ComponentStore.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/virtualized.list.store.ts#L21">stores/virtualized.list.store.ts:21</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/virtualized.list.store.ts#L46">stores/virtualized.list.store.ts:46</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -161,37 +168,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>dummyRef: <span class="tsd-signature-type">MutableRefObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></h5>
-								</li>
-								<li>
-									<h5>gutter: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></h5>
-								</li>
-								<li>
-									<h5>id: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;&#x27;</span></h5>
-								</li>
-								<li>
-									<h5>items: <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></h5>
-								</li>
-								<li>
-									<h5>orientation: <a href="../enums/Orientation.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Orientation</a><span class="tsd-signature-symbol"> = ...</span></h5>
-								</li>
-								<li>
-									<h5>ref: <span class="tsd-signature-type">MutableRefObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></h5>
-								</li>
-								<li>
-									<h5>update: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> = ...</span></h5>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter-signature">
-											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-											</ul>
-											<ul class="tsd-descriptions">
-												<li class="tsd-description">
-													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-												</li>
-											</ul>
-										</li>
-									</ul>
+									<h5>props: <span class="tsd-signature-symbol">{ </span>gutter<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>itemParentProps<span class="tsd-signature-symbol">?: </span><a href="../index.html#HTMLDivProps" class="tsd-signature-type" data-tsd-kind="Type alias">HTMLDivProps</a><span class="tsd-signature-symbol">; </span>items<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>orientation<span class="tsd-signature-symbol">?: </span><a href="../enums/Orientation.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Orientation</a><span class="tsd-signature-symbol">; </span>dummy<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>empty<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span>renderItem<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">ClassAttributes</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLUListElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">HTMLAttributes</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLUListElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><a href="../index.html#ComponentProps" class="tsd-signature-type" data-tsd-kind="Type alias">ComponentProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLUListElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>dummyRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MutableRefObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> }</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="VirtualizedListStore.html" class="tsd-signature-type" data-tsd-kind="Class">VirtualizedListStore</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -207,9 +184,14 @@
 					<div class="tsd-signature tsd-kind-icon">dummy<wbr>Ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">MutableRefObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/virtualized.list.store.ts#L12">stores/virtualized.list.store.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/virtualized.list.store.ts#L16">stores/virtualized.list.store.ts:16</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A ref of the dummy item element.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="gutter" class="tsd-anchor"></a>
@@ -217,9 +199,14 @@
 					<div class="tsd-signature tsd-kind-icon">gutter<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/virtualized.list.store.ts#L13">stores/virtualized.list.store.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/virtualized.list.store.ts#L20">stores/virtualized.list.store.ts:20</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A number which determines the spacing between items.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="id" class="tsd-anchor"></a>
@@ -228,9 +215,14 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="ComponentStore.html">ComponentStore</a>.<a href="ComponentStore.html#id">id</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.store.ts#L9">modules/component.store.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.store.ts#L16">modules/component.store.ts:16</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A string which identifies a component.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="itemElementHeight" class="tsd-anchor"></a>
@@ -238,9 +230,14 @@
 					<div class="tsd-signature tsd-kind-icon">item<wbr>Element<wbr>Height<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/virtualized.list.store.ts#L15">stores/virtualized.list.store.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/virtualized.list.store.ts#L28">stores/virtualized.list.store.ts:28</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A number of the computed dummy item element height.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="itemElementWidth" class="tsd-anchor"></a>
@@ -248,9 +245,14 @@
 					<div class="tsd-signature tsd-kind-icon">item<wbr>Element<wbr>Width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/virtualized.list.store.ts#L16">stores/virtualized.list.store.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/virtualized.list.store.ts#L32">stores/virtualized.list.store.ts:32</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A number which determines the item element width.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="items" class="tsd-anchor"></a>
@@ -258,9 +260,14 @@
 					<div class="tsd-signature tsd-kind-icon">items<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/virtualized.list.store.ts#L14">stores/virtualized.list.store.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/virtualized.list.store.ts#L24">stores/virtualized.list.store.ts:24</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>An array of T.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="name" class="tsd-anchor"></a>
@@ -269,9 +276,14 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="ComponentStore.html">ComponentStore</a>.<a href="ComponentStore.html#name">name</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.store.ts#L10">modules/component.store.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.store.ts#L20">modules/component.store.ts:20</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A string which helps identify a component, used as a prefix for the id.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="orientation" class="tsd-anchor"></a>
@@ -279,9 +291,14 @@
 					<div class="tsd-signature tsd-kind-icon">orientation<span class="tsd-signature-symbol">:</span> <a href="../enums/Orientation.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Orientation</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/virtualized.list.store.ts#L17">stores/virtualized.list.store.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/virtualized.list.store.ts#L36">stores/virtualized.list.store.ts:36</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>An <a href="../enums/Orientation.html">Orientation</a> which determines how sizes are calculated.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="parentElementHeight" class="tsd-anchor"></a>
@@ -289,9 +306,14 @@
 					<div class="tsd-signature tsd-kind-icon">parent<wbr>Element<wbr>Height<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/virtualized.list.store.ts#L18">stores/virtualized.list.store.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/virtualized.list.store.ts#L40">stores/virtualized.list.store.ts:40</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A number which determines the parent element height.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="parentElementWidth" class="tsd-anchor"></a>
@@ -299,20 +321,30 @@
 					<div class="tsd-signature tsd-kind-icon">parent<wbr>Element<wbr>Width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/virtualized.list.store.ts#L19">stores/virtualized.list.store.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/virtualized.list.store.ts#L44">stores/virtualized.list.store.ts:44</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A number which determines the parent element width.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="ref" class="tsd-anchor"></a>
 					<h3>ref</h3>
-					<div class="tsd-signature tsd-kind-icon">ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">MutableRefObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLDivElement</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">LegacyRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLUListElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">MutableRefObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLUListElement</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="ComponentStore.html">ComponentStore</a>.<a href="ComponentStore.html#ref">ref</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.store.ts#L11">modules/component.store.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.store.ts#L24">modules/component.store.ts:24</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A ref with T interface.</p>
+						</div>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -327,9 +359,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.store.ts#L22">modules/component.store.ts:22</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.store.ts#L41">modules/component.store.ts:41</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns a DOM element from the ref.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
 						</li>
 					</ul>
@@ -344,9 +381,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/virtualized.list.store.ts#L98">stores/virtualized.list.store.ts:98</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/virtualized.list.store.ts#L127">stores/virtualized.list.store.ts:127</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the parent element height if the orientation is VERTICAL otherwise returns 100%.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h4>
 						</li>
 					</ul>
@@ -361,9 +403,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/virtualized.list.store.ts#L102">stores/virtualized.list.store.ts:102</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/virtualized.list.store.ts#L134">stores/virtualized.list.store.ts:134</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the parent element width if the orientation is HORIZONTAL otherwise returns 100%.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h4>
 						</li>
 					</ul>
@@ -378,7 +425,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/virtualized.list.store.ts#L106">stores/virtualized.list.store.ts:106</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/virtualized.list.store.ts#L138">stores/virtualized.list.store.ts:138</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -395,7 +442,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/virtualized.list.store.ts#L110">stores/virtualized.list.store.ts:110</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/virtualized.list.store.ts#L142">stores/virtualized.list.store.ts:142</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -412,7 +459,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/virtualized.list.store.ts#L114">stores/virtualized.list.store.ts:114</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/virtualized.list.store.ts#L146">stores/virtualized.list.store.ts:146</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -429,7 +476,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/virtualized.list.store.ts#L118">stores/virtualized.list.store.ts:118</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/virtualized.list.store.ts#L150">stores/virtualized.list.store.ts:150</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -449,9 +496,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/virtualized.list.store.ts#L42">stores/virtualized.list.store.ts:42</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/virtualized.list.store.ts#L62">stores/virtualized.list.store.ts:62</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Searches for an id key inside of items[index] otherwise uses the index.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -472,9 +524,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/virtualized.list.store.ts#L46">stores/virtualized.list.store.ts:46</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/virtualized.list.store.ts#L69">stores/virtualized.list.store.ts:69</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Computes the item element width if the orientation is HORIZONTAL otherwise if the orientation is VERTICAL computes its height.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -489,9 +546,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/stores/virtualized.list.store.ts#L63">stores/virtualized.list.store.ts:63</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/stores/virtualized.list.store.ts#L89">stores/virtualized.list.store.ts:89</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Computes the parent element width if the orientation is HORIZONTAL otherwise if the orientation is VERTICAL computes its height.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -507,9 +569,14 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="ComponentStore.html">ComponentStore</a>.<a href="ComponentStore.html#update">update</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/2d1536a/src/modules/component.store.ts#L20">modules/component.store.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/68f698c/src/modules/component.store.ts#L36">modules/component.store.ts:36</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Forces a re-render.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -625,15 +692,11 @@
 				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
-			</ul>
-			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
 			</ul>
 		</div>
 	</div>

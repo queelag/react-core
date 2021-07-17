@@ -1,15 +1,57 @@
 import { Logger } from '@queelag/core'
 
 /**
+ * A generic controller for handling visibility states.
+ *
+ * Usage:
+ *
+ * ```typescript
+ * import React, { useEffect } from 'react'
+ * import { Backdrop, ModalProps, VisibilityController } from '@queelag/react-core'
+ * import { makeObservable, observer } from 'mobx'
+ *
+ * class _ModalController extends VisibilityController {
+ *   constructor() {
+ *     super()
+ *     makeObservable(this, { data: observable })
+ *   }
+ * }
+ *
+ * const ModalController = new _ModalController()
+ *
+ * const Modal = observer((props: ModalProps) => {
+ *   const onClickBackdrop = () => ModalController.hide(props.name)
+ *
+ *   useEffect(() => {
+ *     ModalController.show(props.name)
+ *   }, [])
+ *
+ *   if (ModalController.isHidden(props.name)) {
+ *     return null
+ *   }
+ *
+ *   return (
+ *     <div className="container" style={{ position: 'relative' }}>
+ *       <Backdrop onClick={onClickBackdrop} />
+ *       <div className="content" style={{ position: 'absolute' }} />
+ *     </div>
+ *   )
+ * })
+ * ```
+ *
  * @category Controller
  */
 export class VisibilityController {
-  data: Map<string, number>
+  /** @internal */
+  private readonly data: Map<string, number>
 
   constructor() {
     this.data = new Map()
   }
 
+  /**
+   * Sets name to HIDING, after delay time sets name to HIDDEN.
+   */
   hide(name: string, delay: number = 0): void {
     if (this.isHidden(name)) {
       return Logger.warn('VisibilityController', 'hide', `The key ${name} is already hidden.`)
@@ -24,6 +66,9 @@ export class VisibilityController {
     }, delay)
   }
 
+  /**
+   * Sets name to VISIBLE, after delay time sets name to SHOWING.
+   */
   show(name: string, delay: number = 0): void {
     if (this.isVisible(name)) {
       return Logger.warn('VisibilityController', 'show', `The key ${name} is already visible.`, this.data.get(name))
@@ -38,26 +83,42 @@ export class VisibilityController {
     }, delay)
   }
 
+  /**
+   * Shows name if it's hidden or hides it if it's shown.
+   */
   toggle(name: string, delay: number = 0): void {
     this.isHidden(name) ? this.show(name) : this.hide(name, delay)
   }
 
+  /** @internal */
   private get(name: string): number {
     return this.data.get(name) || VisibilityController.HIDDEN
   }
 
+  /**
+   * Checks if name is HIDING.
+   */
   isHiding(name: string): boolean {
     return this.get(name) === VisibilityController.HIDING
   }
 
+  /**
+   * Checks if name is HIDDEN.
+   */
   isHidden(name: string): boolean {
     return this.get(name) === VisibilityController.HIDDEN
   }
 
+  /**
+   * Checks if name is VISIBLE.
+   */
   isVisible(name: string): boolean {
     return this.get(name) !== VisibilityController.HIDDEN
   }
 
+  /**
+   * Checks if name is SHOWING.
+   */
   isShowing(name: string): boolean {
     return this.get(name) === VisibilityController.SHOWING
   }
