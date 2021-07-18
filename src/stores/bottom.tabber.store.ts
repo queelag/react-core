@@ -1,7 +1,8 @@
 import { Router } from 'router5'
 import { ComponentName } from '../definitions/enums'
-import { BottomTabberProps, ComponentProps } from '../definitions/props'
+import { ComponentProps } from '../definitions/props'
 import { BottomTabberItem } from '../definitions/types'
+import { BottomTabberProps } from '../definitions/with.router5.props'
 import { ComponentStore } from '../modules/component.store'
 import { Dummy } from '../modules/dummy'
 

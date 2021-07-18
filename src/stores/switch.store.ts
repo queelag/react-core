@@ -1,5 +1,6 @@
 import { ComponentName } from '../definitions/enums'
-import { ComponentFormFieldProps, SwitchProps } from '../definitions/props'
+import { SwitchProps } from '../definitions/props'
+import { ComponentFormFieldProps } from '../definitions/with.superstruct.props'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
 
 /**

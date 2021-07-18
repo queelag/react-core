@@ -1,5 +1,5 @@
 import * as S from 'superstruct'
-import { ComponentFormFieldProps } from '../definitions/props'
+import { ComponentFormFieldProps } from '../definitions/with.superstruct.props'
 import { ComponentLayerStore } from './component.layer.store'
 import { Dummy } from './dummy'
 

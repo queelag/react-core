@@ -1,10 +1,11 @@
 import { IDUtils, tcp } from '@queelag/core'
-import { Buffer } from 'buffer'
 import { ChangeEvent } from 'react'
 import * as S from 'superstruct'
 import { ComponentName, InputFileMode } from '../definitions/enums'
-import { ComponentFormFieldProps, InputFileProps } from '../definitions/props'
+import { InputFileProps } from '../definitions/props'
 import { InputFileItem } from '../definitions/types'
+import { ComponentFormFieldProps } from '../definitions/with.superstruct.props'
+import { Base64 } from '../modules/base64'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
 import { Dummy } from '../modules/dummy'
 import { Schema } from '../modules/schema'
@@ -50,7 +51,7 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
           let item: InputFileItem
 
           item = Dummy.inputFileItem
-          item.data = Buffer.from(v).toString('base64')
+          item.data = Base64.encode(v)
           item.id = IDUtils.unique(r.map((v: InputFileItem) => v.id))
           item.name = event.target.files ? event.target.files[k].name : ''
 
@@ -67,7 +68,7 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
         if (buffer instanceof Error) return
 
         item = Dummy.inputFileItem
-        item.data = Buffer.from(buffer).toString('base64')
+        item.data = Base64.encode(buffer)
         item.id = IDUtils.unique()
         item.name = event.target.files ? event.target.files[0].name : ''
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { RouterRendererProps } from '../definitions/props'
+import { RouterRendererProps } from '../definitions/with.router5.props'
 
 /**
  * Renders the matching component to the current route in the context.

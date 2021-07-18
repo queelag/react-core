@@ -1,9 +1,9 @@
 import { Logger, NumberUtils, rv, tc, tcp } from '@queelag/core'
-import { Buffer } from 'buffer'
 import { CSSProperties, SyntheticEvent } from 'react'
 import { IMAGE_EMPTY_BASE64, IMAGE_EMPTY_TYPE } from '../definitions/constants'
 import { ComponentName, Orientation } from '../definitions/enums'
 import { ComponentShapeProps, ImageProps } from '../definitions/props'
+import { Base64 } from '../modules/base64'
 import { Cache } from '../modules/cache'
 import { ComponentShapeStore } from '../modules/component.shape.store'
 import { ShapeUtils } from '../utils/shape.utils'
@@ -142,7 +142,7 @@ export class ImageStore extends ComponentShapeStore<HTMLImageElement> {
           buffer = await tcp(() => (response as Response).arrayBuffer())
           if (buffer instanceof Error) return this.onError()
 
-          base64 = tc(() => Buffer.from(buffer as ArrayBuffer).toString('base64'))
+          base64 = tc(() => Base64.encode(buffer as ArrayBuffer))
           if (base64 instanceof Error) return this.onError()
 
           type = response.headers.get('content-type')

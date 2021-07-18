@@ -1,6 +1,7 @@
 import * as S from 'superstruct'
 import { ComponentName } from '../definitions/enums'
-import { CheckboxProps, ComponentFormFieldProps } from '../definitions/props'
+import { CheckboxProps } from '../definitions/props'
+import { ComponentFormFieldProps } from '../definitions/with.superstruct.props'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
 
 /**

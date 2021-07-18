@@ -1,8 +1,7 @@
 import { NumberUtils } from '@queelag/core'
-import { Buffer } from 'buffer'
 import { ChangeEvent } from 'react'
 import { ComponentName, InputType } from '../definitions/enums'
-import { ComponentFormFieldProps, InputProps } from '../definitions/props'
+import { ComponentFormFieldProps, InputProps } from '../definitions/with.superstruct.props'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
 
 /**
@@ -58,7 +57,7 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
   onChange = (event: ChangeEvent<HTMLInputElement>): void => {
     switch (this.type) {
       case InputType.BUFFER:
-        this.store[this.path] = Buffer.from(event.target.value) as any
+        this.store[this.path] = new TextEncoder().encode(event.target.value) as any
         break
       case InputType.DATE:
         this.store[this.path] = 0 as any

@@ -1,18 +1,12 @@
 import { ID } from '@queelag/core'
 import { FormEvent, LegacyRef, MutableRefObject } from 'react'
-import { RouteContext } from 'react-router5/dist/types'
-import { ListChildComponentProps } from 'react-window'
-import { Router } from 'router5'
-import * as S from 'superstruct'
-import { ButtonType, Color, DividerType, FeedbackType, InputFileMode, InputType, Layer, Orientation, SelectMode, Shape, Size } from './enums'
+import { ButtonType, Color, DividerType, FeedbackType, InputFileMode, Layer, Orientation, SelectMode, Shape, Size } from './enums'
 import {
   BottomSheetItem,
-  BottomTabberItem,
   ContextMenuItem,
   OmitRef,
   OnboardingItem,
   SelectOption,
-  SidebarItem,
   StatisticValue,
   TopTabberItem,
   WizardOnStepChange,
@@ -55,12 +49,6 @@ export type BottomSheetProps = {
   items?: BottomSheetItem[]
   name: string
   title?: string
-} & HTMLDivProps
-
-/** @category Prop */
-export type BottomTabberProps = {
-  items: BottomTabberItem[]
-  router: Router
 } & HTMLDivProps
 
 /** @category Prop */
@@ -112,16 +100,6 @@ export type ComponentProps<T extends Element> = {
   update?: () => void
 }
 
-export type ComponentFormFieldProps<T extends Element, U extends object> = {
-  disabled?: boolean
-  label?: string
-  path: keyof U
-  required?: boolean
-  schema?: S.Struct<any, any>
-  store: U
-  touched?: boolean
-} & ComponentLayerProps<T>
-
 export type ComponentLayerProps<T extends Element> = {
   layer?: Layer
 } & ComponentProps<T>
@@ -166,13 +144,6 @@ export type FormProps = {
   layer?: Layer
   onSubmit: (event: FormEvent<HTMLFormElement>) => any
 } & Omit<HTMLFormProps, 'onSubmit'>
-
-/** @category Prop */
-export type HeaderProps = {
-  logo?: JSX.Element
-  router: Router
-  title?: string
-} & HTMLDivProps
 
 /** @category Prop */
 export type HTMLAnchorProps = React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>
@@ -236,23 +207,6 @@ export type InputFileProps<T extends object> = {
 } & Omit<HTMLInputProps, 'onChange'>
 
 /** @category Prop */
-export type InputProps<T extends object> = {
-  label?: string
-  layer?: Layer
-  onBlurCallback?: () => any
-  onChangeCallback?: () => any
-  onFocusCallback?: () => any
-  path: keyof T
-  prefix?: JSX.Element
-  required?: boolean
-  schema?: S.Struct<any, any>
-  store: T
-  suffix?: JSX.Element
-  touched?: boolean
-  type?: InputType
-} & Omit<HTMLInputProps, 'onBlur' | 'onChange' | 'onFocus' | 'type'>
-
-/** @category Prop */
 export type LabelProps = {
   color?: Color
   inject?: any[]
@@ -310,13 +264,6 @@ export type ResultProps = {
 } & HTMLDivProps
 
 /** @category Prop */
-export type RouterRendererProps = {
-  context: RouteContext
-  fallback?: (props: { context: RouteContext }) => JSX.Element
-  map: Map<string, (props: { context: RouteContext }) => JSX.Element>
-} & HTMLDivProps
-
-/** @category Prop */
 export type SelectProps<T extends object> = {
   disabled?: boolean
   label?: string
@@ -334,13 +281,6 @@ export type SettingProps = {
   description: string
   layer?: Layer
   title: string
-} & HTMLDivProps
-
-/** @category Prop */
-export type SidebarProps = {
-  footer?: JSX.Element
-  items: SidebarItem[]
-  router: Router
 } & HTMLDivProps
 
 /** @category Prop */
@@ -399,11 +339,6 @@ export type VirtualizedListProps<T> = {
   orientation?: Orientation
   renderItem: (v: T, k: number) => JSX.Element
 } & HTMLUListProps
-
-/** @category Prop */
-export type VirtualizedListItemProps<T> = {
-  renderItem: (v: T, k: number) => JSX.Element
-} & ListChildComponentProps
 
 /** @category Prop */
 export type WizardProps = {

@@ -1,7 +1,8 @@
 import * as S from 'superstruct'
 import { ComponentName, SelectMode } from '../definitions/enums'
-import { ComponentFormFieldProps, SelectProps } from '../definitions/props'
+import { SelectProps } from '../definitions/props'
 import { SelectOption, SelectOptionValue } from '../definitions/types'
+import { ComponentFormFieldProps } from '../definitions/with.superstruct.props'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
 
 /**
