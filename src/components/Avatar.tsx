@@ -1,5 +1,5 @@
 import { ObjectUtils, ReactUtils, StoreUtils } from '@queelag/core'
-import React, { ForwardedRef, forwardRef, useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { AVATAR_PROPS_KEYS } from '../definitions/constants'
 import { AvatarProps } from '../definitions/props'
 import { useForceUpdate } from '../hooks/use.force.update'
@@ -23,7 +23,7 @@ import { Image } from './Image'
  *
  * @category Component
  */
-export const Avatar = forwardRef((props: AvatarProps, ref: ForwardedRef<HTMLDivElement>) => {
+export function Avatar(props: AvatarProps) {
   const update = useForceUpdate()
   const store = useMemo(() => new AvatarStore({ ...props, update }), [])
 
@@ -36,7 +36,6 @@ export const Avatar = forwardRef((props: AvatarProps, ref: ForwardedRef<HTMLDivE
       {...ObjectUtils.omit(props, AVATAR_PROPS_KEYS)}
       className={ReactUtils.joinClassNames(props.className, store.background)}
       id={store.id}
-      ref={ref}
       style={{
         ...props.style,
         ...ShapeUtils.findStyle(store.shape, store.size),
@@ -59,4 +58,4 @@ export const Avatar = forwardRef((props: AvatarProps, ref: ForwardedRef<HTMLDivE
       )}
     </div>
   )
-})
+}

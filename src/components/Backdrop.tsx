@@ -1,5 +1,5 @@
 import { ObjectUtils } from '@queelag/core'
-import React, { ForwardedRef, forwardRef } from 'react'
+import React from 'react'
 import { BACKDROP_PROPS_KEYS } from '../definitions/constants'
 import { BackdropProps } from '../definitions/props'
 
@@ -24,12 +24,11 @@ import { BackdropProps } from '../definitions/props'
  *
  * @category Component
  */
-export const Backdrop = forwardRef((props: BackdropProps, ref: ForwardedRef<HTMLDivElement>) => {
+export function Backdrop(props: BackdropProps) {
   return (
     <div
       {...ObjectUtils.omit(props, BACKDROP_PROPS_KEYS)}
-      ref={ref}
       style={{ background: 'black', height: '100%', opacity: props.opacity || 0.5, position: 'absolute', width: '100%' }}
     />
   )
-})
+}

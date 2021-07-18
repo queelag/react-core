@@ -1,9 +1,9 @@
+import { ID } from '@queelag/core'
 import { FormEvent, LegacyRef, MutableRefObject } from 'react'
 import { RouteContext } from 'react-router5/dist/types'
 import { ListChildComponentProps } from 'react-window'
 import { Router } from 'router5'
 import * as S from 'superstruct'
-import { ID } from '../../../core/dist'
 import { ButtonType, Color, DividerType, FeedbackType, InputFileMode, InputType, Layer, Orientation, SelectMode, Shape, Size } from './enums'
 import {
   BottomSheetItem,
@@ -284,7 +284,7 @@ export type LoadingProps = {
 
 /** @category Prop */
 export type ModalProps = {
-  button?: ButtonProps
+  description?: string
   name: string
   title?: string
 } & HTMLDivProps

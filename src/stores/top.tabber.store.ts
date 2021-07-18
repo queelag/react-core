@@ -15,7 +15,7 @@ export class TopTabberStore extends ComponentStore<HTMLDivElement> {
    */
   active: string
   /**
-   * An array of {@link TopTabberItem.}
+   * An array of {@link TopTabberItem}.
    */
   items: TopTabberItem[]
 

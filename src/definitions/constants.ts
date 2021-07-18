@@ -107,7 +107,7 @@ export const LIST_ITEM_PROPS_KEYS: (keyof ListItemProps)[] = ['avatar', 'descrip
 /** @category Constant */
 export const LOADING_PROPS_KEYS: (keyof LoadingProps)[] = ['title']
 /** @category Constant */
-export const MODAL_PROPS_KEYS: (keyof ModalProps)[] = ['button', 'name', 'title']
+export const MODAL_PROPS_KEYS: (keyof ModalProps)[] = ['name', 'title']
 /** @category Constant */
 export const ONBOARDING_PROPS_KEYS: (keyof OnboardingProps)[] = ['items', 'onEnd']
 /** @category Constant */
