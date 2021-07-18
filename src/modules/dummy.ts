@@ -1,5 +1,4 @@
 import { MutableRefObject } from 'react'
-import * as S from 'superstruct'
 import { Blank } from '../components/Blank'
 import { Parent } from '../components/Parent'
 import { Color } from '../definitions/enums'
@@ -70,10 +69,6 @@ export class Dummy {
       redirect: [],
       regex: new RegExp('')
     }
-  }
-
-  static get schema(): S.Struct {
-    return S.any()
   }
 
   static get sidebarItem(): SidebarItem {

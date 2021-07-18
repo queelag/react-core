@@ -5,6 +5,10 @@ import { InputFileItem } from '../definitions/types'
  * @category Module
  */
 export class Schema {
+  static get any(): S.Struct {
+    return S.any()
+  }
+
   static get inputFileItemOptional(): S.Describe<InputFileItem> {
     return S.object({
       data: S.string(),

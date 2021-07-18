@@ -1,7 +1,7 @@
 import * as S from 'superstruct'
 import { ComponentFormFieldProps } from '../definitions/with.superstruct.props'
 import { ComponentLayerStore } from './component.layer.store'
-import { Dummy } from './dummy'
+import { Schema } from './schema'
 
 /**
  * An abstraction for form field stores, handles value and validation.
@@ -28,7 +28,7 @@ export class ComponentFormFieldStore<T extends Element, U extends object> extend
    */
   required: boolean
   /** @internal */
-  protected _schema: S.Struct<any, any> = Dummy.schema
+  protected _schema: S.Struct<any, any> = Schema.any
   /**
    * An object with interface U.
    */
@@ -49,7 +49,7 @@ export class ComponentFormFieldStore<T extends Element, U extends object> extend
     this.label = props.label || ''
     this.path = props.path
     this.required = props.required || false
-    this.schema = props.schema || Dummy.schema
+    this.schema = props.schema || Schema.any
     this.store = props.store
     this.touched = props.touched || false
     this.validation = this.schema.validate(this.value)

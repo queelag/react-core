@@ -71,7 +71,6 @@ export class IconStore extends ComponentLayerStore<SVGElement> {
     ;(async () => {
       switch (true) {
         case /^(https?:\/\/|\/)/.test(svg):
-          // case Schema.isValid(Joi.string().uri({ allowRelative: true }), svg):
           let cached: string | undefined, response: Response | Error, text: string | Error
 
           cached = Cache.icons.get(svg)
