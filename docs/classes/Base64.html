@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Schema | @queelag/react-core - v1.0.0</title>
+	<title>Base64 | @queelag/react-core - v1.0.0</title>
 	<meta name="description" content="Documentation for @queelag/react-core - v1.0.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,10 +55,10 @@
 					<a href="../index.html">@queelag/react-core - v1.0.0</a>
 				</li>
 				<li>
-					<a href="Schema.html">Schema</a>
+					<a href="Base64.html">Base64</a>
 				</li>
 			</ul>
-			<h1>Class Schema</h1>
+			<h1>Class Base64</h1>
 		</div>
 	</div>
 </header>
@@ -69,7 +69,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">Schema</span>
+						<span class="target">Base64</span>
 					</li>
 				</ul>
 			</section>
@@ -80,14 +80,14 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="Schema.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="Base64.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
-							<h3>Accessors</h3>
+							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-static"><a href="Schema.html#inputFileItemOptional" class="tsd-kind-icon">input<wbr>File<wbr>Item<wbr>Optional</a></li>
-								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-static"><a href="Schema.html#inputFileItemRequired" class="tsd-kind-icon">input<wbr>File<wbr>Item<wbr>Required</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="Base64.html#decode" class="tsd-kind-icon">decode</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="Base64.html#encode" class="tsd-kind-icon">encode</a></li>
 							</ul>
 						</section>
 					</div>
@@ -99,50 +99,62 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Schema<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Schema.html" class="tsd-signature-type" data-tsd-kind="Class">Schema</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Base64<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Base64.html" class="tsd-signature-type" data-tsd-kind="Class">Base64</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="Schema.html" class="tsd-signature-type" data-tsd-kind="Class">Schema</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="Base64.html" class="tsd-signature-type" data-tsd-kind="Class">Base64</a></h4>
 						</li>
 					</ul>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Accessors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-static">
-					<a name="inputFileItemOptional" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> input<wbr>File<wbr>Item<wbr>Optional</h3>
-					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> inputFileItemOptional<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Describe</span><span class="tsd-signature-symbol">&lt;</span><a href="../index.html#InputFileItem" class="tsd-signature-type" data-tsd-kind="Type alias">InputFileItem</a><span class="tsd-signature-symbol">&gt;</span></li>
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="decode" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> decode</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">decode<span class="tsd-signature-symbol">(</span>string<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Uint8Array</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/de1eff3/src/modules/schema.ts#L8">modules/schema.ts:8</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/de1eff3/src/modules/base64.ts#L4">modules/base64.ts:4</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Describe</span><span class="tsd-signature-symbol">&lt;</span><a href="../index.html#InputFileItem" class="tsd-signature-type" data-tsd-kind="Type alias">InputFileItem</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>string: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Uint8Array</span></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-static">
-					<a name="inputFileItemRequired" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> input<wbr>File<wbr>Item<wbr>Required</h3>
-					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> inputFileItemRequired<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Describe</span><span class="tsd-signature-symbol">&lt;</span><a href="../index.html#InputFileItem" class="tsd-signature-type" data-tsd-kind="Type alias">InputFileItem</a><span class="tsd-signature-symbol">&gt;</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="encode" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> encode</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">encode<span class="tsd-signature-symbol">(</span>buffer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ArrayBuffer</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/de1eff3/src/modules/schema.ts#L16">modules/schema.ts:16</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/de1eff3/src/modules/base64.ts#L8">modules/base64.ts:8</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Describe</span><span class="tsd-signature-symbol">&lt;</span><a href="../index.html#InputFileItem" class="tsd-signature-type" data-tsd-kind="Type alias">InputFileItem</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>buffer: <span class="tsd-signature-type">ArrayBuffer</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -161,16 +173,16 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class">
-						<a href="Schema.html" class="tsd-kind-icon">Schema</a>
+						<a href="Base64.html" class="tsd-kind-icon">Base64</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="Schema.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="Base64.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-static">
-								<a href="Schema.html#inputFileItemOptional" class="tsd-kind-icon">input<wbr>File<wbr>Item<wbr>Optional</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="Base64.html#decode" class="tsd-kind-icon">decode</a>
 							</li>
-							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-static">
-								<a href="Schema.html#inputFileItemRequired" class="tsd-kind-icon">input<wbr>File<wbr>Item<wbr>Required</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="Base64.html#encode" class="tsd-kind-icon">encode</a>
 							</li>
 						</ul>
 					</li>
