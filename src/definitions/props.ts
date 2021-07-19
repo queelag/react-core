@@ -1,348 +1,202 @@
-import { ID } from '@queelag/core'
-import { FormEvent, LegacyRef, MutableRefObject } from 'react'
-import { ButtonType, Color, DividerType, FeedbackType, InputFileMode, Layer, Orientation, SelectMode, Shape, Size } from './enums'
+import { FormEvent, ReactNode } from 'react'
+import { ButtonVariant, Color, Layer } from './enums'
 import {
-  BottomSheetItem,
-  ContextMenuItem,
-  OmitRef,
   OnboardingItem,
-  SelectOption,
-  StatisticValue,
-  TopTabberItem,
-  WizardOnStepChange,
+  WithBackground,
+  WithColor,
+  WithDescription,
+  WithFeedbackType,
+  WithFooter,
+  WithHeader,
+  WithIcon,
+  WithLayer,
+  WithLocalizationProps,
+  WithOrientation,
+  WithShape,
+  WithSize,
+  WithTitle,
   WizardStepPartial
-} from './types'
+} from './interfaces'
+import { StatisticValue, WizardOnStepChange } from './types'
 
 /** @category Prop */
-export type AlertProps = {
-  description?: string
-  title?: string
-  type: FeedbackType
-} & HTMLDivProps
+export interface AlertProps extends HTMLDivProps, WithDescription, WithTitle, WithFeedbackType {}
 
 /** @category Prop */
-export type AvatarProps = {
-  background?: string
-  color?: string
+export interface AvatarProps extends HTMLDivProps, WithBackground, WithColor, WithShape {
   icon?: (props: IconProps) => JSX.Element
-  layer?: Layer
-  ratio?: number
-  shape?: Shape
+  iconProps?: IconProps
+  image?: string
+  imageProps?: ImageProps
   size: number
-  source?: string
   text?: string
-  thickness?: number
-} & OmitRef<HTMLDivProps>
+  textProps?: HTMLElementProps
+}
 
 /** @category Prop */
-export type BackdropProps = {
+export interface BackdropProps extends HTMLDivProps {
   opacity?: number
-} & HTMLDivProps
+}
 
 /** @category Prop */
-export type BadgeProps = {
+export interface BadgeProps extends HTMLDivProps {
   value: number
-} & HTMLDivProps
+}
 
 /** @category Prop */
-export type BottomSheetProps = {
-  items?: BottomSheetItem[]
-  name: string
-  title?: string
-} & HTMLDivProps
-
-/** @category Prop */
-export type ButtonProps = {
-  background?: Color
-  color?: Color
+export interface ButtonProps extends HTMLButtonProps, WithBackground, WithColor, WithIcon, WithShape, WithSize {
   destructive?: boolean
-  icon?: (props: IconProps) => JSX.Element
-  layer?: Layer
-  shape?: Shape
-  size?: Size
   spinning?: boolean
-  submit?: boolean
   title?: string
-  type?: ButtonType
-} & Omit<HTMLButtonProps, 'type'>
+  variant?: ButtonVariant
+}
 
 /** @category Prop */
-export type CardProps = {
-  header?: JSX.Element
-  layer?: Layer
-  footer?: JSX.Element
-  title?: string
-} & HTMLDivProps
+export interface CardProps extends HTMLDivProps, WithHeader, WithLayer, WithFooter, WithTitle {}
 
 /** @category Prop */
-export type CheckboxProps<T extends object> = {
-  disabled?: boolean
-  label?: string
-  layer?: Layer
-  path: keyof T
-  required?: boolean
-  store: T
-  touched?: boolean
-} & HTMLDivProps
-
-/** @category Prop */
-export type ColorableDivProps = {
+export interface ColorableDivProps extends HTMLDivProps {
   background?: Color
   border?: Color
   divide?: Color
   layer?: Layer
   text?: Color
-} & HTMLDivProps
-
-export type ComponentProps<T extends Element> = {
-  id?: ID
-  ref?: LegacyRef<T> | MutableRefObject<T>
-  update?: () => void
 }
 
-export type ComponentLayerProps<T extends Element> = {
-  layer?: Layer
-} & ComponentProps<T>
-
-export type ComponentLayerShapeProps<T extends Element> = ComponentProps<T> & ComponentLayerProps<T> & ComponentShapeProps<T>
-export type ComponentLayerShapeSizeProps<T extends Element> = ComponentProps<T> & ComponentLayerProps<T> & ComponentShapeProps<T> & ComponentSizeProps<T>
-
-export type ComponentShapeProps<T extends Element> = {
-  shape?: Shape
-} & ComponentProps<T>
-
-export type ComponentSizeProps<T extends Element> = {
-  size?: Size
-} & ComponentProps<T>
+/** @category Prop */
+export interface DialogProps extends WithDescription, WithFooter, WithHeader, WithTitle {
+  buttons?: Partial<ButtonProps>[]
+  onHide?: () => any
+  onShow?: () => any
+}
 
 /** @category Prop */
-export type ContextMenuProps = {
-  items: ContextMenuItem[]
-  name: string
-} & HTMLDivProps
+export interface DividerProps extends HTMLDivProps, WithColor, WithLayer, WithOrientation {}
 
 /** @category Prop */
-export type DialogProps = {
-  button?: Partial<ButtonProps>
-  onClickConfirm: () => any
-} & Omit<ModalProps, 'button'>
+export interface EmptyProps extends HTMLDivProps, WithDescription, WithLayer, WithTitle {}
 
 /** @category Prop */
-export type DividerProps = {
-  color?: Color
-  layer?: Layer
-  type?: DividerType
-} & HTMLDivProps
-
-/** @category Prop */
-export type EmptyProps = {
-  layer?: Layer
-} & HTMLDivProps
-
-/** @category Prop */
-export type FormProps = {
-  layer?: Layer
+export interface FormProps extends Omit<HTMLFormProps, 'onSubmit'> {
   onSubmit: (event: FormEvent<HTMLFormElement>) => any
-} & Omit<HTMLFormProps, 'onSubmit'>
+}
 
 /** @category Prop */
-export type HTMLAnchorProps = React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>
+export interface HTMLAnchorProps extends React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement> {}
 /** @category Prop */
-export type HTMLButtonProps = React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
+export interface HTMLButtonProps extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {}
 /** @category Prop */
-export type HTMLDivProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+export interface HTMLDivProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
 /** @category Prop */
-export type HTMLDListProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDListElement>, HTMLDListElement>
+export interface HTMLDListProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDListElement>, HTMLDListElement> {}
 /** @category Prop */
-export type HTMLElementProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
+export interface HTMLElementProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> {}
 /** @category Prop */
-export type HTMLImageProps = React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>
+export interface HTMLImageProps extends React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement> {}
 /** @category Prop */
-export type HTMLInputProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
+export interface HTMLInputProps extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {}
 /** @category Prop */
-export type HTMLLabelProps = React.DetailedHTMLProps<React.LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement>
+export interface HTMLLabelProps extends React.DetailedHTMLProps<React.LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement> {}
 /** @category Prop */
-export type HTMLLIProps = React.DetailedHTMLProps<React.LiHTMLAttributes<HTMLLIElement>, HTMLLIElement>
+export interface HTMLLIProps extends React.DetailedHTMLProps<React.LiHTMLAttributes<HTMLLIElement>, HTMLLIElement> {}
 /** @category Prop */
-export type HTMLFormProps = React.DetailedHTMLProps<React.FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>
+export interface HTMLFormProps extends React.DetailedHTMLProps<React.FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> {}
 /** @category Prop */
-export type HTMLOListProps = React.DetailedHTMLProps<React.OlHTMLAttributes<HTMLOListElement>, HTMLOListElement>
+export interface HTMLOListProps extends React.DetailedHTMLProps<React.OlHTMLAttributes<HTMLOListElement>, HTMLOListElement> {}
 /** @category Prop */
-export type HTMLParagraphProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement>
+export interface HTMLParagraphProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement> {}
 /** @category Prop */
-export type HTMLSpanProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>
+export interface HTMLSpanProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement> {}
 /** @category Prop */
-export type HTMLUListProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLUListElement>, HTMLUListElement>
+export interface HTMLUListProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLUListElement>, HTMLUListElement> {}
 
 /** @category Prop */
-export type IconProps = {
-  color?: string
+export interface IconProps extends Omit<React.SVGProps<SVGSVGElement>, 'fill' | 'stroke'>, WithColor, WithLayer {
   fill?: boolean | string
-  layer?: Layer
   size?: number
   stroke?: boolean | string
   svg?: string
   thickness?: number
-} & Omit<React.SVGProps<SVGSVGElement>, 'fill' | 'stroke'>
+}
 
 /** @category Prop */
-export type ImageProps = {
-  fallback?: ((props: any) => JSX.Element) | string
-  orientation?: Orientation
+export interface ImageProps extends Omit<HTMLImageProps, 'src'>, WithOrientation, WithShape {
+  fallback?: ReactNode
   ratio?: number
-  shape?: Shape
-  size?: number
+  size?: number | string
   source: string
-} & Omit<HTMLImageProps, 'src'>
+}
 
 /** @category Prop */
-export type InputFileProps<T extends object> = {
-  label?: string
-  layer?: Layer
-  mode?: InputFileMode
-  onChangeCallback?: () => any
-  path: keyof T
-  required?: boolean
-  store: T
-} & Omit<HTMLInputProps, 'onChange'>
+export interface LabelProps extends HTMLLabelProps, WithColor, WithLayer, WithLocalizationProps {}
 
 /** @category Prop */
-export type LabelProps = {
-  color?: Color
-  inject?: any[]
-  layer?: Layer
-  path?: string
-} & HTMLLabelProps
-
-/** @category Prop */
-export type ListProps<T> = {
-  empty?: () => JSX.Element
+export interface ListProps<T> extends HTMLUListProps {
+  empty?: ReactNode
   items: T[]
-  renderItem: (v: T, k: number) => JSX.Element
-} & HTMLUListProps
+  renderItem: (v: T, k: number) => ReactNode
+}
 
 /** @category Prop */
-export type ListItemProps = {
-  avatar?: string | JSX.Element
-  description?: string | JSX.Element
-  isFirst?: boolean
-  isLast?: boolean
-  layer?: Layer
-  title: string | JSX.Element
-} & HTMLDivProps
+export interface ListItemProps extends HTMLDivProps, WithDescription, WithLayer, WithTitle {
+  avatar?: AvatarProps
+  image?: ImageProps
+}
 
 /** @category Prop */
-export type LoadingProps = {
-  title: string
-} & HTMLDivProps
+export interface LoadingProps extends HTMLDivProps, WithDescription, WithTitle {}
 
 /** @category Prop */
-export type ModalProps = {
-  description?: string
-  name: string
-  title?: string
-} & HTMLDivProps
-
-/** @category Prop */
-export type OnboardingProps = {
+export interface OnboardingProps extends HTMLDivProps {
+  active?: number
   items: OnboardingItem[]
-  onEnd: () => any
-} & HTMLDivProps
+  onEnd?: () => any
+}
 
 /** @category Prop */
-export type ParentProps = {
+export interface ParentProps {
   children: JSX.Element
 }
 
 /** @category Prop */
-export type ResultProps = {
-  description?: string
-  icon?: (props: IconProps) => JSX.Element
-  image?: string
-  title: string
-  type?: FeedbackType
-} & HTMLDivProps
+export interface ResultProps extends HTMLDivProps, WithDescription, WithFeedbackType, WithIcon, WithTitle {}
 
 /** @category Prop */
-export type SelectProps<T extends object> = {
-  disabled?: boolean
-  label?: string
-  layer?: Layer
-  mode?: SelectMode
-  options: SelectOption[]
-  path: keyof T
-  placeholder?: string
-  required?: boolean
-  store: T
-} & HTMLDivProps
+export interface SettingProps extends HTMLDivProps, WithDescription, WithLayer, WithTitle {}
 
 /** @category Prop */
-export type SettingProps = {
-  description: string
-  layer?: Layer
-  title: string
-} & HTMLDivProps
+export interface SpinnerProps extends Omit<IconProps, 'svg'> {}
 
 /** @category Prop */
-export type SpinnerProps = {
-  color?: string
-  size?: number
-} & Omit<SVGElementProps, 'fill' | 'stroke'>
-
-/** @category Prop */
-export type StatisticProps = {
-  feedback?: FeedbackType
-  icon?: (props: IconProps) => JSX.Element
-  layer?: Layer
+export interface StatisticProps extends HTMLDivProps, WithFeedbackType, WithIcon, WithLayer, WithTitle {
   progress?: number
   reference?: StatisticValue
-  title: string
   value: StatisticValue
-} & HTMLDivProps
+}
 
 /** @category Prop */
-export type SVGElementProps = React.SVGProps<SVGSVGElement>
+export interface SVGElementProps extends React.SVGProps<SVGSVGElement> {}
 
 /** @category Prop */
-export type SwitchProps<T extends object> = {
-  disabled?: boolean
-  label?: string
-  layer?: Layer
-  path: keyof T
-  store: T
-} & HTMLDivProps
-
-/** @category Prop */
-export type TagProps = {
-  background?: Color
-  color?: Color
+export interface TagProps extends HTMLDivProps, WithBackground, WithColor, WithIcon, WithLayer {
   destroyable?: boolean
-  icon?: (props: IconProps) => JSX.Element
-  layer?: Layer
-  onDestroyCallback?: () => any
+  onDestroy?: () => any
   text: string
-} & HTMLDivProps
+}
 
 /** @category Prop */
-export type TopTabberProps = {
-  active?: string
-  items: TopTabberItem[]
-} & HTMLDivProps
-
-/** @category Prop */
-export type VirtualizedListProps<T> = {
+export interface VirtualizedListProps<T> extends HTMLUListProps, WithOrientation {
   dummy: () => JSX.Element
   empty?: () => JSX.Element
   gutter?: number
   itemParentProps?: HTMLDivProps
   items: T[]
-  orientation?: Orientation
   renderItem: (v: T, k: number) => JSX.Element
-} & HTMLUListProps
+}
 
 /** @category Prop */
-export type WizardProps = {
+export interface WizardProps extends HTMLDivProps {
   active?: string
   onStepChange?: WizardOnStepChange
   steps: WizardStepPartial[]
-} & HTMLDivProps
+}

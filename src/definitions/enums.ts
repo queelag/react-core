@@ -1,4 +1,4 @@
-export enum ButtonType {
+export enum ButtonVariant {
   NONE = 'NONE',
   OUTLINE = 'OUTLINE',
   PRIMARY = 'PRIMARY',
@@ -54,7 +54,6 @@ export enum ComponentName {
   INPUT_FILE = 'INPUT_FILE',
   LIST = 'LIST',
   LIST_ITEM = 'LIST_ITEM',
-  MODAL = 'MODAL',
   NOTIFICATION = 'NOTIFICATION',
   NOT_FOUND = 'NOT_FOUND',
   ONBOARDING = 'ONBOARDING',
@@ -83,11 +82,6 @@ export enum DirectionHorizontal {
 export enum DirectionVertical {
   DOWN = 'DOWN',
   UP = 'UP'
-}
-
-export enum DividerType {
-  HORIZONTAL = 'HORIZONTAL',
-  VERTICAL = 'VERTICAL'
 }
 
 export enum FeedbackType {

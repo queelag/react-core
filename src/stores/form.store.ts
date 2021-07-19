@@ -1,13 +1,14 @@
 import { tcp } from '@queelag/core'
 import { FormEvent } from 'react'
-import { CheckboxCollector } from '../collectors/checkbox.collector'
+import { CheckBoxCollector } from '../collectors/check.box.collector'
 import { InputCollector } from '../collectors/input.collector'
 import { InputFileCollector } from '../collectors/input.file.collector'
 import { SelectCollector } from '../collectors/select.collector'
 import { ComponentName } from '../definitions/enums'
-import { ComponentLayerProps, FormProps } from '../definitions/props'
+import { ComponentLayerStoreProps } from '../definitions/interfaces'
+import { FormProps } from '../definitions/props'
 import { ComponentLayerStore } from '../modules/component.layer.store'
-import { CheckboxStore } from './checkbox.store'
+import { CheckBoxStore } from './check.box.store'
 import { InputFileStore } from './input.file.store'
 import { InputStore } from './input.store'
 import { SelectStore } from './select.store'
@@ -18,7 +19,7 @@ import { SelectStore } from './select.store'
  * @category Store
  */
 export class FormStore extends ComponentLayerStore<HTMLFormElement> {
-  constructor(props: FormProps & ComponentLayerProps<HTMLFormElement>) {
+  constructor(props: FormProps & ComponentLayerStoreProps<HTMLFormElement>) {
     super(ComponentName.FORM, props)
 
     this.onSubmit = props.onSubmit
@@ -37,11 +38,11 @@ export class FormStore extends ComponentLayerStore<HTMLFormElement> {
   /**
    * An array of child CheckBox stores.
    */
-  get checkBoxStores(): CheckboxStore<any>[] {
-    let stores: CheckboxStore<any>[] = []
+  get checkBoxStores(): CheckBoxStore<any>[] {
+    let stores: CheckBoxStore<any>[] = []
 
     this.element.querySelectorAll(`[id^='${ComponentName.CHECKBOX}']`).forEach((v: Element) => {
-      stores.push(CheckboxCollector.get(v.id))
+      stores.push(CheckBoxCollector.get(v.id))
     })
 
     return stores
@@ -91,7 +92,7 @@ export class FormStore extends ComponentLayerStore<HTMLFormElement> {
    */
   get isValid(): boolean {
     return (
-      this.checkBoxStores.every((v: CheckboxStore<any>) => v.isValid) &&
+      this.checkBoxStores.every((v: CheckBoxStore<any>) => v.isValid) &&
       this.inputStores.every((v: InputStore<any>) => v.isValid) &&
       this.inputFileStores.every((v: InputFileStore<any>) => v.isValid) &&
       this.selectStores.every((v: SelectStore<any>) => v.isValid)
@@ -103,7 +104,7 @@ export class FormStore extends ComponentLayerStore<HTMLFormElement> {
     this._onSubmit = async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault()
 
-      this.checkBoxStores.forEach((v: CheckboxStore<any>) => v.touch())
+      this.checkBoxStores.forEach((v: CheckBoxStore<any>) => v.touch())
       this.inputStores.forEach((v: InputStore<any>) => v.touch())
       this.inputFileStores.forEach((v: InputFileStore<any>) => v.touch())
       this.selectStores.forEach((v: SelectStore<any>) => v.touch())
@@ -116,4 +117,4 @@ export class FormStore extends ComponentLayerStore<HTMLFormElement> {
 }
 
 /** @category Constant */
-export const FORM_STORE_KEYS: (keyof FormProps & keyof FormStore)[] = ['id', 'layer', 'onSubmit']
+export const FORM_STORE_KEYS: (keyof FormProps & keyof FormStore)[] = ['id', 'onSubmit']

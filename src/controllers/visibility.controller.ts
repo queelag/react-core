@@ -74,12 +74,12 @@ export class VisibilityController {
       return Logger.warn('VisibilityController', 'show', `The key ${name} is already visible.`, this.data.get(name))
     }
 
-    this.data.set(name, VisibilityController.VISIBLE)
-    Logger.debug('VisibilityController', 'hide', `The key ${name} is visible.`, this.data.get(name))
+    this.data.set(name, VisibilityController.SHOWING)
+    Logger.debug('VisibilityController', 'hide', `The key ${name} is showing.`, this.data.get(name))
 
     setTimeout(() => {
-      this.data.set(name, VisibilityController.SHOWING)
-      Logger.debug('VisibilityController', 'hide', `The key ${name} is showing.`, this.data.get(name))
+      this.data.set(name, VisibilityController.VISIBLE)
+      Logger.debug('VisibilityController', 'hide', `The key ${name} is visible.`, this.data.get(name))
     }, delay)
   }
 
@@ -96,6 +96,13 @@ export class VisibilityController {
   }
 
   /**
+   * Checks if name is HIDDEN.
+   */
+  isHidden(name: string): boolean {
+    return this.get(name) <= VisibilityController.HIDING
+  }
+
+  /**
    * Checks if name is HIDING.
    */
   isHiding(name: string): boolean {
@@ -103,24 +110,17 @@ export class VisibilityController {
   }
 
   /**
-   * Checks if name is HIDDEN.
+   * Checks if name is SHOWING.
    */
-  isHidden(name: string): boolean {
-    return this.get(name) === VisibilityController.HIDDEN
+  isShowing(name: string): boolean {
+    return this.get(name) === VisibilityController.SHOWING
   }
 
   /**
    * Checks if name is VISIBLE.
    */
   isVisible(name: string): boolean {
-    return this.get(name) !== VisibilityController.HIDDEN
-  }
-
-  /**
-   * Checks if name is SHOWING.
-   */
-  isShowing(name: string): boolean {
-    return this.get(name) === VisibilityController.SHOWING
+    return this.get(name) >= VisibilityController.SHOWING
   }
 
   static get HIDDEN(): number {
@@ -131,11 +131,11 @@ export class VisibilityController {
     return 1
   }
 
-  static get VISIBLE(): number {
+  static get SHOWING(): number {
     return 2
   }
 
-  static get SHOWING(): number {
+  static get VISIBLE(): number {
     return 3
   }
 }

@@ -1,7 +1,8 @@
 import { noop, tcp } from '@queelag/core'
 import { MouseEvent } from 'react'
-import { ButtonType, ComponentName } from '../definitions/enums'
-import { ButtonProps, ComponentLayerShapeSizeProps } from '../definitions/props'
+import { ButtonVariant, ComponentName } from '../definitions/enums'
+import { ComponentLayerShapeSizeStoreProps } from '../definitions/interfaces'
+import { ButtonProps } from '../definitions/props'
 import { ComponentLayerShapeSizeStore } from '../modules/component.layer.shape.size.store'
 
 /**
@@ -19,17 +20,17 @@ export class ButtonStore extends ComponentLayerShapeSizeStore<HTMLButtonElement>
    */
   spinning: boolean
   /**
-   * A {@link ButtonType}, useful for handling custom styles.
+   * A {@link ButtonVariant}, useful for handling custom styles.
    */
-  type: ButtonType
+  variant: ButtonVariant
 
-  constructor(props: ButtonProps & ComponentLayerShapeSizeProps<HTMLButtonElement>) {
+  constructor(props: ButtonProps & ComponentLayerShapeSizeStoreProps<HTMLButtonElement>) {
     super(ComponentName.BUTTON, props)
 
     this.disabled = props.disabled || false
     this.onClick = props.onClick || noop
     this.spinning = props.spinning || false
-    this.type = props.type || ButtonType.OUTLINE
+    this.variant = props.variant || ButtonVariant.OUTLINE
   }
 
   /** @internal */
@@ -58,24 +59,24 @@ export class ButtonStore extends ComponentLayerShapeSizeStore<HTMLButtonElement>
     return this.spinning === false
   }
 
-  get isTypeNone(): boolean {
-    return this.type === ButtonType.NONE
+  get isVariantNone(): boolean {
+    return this.variant === ButtonVariant.NONE
   }
 
-  get isTypeOutline(): boolean {
-    return this.type === ButtonType.OUTLINE
+  get isVariantOutline(): boolean {
+    return this.variant === ButtonVariant.OUTLINE
   }
 
-  get isTypePrimary(): boolean {
-    return this.type === ButtonType.PRIMARY
+  get isVariantPrimary(): boolean {
+    return this.variant === ButtonVariant.PRIMARY
   }
 
-  get isTypeSecondary(): boolean {
-    return this.type === ButtonType.SECONDARY
+  get isVariantSecondary(): boolean {
+    return this.variant === ButtonVariant.SECONDARY
   }
 
-  get isTypeText(): boolean {
-    return this.type === ButtonType.TEXT
+  get isVariantText(): boolean {
+    return this.variant === ButtonVariant.TEXT
   }
 
   /** @internal */
@@ -103,4 +104,4 @@ export class ButtonStore extends ComponentLayerShapeSizeStore<HTMLButtonElement>
 }
 
 /** @category Constant */
-export const BUTTON_STORE_KEYS: (keyof ButtonProps & keyof ButtonStore)[] = ['disabled', 'id', 'layer', 'onClick', 'shape', 'size', 'spinning', 'type']
+export const BUTTON_STORE_KEYS: (keyof ButtonProps & keyof ButtonStore)[] = ['disabled', 'id', 'layer', 'onClick', 'shape', 'size', 'spinning', 'variant']

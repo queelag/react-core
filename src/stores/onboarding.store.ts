@@ -1,7 +1,7 @@
-import { NumberUtils } from '@queelag/core'
+import { noop, NumberUtils } from '@queelag/core'
 import { ComponentName } from '../definitions/enums'
-import { ComponentProps, OnboardingProps } from '../definitions/props'
-import { OnboardingItem } from '../definitions/types'
+import { ComponentStoreProps, OnboardingItem } from '../definitions/interfaces'
+import { OnboardingProps } from '../definitions/props'
 import { ComponentStore } from '../modules/component.store'
 
 /**
@@ -19,12 +19,12 @@ export class OnboardingStore extends ComponentStore<HTMLDivElement> {
    */
   items: OnboardingItem[]
 
-  constructor(props: OnboardingProps & ComponentProps<HTMLDivElement>) {
+  constructor(props: OnboardingProps & ComponentStoreProps<HTMLDivElement>) {
     super(ComponentName.ONBOARDING, props)
 
     this.active = 0
     this.items = props.items
-    this.onEnd = props.onEnd
+    this.onEnd = props.onEnd || noop
   }
 
   /**

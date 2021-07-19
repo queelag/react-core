@@ -1,6 +1,6 @@
 import { ListChildComponentProps } from 'react-window'
 
 /** @category Prop */
-export type VirtualizedListItemProps<T> = {
+export interface VirtualizedListItemProps<T> extends ListChildComponentProps {
   renderItem: (v: T, k: number) => JSX.Element
-} & ListChildComponentProps
+}

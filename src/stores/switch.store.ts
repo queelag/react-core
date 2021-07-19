@@ -1,6 +1,6 @@
 import { ComponentName } from '../definitions/enums'
-import { SwitchProps } from '../definitions/props'
-import { ComponentFormFieldProps } from '../definitions/with.superstruct.props'
+import { ComponentFormFieldStoreProps } from '../definitions/with.superstruct.interfaces'
+import { SwitchProps } from '../definitions/with.superstruct.props'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
 
 /**
@@ -9,7 +9,7 @@ import { ComponentFormFieldStore } from '../modules/component.form.field.store'
  * @category Store
  */
 export class SwitchStore<T extends object> extends ComponentFormFieldStore<HTMLDivElement, T> {
-  constructor(props: SwitchProps<T> & ComponentFormFieldProps<HTMLDivElement, T>) {
+  constructor(props: SwitchProps<T> & ComponentFormFieldStoreProps<HTMLDivElement, T>) {
     super(ComponentName.SWITCH, props)
   }
 

@@ -1,5 +1,5 @@
 import * as S from 'superstruct'
-import { ComponentFormFieldProps } from '../definitions/with.superstruct.props'
+import { ComponentFormFieldStoreProps } from '../definitions/with.superstruct.interfaces'
 import { ComponentLayerStore } from './component.layer.store'
 import { Schema } from './schema'
 
@@ -42,15 +42,15 @@ export class ComponentFormFieldStore<T extends Element, U extends object> extend
    */
   validation: [S.StructError | undefined, any]
 
-  constructor(name: string, props: ComponentFormFieldProps<T, U>) {
+  constructor(name: string, props: ComponentFormFieldStoreProps<T, U>) {
     super(name, props)
 
     this.disabled = props.disabled || false
     this.label = props.label || ''
-    this.path = props.path
+    this.path = props.path || ('' as any)
     this.required = props.required || false
     this.schema = props.schema || Schema.any
-    this.store = props.store
+    this.store = props.store || ({} as any)
     this.touched = props.touched || false
     this.validation = this.schema.validate(this.value)
   }

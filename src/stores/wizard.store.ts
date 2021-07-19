@@ -1,7 +1,7 @@
 import { noop, tcp } from '@queelag/core'
 import { ComponentName, DirectionHorizontal } from '../definitions/enums'
-import { ComponentProps, WizardProps } from '../definitions/props'
-import { WizardStep, WizardStepPartial } from '../definitions/types'
+import { ComponentStoreProps, WizardStep, WizardStepPartial } from '../definitions/interfaces'
+import { WizardProps } from '../definitions/props'
 import { ComponentStore } from '../modules/component.store'
 import { Dummy } from '../modules/dummy'
 
@@ -18,7 +18,7 @@ export class WizardStore extends ComponentStore<HTMLDivElement> {
   /** @internal */
   private _steps: WizardStep[] = []
 
-  constructor(props: WizardProps & ComponentProps<HTMLDivElement>) {
+  constructor(props: WizardProps & ComponentStoreProps<HTMLDivElement>) {
     super(ComponentName.WIZARD, props)
 
     this.active = props.active || props.steps[0].name

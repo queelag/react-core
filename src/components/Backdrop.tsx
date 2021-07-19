@@ -28,7 +28,7 @@ export function Backdrop(props: BackdropProps) {
   return (
     <div
       {...ObjectUtils.omit(props, BACKDROP_PROPS_KEYS)}
-      style={{ background: 'black', height: '100%', opacity: props.opacity || 0.5, position: 'absolute', width: '100%' }}
+      style={{ background: 'black', ...props.style, height: '100%', opacity: props.opacity || 0.5, position: 'absolute', width: '100%' }}
     />
   )
 }

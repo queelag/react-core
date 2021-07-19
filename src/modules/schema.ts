@@ -1,5 +1,5 @@
 import * as S from 'superstruct'
-import { InputFileItem } from '../definitions/types'
+import { InputFileItem } from '../definitions/interfaces'
 
 /**
  * @category Module

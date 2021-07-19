@@ -1,5 +1,5 @@
 import { Color, FeedbackType, Layer } from '../definitions/enums'
-import { ColorPickerConfiguration } from '../definitions/types'
+import { ColorPickerConfiguration } from '../definitions/interfaces'
 import { Dummy } from '../modules/dummy'
 
 /**

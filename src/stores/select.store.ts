@@ -1,8 +1,9 @@
 import * as S from 'superstruct'
 import { ComponentName, SelectMode } from '../definitions/enums'
-import { SelectProps } from '../definitions/props'
-import { SelectOption, SelectOptionValue } from '../definitions/types'
-import { ComponentFormFieldProps } from '../definitions/with.superstruct.props'
+import { SelectOption } from '../definitions/interfaces'
+import { SelectOptionValue } from '../definitions/types'
+import { ComponentFormFieldStoreProps } from '../definitions/with.superstruct.interfaces'
+import { SelectProps } from '../definitions/with.superstruct.props'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
 
 /**
@@ -20,7 +21,7 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
    */
   options: SelectOption[]
 
-  constructor(props: SelectProps<T> & ComponentFormFieldProps<HTMLDivElement, T>) {
+  constructor(props: SelectProps<T> & ComponentFormFieldStoreProps<HTMLDivElement, T>) {
     super(ComponentName.SELECT, props)
 
     this.mode = props.mode || SelectMode.SINGLE

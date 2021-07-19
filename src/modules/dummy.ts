@@ -1,27 +1,10 @@
 import { MutableRefObject } from 'react'
 import { Blank } from '../components/Blank'
-import { Parent } from '../components/Parent'
 import { Color } from '../definitions/enums'
-import {
-  BottomTabberItem,
-  ColorPickerConfiguration,
-  ColorPickerConfigurationValue,
-  InputFileItem,
-  Route,
-  SidebarItem,
-  TopTabberItem,
-  WizardStep
-} from '../definitions/types'
+import { ColorPickerConfiguration, ColorPickerConfigurationValue, InputFileItem, WizardStep } from '../definitions/interfaces'
 
 /** @internal */
 export class Dummy {
-  static get bottomTabberItem(): BottomTabberItem {
-    return {
-      icon: Blank,
-      name: ''
-    }
-  }
-
   static get colorPickerConfiguration(): ColorPickerConfiguration {
     return {
       background: this.colorPickerConfigurationValue,
@@ -56,33 +39,6 @@ export class Dummy {
 
   static get ref(): MutableRefObject<any> {
     return { current: document.createElement('div') }
-  }
-
-  static get route(): Route {
-    return {
-      children: [],
-      component: Blank,
-      name: '',
-      parameters: {},
-      path: '',
-      parent: Parent,
-      redirect: [],
-      regex: new RegExp('')
-    }
-  }
-
-  static get sidebarItem(): SidebarItem {
-    return {
-      icon: Blank,
-      name: ''
-    }
-  }
-
-  static get topTabberItem(): TopTabberItem {
-    return {
-      component: Blank,
-      name: ''
-    }
   }
 
   static get wizardStep(): WizardStep {

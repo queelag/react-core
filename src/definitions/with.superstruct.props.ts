@@ -1,24 +1,16 @@
 import * as S from 'superstruct'
-import { InputType, Layer } from './enums'
-import { ComponentLayerProps, HTMLInputProps } from './props'
-
-export type ComponentFormFieldProps<T extends Element, U extends object> = {
-  disabled?: boolean
-  label?: string
-  path: keyof U
-  required?: boolean
-  schema?: S.Struct<any, any>
-  store: U
-  touched?: boolean
-} & ComponentLayerProps<T>
+import { InputFileMode, InputType, Layer, SelectMode } from './enums'
+import { SelectOption } from './interfaces'
+import { HTMLDivProps, HTMLInputProps } from './props'
+import { WithFormFieldProps } from './with.superstruct.interfaces'
 
 /** @category Prop */
-export type InputProps<T extends object> = {
+export interface CheckBoxProps<T extends object> extends HTMLDivProps, WithFormFieldProps<T> {}
+
+/** @category Prop */
+export interface InputProps<T extends object> extends Omit<HTMLInputProps, 'prefix' | 'type'> {
   label?: string
   layer?: Layer
-  onBlurCallback?: () => any
-  onChangeCallback?: () => any
-  onFocusCallback?: () => any
   path: keyof T
   prefix?: JSX.Element
   required?: boolean
@@ -27,4 +19,18 @@ export type InputProps<T extends object> = {
   suffix?: JSX.Element
   touched?: boolean
   type?: InputType
-} & Omit<HTMLInputProps, 'onBlur' | 'onChange' | 'onFocus' | 'type'>
+}
+
+/** @category Prop */
+export interface InputFileProps<T extends object> extends HTMLInputProps, WithFormFieldProps<T> {
+  mode?: InputFileMode
+}
+
+/** @category Prop */
+export interface SelectProps<T extends object> extends HTMLDivProps, WithFormFieldProps<T> {
+  mode?: SelectMode
+  options: SelectOption[]
+}
+
+/** @category Prop */
+export interface SwitchProps<T extends object> extends HTMLDivProps, WithFormFieldProps<T> {}

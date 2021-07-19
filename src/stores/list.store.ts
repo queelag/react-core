@@ -1,5 +1,6 @@
 import { ComponentName } from '../definitions/enums'
-import { ComponentProps, ListProps } from '../definitions/props'
+import { ComponentStoreProps } from '../definitions/interfaces'
+import { ListProps } from '../definitions/props'
 import { ComponentStore } from '../modules/component.store'
 
 /**
@@ -13,7 +14,7 @@ export class ListStore<T> extends ComponentStore<HTMLUListElement> {
    */
   items: T[]
 
-  constructor(props: ListProps<T> & ComponentProps<HTMLUListElement>) {
+  constructor(props: ListProps<T> & ComponentStoreProps<HTMLUListElement>) {
     super(ComponentName.LIST, props)
 
     this.items = props.items

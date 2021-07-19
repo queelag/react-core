@@ -1,10 +1,10 @@
 import { Router } from 'router5'
+import { Blank } from '../components/Blank'
 import { ComponentName } from '../definitions/enums'
-import { ComponentProps } from '../definitions/props'
-import { BottomTabberItem } from '../definitions/types'
+import { ComponentStoreProps } from '../definitions/interfaces'
+import { BottomTabberItem } from '../definitions/with.router5.interfaces'
 import { BottomTabberProps } from '../definitions/with.router5.props'
 import { ComponentStore } from '../modules/component.store'
-import { Dummy } from '../modules/dummy'
 
 /**
  * An abstraction for BottomTabber stores, handles items and router navigation.
@@ -21,7 +21,7 @@ export class BottomTabberStore extends ComponentStore<HTMLDivElement> {
    */
   router: Router
 
-  constructor(props: BottomTabberProps & ComponentProps<HTMLDivElement>) {
+  constructor(props: BottomTabberProps & ComponentStoreProps<HTMLDivElement>) {
     super(ComponentName.BOTTOM_TABBER, props)
 
     this.items = props.items
@@ -32,15 +32,24 @@ export class BottomTabberStore extends ComponentStore<HTMLDivElement> {
    * Navigates to the item route.
    */
   onClickItem(item: BottomTabberItem): void {
-    this.router.navigate(item.name)
+    this.router.navigate(item.route.name, item.route.params || {}, item.route.options || {})
   }
 
   findItemByName(name: string): BottomTabberItem {
-    return this.items.find((v: BottomTabberItem) => v.name === name) || Dummy.bottomTabberItem
+    return this.items.find((v: BottomTabberItem) => v.route.name === name) || this.dummyItem
   }
 
   findItemIndexByName(name: string): number {
-    return this.items.findIndex((v: BottomTabberItem) => v.name === name)
+    return this.items.findIndex((v: BottomTabberItem) => v.route.name === name)
+  }
+
+  private get dummyItem(): BottomTabberItem {
+    return {
+      icon: Blank,
+      route: {
+        name: ''
+      }
+    }
   }
 }
 

@@ -2,7 +2,8 @@ import { Logger, NumberUtils, rv, tc, tcp } from '@queelag/core'
 import { CSSProperties, SyntheticEvent } from 'react'
 import { IMAGE_EMPTY_BASE64, IMAGE_EMPTY_TYPE } from '../definitions/constants'
 import { ComponentName, Orientation } from '../definitions/enums'
-import { ComponentShapeProps, ImageProps } from '../definitions/props'
+import { ComponentShapeStoreProps } from '../definitions/interfaces'
+import { ImageProps } from '../definitions/props'
 import { Base64 } from '../modules/base64'
 import { Cache } from '../modules/cache'
 import { ComponentShapeStore } from '../modules/component.shape.store'
@@ -37,7 +38,7 @@ export class ImageStore extends ComponentShapeStore<HTMLImageElement> {
    */
   type: string
 
-  constructor(props: ImageProps & ComponentShapeProps<HTMLImageElement>) {
+  constructor(props: ImageProps & ComponentShapeStoreProps<HTMLImageElement>) {
     super(ComponentName.IMAGE, props)
 
     this.base64 = IMAGE_EMPTY_BASE64
@@ -64,7 +65,7 @@ export class ImageStore extends ComponentShapeStore<HTMLImageElement> {
   getStyle(props: ImageProps): CSSProperties {
     return {
       ...props.style,
-      ...ShapeUtils.findStyle(this.shape, props.size),
+      ...ShapeUtils.findStyle(this.shape, this.height),
       height: props.height || props.size || this.height || undefined,
       width: props.width || props.size || this.width || undefined
     }

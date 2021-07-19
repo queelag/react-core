@@ -26,7 +26,7 @@ export function VirtualizedList<T>(props: VirtualizedListProps<T>) {
   const update = useForceUpdate()
   const ref = useRef(document.createElement('ul'))
   const dummyRef = useRef(document.createElement('div'))
-  const store = useMemo(() => new VirtualizedListStore({ ...props, dummyRef, ref, update }), [])
+  const store = useMemo(() => new VirtualizedListStore<T>({ ...props, dummyRef, ref, update }), [])
 
   useEffect(() => {
     StoreUtils.updateKeys(store, props, VIRTUALIZED_LIST_STORE_KEYS, update)

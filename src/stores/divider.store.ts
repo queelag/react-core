@@ -1,5 +1,6 @@
-import { ComponentName, DividerType } from '../definitions/enums'
-import { ComponentLayerProps, DividerProps } from '../definitions/props'
+import { ComponentName, Orientation } from '../definitions/enums'
+import { ComponentLayerStoreProps } from '../definitions/interfaces'
+import { DividerProps } from '../definitions/props'
 import { ComponentLayerStore } from '../modules/component.layer.store'
 
 /**
@@ -9,24 +10,24 @@ import { ComponentLayerStore } from '../modules/component.layer.store'
  */
 export class DividerStore extends ComponentLayerStore<HTMLDivElement> {
   /**
-   * A {@link DividerType} which determines the orientation.
+   * An {@link Orientation} which determines the style.
    */
-  type: DividerType
+  orientation: Orientation
 
-  constructor(props: DividerProps & ComponentLayerProps<HTMLDivElement>) {
+  constructor(props: DividerProps & ComponentLayerStoreProps<HTMLDivElement>) {
     super(ComponentName.DIVIDER, props)
 
-    this.type = props.type || DividerType.HORIZONTAL
+    this.orientation = props.orientation || Orientation.HORIZONTAL
   }
 
-  get isTypeHorizontal(): boolean {
-    return this.type === DividerType.HORIZONTAL
+  get isOrientationHorizontal(): boolean {
+    return this.orientation === Orientation.HORIZONTAL
   }
 
-  get isTypeVertical(): boolean {
-    return this.type === DividerType.VERTICAL
+  get isOrientationVertical(): boolean {
+    return this.orientation === Orientation.VERTICAL
   }
 }
 
 /** @category Constant */
-export const DIVIDER_STORE_KEYS: (keyof DividerProps & keyof DividerStore)[] = ['id', 'layer', 'type']
+export const DIVIDER_STORE_KEYS: (keyof DividerProps & keyof DividerStore)[] = ['id', 'layer', 'orientation']

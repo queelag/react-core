@@ -1,7 +1,7 @@
 import * as S from 'superstruct'
 import { ComponentName } from '../definitions/enums'
-import { CheckboxProps } from '../definitions/props'
-import { ComponentFormFieldProps } from '../definitions/with.superstruct.props'
+import { ComponentFormFieldStoreProps } from '../definitions/with.superstruct.interfaces'
+import { CheckBoxProps } from '../definitions/with.superstruct.props'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
 
 /**
@@ -9,8 +9,8 @@ import { ComponentFormFieldStore } from '../modules/component.form.field.store'
  *
  * @category Store
  */
-export class CheckboxStore<U extends object> extends ComponentFormFieldStore<HTMLDivElement, U> {
-  constructor(props: CheckboxProps<U> & ComponentFormFieldProps<HTMLDivElement, U>) {
+export class CheckBoxStore<U extends object> extends ComponentFormFieldStore<HTMLDivElement, U> {
+  constructor(props: CheckBoxProps<U> & ComponentFormFieldStoreProps<HTMLDivElement, U>) {
     super(ComponentName.CHECKBOX, props)
 
     this.validation = this.schema.validate(this.value)
@@ -39,7 +39,7 @@ export class CheckboxStore<U extends object> extends ComponentFormFieldStore<HTM
 }
 
 /** @category Constant */
-export const CHECK_BOX_STORE_KEYS: (keyof CheckboxProps<any> & keyof CheckboxStore<any>)[] = [
+export const CHECK_BOX_STORE_KEYS: (keyof CheckBoxProps<any> & keyof CheckBoxStore<any>)[] = [
   'disabled',
   'id',
   'label',

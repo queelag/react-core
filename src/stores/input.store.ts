@@ -1,7 +1,8 @@
 import { NumberUtils } from '@queelag/core'
 import { ChangeEvent } from 'react'
 import { ComponentName, InputType } from '../definitions/enums'
-import { ComponentFormFieldProps, InputProps } from '../definitions/with.superstruct.props'
+import { ComponentFormFieldStoreProps } from '../definitions/with.superstruct.interfaces'
+import { InputProps } from '../definitions/with.superstruct.props'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
 
 /**
@@ -23,7 +24,7 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
    */
   type: InputType
 
-  constructor(props: InputProps<T> & ComponentFormFieldProps<HTMLInputElement, T>) {
+  constructor(props: InputProps<T> & ComponentFormFieldStoreProps<HTMLInputElement, T>) {
     super(ComponentName.INPUT, props)
 
     this.focused = false

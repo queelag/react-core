@@ -1,5 +1,5 @@
 import { Size } from '../definitions/enums'
-import { ComponentSizeProps } from '../definitions/props'
+import { ComponentSizeStoreProps } from '../definitions/interfaces'
 import { ComponentStore } from './component.store'
 
 /**
@@ -8,7 +8,7 @@ import { ComponentStore } from './component.store'
 export class ComponentSizeStore<T extends Element> extends ComponentStore<T> {
   size: Size
 
-  constructor(name: string, props: ComponentSizeProps<T>) {
+  constructor(name: string, props: ComponentSizeStoreProps<T>) {
     super(name, props)
 
     this.size = props.size || Size.MEDIUM

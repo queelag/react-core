@@ -49,10 +49,21 @@ export function Avatar(props: AvatarProps) {
         width: store.size
       }}
     >
-      {props.icon && <props.icon color={store.color} size={store.size / store.ratio} style={{ position: 'absolute' }} thickness={props.thickness} />}
-      {props.source && <Image size={store.size} source={props.source} style={{ zIndex: 10 }} />}
+      {props.icon && (
+        <props.icon
+          {...props.iconProps}
+          color={props.iconProps?.color || store.color}
+          size={props.iconProps?.size || store.size / 2}
+          style={{ ...props.iconProps?.style, position: 'absolute' }}
+        />
+      )}
+      {props.image && <Image {...props.imageProps} size={store.size} source={props.image} style={{ ...props.imageProps?.style, zIndex: 10 }} />}
       {props.text && (
-        <b className={ReactUtils.joinClassNames(store.color)} style={{ fontSize: store.size / 3, position: 'absolute', textTransform: 'uppercase' }}>
+        <b
+          {...props.textProps}
+          className={ReactUtils.joinClassNames(props.textProps?.className, store.color)}
+          style={{ fontSize: store.size / 3, textTransform: 'uppercase', ...props.textProps?.style, position: 'absolute' }}
+        >
           {props.text}
         </b>
       )}

@@ -1,5 +1,5 @@
 import { Layer, Shape, Size } from '../definitions/enums'
-import { ComponentLayerShapeSizeProps } from '../definitions/props'
+import { ComponentLayerShapeSizeStoreProps } from '../definitions/interfaces'
 import { ComponentStore } from './component.store'
 
 /**
@@ -10,7 +10,7 @@ export class ComponentLayerShapeSizeStore<T extends Element> extends ComponentSt
   shape: Shape
   size: Size
 
-  constructor(name: string, props: ComponentLayerShapeSizeProps<T>) {
+  constructor(name: string, props: ComponentLayerShapeSizeStoreProps<T>) {
     super(name, props)
 
     this.layer = props.layer || Layer.ZERO

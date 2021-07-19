@@ -1,5 +1,6 @@
 import { Color, ComponentName } from '../definitions/enums'
-import { AvatarProps, ComponentLayerShapeProps } from '../definitions/props'
+import { ComponentLayerShapeStoreProps } from '../definitions/interfaces'
+import { AvatarProps } from '../definitions/props'
 import { ComponentLayerShapeStore } from '../modules/component.layer.shape.store'
 import { ColorPicker } from '../pickers/color.picker'
 
@@ -14,20 +15,15 @@ export class AvatarStore extends ComponentLayerShapeStore<HTMLDivElement> {
   /** @internal */
   private _color: string = ''
   /**
-   * A number which determines the icon size ratio to the size.
-   */
-  ratio: number
-  /**
    * A number which determines both height and width.
    */
   size: number
 
-  constructor(props: AvatarProps & ComponentLayerShapeProps<HTMLDivElement>) {
+  constructor(props: AvatarProps & ComponentLayerShapeStoreProps<HTMLDivElement>) {
     super(ComponentName.AVATAR, props)
 
     this.background = props.background || Color.GRAY
     this.color = props.color || Color.MONO
-    this.ratio = props.ratio || 2
     this.size = props.size
   }
 
@@ -57,4 +53,4 @@ export class AvatarStore extends ComponentLayerShapeStore<HTMLDivElement> {
 }
 
 /** @category Constant */
-export const AVATAR_STORE_KEYS: (keyof AvatarProps & keyof AvatarStore)[] = ['background', 'color', 'layer', 'ratio', 'shape', 'size']
+export const AVATAR_STORE_KEYS: (keyof AvatarProps & keyof AvatarStore)[] = ['background', 'color', 'layer', 'shape', 'size']

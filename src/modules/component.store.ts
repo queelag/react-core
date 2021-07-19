@@ -1,6 +1,6 @@
 import { ID, IDUtils, noop } from '@queelag/core'
 import { LegacyRef, MutableRefObject } from 'react'
-import { ComponentProps } from '../definitions/props'
+import { ComponentStoreProps } from '../definitions/interfaces'
 import { Dummy } from './dummy'
 
 /**
@@ -23,7 +23,7 @@ export class ComponentStore<T extends Element> {
    */
   ref: LegacyRef<T> | MutableRefObject<T>
 
-  constructor(name: string, props: ComponentProps<T>) {
+  constructor(name: string, props: ComponentStoreProps<T>) {
     this.id = props.id || IDUtils.prefixed(name)
     this.name = name
     this.ref = props.ref || Dummy.ref

@@ -1,31 +1,48 @@
 import { RouteContext } from 'react-router5/dist/types'
 import { Router } from 'router5'
+import { WithHeader, WithTitle } from './interfaces'
 import { HTMLDivProps } from './props'
-import { BottomTabberItem, SidebarItem } from './types'
+import { BottomSheetItem, BottomTabberItem, ContextMenuItem, SidebarItem, TopTabberItem } from './with.router5.interfaces'
 
 /** @category Prop */
-export type BottomTabberProps = {
+export interface BottomSheetProps extends HTMLDivProps, WithHeader, WithTitle {
+  items?: BottomSheetItem[]
+}
+
+/** @category Prop */
+export interface BottomTabberProps extends HTMLDivProps {
   items: BottomTabberItem[]
   router: Router
-} & HTMLDivProps
+}
 
 /** @category Prop */
-export type HeaderProps = {
+export interface ContextMenuProps extends HTMLDivProps {
+  items: ContextMenuItem[]
+}
+
+/** @category Prop */
+export interface HeaderProps extends HTMLDivProps {
   logo?: JSX.Element
   router: Router
   title?: string
-} & HTMLDivProps
+}
 
 /** @category Prop */
-export type RouterRendererProps = {
+export interface RouterRendererProps extends HTMLDivProps {
   context: RouteContext
   fallback?: (props: { context: RouteContext }) => JSX.Element
   map: Map<string, (props: { context: RouteContext }) => JSX.Element>
-} & HTMLDivProps
+}
 
 /** @category Prop */
-export type SidebarProps = {
+export interface SidebarProps extends HTMLDivProps {
   footer?: JSX.Element
   items: SidebarItem[]
   router: Router
-} & HTMLDivProps
+}
+
+/** @category Prop */
+export interface TopTabberProps extends HTMLDivProps {
+  active?: string
+  items: TopTabberItem[]
+}

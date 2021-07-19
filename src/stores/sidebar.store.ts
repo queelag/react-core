@@ -1,10 +1,10 @@
 import { Router } from 'router5'
+import { Blank } from '../components/Blank'
 import { ComponentName } from '../definitions/enums'
-import { ComponentProps } from '../definitions/props'
-import { SidebarItem } from '../definitions/types'
+import { ComponentStoreProps } from '../definitions/interfaces'
+import { SidebarItem } from '../definitions/with.router5.interfaces'
 import { SidebarProps } from '../definitions/with.router5.props'
 import { ComponentStore } from '../modules/component.store'
-import { Dummy } from '../modules/dummy'
 
 /**
  * An abstraction for Sidebar stores, handles items and navigation.
@@ -21,7 +21,7 @@ export class SidebarStore extends ComponentStore<HTMLDivElement> {
    */
   router: Router
 
-  constructor(props: SidebarProps & ComponentProps<HTMLDivElement>) {
+  constructor(props: SidebarProps & ComponentStoreProps<HTMLDivElement>) {
     super(ComponentName.SIDEBAR, props)
 
     this.items = props.items
@@ -32,15 +32,24 @@ export class SidebarStore extends ComponentStore<HTMLDivElement> {
    * Navigates to the item route.
    */
   onClickItem(item: SidebarItem): void {
-    this.router.navigate(item.name)
+    this.router.navigate(item.route.name, item.route.params || {}, item.route.options || {})
   }
 
   findItemByName(name: string): SidebarItem {
-    return this.items.find((v: SidebarItem) => v.name === name) || Dummy.sidebarItem
+    return this.items.find((v: SidebarItem) => v.route.name === name) || this.dummyItem
   }
 
   findItemIndexByName(name: string): number {
-    return this.items.findIndex((v: SidebarItem) => v.name === name)
+    return this.items.findIndex((v: SidebarItem) => v.route.name === name)
+  }
+
+  private get dummyItem(): SidebarItem {
+    return {
+      icon: Blank,
+      route: {
+        name: ''
+      }
+    }
   }
 }
 

@@ -1,6 +1,7 @@
 import { MouseEvent } from 'react'
 import { ComponentName } from '../definitions/enums'
-import { ComponentLayerProps, TagProps } from '../definitions/props'
+import { ComponentLayerStoreProps } from '../definitions/interfaces'
+import { TagProps } from '../definitions/props'
 import { ComponentLayerStore } from '../modules/component.layer.store'
 
 /**
@@ -14,7 +15,7 @@ export class TagStore extends ComponentLayerStore<HTMLDivElement> {
    */
   destroyed: boolean
 
-  constructor(props: TagProps & ComponentLayerProps<HTMLDivElement>) {
+  constructor(props: TagProps & ComponentLayerStoreProps<HTMLDivElement>) {
     super(ComponentName.TAG, props)
 
     this.destroyed = false

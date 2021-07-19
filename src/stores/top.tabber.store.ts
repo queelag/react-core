@@ -1,8 +1,9 @@
+import { Blank } from '../components/Blank'
 import { ComponentName } from '../definitions/enums'
-import { ComponentProps, TopTabberProps } from '../definitions/props'
-import { TopTabberItem } from '../definitions/types'
+import { ComponentStoreProps } from '../definitions/interfaces'
+import { TopTabberItem } from '../definitions/with.router5.interfaces'
+import { TopTabberProps } from '../definitions/with.router5.props'
 import { ComponentStore } from '../modules/component.store'
-import { Dummy } from '../modules/dummy'
 
 /**
  * An abstraction for TopTabber stores, handles cursors and items.
@@ -19,7 +20,7 @@ export class TopTabberStore extends ComponentStore<HTMLDivElement> {
    */
   items: TopTabberItem[]
 
-  constructor(props: TopTabberProps & ComponentProps<HTMLDivElement>) {
+  constructor(props: TopTabberProps & ComponentStoreProps<HTMLDivElement>) {
     super(ComponentName.TOP_TABBER, props)
 
     this.active = props.active || props.items[0].name
@@ -35,7 +36,7 @@ export class TopTabberStore extends ComponentStore<HTMLDivElement> {
   }
 
   findItemByName(name: string): TopTabberItem {
-    return this.items.find((v: TopTabberItem) => v.name === name) || Dummy.topTabberItem
+    return this.items.find((v: TopTabberItem) => v.name === name) || this.dummyItem
   }
 
   findItemIndexByName(name: string): number {
@@ -48,6 +49,13 @@ export class TopTabberStore extends ComponentStore<HTMLDivElement> {
 
   findNextItem(name: string): TopTabberItem {
     return this.items[this.findItemIndexByName(name) + 1] || this.items[this.items.length - 1]
+  }
+
+  private get dummyItem(): TopTabberItem {
+    return {
+      component: Blank,
+      name: ''
+    }
   }
 }
 

@@ -2,9 +2,9 @@ import { IDUtils, tcp } from '@queelag/core'
 import { ChangeEvent } from 'react'
 import * as S from 'superstruct'
 import { ComponentName, InputFileMode } from '../definitions/enums'
-import { InputFileProps } from '../definitions/props'
-import { InputFileItem } from '../definitions/types'
-import { ComponentFormFieldProps } from '../definitions/with.superstruct.props'
+import { InputFileItem } from '../definitions/interfaces'
+import { ComponentFormFieldStoreProps } from '../definitions/with.superstruct.interfaces'
+import { InputFileProps } from '../definitions/with.superstruct.props'
 import { Base64 } from '../modules/base64'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
 import { Dummy } from '../modules/dummy'
@@ -21,7 +21,7 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
    */
   mode: InputFileMode
 
-  constructor(props: InputFileProps<T> & ComponentFormFieldProps<HTMLInputElement, T>) {
+  constructor(props: InputFileProps<T> & ComponentFormFieldStoreProps<HTMLInputElement, T>) {
     super(ComponentName.INPUT_FILE, props)
 
     this.mode = props.mode || InputFileMode.SINGLE
