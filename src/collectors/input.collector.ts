@@ -6,4 +6,4 @@ import { InputStore } from '../stores/input.store'
  *
  * @category Collector
  */
-export const InputCollector = new ComponentFormFieldCollector<HTMLInputElement, any, InputStore<any>>(new InputStore({ path: 'a', store: { a: '' } }))
+export const InputCollector = new ComponentFormFieldCollector<HTMLInputElement, any, InputStore<any>>(new InputStore({}))

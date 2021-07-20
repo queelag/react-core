@@ -1,5 +1,5 @@
-import * as S from 'superstruct'
-import { InputFileMode, InputType, Layer, SelectMode } from './enums'
+import { ReactNode } from 'react'
+import { InputFileMode, InputType, SelectMode } from './enums'
 import { SelectOption } from './interfaces'
 import { HTMLDivProps, HTMLInputProps } from './props'
 import { WithFormFieldProps } from './with.superstruct.interfaces'
@@ -8,16 +8,9 @@ import { WithFormFieldProps } from './with.superstruct.interfaces'
 export interface CheckBoxProps<T extends object> extends HTMLDivProps, WithFormFieldProps<T> {}
 
 /** @category Prop */
-export interface InputProps<T extends object> extends Omit<HTMLInputProps, 'prefix' | 'type'> {
-  label?: string
-  layer?: Layer
-  path: keyof T
-  prefix?: JSX.Element
-  required?: boolean
-  schema?: S.Struct<any, any>
-  store: T
-  suffix?: JSX.Element
-  touched?: boolean
+export interface InputProps<T extends object> extends Omit<HTMLInputProps, 'prefix' | 'type'>, WithFormFieldProps<T> {
+  prefix?: ReactNode
+  suffix?: ReactNode
   type?: InputType
 }
 

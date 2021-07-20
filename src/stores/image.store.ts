@@ -65,7 +65,7 @@ export class ImageStore extends ComponentShapeStore<HTMLImageElement> {
   getStyle(props: ImageProps): CSSProperties {
     return {
       ...props.style,
-      ...ShapeUtils.findStyle(this.shape, this.height),
+      ...ShapeUtils.findStyle(this.shape, typeof props.size === 'number' ? props.size : 0),
       height: props.height || props.size || this.height || undefined,
       width: props.width || props.size || this.width || undefined
     }
