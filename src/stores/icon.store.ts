@@ -1,9 +1,9 @@
 import { tcp } from '@queelag/core'
 import { Color, ComponentName } from '../definitions/enums'
-import { ComponentLayerStoreProps } from '../definitions/interfaces'
+import { ComponentStoreProps } from '../definitions/interfaces'
 import { IconProps } from '../definitions/props'
 import { Cache } from '../modules/cache'
-import { ComponentLayerStore } from '../modules/component.layer.store'
+import { ComponentStore } from '../modules/component.store'
 import { ColorPicker } from '../pickers/color.picker'
 
 /**
@@ -11,7 +11,7 @@ import { ColorPicker } from '../pickers/color.picker'
  *
  * @category Store
  */
-export class IconStore extends ComponentLayerStore<SVGElement> {
+export class IconStore extends ComponentStore<SVGElement> {
   /** @internal */
   private _color: string = ''
   /**
@@ -25,7 +25,7 @@ export class IconStore extends ComponentLayerStore<SVGElement> {
    */
   thickness: number
 
-  constructor(props: IconProps & ComponentLayerStoreProps<SVGElement>) {
+  constructor(props: IconProps & ComponentStoreProps<SVGElement>) {
     super(ComponentName.ICON, props)
 
     this.color = props.color || Color.MONO

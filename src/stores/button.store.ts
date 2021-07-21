@@ -1,16 +1,16 @@
 import { noop, tcp } from '@queelag/core'
 import { MouseEvent } from 'react'
 import { ButtonVariant, ComponentName } from '../definitions/enums'
-import { ComponentLayerShapeSizeStoreProps } from '../definitions/interfaces'
+import { ComponentStoreProps } from '../definitions/interfaces'
 import { ButtonProps } from '../definitions/props'
-import { ComponentLayerShapeSizeStore } from '../modules/component.layer.shape.size.store'
+import { ComponentStore } from '../modules/component.store'
 
 /**
  * An abstraction for Button stores, handles disabled and spinning statuses.
  *
  * @category Store
  */
-export class ButtonStore extends ComponentLayerShapeSizeStore<HTMLButtonElement> {
+export class ButtonStore extends ComponentStore<HTMLButtonElement> {
   /**
    * A boolean which determines if this button is disabled or not.
    */
@@ -24,7 +24,7 @@ export class ButtonStore extends ComponentLayerShapeSizeStore<HTMLButtonElement>
    */
   variant: ButtonVariant
 
-  constructor(props: ButtonProps & ComponentLayerShapeSizeStoreProps<HTMLButtonElement>) {
+  constructor(props: ButtonProps & ComponentStoreProps<HTMLButtonElement>) {
     super(ComponentName.BUTTON, props)
 
     this.disabled = props.disabled || false

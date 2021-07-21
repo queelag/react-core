@@ -1,8 +1,9 @@
-import { Localization, ObjectUtils, ReactUtils } from '@queelag/core'
+import { Localization, ObjectUtils } from '@queelag/core'
 import React from 'react'
 import { LOCALIZABLE_TEXT_PROPS_KEYS } from '../definitions/constants'
 import { HTMLElementProps, LocalizableTextProps } from '../definitions/props'
 import { ColorPicker } from '../pickers/color.picker'
+import { ReactUtils } from '../utils/react.utils'
 
 export function LocalizableText(props: HTMLElementProps & LocalizableTextProps) {
   const renderLocalized = () => (

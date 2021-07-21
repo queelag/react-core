@@ -1,9 +1,10 @@
-import { ObjectUtils, ReactUtils, StoreUtils } from '@queelag/core'
+import { ObjectUtils, StoreUtils } from '@queelag/core'
 import React, { useEffect, useMemo } from 'react'
 import { AVATAR_PROPS_KEYS } from '../definitions/constants'
 import { AvatarProps } from '../definitions/props'
 import { useForceUpdate } from '../hooks/use.force.update'
 import { AvatarStore, AVATAR_STORE_KEYS } from '../stores/avatar.store'
+import { ReactUtils } from '../utils/react.utils'
 import { ShapeUtils } from '../utils/shape.utils'
 import { Image } from './Image'
 
@@ -38,7 +39,7 @@ export function Avatar(props: AvatarProps) {
       id={store.id}
       style={{
         ...props.style,
-        ...ShapeUtils.findStyle(store.shape, store.size),
+        ...ShapeUtils.findStyle(store.shape, props.size),
         alignItems: 'center',
         display: 'flex',
         height: store.size,
@@ -53,7 +54,7 @@ export function Avatar(props: AvatarProps) {
         <props.icon
           {...props.iconProps}
           color={props.iconProps?.color || store.color}
-          size={props.iconProps?.size || store.size / 2}
+          size={props.iconProps?.size || props.size / 2}
           style={{ ...props.iconProps?.style, position: 'absolute' }}
         />
       )}
@@ -62,7 +63,7 @@ export function Avatar(props: AvatarProps) {
         <b
           {...props.textProps}
           className={ReactUtils.joinClassNames(props.textProps?.className, store.color)}
-          style={{ fontSize: store.size / 3, textTransform: 'uppercase', ...props.textProps?.style, position: 'absolute' }}
+          style={{ fontSize: props.size / 3, textTransform: 'uppercase', ...props.textProps?.style, position: 'absolute' }}
         >
           {props.text}
         </b>

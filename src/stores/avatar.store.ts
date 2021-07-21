@@ -1,7 +1,7 @@
 import { Color, ComponentName } from '../definitions/enums'
-import { ComponentLayerShapeStoreProps } from '../definitions/interfaces'
+import { ComponentStoreProps } from '../definitions/interfaces'
 import { AvatarProps } from '../definitions/props'
-import { ComponentLayerShapeStore } from '../modules/component.layer.shape.store'
+import { ComponentStore } from '../modules/component.store'
 import { ColorPicker } from '../pickers/color.picker'
 
 /**
@@ -9,22 +9,17 @@ import { ColorPicker } from '../pickers/color.picker'
  *
  * @category Store
  */
-export class AvatarStore extends ComponentLayerShapeStore<HTMLDivElement> {
+export class AvatarStore extends ComponentStore<HTMLDivElement> {
   /** @internal */
   private _background: string = ''
   /** @internal */
   private _color: string = ''
-  /**
-   * A number which determines both height and width.
-   */
-  size: number
 
-  constructor(props: AvatarProps & ComponentLayerShapeStoreProps<HTMLDivElement>) {
+  constructor(props: AvatarProps & ComponentStoreProps<HTMLDivElement>) {
     super(ComponentName.AVATAR, props)
 
     this.background = props.background || Color.GRAY
     this.color = props.color || Color.MONO
-    this.size = props.size
   }
 
   /**

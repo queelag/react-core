@@ -5,9 +5,9 @@ import { InputCollector } from '../collectors/input.collector'
 import { InputFileCollector } from '../collectors/input.file.collector'
 import { SelectCollector } from '../collectors/select.collector'
 import { ComponentName } from '../definitions/enums'
-import { ComponentLayerStoreProps } from '../definitions/interfaces'
+import { ComponentStoreProps } from '../definitions/interfaces'
 import { FormProps } from '../definitions/props'
-import { ComponentLayerStore } from '../modules/component.layer.store'
+import { ComponentStore } from '../modules/component.store'
 import { CheckBoxStore } from './check.box.store'
 import { InputFileStore } from './input.file.store'
 import { InputStore } from './input.store'
@@ -18,8 +18,8 @@ import { SelectStore } from './select.store'
  *
  * @category Store
  */
-export class FormStore extends ComponentLayerStore<HTMLFormElement> {
-  constructor(props: FormProps & ComponentLayerStoreProps<HTMLFormElement>) {
+export class FormStore extends ComponentStore<HTMLFormElement> {
+  constructor(props: FormProps & ComponentStoreProps<HTMLFormElement>) {
     super(ComponentName.FORM, props)
 
     this.onSubmit = props.onSubmit

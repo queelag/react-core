@@ -1,20 +1,20 @@
 import { ComponentName, Orientation } from '../definitions/enums'
-import { ComponentLayerStoreProps } from '../definitions/interfaces'
+import { ComponentStoreProps } from '../definitions/interfaces'
 import { DividerProps } from '../definitions/props'
-import { ComponentLayerStore } from '../modules/component.layer.store'
+import { ComponentStore } from '../modules/component.store'
 
 /**
  * An abstraction for Divider stores.
  *
  * @category Store
  */
-export class DividerStore extends ComponentLayerStore<HTMLDivElement> {
+export class DividerStore extends ComponentStore<HTMLDivElement> {
   /**
    * An {@link Orientation} which determines the style.
    */
   orientation: Orientation
 
-  constructor(props: DividerProps & ComponentLayerStoreProps<HTMLDivElement>) {
+  constructor(props: DividerProps & ComponentStoreProps<HTMLDivElement>) {
     super(ComponentName.DIVIDER, props)
 
     this.orientation = props.orientation || Orientation.HORIZONTAL

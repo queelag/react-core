@@ -1,6 +1,6 @@
 import * as S from 'superstruct'
 import { ComponentFormFieldStoreProps } from '../definitions/with.superstruct.interfaces'
-import { ComponentLayerStore } from './component.layer.store'
+import { ComponentStore } from './component.store'
 import { Schema } from './schema'
 
 /**
@@ -10,7 +10,7 @@ import { Schema } from './schema'
  * @template T The DOM element.
  * @template U The object interface.
  */
-export class ComponentFormFieldStore<T extends Element, U extends object> extends ComponentLayerStore<T> {
+export class ComponentFormFieldStore<T extends Element, U extends object> extends ComponentStore<T> {
   /**
    * A boolean which determines if this field is disabled or not.
    */

@@ -1,21 +1,21 @@
 import { MouseEvent } from 'react'
 import { ComponentName } from '../definitions/enums'
-import { ComponentLayerStoreProps } from '../definitions/interfaces'
+import { ComponentStoreProps } from '../definitions/interfaces'
 import { TagProps } from '../definitions/props'
-import { ComponentLayerStore } from '../modules/component.layer.store'
+import { ComponentStore } from '../modules/component.store'
 
 /**
  * An abstraction for Tag stores, handles destruction.
  *
  * @category Store
  */
-export class TagStore extends ComponentLayerStore<HTMLDivElement> {
+export class TagStore extends ComponentStore<HTMLDivElement> {
   /**
    * A boolean which determines if this tag has been destroyed or not.
    */
   destroyed: boolean
 
-  constructor(props: TagProps & ComponentLayerStoreProps<HTMLDivElement>) {
+  constructor(props: TagProps & ComponentStoreProps<HTMLDivElement>) {
     super(ComponentName.TAG, props)
 
     this.destroyed = false

@@ -1,9 +1,11 @@
-import { ObjectUtils, ReactUtils, StoreUtils } from '@queelag/core'
+import { ObjectUtils, StoreUtils } from '@queelag/core'
 import React, { useEffect, useMemo } from 'react'
 import { ICON_PROPS_KEYS } from '../definitions/constants'
+import { Orientation } from '../definitions/enums'
 import { IconProps } from '../definitions/props'
 import { useForceUpdate } from '../hooks/use.force.update'
 import { IconStore, ICON_STORE_KEYS } from '../stores/icon.store'
+import { ReactUtils } from '../utils/react.utils'
 
 /**
  * A svg component that safely renders any raw svg into it, allowing every possible customization.
@@ -23,7 +25,7 @@ import { IconStore, ICON_STORE_KEYS } from '../stores/icon.store'
  */
 export function Icon(props: IconProps) {
   const update = useForceUpdate()
-  const store = useMemo(() => new IconStore({ ...props, update }), [])
+  const store = useMemo(() => new IconStore({ ...props, orientation: Orientation.HORIZONTAL, update }), [])
 
   useEffect(() => {
     StoreUtils.updateKeys(store, props, ICON_STORE_KEYS, update)

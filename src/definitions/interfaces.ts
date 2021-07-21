@@ -24,24 +24,11 @@ export interface ColorPickerConfiguration {
   text: ColorPickerConfigurationValue
 }
 
-export interface ComponentStoreProps<T extends Element> {
+export interface ComponentStoreProps<T extends Element> extends WithLayer, WithOrientation, WithShape, WithSize {
   id?: ID
   ref?: LegacyRef<T> | MutableRefObject<T>
   update?: () => void
 }
-
-export interface ComponentLayerStoreProps<T extends Element> extends ComponentStoreProps<T>, WithLayer {}
-
-export interface ComponentLayerShapeStoreProps<T extends Element> extends ComponentStoreProps<T>, ComponentLayerStoreProps<T>, ComponentShapeStoreProps<T> {}
-export interface ComponentLayerShapeSizeStoreProps<T extends Element>
-  extends ComponentStoreProps<T>,
-    ComponentLayerStoreProps<T>,
-    ComponentShapeStoreProps<T>,
-    ComponentSizeStoreProps<T> {}
-
-export interface ComponentShapeStoreProps<T extends Element> extends ComponentStoreProps<T>, WithShape {}
-
-export interface ComponentSizeStoreProps<T extends Element> extends ComponentStoreProps<T>, WithSize {}
 
 export interface InputFileItem {
   data: string
@@ -108,7 +95,7 @@ export interface WithShape {
 }
 
 export interface WithSize {
-  size?: Size
+  size?: Size | number | string
 }
 
 export interface WithTitle {

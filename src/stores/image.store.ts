@@ -1,11 +1,11 @@
-import { Base64, Logger, NumberUtils, rv, tc, tcp } from '@queelag/core'
+import { Base64, Logger, rv, tc, tcp } from '@queelag/core'
 import { CSSProperties, SyntheticEvent } from 'react'
 import { IMAGE_EMPTY_BASE64, IMAGE_EMPTY_TYPE } from '../definitions/constants'
 import { ComponentName, Orientation } from '../definitions/enums'
-import { ComponentShapeStoreProps } from '../definitions/interfaces'
+import { ComponentStoreProps } from '../definitions/interfaces'
 import { ImageProps } from '../definitions/props'
 import { Cache } from '../modules/cache'
-import { ComponentShapeStore } from '../modules/component.shape.store'
+import { ComponentStore } from '../modules/component.store'
 import { ShapeUtils } from '../utils/shape.utils'
 
 /**
@@ -13,7 +13,7 @@ import { ShapeUtils } from '../utils/shape.utils'
  *
  * @category Store
  */
-export class ImageStore extends ComponentShapeStore<HTMLImageElement> {
+export class ImageStore extends ComponentStore<HTMLImageElement> {
   /**
    * A string which contains base64 data.
    */
@@ -37,7 +37,7 @@ export class ImageStore extends ComponentShapeStore<HTMLImageElement> {
    */
   type: string
 
-  constructor(props: ImageProps & ComponentShapeStoreProps<HTMLImageElement>) {
+  constructor(props: ImageProps & ComponentStoreProps<HTMLImageElement>) {
     super(ComponentName.IMAGE, props)
 
     this.base64 = IMAGE_EMPTY_BASE64
@@ -78,17 +78,10 @@ export class ImageStore extends ComponentShapeStore<HTMLImageElement> {
   }
 
   /**
-   * Returns the computed height of this image element.
+   * Calculates a ratioed height based on this image element width if ratio is not zero.
    */
-  get elementHeight(): number {
-    return NumberUtils.parseFloat(getComputedStyle(this.element).height)
-  }
-
-  /**
-   * Returns the computed width of this image element.
-   */
-  get elementWidth(): number {
-    return NumberUtils.parseFloat(getComputedStyle(this.element).width)
+  get height(): number {
+    return this.isOrientationVertical ? (this.ratio > 0 ? this.elementComputedWidth * this.ratio : 0) : 0
   }
 
   /**
@@ -96,6 +89,13 @@ export class ImageStore extends ComponentShapeStore<HTMLImageElement> {
    */
   get source(): string {
     return this._source
+  }
+
+  /**
+   * Calculates a ratioed width based on this image element height if ratio is not zero.
+   */
+  get width(): number {
+    return this.isOrientationHorizontal ? (this.ratio > 0 ? this.elementComputedHeight * this.ratio : 0) : 0
   }
 
   /**
@@ -110,20 +110,6 @@ export class ImageStore extends ComponentShapeStore<HTMLImageElement> {
    */
   get hasNoError(): boolean {
     return this.error === false
-  }
-
-  /**
-   * Calculates a ratioed height based on this image element width if ratio is not zero.
-   */
-  get height(): number {
-    return this.ratio > 0 ? this.elementWidth * this.ratio : 0
-  }
-
-  /**
-   * Calculates a ratioed width based on this image element height if ratio is not zero.
-   */
-  get width(): number {
-    return this.ratio > 0 ? this.elementHeight * this.ratio : 0
   }
 
   /** @internal */

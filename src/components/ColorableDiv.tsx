@@ -1,8 +1,9 @@
-import { ObjectUtils, ReactUtils } from '@queelag/core'
+import { ObjectUtils } from '@queelag/core'
 import React from 'react'
 import { COLOR_DIV_PROPS_KEYS } from '../definitions/constants'
 import { ColorableDivProps } from '../definitions/props'
 import { ColorPicker } from '../pickers/color.picker'
+import { ReactUtils } from '../utils/react.utils'
 
 /**
  * A div component that uses the {@link ColorPicker} under the hood.
