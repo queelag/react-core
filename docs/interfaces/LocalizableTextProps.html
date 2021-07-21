@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>WithBackground | @queelag/react-core - v1.0.8</title>
+	<title>LocalizableTextProps | @queelag/react-core - v1.0.8</title>
 	<meta name="description" content="Documentation for @queelag/react-core - v1.0.8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,10 +55,10 @@
 					<a href="../index.html">@queelag/react-core - v1.0.8</a>
 				</li>
 				<li>
-					<a href="WithBackground.html">WithBackground</a>
+					<a href="LocalizableTextProps.html">LocalizableTextProps</a>
 				</li>
 			</ul>
-			<h1>Interface WithBackground</h1>
+			<h1>Interface LocalizableTextProps</h1>
 		</div>
 	</div>
 </header>
@@ -69,21 +69,13 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="WithLayer.html" class="tsd-signature-type" data-tsd-kind="Interface">WithLayer</a>
+						<a href="WithColor.html" class="tsd-signature-type" data-tsd-kind="Interface">WithColor</a>
+					</li>
+					<li>
+						<a href="WithLocalizationProps.html" class="tsd-signature-type" data-tsd-kind="Interface">WithLocalizationProps</a>
 						<ul class="tsd-hierarchy">
 							<li>
-								<span class="target">WithBackground</span>
-								<ul class="tsd-hierarchy">
-									<li>
-										<a href="AvatarProps.html" class="tsd-signature-type" data-tsd-kind="Interface">AvatarProps</a>
-									</li>
-									<li>
-										<a href="ButtonProps.html" class="tsd-signature-type" data-tsd-kind="Interface">ButtonProps</a>
-									</li>
-									<li>
-										<a href="TagProps.html" class="tsd-signature-type" data-tsd-kind="Interface">TagProps</a>
-									</li>
-								</ul>
+								<span class="target">LocalizableTextProps</span>
 							</li>
 						</ul>
 					</li>
@@ -93,25 +85,45 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
+						<section class="tsd-index-section tsd-is-inherited">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="WithBackground.html#background" class="tsd-kind-icon">background</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="WithBackground.html#layer" class="tsd-kind-icon">layer</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="LocalizableTextProps.html#color" class="tsd-kind-icon">color</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="LocalizableTextProps.html#inject" class="tsd-kind-icon">inject</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="LocalizableTextProps.html#layer" class="tsd-kind-icon">layer</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="LocalizableTextProps.html#path" class="tsd-kind-icon">path</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="LocalizableTextProps.html#element" class="tsd-kind-icon">element</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group ">
+			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="background" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> background</h3>
-					<div class="tsd-signature tsd-kind-icon">background<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="color" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> color</h3>
+					<div class="tsd-signature tsd-kind-icon">color<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="WithColor.html">WithColor</a>.<a href="WithColor.html#color">color</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/1a12321/src/definitions/interfaces.ts#L62">src/definitions/interfaces.ts:62</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/1a12321/src/definitions/interfaces.ts#L66">src/definitions/interfaces.ts:66</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="inject" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> inject</h3>
+					<div class="tsd-signature tsd-kind-icon">inject<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="WithLocalizationProps.html">WithLocalizationProps</a>.<a href="WithLocalizationProps.html#inject">inject</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/1a12321/src/definitions/interfaces.ts#L86">src/definitions/interfaces.ts:86</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -120,11 +132,48 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> layer</h3>
 					<div class="tsd-signature tsd-kind-icon">layer<span class="tsd-signature-symbol">:</span> <a href="../enums/Layer.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Layer</a></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="WithLayer.html">WithLayer</a>.<a href="WithLayer.html#layer">layer</a></p>
+						<p>Inherited from <a href="WithColor.html">WithColor</a>.<a href="WithColor.html#layer">layer</a></p>
 						<ul>
 							<li>Defined in <a href="https://github.com/queelag/react-core/blob/1a12321/src/definitions/interfaces.ts#L82">src/definitions/interfaces.ts:82</a></li>
 						</ul>
 					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="path" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> path</h3>
+					<div class="tsd-signature tsd-kind-icon">path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="WithLocalizationProps.html">WithLocalizationProps</a>.<a href="WithLocalizationProps.html#path">path</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/1a12321/src/definitions/interfaces.ts#L87">src/definitions/interfaces.ts:87</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+					<a name="element" class="tsd-anchor"></a>
+					<h3>element</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
+						<li class="tsd-signature tsd-kind-icon">element<span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/1a12321/src/definitions/props.ts#L157">src/definitions/props.ts:157</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>props: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Element</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -141,13 +190,22 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="WithBackground.html" class="tsd-kind-icon">With<wbr>Background</a>
+						<a href="LocalizableTextProps.html" class="tsd-kind-icon">Localizable<wbr>Text<wbr>Props</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="WithBackground.html#background" class="tsd-kind-icon">background</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="LocalizableTextProps.html#color" class="tsd-kind-icon">color</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="WithBackground.html#layer" class="tsd-kind-icon">layer</a>
+								<a href="LocalizableTextProps.html#inject" class="tsd-kind-icon">inject</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="LocalizableTextProps.html#layer" class="tsd-kind-icon">layer</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="LocalizableTextProps.html#path" class="tsd-kind-icon">path</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-interface">
+								<a href="LocalizableTextProps.html#element" class="tsd-kind-icon">element</a>
 							</li>
 						</ul>
 					</li>
