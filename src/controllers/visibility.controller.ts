@@ -43,7 +43,7 @@ import { Logger } from '@queelag/core'
  */
 export class VisibilityController {
   /** @internal */
-  private readonly data: Map<string, number>
+  readonly data: Map<string, number>
 
   constructor() {
     this.data = new Map()

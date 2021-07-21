@@ -147,6 +147,17 @@ export interface ListItemProps extends HTMLDivProps, WithDescription, WithLayer,
 export interface LoadingProps extends HTMLDivProps, WithDescription, WithTitle {}
 
 /** @category Prop */
+export interface LocalizableLabelProps extends HTMLLabelProps, Omit<LocalizableTextProps, 'element'> {}
+
+/** @category Prop */
+export interface LocalizableSpanProps extends HTMLSpanProps, Omit<LocalizableTextProps, 'element'> {}
+
+/** @category Prop */
+export interface LocalizableTextProps extends WithColor, WithLocalizationProps {
+  element: (props: any) => JSX.Element
+}
+
+/** @category Prop */
 export interface OnboardingProps extends HTMLDivProps {
   active?: number
   items: OnboardingItem[]

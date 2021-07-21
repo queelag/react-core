@@ -547,14 +547,15 @@
   resolved "https://registry.yarnpkg.com/@microsoft/tsdoc/-/tsdoc-0.13.2.tgz#3b0efb6d3903bd49edb073696f60e90df08efb26"
   integrity sha512-WrHvO8PDL8wd8T2+zBGKrMwVL5IyzR3ryWUsl0PXgEV0QHup4mTLi0QcATefGI6Gx9Anu7vthPyyyLpY0EpiQg==
 
-"@queelag/core@^1.0.1":
-  version "1.0.1"
-  resolved "https://npm.pkg.github.com/download/@queelag/core/1.0.1/36645a22ba1bf64bbb262368ccde4f33d73e43f6baf7eaad173943dd6702b7b8#a756897941171555b2ecda3f7905e83fdcd9ecac"
-  integrity sha512-iYTw3/88Qwm4d1ZCP6Zs+bJbFyU1N/HeZbyO7VR05gt4EpSvYAwnx87gSca4ZaLA+maknRJvvvSeyCAlZjRRyw==
+"@queelag/core@^1.0.2":
+  version "1.0.2"
+  resolved "https://npm.pkg.github.com/download/@queelag/core/1.0.2/15bb34c40e2b50230f396f29e46a806ba7fbe3644ed12bbb1464ee14c8d89a4e#ca1d8ed45bfdd1f212379aaf0df043ac6ed249de"
+  integrity sha512-qHcoFGM1nl1cwJVoBuEtjyaO6gKgQI0VSxDkTsFsKgYpM7IzuAClwTbwHFFbHiWMPbJW4n0FX0EGSFHvPImI6A==
   dependencies:
     axios "^0.21.1"
     js-cookie "^2.2.1"
     nanoid "^3.1.23"
+    rfc4648 "^1.5.0"
 
 "@rollup/plugin-typescript@^8.2.3":
   version "8.2.3"

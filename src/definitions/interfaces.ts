@@ -70,6 +70,10 @@ export interface WithDescription {
   description?: string
 }
 
+export interface WithFeedbackType {
+  type: FeedbackType
+}
+
 export interface WithIcon {
   icon?: (props: IconProps) => JSX.Element
 }
@@ -91,6 +95,10 @@ export interface WithHeader {
   header?: ReactNode
 }
 
+export interface WithName {
+  name: string
+}
+
 export interface WithOrientation {
   orientation?: Orientation
 }
@@ -107,10 +115,6 @@ export interface WithTitle {
   title?: string
 }
 
-export interface WithFeedbackType {
-  type?: FeedbackType
-}
-
 export interface WizardStep {
   canGoBack: () => boolean
   canGoNext: () => boolean
@@ -120,9 +124,8 @@ export interface WizardStep {
   title: string
 }
 
-export interface WizardStepPartial extends WithDescription, WithTitle {
+export interface WizardStepPartial extends WithDescription, WithName, WithTitle {
   canGoBack?: () => boolean
   canGoNext?: () => boolean
   content?: ReactNode
-  name: string
 }
