@@ -141,9 +141,9 @@ export class ColorPicker {
       case Color.GRAY:
         return this.configuration.text.gray[layer]
       case Color.MONO:
-        return this.configuration.background.mono
+        return this.configuration.text.mono
       case Color.MONO_INVERTED:
-        return this.configuration.background.monoInverted
+        return this.configuration.text.monoInverted
       default:
         return this.configuration.text.any(color)[layer]
     }

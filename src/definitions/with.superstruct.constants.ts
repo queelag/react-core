@@ -7,7 +7,7 @@ export const WITH_FORM_FIELD_PROPS_KEYS: (keyof WithFormFieldProps<any>)[] = [
   'label',
   'layer',
   'path',
-  'placeholder',
+  // 'placeholder',
   'required',
   'schema',
   'store',

@@ -1,10 +1,16 @@
 import { MutableRefObject } from 'react'
 import { Blank } from '../components/Blank'
-import { Color } from '../definitions/enums'
-import { ColorPickerConfiguration, ColorPickerConfigurationValue, InputFileItem, WizardStep } from '../definitions/interfaces'
+import { Color, Theme } from '../definitions/enums'
+import { AppearanceData, ColorPickerConfiguration, ColorPickerConfigurationValue, InputFileItem, WizardStep } from '../definitions/interfaces'
 
 /** @internal */
 export class Dummy {
+  static get appearanceData(): AppearanceData {
+    return {
+      theme: Theme.SYSTEM
+    }
+  }
+
   static get colorPickerConfiguration(): ColorPickerConfiguration {
     return {
       background: this.colorPickerConfigurationValue,

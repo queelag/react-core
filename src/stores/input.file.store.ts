@@ -117,6 +117,8 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
         return S.array(this.required ? Schema.inputFileItemRequired : Schema.inputFileItemOptional)
       case InputFileMode.SINGLE:
         return this.required ? Schema.inputFileItemRequired : Schema.inputFileItemOptional
+      default:
+        return S.any()
     }
   }
 

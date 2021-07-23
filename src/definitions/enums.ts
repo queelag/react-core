@@ -120,6 +120,10 @@ export enum Layer {
   THREE = 3
 }
 
+export enum LocalStorageName {
+  APPEARANCE = 'APPEARANCE'
+}
+
 export enum Orientation {
   HORIZONTAL = 'HORIZONTAL',
   VERTICAL = 'VERTICAL'

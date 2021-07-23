@@ -68,6 +68,8 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
         return this.required ? S.size(S.array(S.string()), 1, Infinity) : S.array(S.string())
       case SelectMode.SINGLE:
         return this.required ? S.size(S.string(), 1, Infinity) : S.string()
+      default:
+        return S.any()
     }
   }
 

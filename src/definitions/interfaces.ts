@@ -1,8 +1,12 @@
 import { ID } from '@queelag/core'
 import { LegacyRef, MutableRefObject, ReactNode } from 'react'
-import { Color, FeedbackType, Layer, Orientation, Shape, Size } from './enums'
+import { Color, FeedbackType, Layer, Orientation, Shape, Size, Theme } from './enums'
 import { IconProps } from './props'
 import { SelectOptionValue } from './types'
+
+export interface AppearanceData {
+  theme: Theme
+}
 
 export interface ColorPickerConfigurationValue {
   any: (color: Color) => [string, string, string, string]

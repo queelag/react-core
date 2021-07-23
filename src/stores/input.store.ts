@@ -1,4 +1,4 @@
-import { NumberUtils } from '@queelag/core'
+import { Logger, NumberUtils } from '@queelag/core'
 import { ChangeEvent } from 'react'
 import { ComponentName, InputType } from '../definitions/enums'
 import { ComponentFormFieldStoreProps } from '../definitions/with.superstruct.interfaces'
@@ -86,6 +86,8 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
    */
   onFocus = (): void => {
     this.focused = true
+    Logger.debug(this.id, 'onFocus', `Focused has been set to true.`)
+
     this.update()
   }
 
@@ -94,6 +96,8 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
    */
   onBlur = (): void => {
     this.focused = false
+    Logger.debug(this.id, 'onBlur', 'Focused has been set to false.')
+
     this.update()
   }
 
