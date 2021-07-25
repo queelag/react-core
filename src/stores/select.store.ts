@@ -1,3 +1,5 @@
+import { Logger } from '@queelag/core'
+import { ChangeEvent } from 'react'
 import * as S from 'superstruct'
 import { ComponentName, SelectMode } from '../definitions/enums'
 import { SelectOption } from '../definitions/interfaces'
@@ -20,12 +22,17 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
    * An array of {@link SelectOption}.
    */
   options: SelectOption[]
+  /**
+   * A string value to filter the options.
+   */
+  query: string
 
   constructor(props: SelectProps<T> & ComponentFormFieldStoreProps<HTMLDivElement, T>) {
     super(ComponentName.SELECT, props)
 
     this.mode = props.mode || SelectMode.SINGLE
     this.options = props.options
+    this.query = ''
   }
 
   /**
@@ -46,6 +53,8 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
 
     this.touched = true
     this.validation = this.schema.validate(this.value)
+
+    this.resetQuery()
   }
 
   /**
@@ -55,8 +64,55 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
     this.onClickOption(option)
   }
 
+  onChangeQuery = (event: ChangeEvent<HTMLInputElement>): void => {
+    this.query = event.target.value
+    Logger.debug(this.id, 'onChangeQuery', `The query value has been set to ${this.query}.`)
+
+    if (this.query.length <= 0) {
+      this.resetValue()
+    }
+
+    this.update()
+  }
+
+  onCollapse = (): void => {
+    this.resetQuery()
+  }
+
+  onEscape = (): void => {
+    this.resetQuery()
+    this.resetValue()
+  }
+
+  resetQuery(): void {
+    this.query = ''
+    Logger.debug(this.id, 'resetQuery', `The query has been reset.`)
+
+    this.update()
+  }
+
+  resetValue(): void {
+    switch (this.mode) {
+      case SelectMode.MULTIPLE:
+        this.store[this.path] = [] as any
+        break
+      case SelectMode.SINGLE:
+        this.store[this.path] = this.dummyOption as any
+        break
+    }
+
+    Logger.debug(this.id, 'resetValue', `The value has been reset.`)
+  }
+
   findLabelByValue(value: SelectOptionValue): string {
     return (this.options.find((v: SelectOption) => v.value === value) || { label: '', value: '' }).label
+  }
+
+  get optionsFilteredByQuery(): SelectOption[] {
+    return this.options.filter(
+      (v: SelectOption) =>
+        v.label.toLowerCase().trim().includes(this.query.toLowerCase().trim()) || v.value.toLowerCase().trim().includes(this.query.toLowerCase().trim())
+    )
   }
 
   /**
@@ -81,7 +137,7 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
       case SelectMode.MULTIPLE:
         return (this.store[this.path] as any) || []
       case SelectMode.SINGLE:
-        return this.store[this.path] as any
+        return (this.store[this.path] as any) || ''
     }
   }
 
@@ -91,6 +147,10 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
 
   get isModeSingle(): boolean {
     return this.mode === SelectMode.SINGLE
+  }
+
+  private get dummyOption(): SelectOption {
+    return { label: '', value: '' }
   }
 
   /** @internal */
