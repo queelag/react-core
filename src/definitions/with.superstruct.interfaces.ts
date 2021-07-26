@@ -1,4 +1,4 @@
-import * as S from 'superstruct'
+import type * as S from 'superstruct'
 import { ComponentStoreProps, WithLayer } from './interfaces'
 
 export interface ComponentFormFieldStoreProps<T extends Element, U extends object> extends ComponentStoreProps<T>, WithFormFieldProps<U> {}

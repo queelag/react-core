@@ -1,4 +1,4 @@
-import { ListChildComponentProps } from 'react-window'
+import type { ListChildComponentProps } from 'react-window'
 
 /** @category Prop */
 export interface VirtualizedListItemProps<T> extends ListChildComponentProps {

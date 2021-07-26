@@ -1,5 +1,5 @@
-import { RouteContext } from 'react-router5/dist/types'
-import { Router } from 'router5'
+import type { RouteContext } from 'react-router5/dist/types'
+import type { Router } from 'router5'
 import { WithHeader, WithTitle } from './interfaces'
 import { HTMLDivProps } from './props'
 import { BottomSheetItem, BottomTabberItem, ContextMenuItem, SidebarItem, TopTabberItem } from './with.router5.interfaces'

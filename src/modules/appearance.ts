@@ -2,7 +2,7 @@ import { Theme } from '../definitions/enums'
 import { AppearanceData } from '../definitions/interfaces'
 import { Dummy } from './dummy'
 
-class _Appearance {
+export class Appearance {
   data: AppearanceData
 
   constructor() {
@@ -65,5 +65,3 @@ class _Appearance {
     return document.querySelector('html') || document.createElement('html')
   }
 }
-
-export const Appearance = new _Appearance()

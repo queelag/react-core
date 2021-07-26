@@ -1,4 +1,4 @@
-import { Router } from 'router5'
+import type { Router } from 'router5'
 import { Blank } from '../components/Blank'
 import { ComponentName } from '../definitions/enums'
 import { ComponentStoreProps } from '../definitions/interfaces'

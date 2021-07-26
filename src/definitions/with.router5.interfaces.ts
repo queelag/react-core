@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
-import { Options } from 'router5'
-import { Params } from 'router5/dist/types/base'
+import type { Options } from 'router5'
+import type { Params } from 'router5/dist/types/base'
 import { WithColor, WithDescription, WithIcon, WithTitle } from './interfaces'
 
 export interface BottomSheetItem extends WithColor, WithDescription, WithIcon, WithRoute, WithTitle {

@@ -44,7 +44,7 @@ export class Dummy {
   }
 
   static get ref(): MutableRefObject<any> {
-    return { current: document.createElement('div') }
+    return { current: global ? ({} as any) : document.createElement('div') }
   }
 
   static get wizardStep(): WizardStep {

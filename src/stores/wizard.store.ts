@@ -21,7 +21,7 @@ export class WizardStore extends ComponentStore<HTMLDivElement> {
   constructor(props: WizardProps & ComponentStoreProps<HTMLDivElement>) {
     super(ComponentName.WIZARD, props)
 
-    this.active = props.active || props.steps[0].name
+    this.active = props.active || (props.steps[0] ? props.steps[0].name : '')
     this.onStepChange = props.onStepChange || noop
     this.steps = props.steps
   }
