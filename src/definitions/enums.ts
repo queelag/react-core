@@ -97,6 +97,12 @@ export enum FormFieldType {
   SELECT = 'SELECT'
 }
 
+export enum ImageStatus {
+  ERROR = 'ERROR',
+  LOADED = 'LOADED',
+  LOADING = 'LOADING'
+}
+
 export enum InputFileMode {
   MULTIPLE = 'MULTIPLE',
   SINGLE = 'SINGLE'

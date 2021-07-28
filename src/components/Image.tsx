@@ -1,6 +1,6 @@
 import { ObjectUtils, StoreUtils } from '@queelag/core'
 import React, { Fragment, SyntheticEvent, useEffect, useMemo, useRef } from 'react'
-import { IMAGE_PROPS_KEYS } from '../definitions/constants'
+import { IMAGE_EMPTY_BASE64, IMAGE_PROPS_KEYS } from '../definitions/constants'
 import { ImageProps } from '../definitions/props'
 import { useForceUpdate } from '../hooks/use.force.update'
 import { ImageStore, IMAGE_STORE_KEYS } from '../stores/image.store'
@@ -27,14 +27,14 @@ export function Image(props: ImageProps) {
   const ref = useRef(document.createElement('img'))
   const store = useMemo(() => new ImageStore({ ...props, ref, update }), [])
 
-  const onError = (e: SyntheticEvent<HTMLImageElement>) => {
-    store.onError(e)
-    props.onError && props.onError(e)
+  const onError = (event: SyntheticEvent<HTMLImageElement>) => {
+    store.onError(event)
+    props.onError && props.onError(event)
   }
 
-  const onLoad = (e: SyntheticEvent<HTMLImageElement>) => {
-    store.update()
-    props.onLoad && props.onLoad(e)
+  const onLoad = (event: SyntheticEvent<HTMLImageElement>) => {
+    store.onLoad(event)
+    props.onLoad && props.onLoad(event)
   }
 
   useEffect(() => {
@@ -44,34 +44,22 @@ export function Image(props: ImageProps) {
   useEffect(() => WindowUtils.addEventListenerAndReturnRemover('resize', () => store.update()), [])
 
   return (
-    <>
-      {store.hasNoError && (
-        <Fragment>
-          {store.source.length > 0 && (
-            <img
-              {...ObjectUtils.omit(props, IMAGE_PROPS_KEYS)}
-              id={store.id}
-              onError={onError}
-              onLoad={onLoad}
-              ref={ref}
-              src={store.source}
-              style={store.getStyle(props)}
-            />
-          )}
-          {store.source.length <= 0 && <img {...ObjectUtils.omit(props, IMAGE_PROPS_KEYS)} id={store.id} ref={ref} style={store.getStyle(props)} />}
-        </Fragment>
+    <Fragment>
+      {store.isStatusLoaded && (
+        <img
+          {...ObjectUtils.omit(props, IMAGE_PROPS_KEYS)}
+          id={store.id}
+          onError={onError}
+          onLoad={onLoad}
+          ref={ref}
+          src={props.source}
+          style={store.getStyle(props)}
+        />
       )}
-      {store.hasError && (
-        <Fragment>
-          {typeof props.fallback === 'string' && (
-            <img {...ObjectUtils.omit(props, IMAGE_PROPS_KEYS)} id={store.id} src={props.fallback} style={store.getStyle(props)} />
-          )}
-          {typeof props.fallback === 'function' && (
-            <props.fallback {...ObjectUtils.omit(props, IMAGE_PROPS_KEYS)} id={store.id} style={store.getStyle(props)} />
-          )}
-          {typeof props.fallback === 'undefined' && <img {...ObjectUtils.omit(props, IMAGE_PROPS_KEYS)} id={store.id} style={store.getStyle(props)} />}
-        </Fragment>
+      {store.isFallbackVisible && <img {...ObjectUtils.omit(props, IMAGE_PROPS_KEYS)} ref={ref} src={IMAGE_EMPTY_BASE64} style={store.getStyle(props)} />}
+      {store.isStatusLoading && (
+        <img onError={onError} onLoad={onLoad} src={props.source} style={{ opacity: 0, pointerEvents: 'none', position: 'absolute' }} />
       )}
-    </>
+    </Fragment>
   )
 }

@@ -1,8 +1,8 @@
-import { ID, IDUtils, tc } from '@queelag/core'
+import { ID } from '@queelag/core'
 import { CSSProperties } from 'react'
 // @ts-ignore
-import { createSquircle } from 'squircleyjs'
-import { ComponentName, Shape } from '../definitions/enums'
+// import { createSquircle } from 'squircleyjs'
+import { Shape } from '../definitions/enums'
 
 /**
  * Utils for anything related to shapes.
@@ -30,24 +30,26 @@ export class ShapeUtils {
         potential = this.squircleCache.get(this.toSquircleCacheKey(size, curvature))
         if (potential) return { clipPath: `url(#${potential})` }
 
-        svg = tc(() =>
-          createSquircle({
-            format: 'SVGNode',
-            viewBox: [0, 0, size, size],
-            width: size,
-            height: size,
-            curvature: curvature,
-            fill: '#000',
-            rotate: 0
-          })
-        )
-        if (svg instanceof Error) return {}
+        id = ''
 
-        id = IDUtils.prefixed(ComponentName.SQUIRCLE)
-        svg.innerHTML = `<clipPath id='${id}'>${svg.innerHTML}</clipPath>`
+        // svg = tc(() =>
+        //   createSquircle({
+        //     format: 'SVGNode',
+        //     viewBox: [0, 0, size, size],
+        //     width: size,
+        //     height: size,
+        //     curvature: curvature,
+        //     fill: '#000',
+        //     rotate: 0
+        //   })
+        // )
+        // if (svg instanceof Error) return {}
 
-        this.squircleCache.set(this.toSquircleCacheKey(size, curvature), id)
-        this.squirclesContainer.appendChild(svg)
+        // id = IDUtils.prefixed(ComponentName.SQUIRCLE)
+        // svg.innerHTML = `<clipPath id='${id}'>${svg.innerHTML}</clipPath>`
+
+        // this.squircleCache.set(this.toSquircleCacheKey(size, curvature), id)
+        // this.squirclesContainer.appendChild(svg)
 
         return { clipPath: `url(#${id})` }
     }
