@@ -48,17 +48,18 @@ export function Image(props: ImageProps) {
       {store.isStatusLoaded && (
         <img
           {...ObjectUtils.omit(props, IMAGE_PROPS_KEYS)}
+          crossOrigin='anonymous'
           id={store.id}
           onError={onError}
           onLoad={onLoad}
           ref={ref}
-          src={props.source}
+          src={store.source}
           style={store.getStyle(props)}
         />
       )}
       {store.isFallbackVisible && <img {...ObjectUtils.omit(props, IMAGE_PROPS_KEYS)} ref={ref} src={IMAGE_EMPTY_BASE64} style={store.getStyle(props)} />}
       {store.isStatusLoading && (
-        <img onError={onError} onLoad={onLoad} src={props.source} style={{ opacity: 0, pointerEvents: 'none', position: 'absolute' }} />
+        <img crossOrigin='anonymous' onError={onError} onLoad={onLoad} src={store.source} style={{ opacity: 0, pointerEvents: 'none', position: 'absolute' }} />
       )}
     </Fragment>
   )

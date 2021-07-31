@@ -81,7 +81,7 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
 
   onEscape = (): void => {
     this.resetQuery()
-    this.resetValue()
+    // this.resetValue()
   }
 
   resetQuery(): void {

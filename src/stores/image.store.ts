@@ -4,7 +4,9 @@ import { IMAGE_EMPTY_BASE64 } from '../definitions/constants'
 import { ComponentName, ImageStatus, Orientation } from '../definitions/enums'
 import { ComponentStoreProps } from '../definitions/interfaces'
 import { ImageProps } from '../definitions/props'
+import { Cache } from '../modules/cache'
 import { ComponentStore } from '../modules/component.store'
+import { ImageUtils } from '../utils/image.utils'
 import { ShapeUtils } from '../utils/shape.utils'
 
 /**
@@ -48,6 +50,8 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
   }
 
   onLoad = (event: SyntheticEvent<HTMLImageElement>): void => {
+    Cache.images.set(this.source, ImageUtils.toBase64(this.element))
+
     this.status = ImageStatus.LOADED
     Logger.debug(this.id, 'onLoad', `The status has been set to ${ImageStatus.LOADED}.`, event)
 
@@ -105,7 +109,21 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
 
   /** @internal */
   set source(source: string) {
-    this.status = ImageStatus.LOADING
+    let cached: string | undefined
+
+    cached = Cache.images.get(source)
+    if (!cached) {
+      this._source = source
+      this.status = ImageStatus.LOADING
+
+      this.update()
+
+      return
+    }
+
+    this._source = cached as string
+    this.status = ImageStatus.LOADED
+
     this.update()
   }
 }
