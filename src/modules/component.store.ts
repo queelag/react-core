@@ -1,5 +1,5 @@
 import { ID, IDUtils, noop, NumberUtils } from '@queelag/core'
-import { LegacyRef, MutableRefObject } from 'react'
+import { MutableRefObject } from 'react'
 import { Layer, Orientation, Shape, Size } from '../definitions/enums'
 import { ComponentStoreProps } from '../definitions/interfaces'
 import { Dummy } from './dummy'
@@ -30,7 +30,7 @@ export class ComponentStore<T extends Element> {
   /**
    * A ref with T interface.
    */
-  ref: LegacyRef<T> | MutableRefObject<T>
+  ref: MutableRefObject<T>
   /**
    * A {@link Shape} which determines the frame of a component.
    */
@@ -45,7 +45,7 @@ export class ComponentStore<T extends Element> {
     this.layer = props.layer || Layer.ZERO
     this.name = name
     this.orientation = props.orientation || Orientation.HORIZONTAL
-    this.ref = props.ref || Dummy.ref
+    this.ref = (props.ref as any) || Dummy.ref
     this.shape = props.shape || Shape.NONE
     this.size = props.size || Size.MEDIUM
     this.update = props.update || noop
@@ -60,7 +60,7 @@ export class ComponentStore<T extends Element> {
    * Returns a DOM element from the ref.
    */
   get element(): T {
-    return (this.ref as MutableRefObject<T>).current || this.ref || document.createElement('div')
+    return this.ref.current || document.createElement('div')
   }
 
   /**

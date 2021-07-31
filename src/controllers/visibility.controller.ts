@@ -99,7 +99,7 @@ export class VisibilityController {
    * Checks if name is HIDDEN.
    */
   isHidden(name: string): boolean {
-    return this.get(name) <= VisibilityController.HIDING
+    return this.get(name) === VisibilityController.HIDDEN
   }
 
   /**
@@ -120,7 +120,7 @@ export class VisibilityController {
    * Checks if name is VISIBLE.
    */
   isVisible(name: string): boolean {
-    return this.get(name) >= VisibilityController.SHOWING
+    return this.get(name) === VisibilityController.VISIBLE
   }
 
   static get HIDDEN(): number {

@@ -11,6 +11,7 @@ import {
   WithIcon,
   WithLayer,
   WithLocalizationProps,
+  WithName,
   WithOrientation,
   WithShape,
   WithSize,
@@ -64,7 +65,7 @@ export interface ColorableDivProps extends HTMLDivProps {
 }
 
 /** @category Prop */
-export interface DialogProps extends HTMLDivProps, WithDescription, WithFooter, WithHeader, WithTitle {
+export interface DialogProps extends HTMLDivProps, WithDescription, WithFooter, WithHeader, Partial<WithName>, WithTitle {
   buttons?: Partial<ButtonProps>[]
   onHide?: () => any
   onShow?: () => any
