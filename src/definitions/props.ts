@@ -1,5 +1,5 @@
 import { FormEvent, ReactNode } from 'react'
-import { ButtonVariant, Color, Layer } from './enums'
+import { ButtonVariant } from './enums'
 import {
   OnboardingItem,
   WithBackground,
@@ -56,12 +56,11 @@ export interface ButtonProps extends HTMLButtonProps, WithBackground, WithColor,
 export interface CardProps extends HTMLDivProps, WithHeader, WithLayer, WithFooter, WithTitle {}
 
 /** @category Prop */
-export interface ColorableDivProps extends HTMLDivProps {
-  background?: Color
-  border?: Color
-  divide?: Color
-  layer?: Layer
-  text?: Color
+export interface ColorableDivProps extends HTMLDivProps, WithLayer {
+  background?: string
+  border?: string
+  divide?: string
+  text?: string
 }
 
 /** @category Prop */

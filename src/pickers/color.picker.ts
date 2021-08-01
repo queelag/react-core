@@ -40,7 +40,7 @@ export class ColorPicker {
    * Picks a layered background color from a string
    */
   static backgroundByString(color: string, layer?: Layer): string {
-    return Object.keys(Color).includes(color) ? this.background(color as Color, layer) : color
+    return Object.values(Color).includes(color as Color) ? this.background(color as Color, layer) : color
   }
 
   /**
@@ -54,7 +54,7 @@ export class ColorPicker {
    * Picks a layered border color from a string
    */
   static borderByString(color: string, layer?: Layer): string {
-    return Object.keys(Color).includes(color) ? this.border(color as Color, layer) : color
+    return Object.values(Color).includes(color as Color) ? this.border(color as Color, layer) : color
   }
 
   /**
@@ -68,7 +68,7 @@ export class ColorPicker {
    * Picks a layered divide color from a string
    */
   static divideByString(color: string, layer?: Layer): string {
-    return Object.keys(Color).includes(color) ? this.divide(color as Color, layer) : color
+    return Object.values(Color).includes(color as Color) ? this.divide(color as Color, layer) : color
   }
 
   /**
@@ -82,7 +82,7 @@ export class ColorPicker {
    * Picks a layered text color from a string
    */
   static textByString(color: string, layer?: Layer): string {
-    return Object.keys(Color).includes(color) ? this.text(color as Color, layer) : color
+    return Object.values(Color).includes(color as Color) ? this.text(color as Color, layer) : color
   }
 
   /**
