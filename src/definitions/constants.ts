@@ -67,7 +67,7 @@ export const ICON_PROPS_KEYS: (keyof IconProps)[] = ['color', 'layer', 'size', '
 /** @category Constant */
 export const IMAGE_EMPTY_BASE64: string = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='
 /** @category Constant */
-export const IMAGE_PROPS_KEYS: (keyof ImageProps)[] = ['orientation', 'ratio', 'shape', 'size', 'source']
+export const IMAGE_PROPS_KEYS: (keyof ImageProps)[] = ['alpha', 'cache', 'orientation', 'quality', 'ratio', 'shape', 'size', 'source']
 /** @category Constant */
 export const LIST_PROPS_KEYS: (keyof ListProps<any>)[] = ['empty', 'items', 'renderItem']
 /** @category Constant */

@@ -2,7 +2,7 @@ import { Logger } from '@queelag/core'
 import { Cache } from '../modules/cache'
 
 export class ImageUtils {
-  static toBase64(image: HTMLImageElement, alpha: boolean = false): string {
+  static toBase64(image: HTMLImageElement, alpha: boolean = false, quality: number = 0.8): string {
     let canvas: HTMLCanvasElement, context: CanvasRenderingContext2D, base64: string
 
     canvas = document.createElement('canvas')
@@ -12,7 +12,7 @@ export class ImageUtils {
     canvas.width = image.naturalWidth
     context.drawImage(image, 0, 0)
 
-    return canvas.toDataURL(alpha ? 'image/png' : 'image/jpeg', 0.8)
+    return canvas.toDataURL(alpha ? 'image/png' : 'image/jpeg', quality)
   }
 
   static async preload(sources: string[]): Promise<boolean> {

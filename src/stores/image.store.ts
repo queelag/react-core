@@ -16,9 +16,21 @@ import { ShapeUtils } from '../utils/shape.utils'
  */
 export class ImageStore extends ComponentStore<HTMLImageElement> {
   /**
+   * A boolean which determines the type of the cached image.
+   */
+  alpha: boolean
+  /**
+   * A boolean which determines if this image will be cached or not.
+   */
+  cache: boolean
+  /**
    * An {@link Orientation} used to calculate the ratio.
    */
   orientation: Orientation
+  /**
+   * A number which determines the quality of the cached image.
+   */
+  quality: number
   /**
    * A number which determines ratioed height or width based on the orientation.
    */
@@ -33,7 +45,10 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
   constructor(props: ImageProps & ComponentStoreProps<HTMLImageElement>) {
     super(ComponentName.IMAGE, props)
 
+    this.alpha = props.alpha || false
+    this.cache = typeof props.cache === 'boolean' ? props.cache : true
     this.orientation = props.orientation || Orientation.HORIZONTAL
+    this.quality = props.quality || 0.8
     this.ratio = props.ratio || 0
     this.status = ImageStatus.LOADING
     this.source = props.source
@@ -50,7 +65,9 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
   }
 
   onLoad = (event: SyntheticEvent<HTMLImageElement>): void => {
-    Cache.images.set(this.source, ImageUtils.toBase64(this.element))
+    if (this.isCacheable) {
+      Cache.images.set(this.source, ImageUtils.toBase64(this.element, this.alpha, this.quality))
+    }
 
     this.status = ImageStatus.LOADED
     Logger.debug(this.id, 'onLoad', `The status has been set to ${ImageStatus.LOADED}.`, event)
@@ -89,6 +106,10 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
    */
   get width(): number {
     return this.isOrientationHorizontal ? (this.ratio > 0 ? this.elementComputedHeight * this.ratio : 0) : 0
+  }
+
+  get isCacheable(): boolean {
+    return this.cache === true
   }
 
   get isFallbackVisible(): boolean {
