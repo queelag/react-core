@@ -112,6 +112,10 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
     return this.cache === true
   }
 
+  get isNotCacheable(): boolean {
+    return this.cache === false
+  }
+
   get isFallbackVisible(): boolean {
     return this.isStatusError || this.isStatusLoading
   }
@@ -150,4 +154,4 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
 }
 
 /** @category Constant */
-export const IMAGE_STORE_KEYS: (keyof ImageProps & keyof ImageStore)[] = ['id', 'shape', 'source']
+export const IMAGE_STORE_KEYS: (keyof ImageProps & keyof ImageStore)[] = ['alpha', 'cache', 'id', 'quality', 'orientation', 'ratio', 'shape', 'source']
