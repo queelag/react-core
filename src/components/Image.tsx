@@ -1,10 +1,9 @@
-import { ObjectUtils, StoreUtils } from '@queelag/core'
-import React, { Fragment, SyntheticEvent, useEffect, useMemo, useRef } from 'react'
+import { ObjectUtils, StoreUtils, WindowUtils } from '@queelag/core'
+import React, { Fragment, SyntheticEvent, useEffect } from 'react'
 import { IMAGE_EMPTY_BASE64, IMAGE_PROPS_KEYS } from '../definitions/constants'
 import { ImageProps } from '../definitions/props'
-import { useForceUpdate } from '../hooks/use.force.update'
+import { useComponentStore } from '../hooks/use.component.store'
 import { ImageStore, IMAGE_STORE_KEYS } from '../stores/image.store'
-import { WindowUtils } from '../utils/window.utils'
 
 /**
  * An image component which handles caching, error states, fallbacks and ratio based sizes.
@@ -23,9 +22,7 @@ import { WindowUtils } from '../utils/window.utils'
  * @category Component
  */
 export function Image(props: ImageProps) {
-  const update = useForceUpdate()
-  const ref = useRef(document.createElement('img'))
-  const store = useMemo(() => new ImageStore({ ...props, ref, update }), [])
+  const store = useComponentStore(ImageStore, props, 'img')
 
   const onError = (event: SyntheticEvent<HTMLImageElement>) => {
     store.onError(event)
@@ -38,7 +35,7 @@ export function Image(props: ImageProps) {
   }
 
   useEffect(() => {
-    StoreUtils.updateKeys(store, props, IMAGE_STORE_KEYS, update)
+    StoreUtils.updateKeys(store, props, IMAGE_STORE_KEYS, store.update)
   }, ObjectUtils.pickToArray(props, IMAGE_STORE_KEYS))
 
   useEffect(() => WindowUtils.addEventListenerAndReturnRemover('resize', () => store.update()), [])
@@ -51,12 +48,12 @@ export function Image(props: ImageProps) {
           id={store.id}
           onError={onError}
           onLoad={onLoad}
-          ref={ref}
+          ref={store.ref}
           src={store.source}
           style={store.getStyle(props)}
         />
       )}
-      {store.isFallbackVisible && <img {...ObjectUtils.omit(props, IMAGE_PROPS_KEYS)} ref={ref} src={IMAGE_EMPTY_BASE64} style={store.getStyle(props)} />}
+      {store.isFallbackVisible && <img {...ObjectUtils.omit(props, IMAGE_PROPS_KEYS)} ref={store.ref} src={IMAGE_EMPTY_BASE64} style={store.getStyle(props)} />}
       {store.isStatusLoading && (
         <img onError={onError} onLoad={onLoad} src={store.source} style={{ opacity: 0, pointerEvents: 'none', position: 'absolute' }} />
       )}

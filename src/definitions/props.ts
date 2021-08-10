@@ -111,7 +111,7 @@ export interface HTMLSpanProps extends React.DetailedHTMLProps<React.HTMLAttribu
 export interface HTMLUListProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLUListElement>, HTMLUListElement> {}
 
 /** @category Prop */
-export interface IconProps extends Omit<React.SVGProps<SVGSVGElement>, 'fill' | 'stroke'>, WithColor, WithLayer {
+export interface IconProps extends Omit<React.SVGProps<SVGSVGElement>, 'fill' | 'orientation' | 'stroke'>, WithColor, WithLayer {
   fill?: boolean | string
   size?: number
   stroke?: boolean | string

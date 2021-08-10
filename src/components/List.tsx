@@ -1,8 +1,8 @@
 import { ObjectUtils, StoreUtils } from '@queelag/core'
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect } from 'react'
 import { LIST_PROPS_KEYS } from '../definitions/constants'
 import { ListProps } from '../definitions/props'
-import { useForceUpdate } from '../hooks/use.force.update'
+import { useComponentStore } from '../hooks/use.component.store'
 import { ListStore, LIST_STORE_KEYS } from '../stores/list.store'
 
 /**
@@ -22,11 +22,10 @@ import { ListStore, LIST_STORE_KEYS } from '../stores/list.store'
  * @category Component
  */
 export function List<T>(props: ListProps<T>) {
-  const update = useForceUpdate()
-  const store = useMemo(() => new ListStore<T>({ ...props, update }), [])
+  const store = useComponentStore(ListStore, props)
 
   useEffect(() => {
-    StoreUtils.updateKeys(store, props, LIST_STORE_KEYS, update)
+    StoreUtils.updateKeys(store, props, LIST_STORE_KEYS, store.update)
   }, ObjectUtils.pickToArray(props, LIST_STORE_KEYS))
 
   return (

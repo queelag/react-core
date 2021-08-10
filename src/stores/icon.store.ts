@@ -11,13 +11,9 @@ import { ColorPicker } from '../pickers/color.picker'
  *
  * @category Store
  */
-export class IconStore extends ComponentStore<SVGElement> {
+export class IconStore extends ComponentStore<SVGSVGElement> {
   /** @internal */
   private _color: string = ''
-  /**
-   * A number which determines height and width.
-   */
-  size: number
   /** @internal */
   private _svg: string = ''
   /**
@@ -25,7 +21,7 @@ export class IconStore extends ComponentStore<SVGElement> {
    */
   thickness: number
 
-  constructor(props: IconProps & ComponentStoreProps<SVGElement>) {
+  constructor(props: IconProps & ComponentStoreProps<SVGSVGElement>) {
     super(ComponentName.ICON, props)
 
     this.color = props.color || Color.MONO
@@ -86,11 +82,11 @@ export class IconStore extends ComponentStore<SVGElement> {
           text = await tcp(() => (response as Response).text())
           if (text instanceof Error) return
 
-          this._svg = svg
+          this._svg = text
           Cache.icons.set(svg, text)
 
           break
-        case svg.includes('svg'):
+        case /svg/.test(svg):
           this._svg = svg
           break
         default:

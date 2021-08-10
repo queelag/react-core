@@ -1,9 +1,10 @@
 import { ObjectUtils, StoreUtils } from '@queelag/core'
-import React, { useEffect, useMemo, useRef } from 'react'
+import React, { useEffect } from 'react'
 import { FixedSizeList, Layout, ListChildComponentProps } from 'react-window'
 import { VIRTUALIZED_LIST_PROPS_KEYS } from '../definitions/constants'
 import { VirtualizedListProps } from '../definitions/props'
-import { useForceUpdate } from '../hooks/use.force.update'
+import { useComponentStore } from '../hooks/use.component.store'
+import { useSafeRef } from '../hooks/use.safe.ref'
 import { VirtualizedListStore, VIRTUALIZED_LIST_STORE_KEYS } from '../stores/virtualized.list.store'
 
 /**
@@ -23,13 +24,11 @@ import { VirtualizedListStore, VIRTUALIZED_LIST_STORE_KEYS } from '../stores/vir
  * @category Component
  */
 export function VirtualizedList<T>(props: VirtualizedListProps<T>) {
-  const update = useForceUpdate()
-  const ref = useRef(document.createElement('ul'))
-  const dummyRef = useRef(document.createElement('div'))
-  const store = useMemo(() => new VirtualizedListStore<T>({ ...props, dummyRef, ref, update }), [])
+  const dummyRef = useSafeRef('div')
+  const store = useComponentStore(VirtualizedListStore, { ...props, dummyRef }, 'ul')
 
   useEffect(() => {
-    StoreUtils.updateKeys(store, props, VIRTUALIZED_LIST_STORE_KEYS, update)
+    StoreUtils.updateKeys(store, props, VIRTUALIZED_LIST_STORE_KEYS, store.update)
   }, ObjectUtils.pickToArray(props, VIRTUALIZED_LIST_STORE_KEYS))
 
   useEffect(() => {
@@ -40,7 +39,7 @@ export function VirtualizedList<T>(props: VirtualizedListProps<T>) {
   useEffect(() => {
     let listener: () => void
 
-    listener = () => update()
+    listener = () => store.update()
     window.addEventListener('resize', listener)
 
     return () => window.removeEventListener('resize', listener)
@@ -50,7 +49,7 @@ export function VirtualizedList<T>(props: VirtualizedListProps<T>) {
     <ul
       {...ObjectUtils.omit(props, VIRTUALIZED_LIST_PROPS_KEYS)}
       id={store.id}
-      ref={ref}
+      ref={store.ref}
       style={{
         ...props.style,
         overflow: 'hidden'

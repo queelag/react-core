@@ -1,8 +1,8 @@
 import { ObjectUtils, StoreUtils } from '@queelag/core'
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect } from 'react'
 import { AVATAR_PROPS_KEYS } from '../definitions/constants'
 import { AvatarProps } from '../definitions/props'
-import { useForceUpdate } from '../hooks/use.force.update'
+import { useComponentStore } from '../hooks/use.component.store'
 import { AvatarStore, AVATAR_STORE_KEYS } from '../stores/avatar.store'
 import { ReactUtils } from '../utils/react.utils'
 import { ShapeUtils } from '../utils/shape.utils'
@@ -25,11 +25,10 @@ import { Image } from './Image'
  * @category Component
  */
 export function Avatar(props: AvatarProps) {
-  const update = useForceUpdate()
-  const store = useMemo(() => new AvatarStore({ ...props, update }), [])
+  const store = useComponentStore(AvatarStore, props)
 
   useEffect(() => {
-    StoreUtils.updateKeys(store, props, AVATAR_STORE_KEYS, update)
+    StoreUtils.updateKeys(store, props, AVATAR_STORE_KEYS, store.update)
   }, ObjectUtils.pickToArray(props, AVATAR_STORE_KEYS))
 
   return (

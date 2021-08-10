@@ -1,8 +1,8 @@
 import { ObjectUtils, StoreUtils } from '@queelag/core'
-import React, { useEffect, useMemo, useRef } from 'react'
+import React, { useEffect } from 'react'
 import { FORM_PROPS_KEYS } from '../definitions/constants'
 import { FormProps } from '../definitions/props'
-import { useForceUpdate } from '../hooks/use.force.update'
+import { useComponentStore } from '../hooks/use.component.store'
 import { FormStore, FORM_STORE_KEYS } from '../stores/form.store'
 
 /**
@@ -28,16 +28,14 @@ import { FormStore, FORM_STORE_KEYS } from '../stores/form.store'
  * @category Component
  */
 export function Form(props: FormProps) {
-  const update = useForceUpdate()
-  const ref = useRef(document.createElement('form'))
-  const store = useMemo(() => new FormStore({ ...props, ref, update }), [])
+  const store = useComponentStore(FormStore, props, 'form')
 
   useEffect(() => {
-    StoreUtils.updateKeys(store, props, FORM_STORE_KEYS, update)
+    StoreUtils.updateKeys(store, props, FORM_STORE_KEYS, store.update)
   }, ObjectUtils.pickToArray(props, FORM_STORE_KEYS))
 
   return (
-    <form {...ObjectUtils.omit(props, FORM_PROPS_KEYS)} id={store.id} onSubmit={store.onSubmit} ref={ref}>
+    <form {...ObjectUtils.omit(props, FORM_PROPS_KEYS)} id={store.id} onSubmit={store.onSubmit} ref={store.ref}>
       {props.children}
     </form>
   )

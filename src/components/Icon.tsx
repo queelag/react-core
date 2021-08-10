@@ -1,9 +1,8 @@
 import { ObjectUtils, StoreUtils } from '@queelag/core'
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect } from 'react'
 import { ICON_PROPS_KEYS } from '../definitions/constants'
-import { Orientation } from '../definitions/enums'
 import { IconProps } from '../definitions/props'
-import { useForceUpdate } from '../hooks/use.force.update'
+import { useComponentStore } from '../hooks/use.component.store'
 import { IconStore, ICON_STORE_KEYS } from '../stores/icon.store'
 import { ReactUtils } from '../utils/react.utils'
 
@@ -24,11 +23,10 @@ import { ReactUtils } from '../utils/react.utils'
  * @category Component
  */
 export function Icon(props: IconProps) {
-  const update = useForceUpdate()
-  const store = useMemo(() => new IconStore({ ...props, orientation: Orientation.HORIZONTAL, update }), [])
+  const store = useComponentStore(IconStore, props)
 
   useEffect(() => {
-    StoreUtils.updateKeys(store, props, ICON_STORE_KEYS, update)
+    StoreUtils.updateKeys(store, props, ICON_STORE_KEYS, store.update)
   }, ObjectUtils.pickToArray(props, ICON_STORE_KEYS))
 
   return (

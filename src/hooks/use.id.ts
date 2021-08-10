@@ -1,11 +1,19 @@
 import { ID, IDUtils } from '@queelag/core'
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 /**
  * Generates a prefixed ID.
  *
  * @category Hook
  */
-export function useID(prefix: string, id: string = IDUtils.prefixed(prefix)): ID {
-  return useMemo(() => id, [])
+export function useID(prefix: string, customID: string = ''): ID {
+  const [id, setID] = useState<ID>(customID)
+
+  useEffect(() => {
+    if (id.length <= 0) {
+      setID(IDUtils.prefixed(prefix))
+    }
+  }, [])
+
+  return useMemo(() => id, [id])
 }
