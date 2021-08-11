@@ -29,7 +29,7 @@ export const useComponentStore = <
 
   useEffect(() => {
     StoreUtils.updateKeys(store, props, keys, update)
-  })
+  }, [props])
 
   return store
 }
