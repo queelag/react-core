@@ -1,15 +1,15 @@
-import { WithIdentity } from '@queelag/core'
+import { ID } from '@queelag/core'
 import { ComponentFormFieldStore } from './component.form.field.store'
 
 /**
  * @category Module
  */
-export class ComponentFormFieldCollector<T extends Element, U extends WithIdentity, V extends ComponentFormFieldStore<T, U>> {
-  data: Map<string, V>
+export class ComponentFormFieldCollector<T extends Element, U extends object, V extends ComponentFormFieldStore<T, U>> {
+  data: { byID: Map<ID, V>; byStore: Map<U, Map<number | string | symbol, V>> }
   dummy: V
 
   constructor(dummy: V) {
-    this.data = new Map()
+    this.data = { byID: new Map(), byStore: new Map() }
     this.dummy = dummy
   }
 
@@ -19,29 +19,42 @@ export class ComponentFormFieldCollector<T extends Element, U extends WithIdenti
   }
 
   set(store: V): void {
-    this.data.set(store.id, store)
-    this.data.set(this.toKey(store.store, store.path), store)
+    let entry: Map<number | string | symbol, V> | undefined
+
+    entry = this.data.byStore.get(store.store)
+    if (!entry) {
+      this.data.byStore.set(store.store, new Map())
+      return this.set(store)
+    }
+
+    entry.set(store.path, store)
+    this.data.byID.set(store.id, store)
   }
 
-  get(id: string): V
+  get(id: ID): V
   get(store: U, path: string): V
-  get(...args: any[]): V {
-    switch (true) {
-      case typeof args[0] === 'string':
-        return this.data.get(args[0]) || this.dummy
-      case typeof args[0] === 'object' && typeof args[1] === 'string':
-        return this.data.get(this.toKey(args[0], args[1])) || this.dummy
-      default:
-        return this.dummy
+  get(...args: any[]) {
+    switch (typeof args[0]) {
+      case 'string':
+        return this.data.byID.get(args[0])
+      case 'object':
+        let entry: Map<number | string | symbol, V> | undefined
+
+        entry = this.data.byStore.get(args[0])
+        if (!entry) return this.dummy
+
+        return entry.get(args[1]) || this.dummy
     }
   }
 
   delete(store: V): void {
-    this.data.delete(store.id)
-    this.data.delete(this.toKey(store.store, store.path))
-  }
+    let entry: Map<number | string | symbol, V> | undefined
 
-  private toKey(store: U, path: keyof U): string {
-    return store['id'] + '_' + path
+    this.data.byID.delete(store.id)
+
+    entry = this.data.byStore.get(store.store)
+    if (!entry) return
+
+    entry.delete(store.path)
   }
 }

@@ -1,4 +1,4 @@
-import { ElementTagNameMap, WithIdentity } from '@queelag/core'
+import { ElementTagNameMap } from '@queelag/core'
 import { useEffect } from 'react'
 import { COMPONENT_FORM_FIELD_STORE_KEYS } from '../definitions/with.superstruct.constants'
 import { ComponentFormFieldStoreProps } from '../definitions/with.superstruct.interfaces'
@@ -8,7 +8,7 @@ import { useComponentStore } from './use.component.store'
 
 export const useComponentFormFieldStore = <
   K extends keyof ElementTagNameMap,
-  U extends WithIdentity,
+  U extends object,
   V extends ComponentFormFieldStore<ElementTagNameMap[K], U>,
   W extends ComponentFormFieldStoreProps<ElementTagNameMap[K], U>
 >(
@@ -24,7 +24,7 @@ export const useComponentFormFieldStore = <
   useEffect(() => {
     Collector.set(store)
     return () => Collector.delete(store)
-  }, [])
+  }, [store.store, store.path])
 
   return store
 }

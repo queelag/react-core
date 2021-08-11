@@ -1,10 +1,11 @@
+import { ID } from '@queelag/core'
 import { ComponentStore } from './component.store'
 
 /**
  * @category Module
  */
 export class ComponentCollector<T extends ComponentStore<any>> {
-  data: Map<string, T> = new Map()
+  data: Map<ID, T> = new Map()
   dummy: T
 
   constructor(dummy: T) {
@@ -17,14 +18,14 @@ export class ComponentCollector<T extends ComponentStore<any>> {
   }
 
   set(store: T): void {
-    this.data.set(store.name, store)
+    this.data.set(store.id, store)
   }
 
-  get(name: string): T {
-    return this.data.get(name) || this.dummy
+  get(id: ID): T {
+    return this.data.get(id) || this.dummy
   }
 
   delete(store: T): void {
-    this.data.delete(store.name)
+    this.data.delete(store.id)
   }
 }

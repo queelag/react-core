@@ -13,7 +13,7 @@ export function useID(prefix: string, customID: string = ''): ID {
     if (id.length <= 0) {
       setID(IDUtils.prefixed(prefix))
     }
-  }, [])
+  }, [customID, prefix])
 
   return id
 }
