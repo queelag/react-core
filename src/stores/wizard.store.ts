@@ -109,6 +109,3 @@ export class WizardStore extends ComponentStore<HTMLDivElement> {
     this._steps = steps.map((v: WizardStepPartial) => Object.assign({}, Dummy.wizardStep, v))
   }
 }
-
-/** @category Constant */
-export const WIZARD_STORE_KEYS: (keyof WizardProps & keyof WizardStore)[] = ['active', 'id', 'onStepChange', 'steps']

@@ -158,6 +158,3 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
     this._schema = schema
   }
 }
-
-/** @category Constant */
-export const SELECT_STORE_KEYS: (keyof SelectProps<any> & keyof SelectStore<any>)[] = ['id', 'label', 'layer', 'mode', 'options', 'path', 'required', 'store']

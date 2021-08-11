@@ -1,11 +1,11 @@
-import { ObjectUtils, StoreUtils } from '@queelag/core'
+import { ObjectUtils } from '@queelag/core'
 import React, { useEffect } from 'react'
 import { FixedSizeList, Layout, ListChildComponentProps } from 'react-window'
-import { VIRTUALIZED_LIST_PROPS_KEYS } from '../definitions/constants'
+import { VIRTUALIZED_LIST_PROPS_KEYS, VIRTUALIZED_LIST_STORE_KEYS } from '../definitions/constants'
 import { VirtualizedListProps } from '../definitions/props'
 import { useComponentStore } from '../hooks/use.component.store'
 import { useSafeRef } from '../hooks/use.safe.ref'
-import { VirtualizedListStore, VIRTUALIZED_LIST_STORE_KEYS } from '../stores/virtualized.list.store'
+import { VirtualizedListStore } from '../stores/virtualized.list.store'
 
 /**
  * A virtualized unordered list, handles sizes and empty states.
@@ -25,11 +25,7 @@ import { VirtualizedListStore, VIRTUALIZED_LIST_STORE_KEYS } from '../stores/vir
  */
 export function VirtualizedList<T>(props: VirtualizedListProps<T>) {
   const dummyRef = useSafeRef('div')
-  const store = useComponentStore(VirtualizedListStore, { ...props, dummyRef }, 'ul')
-
-  useEffect(() => {
-    StoreUtils.updateKeys(store, props, VIRTUALIZED_LIST_STORE_KEYS, store.update)
-  }, ObjectUtils.pickToArray(props, VIRTUALIZED_LIST_STORE_KEYS))
+  const store = useComponentStore(VirtualizedListStore, { ...props, dummyRef }, VIRTUALIZED_LIST_STORE_KEYS as any, 'ul')
 
   useEffect(() => {
     store.readItemElementHeightOrWidth()

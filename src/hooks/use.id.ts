@@ -1,5 +1,5 @@
 import { ID, IDUtils } from '@queelag/core'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 /**
  * Generates a prefixed ID.
@@ -15,5 +15,5 @@ export function useID(prefix: string, customID: string = ''): ID {
     }
   }, [])
 
-  return useMemo(() => id, [id])
+  return id
 }

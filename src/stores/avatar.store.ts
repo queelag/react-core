@@ -46,6 +46,3 @@ export class AvatarStore extends ComponentStore<HTMLDivElement> {
     this._color = color
   }
 }
-
-/** @category Constant */
-export const AVATAR_STORE_KEYS: (keyof AvatarProps & keyof AvatarStore)[] = ['background', 'color', 'layer', 'shape', 'size']

@@ -152,6 +152,3 @@ export class VirtualizedListStore<T> extends ComponentStore<HTMLUListElement> {
     return this.orientation === Orientation.VERTICAL
   }
 }
-
-/** @category Constant */
-export const VIRTUALIZED_LIST_STORE_KEYS: (keyof VirtualizedListProps<any> & keyof VirtualizedListStore<any>)[] = ['gutter', 'id', 'items', 'orientation']

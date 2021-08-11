@@ -1,9 +1,9 @@
-import { ObjectUtils, StoreUtils, WindowUtils } from '@queelag/core'
+import { ObjectUtils, WindowUtils } from '@queelag/core'
 import React, { Fragment, SyntheticEvent, useEffect } from 'react'
-import { IMAGE_EMPTY_BASE64, IMAGE_PROPS_KEYS } from '../definitions/constants'
+import { IMAGE_EMPTY_BASE64, IMAGE_PROPS_KEYS, IMAGE_STORE_KEYS } from '../definitions/constants'
 import { ImageProps } from '../definitions/props'
 import { useComponentStore } from '../hooks/use.component.store'
-import { ImageStore, IMAGE_STORE_KEYS } from '../stores/image.store'
+import { ImageStore } from '../stores/image.store'
 
 /**
  * An image component which handles caching, error states, fallbacks and ratio based sizes.
@@ -22,7 +22,7 @@ import { ImageStore, IMAGE_STORE_KEYS } from '../stores/image.store'
  * @category Component
  */
 export function Image(props: ImageProps) {
-  const store = useComponentStore(ImageStore, props, 'img')
+  const store = useComponentStore(ImageStore, props, IMAGE_STORE_KEYS, 'img')
 
   const onError = (event: SyntheticEvent<HTMLImageElement>) => {
     store.onError(event)
@@ -33,10 +33,6 @@ export function Image(props: ImageProps) {
     store.onLoad(event)
     props.onLoad && props.onLoad(event)
   }
-
-  useEffect(() => {
-    StoreUtils.updateKeys(store, props, IMAGE_STORE_KEYS, store.update)
-  }, ObjectUtils.pickToArray(props, IMAGE_STORE_KEYS))
 
   useEffect(() => WindowUtils.addEventListenerAndReturnRemover('resize', () => store.update()), [])
 

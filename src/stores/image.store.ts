@@ -1,10 +1,9 @@
-import { ImageUtils, Logger } from '@queelag/core'
+import { Cache, ImageUtils, Logger } from '@queelag/core'
 import { CSSProperties, SyntheticEvent } from 'react'
 import { IMAGE_EMPTY_BASE64 } from '../definitions/constants'
 import { ComponentName, ImageStatus, Orientation } from '../definitions/enums'
 import { ComponentStoreProps } from '../definitions/interfaces'
 import { ImageProps } from '../definitions/props'
-import { Cache } from '../modules/cache'
 import { ComponentStore } from '../modules/component.store'
 import { ShapeUtils } from '../utils/shape.utils'
 
@@ -151,6 +150,3 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
     this.update()
   }
 }
-
-/** @category Constant */
-export const IMAGE_STORE_KEYS: (keyof ImageProps & keyof ImageStore)[] = ['alpha', 'cache', 'id', 'quality', 'orientation', 'ratio', 'shape', 'source']

@@ -64,6 +64,3 @@ export class OnboardingStore extends ComponentStore<HTMLDivElement> {
     return this.active === this.items.length
   }
 }
-
-/** @category Constant */
-export const ONBOARDING_STORE_KEYS: (keyof OnboardingProps & keyof OnboardingStore)[] = ['id', 'items', 'onEnd']

@@ -52,6 +52,3 @@ export class BottomTabberStore extends ComponentStore<HTMLDivElement> {
     }
   }
 }
-
-/** @category Constant */
-export const BOTTOM_TABBER_STORE_KEYS: (keyof BottomTabberProps & keyof BottomTabberStore)[] = ['id', 'items', 'router']

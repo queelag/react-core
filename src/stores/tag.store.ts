@@ -39,6 +39,3 @@ export class TagStore extends ComponentStore<HTMLDivElement> {
     return this.destroyed === false
   }
 }
-
-/** @category Constant */
-export const TAG_STORE_KEYS: (keyof TagProps & keyof TagStore)[] = ['id', 'layer']

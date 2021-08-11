@@ -115,6 +115,3 @@ export class FormStore extends ComponentStore<HTMLFormElement> {
     }
   }
 }
-
-/** @category Constant */
-export const FORM_STORE_KEYS: (keyof FormProps & keyof FormStore)[] = ['id', 'onSubmit']

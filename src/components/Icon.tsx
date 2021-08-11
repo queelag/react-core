@@ -1,9 +1,9 @@
-import { ObjectUtils, StoreUtils } from '@queelag/core'
-import React, { useEffect } from 'react'
-import { ICON_PROPS_KEYS } from '../definitions/constants'
+import { ObjectUtils } from '@queelag/core'
+import React from 'react'
+import { ICON_PROPS_KEYS, ICON_STORE_KEYS } from '../definitions/constants'
 import { IconProps } from '../definitions/props'
 import { useComponentStore } from '../hooks/use.component.store'
-import { IconStore, ICON_STORE_KEYS } from '../stores/icon.store'
+import { IconStore } from '../stores/icon.store'
 import { ReactUtils } from '../utils/react.utils'
 
 /**
@@ -23,11 +23,7 @@ import { ReactUtils } from '../utils/react.utils'
  * @category Component
  */
 export function Icon(props: IconProps) {
-  const store = useComponentStore(IconStore, props)
-
-  useEffect(() => {
-    StoreUtils.updateKeys(store, props, ICON_STORE_KEYS, store.update)
-  }, ObjectUtils.pickToArray(props, ICON_STORE_KEYS))
+  const store = useComponentStore(IconStore, props, ICON_STORE_KEYS, 'svg')
 
   return (
     <svg

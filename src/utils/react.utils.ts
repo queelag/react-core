@@ -1,3 +1,4 @@
+import { ElementTagNameMap, Environment } from '@queelag/core'
 import { MutableRefObject } from 'react'
 
 /**
@@ -9,8 +10,8 @@ export class ReactUtils {
   /** @hidden */
   constructor() {}
 
-  static createDummyRef<T extends Element = Element>(tagName: keyof HTMLElementTagNameMap, options?: ElementCreationOptions): MutableRefObject<T> {
-    return typeof window !== 'undefined' ? { current: document.createElement(tagName, options) } : ({ current: {} } as any)
+  static createDummyRef<K extends keyof ElementTagNameMap>(tagName: K, options?: ElementCreationOptions): MutableRefObject<ElementTagNameMap[K]> {
+    return Environment.isWindowDefined ? { current: document.createElement(tagName, options) } : ({ current: {} } as any)
   }
 
   /**

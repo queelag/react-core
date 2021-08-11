@@ -1,3 +1,4 @@
+import { Environment } from '@queelag/core'
 import { MutableRefObject } from 'react'
 import { Blank } from '../components/Blank'
 import { Color, Theme } from '../definitions/enums'
@@ -44,7 +45,7 @@ export class Dummy {
   }
 
   static get ref(): MutableRefObject<any> {
-    return { current: global ? ({} as any) : document.createElement('div') }
+    return { current: Environment.isWindowDefined ? document.createElement('div') : {} }
   }
 
   static get wizardStep(): WizardStep {

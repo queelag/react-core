@@ -155,6 +155,3 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
     this._schema = schema
   }
 }
-
-/** @category Constant */
-export const INPUT_FILE_STORE_KEYS: (keyof InputFileProps<any> & keyof InputFileStore<any>)[] = ['id', 'label', 'layer', 'mode', 'path', 'required', 'store']

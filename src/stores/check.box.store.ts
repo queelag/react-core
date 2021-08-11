@@ -37,16 +37,3 @@ export class CheckBoxStore<U extends object> extends ComponentFormFieldStore<HTM
     this._schema = schema
   }
 }
-
-/** @category Constant */
-export const CHECK_BOX_STORE_KEYS: (keyof CheckBoxProps<any> & keyof CheckBoxStore<any>)[] = [
-  'disabled',
-  'id',
-  'label',
-  'layer',
-  'onClick',
-  'path',
-  'required',
-  'store',
-  'touched'
-]

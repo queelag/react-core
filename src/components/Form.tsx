@@ -1,9 +1,9 @@
-import { ObjectUtils, StoreUtils } from '@queelag/core'
-import React, { useEffect } from 'react'
-import { FORM_PROPS_KEYS } from '../definitions/constants'
+import { ObjectUtils } from '@queelag/core'
+import React from 'react'
+import { FORM_PROPS_KEYS, FORM_STORE_KEYS } from '../definitions/constants'
 import { FormProps } from '../definitions/props'
 import { useComponentStore } from '../hooks/use.component.store'
-import { FormStore, FORM_STORE_KEYS } from '../stores/form.store'
+import { FormStore } from '../stores/form.store'
 
 /**
  * A component that has custom submit interactions with form field components.
@@ -28,11 +28,7 @@ import { FormStore, FORM_STORE_KEYS } from '../stores/form.store'
  * @category Component
  */
 export function Form(props: FormProps) {
-  const store = useComponentStore(FormStore, props, 'form')
-
-  useEffect(() => {
-    StoreUtils.updateKeys(store, props, FORM_STORE_KEYS, store.update)
-  }, ObjectUtils.pickToArray(props, FORM_STORE_KEYS))
+  const store = useComponentStore(FormStore, props, FORM_STORE_KEYS, 'form')
 
   return (
     <form {...ObjectUtils.omit(props, FORM_PROPS_KEYS)} id={store.id} onSubmit={store.onSubmit} ref={store.ref}>

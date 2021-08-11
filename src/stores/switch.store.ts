@@ -48,6 +48,3 @@ export class SwitchStore<T extends object> extends ComponentFormFieldStore<HTMLD
     return this.value === true
   }
 }
-
-/** @category Constant */
-export const SWITCH_STORE_KEYS: (keyof SwitchProps<any> & keyof SwitchStore<any>)[] = ['disabled', 'id', 'label', 'layer', 'path', 'store']

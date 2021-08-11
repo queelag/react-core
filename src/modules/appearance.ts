@@ -12,7 +12,11 @@ export class Appearance {
 
   async initialize(): Promise<boolean> {
     this.setTheme(Theme.SYSTEM)
-    // return this.load()
+
+    // if (Environment.isWindowDefined) {
+    //   return LocalStorage.get(LocalStorageName.APPEARANCE, this.data)
+    // }
+
     return true
   }
 
@@ -39,7 +43,10 @@ export class Appearance {
         return this.setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches ? Theme.DARK : Theme.LIGHT)
     }
 
-    // return this.save()
+    // if (Environment.isWindowDefined) {
+    //   return LocalStorage.set(LocalStorageName.APPEARANCE, this.data)
+    // }
+
     return true
   }
 

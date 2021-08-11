@@ -180,16 +180,3 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
     return this.isTypeBuffer || this.isTypePassword
   }
 }
-
-/** @category Constant */
-export const INPUT_STORE_KEYS: (keyof InputProps<any> & keyof InputStore<any>)[] = [
-  'id',
-  'label',
-  'layer',
-  'path',
-  'required',
-  'schema',
-  'store',
-  'touched',
-  'type'
-]

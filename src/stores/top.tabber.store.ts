@@ -58,6 +58,3 @@ export class TopTabberStore extends ComponentStore<HTMLDivElement> {
     }
   }
 }
-
-/** @category Constant */
-export const TOP_TABBER_STORE_KEYS: (keyof TopTabberProps & keyof TopTabberStore)[] = ['active', 'id', 'items']

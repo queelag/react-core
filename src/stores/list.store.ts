@@ -28,6 +28,3 @@ export class ListStore<T> extends ComponentStore<HTMLUListElement> {
     return this.items.length <= 0
   }
 }
-
-/** @category Constant */
-export const LIST_STORE_KEYS: (keyof ListProps<any> & keyof ListStore<any>)[] = ['id', 'items']

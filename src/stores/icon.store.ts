@@ -1,4 +1,4 @@
-import { tcp } from '@queelag/core'
+import { Environment, tcp } from '@queelag/core'
 import { Color, ComponentName } from '../definitions/enums'
 import { ComponentStoreProps } from '../definitions/interfaces'
 import { IconProps } from '../definitions/props'
@@ -76,6 +76,10 @@ export class IconStore extends ComponentStore<SVGSVGElement> {
             return
           }
 
+          if (Environment.isWindowNotDefined) {
+            return
+          }
+
           response = await tcp(() => window.fetch(svg))
           if (response instanceof Error) return
 
@@ -98,6 +102,3 @@ export class IconStore extends ComponentStore<SVGSVGElement> {
     })()
   }
 }
-
-/** @category Constant */
-export const ICON_STORE_KEYS: (keyof IconProps & keyof IconStore)[] = ['color', 'id', 'layer', 'size', 'svg', 'thickness']

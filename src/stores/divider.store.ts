@@ -28,6 +28,3 @@ export class DividerStore extends ComponentStore<HTMLDivElement> {
     return this.orientation === Orientation.VERTICAL
   }
 }
-
-/** @category Constant */
-export const DIVIDER_STORE_KEYS: (keyof DividerProps & keyof DividerStore)[] = ['id', 'layer', 'orientation']

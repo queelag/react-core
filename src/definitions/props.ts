@@ -45,10 +45,9 @@ export interface BadgeProps extends HTMLDivProps {
 }
 
 /** @category Prop */
-export interface ButtonProps extends HTMLButtonProps, WithBackground, WithColor, WithIcon, WithShape, WithSize {
+export interface ButtonProps extends HTMLButtonProps, WithBackground, WithColor, WithIcon, WithShape, WithSize, WithTitle {
   destructive?: boolean
   spinning?: boolean
-  title?: string
   variant?: ButtonVariant
 }
 

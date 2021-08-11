@@ -102,6 +102,3 @@ export class ButtonStore extends ComponentStore<HTMLButtonElement> {
     }
   }
 }
-
-/** @category Constant */
-export const BUTTON_STORE_KEYS: (keyof ButtonProps & keyof ButtonStore)[] = ['disabled', 'id', 'layer', 'onClick', 'shape', 'size', 'spinning', 'variant']

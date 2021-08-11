@@ -1,9 +1,9 @@
-import { ObjectUtils, StoreUtils } from '@queelag/core'
-import React, { useEffect } from 'react'
-import { AVATAR_PROPS_KEYS } from '../definitions/constants'
+import { ObjectUtils } from '@queelag/core'
+import React from 'react'
+import { AVATAR_PROPS_KEYS, AVATAR_STORE_KEYS } from '../definitions/constants'
 import { AvatarProps } from '../definitions/props'
 import { useComponentStore } from '../hooks/use.component.store'
-import { AvatarStore, AVATAR_STORE_KEYS } from '../stores/avatar.store'
+import { AvatarStore } from '../stores/avatar.store'
 import { ReactUtils } from '../utils/react.utils'
 import { ShapeUtils } from '../utils/shape.utils'
 import { Image } from './Image'
@@ -25,11 +25,7 @@ import { Image } from './Image'
  * @category Component
  */
 export function Avatar(props: AvatarProps) {
-  const store = useComponentStore(AvatarStore, props)
-
-  useEffect(() => {
-    StoreUtils.updateKeys(store, props, AVATAR_STORE_KEYS, store.update)
-  }, ObjectUtils.pickToArray(props, AVATAR_STORE_KEYS))
+  const store = useComponentStore(AvatarStore, props, AVATAR_STORE_KEYS)
 
   return (
     <div
