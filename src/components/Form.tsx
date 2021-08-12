@@ -1,5 +1,5 @@
 import { ObjectUtils } from '@queelag/core'
-import React from 'react'
+import React, { FormEvent } from 'react'
 import { FORM_PROPS_KEYS, FORM_STORE_KEYS } from '../definitions/constants'
 import { FormProps } from '../definitions/props'
 import { useComponentStore } from '../hooks/use.component.store'
@@ -30,8 +30,13 @@ import { FormStore } from '../stores/form.store'
 export function Form(props: FormProps) {
   const store = useComponentStore(FormStore, props, FORM_STORE_KEYS, 'form')
 
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    store.onSubmit(e)
+    props.onSubmit && props.onSubmit(e)
+  }
+
   return (
-    <form {...ObjectUtils.omit(props, FORM_PROPS_KEYS)} id={store.id} onSubmit={store.onSubmit} ref={store.ref}>
+    <form {...ObjectUtils.omit(props, FORM_PROPS_KEYS)} id={store.id} onSubmit={onSubmit} ref={store.ref}>
       {props.children}
     </form>
   )

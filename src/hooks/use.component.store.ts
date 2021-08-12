@@ -1,11 +1,12 @@
 import { ElementTagNameMap, StoreUtils } from '@queelag/core'
 import { useEffect, useMemo } from 'react'
-import { COMPONENT_STORE_KEYS } from '../definitions/constants'
 import { ComponentStoreProps } from '../definitions/interfaces'
 import { ComponentStore } from '../modules/component.store'
 import { useForceUpdate } from './use.force.update'
 import { useID } from './use.id'
 import { useSafeRef } from './use.safe.ref'
+
+const KEYS: (keyof ComponentStore<any>)[] = ['id', 'layer', 'orientation', 'shape', 'size']
 
 export const useComponentStore = <
   K extends keyof ElementTagNameMap,
@@ -14,7 +15,7 @@ export const useComponentStore = <
 >(
   Store: { new (props: V): U },
   props: V,
-  keys: (keyof U & keyof V)[] = COMPONENT_STORE_KEYS,
+  keys: (keyof U & keyof V)[] = [],
   tagName: K = 'div' as K
 ): U => {
   const ref = useSafeRef(tagName)
@@ -28,7 +29,7 @@ export const useComponentStore = <
   }, [id])
 
   useEffect(() => {
-    StoreUtils.updateKeys(store, props, keys, update)
+    StoreUtils.updateKeys(store, props, [...(KEYS as any), ...keys], update)
   }, [props])
 
   return store

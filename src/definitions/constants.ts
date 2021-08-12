@@ -40,12 +40,6 @@ import {
 } from './props'
 
 /** @category Constant */
-export const COMPONENT_STORE_KEYS: any[] = ['id', 'layer', 'orientation', 'shape', 'size']
-
-/** @category Constant */
-export const IMAGE_EMPTY_BASE64: string = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='
-
-/** @category Constant */
 export const ALERT_PROPS_KEYS: (keyof AlertProps)[] = ['description', 'title', 'type']
 
 /** @category Constant */
@@ -64,7 +58,7 @@ export const AVATAR_PROPS_KEYS: (keyof AvatarProps)[] = [
 ]
 
 /** @category Constant */
-export const AVATAR_STORE_KEYS: (keyof AvatarProps & keyof AvatarStore)[] = [...COMPONENT_STORE_KEYS, 'background', 'color']
+export const AVATAR_STORE_KEYS: (keyof AvatarProps & keyof AvatarStore)[] = ['background', 'color']
 
 /** @category Constant */
 export const BACKDROP_PROPS_KEYS: (keyof BackdropProps)[] = ['opacity']
@@ -76,13 +70,13 @@ export const BADGE_PROPS_KEYS: (keyof BadgeProps)[] = ['value']
 export const BUTTON_PROPS_KEYS: (keyof ButtonProps)[] = ['background', 'color', 'destructive', 'icon', 'layer', 'shape', 'size', 'spinning', 'title', 'variant']
 
 /** @category Constant */
-export const BUTTON_STORE_KEYS: (keyof ButtonProps & keyof ButtonStore)[] = [...COMPONENT_STORE_KEYS, 'disabled', 'onClick', 'spinning', 'variant']
+export const BUTTON_STORE_KEYS: (keyof ButtonProps & keyof ButtonStore)[] = ['disabled', 'onClick', 'spinning', 'variant']
 
 /** @category Constant */
 export const CARD_PROPS_KEYS: (keyof CardProps)[] = ['header', 'layer', 'footer', 'title']
 
 /** @category Constant */
-export const COLOR_DIV_PROPS_KEYS: (keyof ColorableDivProps)[] = ['background', 'border', 'divide', 'layer', 'text']
+export const COLORABLE_DIV_PROPS_KEYS: (keyof ColorableDivProps)[] = ['background', 'border', 'divide', 'layer', 'text']
 
 /** @category Constant */
 export const DIALOG_PROPS_KEYS: (keyof DialogProps)[] = ['buttons', 'description', 'footer', 'header', 'name', 'onHide', 'onShow', 'title']
@@ -91,7 +85,7 @@ export const DIALOG_PROPS_KEYS: (keyof DialogProps)[] = ['buttons', 'description
 export const DIVIDER_PROPS_KEYS: (keyof DividerProps)[] = ['color', 'layer', 'orientation']
 
 /** @category Constant */
-export const DIVIDER_STORE_KEYS: (keyof DividerProps & keyof DividerStore)[] = COMPONENT_STORE_KEYS
+export const DIVIDER_STORE_KEYS: (keyof DividerProps & keyof DividerStore)[] = []
 
 /** @category Constant */
 export const EMPTY_PROPS_KEYS: (keyof EmptyProps)[] = ['description', 'layer', 'title']
@@ -100,25 +94,28 @@ export const EMPTY_PROPS_KEYS: (keyof EmptyProps)[] = ['description', 'layer', '
 export const FORM_PROPS_KEYS: (keyof FormProps)[] = []
 
 /** @category Constant */
-export const FORM_STORE_KEYS: (keyof FormProps & keyof FormStore)[] = COMPONENT_STORE_KEYS
+export const FORM_STORE_KEYS: (keyof FormProps & keyof FormStore)[] = []
 
 /** @category Constant */
 export const ICON_PROPS_KEYS: (keyof IconProps)[] = ['color', 'layer', 'size', 'svg', 'thickness']
 
 /** @category Constant */
-export const ICON_STORE_KEYS: (keyof IconProps & keyof IconStore)[] = [...COMPONENT_STORE_KEYS, 'color', 'svg', 'thickness']
+export const ICON_STORE_KEYS: (keyof IconProps & keyof IconStore)[] = ['color', 'svg', 'thickness']
+
+/** @category Constant */
+export const IMAGE_EMPTY_BASE64: string = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='
 
 /** @category Constant */
 export const IMAGE_PROPS_KEYS: (keyof ImageProps)[] = ['alpha', 'cache', 'orientation', 'quality', 'ratio', 'shape', 'size', 'source']
 
 /** @category Constant */
-export const IMAGE_STORE_KEYS: (keyof ImageProps & keyof ImageStore)[] = [...COMPONENT_STORE_KEYS, 'alpha', 'cache', 'quality', 'ratio', 'source']
+export const IMAGE_STORE_KEYS: (keyof ImageProps & keyof ImageStore)[] = ['alpha', 'cache', 'quality', 'ratio', 'source']
 
 /** @category Constant */
 export const LIST_PROPS_KEYS: (keyof ListProps<any>)[] = ['empty', 'items', 'renderItem']
 
 /** @category Constant */
-export const LIST_STORE_KEYS: (keyof ListProps<any> & keyof ListStore<any>)[] = [...COMPONENT_STORE_KEYS, 'items']
+export const LIST_STORE_KEYS: (keyof ListProps<any> & keyof ListStore<any>)[] = ['items']
 
 /** @category Constant */
 export const LIST_ITEM_PROPS_KEYS: (keyof ListItemProps)[] = ['avatar', 'description', 'image', 'layer', 'title']
@@ -139,7 +136,7 @@ export const LOCALIZABLE_TEXT_PROPS_KEYS: (keyof LocalizableTextProps)[] = ['col
 export const ONBOARDING_PROPS_KEYS: (keyof OnboardingProps)[] = ['active', 'items', 'onEnd']
 
 /** @category Constant */
-export const ONBOARDING_STORE_KEYS: (keyof OnboardingProps & keyof OnboardingStore)[] = [...COMPONENT_STORE_KEYS, 'items', 'onEnd']
+export const ONBOARDING_STORE_KEYS: (keyof OnboardingProps & keyof OnboardingStore)[] = ['items', 'onEnd']
 
 /** @category Constant */
 export const RESULT_PROPS_KEYS: (keyof ResultProps)[] = ['description', 'icon', 'title', 'type']
@@ -157,7 +154,7 @@ export const STATISTIC_PROPS_KEYS: (keyof StatisticProps)[] = ['icon', 'layer', 
 export const TAG_PROPS_KEYS: (keyof TagProps)[] = ['background', 'color', 'destroyable', 'icon', 'layer', 'onDestroy', 'text']
 
 /** @category Constant */
-export const TAG_STORE_KEYS: (keyof TagProps & keyof TagStore)[] = COMPONENT_STORE_KEYS
+export const TAG_STORE_KEYS: (keyof TagProps & keyof TagStore)[] = []
 
 /** @category Constant */
 export const VIRTUALIZED_LIST_PROPS_KEYS: (keyof VirtualizedListProps<any>)[] = [
@@ -171,10 +168,10 @@ export const VIRTUALIZED_LIST_PROPS_KEYS: (keyof VirtualizedListProps<any>)[] = 
 ]
 
 /** @category Constant */
-export const VIRTUALIZED_LIST_STORE_KEYS: (keyof VirtualizedListProps<any> & keyof VirtualizedListStore<any>)[] = [...COMPONENT_STORE_KEYS, 'gutter', 'items']
+export const VIRTUALIZED_LIST_STORE_KEYS: (keyof VirtualizedListProps<any> & keyof VirtualizedListStore<any>)[] = ['gutter', 'items']
 
 /** @category Constant */
 export const WIZARD_PROPS_KEYS: (keyof WizardProps)[] = ['active', 'onStepChange', 'steps']
 
 /** @category Constant */
-export const WIZARD_STORE_KEYS: (keyof WizardProps & keyof WizardStore)[] = [...COMPONENT_STORE_KEYS, 'active', 'onStepChange', 'steps']
+export const WIZARD_STORE_KEYS: (keyof WizardProps & keyof WizardStore)[] = ['active', 'onStepChange', 'steps']

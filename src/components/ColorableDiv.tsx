@@ -1,6 +1,6 @@
 import { ObjectUtils } from '@queelag/core'
 import React from 'react'
-import { COLOR_DIV_PROPS_KEYS } from '../definitions/constants'
+import { COLORABLE_DIV_PROPS_KEYS } from '../definitions/constants'
 import { ColorableDivProps } from '../definitions/props'
 import { ColorPicker } from '../pickers/color.picker'
 import { ReactUtils } from '../utils/react.utils'
@@ -24,7 +24,7 @@ import { ReactUtils } from '../utils/react.utils'
 export function ColorableDiv(props: ColorableDivProps) {
   return (
     <div
-      {...ObjectUtils.omit(props, COLOR_DIV_PROPS_KEYS)}
+      {...ObjectUtils.omit(props, COLORABLE_DIV_PROPS_KEYS)}
       className={ReactUtils.joinClassNames(
         props.background && ColorPicker.backgroundByString(props.background, props.layer),
         props.border && ColorPicker.borderByString(props.border, props.layer),

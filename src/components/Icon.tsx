@@ -34,6 +34,15 @@ export function Icon(props: IconProps) {
       height={store.size}
       stroke={typeof props.stroke === 'boolean' ? (props.stroke ? 'currentColor' : 'none') : props.stroke}
       strokeWidth={store.thickness}
+      style={{
+        height: store.size,
+        maxHeight: store.size,
+        maxWidth: store.size,
+        minHeight: store.size,
+        minWidth: store.size,
+        width: store.size,
+        ...props.style
+      }}
       xmlns='http://www.w3.org/2000/svg'
       viewBox={store.viewbox}
       width={store.size}
