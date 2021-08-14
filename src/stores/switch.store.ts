@@ -1,3 +1,4 @@
+import { Logger } from '@queelag/core'
 import { ComponentName } from '../definitions/enums'
 import { ComponentFormFieldStoreProps } from '../definitions/with.superstruct.interfaces'
 import { SwitchProps } from '../definitions/with.superstruct.props'
@@ -13,18 +14,16 @@ export class SwitchStore<T extends object> extends ComponentFormFieldStore<HTMLD
     super(ComponentName.SWITCH, props)
   }
 
-  /** @internal */
-  onChange = (value: boolean): void => {
-    if (this.isEnabled) {
-      this.store[this.path] = value as any
-    }
-  }
-
   /**
    * Sets the value to true if false and to false if true.
    */
   onClick = (): void => {
-    this.onChange(!this.value)
+    if (this.isDisabled) {
+      return Logger.warn(this.id, 'onChange', `Execution stopped, disabled is truthy.`)
+    }
+
+    this.store[this.path] = !this.value as any
+    Logger.debug(this.id, 'onChange', `The value has been set to ${this.value}.`)
   }
 
   /**

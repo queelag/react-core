@@ -133,7 +133,7 @@ export const LOCALIZABLE_SPAN_PROPS_KEYS: (keyof LocalizableSpanProps)[] = ['col
 export const LOCALIZABLE_TEXT_PROPS_KEYS: (keyof LocalizableTextProps)[] = ['color', 'element', 'inject', 'layer', 'path']
 
 /** @category Constant */
-export const ONBOARDING_PROPS_KEYS: (keyof OnboardingProps)[] = ['active', 'items', 'onEnd']
+export const ONBOARDING_PROPS_KEYS: (keyof OnboardingProps)[] = ['activeItemIndex', 'items', 'onEnd']
 
 /** @category Constant */
 export const ONBOARDING_STORE_KEYS: (keyof OnboardingProps & keyof OnboardingStore)[] = ['items', 'onEnd']
@@ -151,7 +151,7 @@ export const SPINNER_PROPS_KEYS: (keyof SpinnerProps)[] = ['color', 'layer', 'si
 export const STATISTIC_PROPS_KEYS: (keyof StatisticProps)[] = ['icon', 'layer', 'progress', 'reference', 'title', 'type', 'value']
 
 /** @category Constant */
-export const TAG_PROPS_KEYS: (keyof TagProps)[] = ['background', 'color', 'destroyable', 'icon', 'layer', 'onDestroy', 'text']
+export const TAG_PROPS_KEYS: (keyof TagProps)[] = ['background', 'color', 'destroyable', 'icon', 'layer', 'text']
 
 /** @category Constant */
 export const TAG_STORE_KEYS: (keyof TagProps & keyof TagStore)[] = []
@@ -171,7 +171,7 @@ export const VIRTUALIZED_LIST_PROPS_KEYS: (keyof VirtualizedListProps<any>)[] = 
 export const VIRTUALIZED_LIST_STORE_KEYS: (keyof VirtualizedListProps<any> & keyof VirtualizedListStore<any>)[] = ['gutter', 'items']
 
 /** @category Constant */
-export const WIZARD_PROPS_KEYS: (keyof WizardProps)[] = ['active', 'onStepChange', 'steps']
+export const WIZARD_PROPS_KEYS: (keyof WizardProps)[] = ['activeStepName', 'onStepChange', 'steps']
 
 /** @category Constant */
-export const WIZARD_STORE_KEYS: (keyof WizardProps & keyof WizardStore)[] = ['active', 'onStepChange', 'steps']
+export const WIZARD_STORE_KEYS: (keyof WizardProps & keyof WizardStore)[] = ['activeStepName', 'onStepChange', 'steps']

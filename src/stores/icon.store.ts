@@ -1,4 +1,4 @@
-import { Environment, tcp } from '@queelag/core'
+import { Environment, Logger, tcp } from '@queelag/core'
 import { Color, ComponentName } from '../definitions/enums'
 import { ComponentStoreProps } from '../definitions/interfaces'
 import { IconProps } from '../definitions/props'
@@ -73,11 +73,13 @@ export class IconStore extends ComponentStore<SVGSVGElement> {
           cached = Cache.icons.get(svg)
           if (cached) {
             this.svg = cached
+            Logger.debug(this.id, 'setSVG', `The svg has been set to the cached one.`)
+
             return
           }
 
           if (Environment.isWindowNotDefined) {
-            return
+            return Logger.error(this.id, 'setSVG', `The window is not defined.`)
           }
 
           response = await tcp(() => window.fetch(svg))
@@ -87,14 +89,21 @@ export class IconStore extends ComponentStore<SVGSVGElement> {
           if (text instanceof Error) return
 
           this._svg = text
+          Logger.debug(this.id, 'setSVG', `The svg has been set to the fetched text value.`)
+
           Cache.icons.set(svg, text)
+          Logger.debug(this.id, 'setSVG', `The svg has been cached.`)
 
           break
         case /svg/.test(svg):
           this._svg = svg
+          Logger.debug(this.id, 'setSVG', `The svg has been set.`)
+
           break
         default:
           this._svg = '<svg viewbox="0 0 0 0"></svg>'
+          Logger.debug(this.id, 'setSVG', `The svg has been set to a fallback.`)
+
           break
       }
 

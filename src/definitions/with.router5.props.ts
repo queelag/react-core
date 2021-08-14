@@ -43,6 +43,6 @@ export interface SidebarProps extends HTMLDivProps {
 
 /** @category Prop */
 export interface TopTabberProps extends HTMLDivProps {
-  active?: string
+  activeItemName?: string
   items: TopTabberItem[]
 }

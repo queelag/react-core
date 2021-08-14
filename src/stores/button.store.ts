@@ -1,4 +1,4 @@
-import { noop, tcp } from '@queelag/core'
+import { Logger, noop, tcp } from '@queelag/core'
 import { MouseEvent } from 'react'
 import { ButtonVariant, ComponentName } from '../definitions/enums'
 import { ComponentStoreProps } from '../definitions/interfaces'
@@ -85,11 +85,13 @@ export class ButtonStore extends ComponentStore<HTMLButtonElement> {
       event.stopPropagation()
 
       if (this.isDisabled) {
-        return
+        return Logger.warn(this.id, 'onClick', `Execution stopped, disabled is truthy.`)
       }
 
       this.disabled = true
       this.spinning = true
+
+      Logger.debug(this.id, 'onClick', `The disabled and spinning states have been set to true.`)
 
       this.update()
 
@@ -97,6 +99,8 @@ export class ButtonStore extends ComponentStore<HTMLButtonElement> {
 
       this.disabled = false
       this.spinning = false
+
+      Logger.debug(this.id, 'onClick', `The disabled and spinning states have been set to false.`)
 
       this.update()
     }

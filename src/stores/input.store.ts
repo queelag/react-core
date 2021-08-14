@@ -59,12 +59,18 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
     switch (this.type) {
       case InputType.BUFFER:
         this.store[this.path] = new TextEncoder().encode(event.target.value) as any
+        Logger.debug(this.id, 'onChange', this.type, `The value has been set.`, this.value)
+
         break
       case InputType.DATE:
         this.store[this.path] = 0 as any
+        Logger.debug(this.id, 'onChange', this.type, `The value has been set to ${this.value}.`)
+
         break
       case InputType.NUMBER:
         this.store[this.path] = (event.target.value.length > 0 ? NumberUtils.parseFloat(event.target.value) : '') as any
+        Logger.debug(this.id, 'onChange', this.type, `The value has been set to ${this.value}.`)
+
         break
       case InputType.EMAIL:
       case InputType.PASSWORD:
@@ -72,11 +78,20 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
       case InputType.TEXT:
       case InputType.URL:
         this.store[this.path] = event.target.value as any
+        Logger.debug(this.id, 'onChange', this.type, `The value has been set to ${this.value}.`)
+
         break
     }
 
-    this.touched = true
-    this.validation = this.schema.validate(this.value)
+    this.touch()
+  }
+
+  /**
+   * Marks this field as blurred.
+   */
+  onBlur = (): void => {
+    this.focused = false
+    Logger.debug(this.id, 'onBlur', 'The focused state has been set to false.')
 
     this.update()
   }
@@ -86,17 +101,7 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
    */
   onFocus = (): void => {
     this.focused = true
-    Logger.debug(this.id, 'onFocus', `Focused has been set to true.`)
-
-    this.update()
-  }
-
-  /**
-   * Marks this field as blurred.
-   */
-  onBlur = (): void => {
-    this.focused = false
-    Logger.debug(this.id, 'onBlur', 'Focused has been set to false.')
+    Logger.debug(this.id, 'onFocus', `The focused state has been set to true.`)
 
     this.update()
   }
@@ -106,9 +111,11 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
    */
   onClickToggleObscuration = (): void => {
     this.obscured = !this.obscured
+    Logger.debug(this.id, 'onClickToggleObscuration', `The obscuration has been set to ${this.obscured}.`)
 
     if (this.isTypeBuffer) {
       this.element.type = this.obscured ? 'password' : 'text'
+      Logger.debug(this.id, 'onClickToggleObscuration', `The element type has been set to ${this.element.type}.`)
     }
 
     this.update()

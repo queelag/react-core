@@ -65,6 +65,7 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
   onLoad = (event: SyntheticEvent<HTMLImageElement>): void => {
     if (this.isCacheable) {
       Cache.images.set(this.source, ImageUtils.toBase64(this.element, this.alpha, this.quality))
+      Logger.debug(this.id, 'onLoad', `The base64 value of the image has been cached.`)
     }
 
     this.status = ImageStatus.LOADED
@@ -137,7 +138,10 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
     cached = Cache.images.get(source)
     if (!cached) {
       this._source = source
+      Logger.debug(this.id, 'setSource', `The source has been set.`)
+
       this.status = ImageStatus.LOADING
+      Logger.debug(this.id, 'setSource', `The status has been set to ${this.status}.`)
 
       this.update()
 
@@ -145,7 +149,10 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
     }
 
     this._source = cached as string
+    Logger.debug(this.id, 'setSource', `The source has been set to the cached one.`)
+
     this.status = ImageStatus.LOADED
+    Logger.debug(this.id, 'setSource', `The status has been set to ${this.status}.`)
 
     this.update()
   }

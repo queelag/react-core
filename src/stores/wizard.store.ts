@@ -14,14 +14,14 @@ export class WizardStore extends ComponentStore<HTMLDivElement> {
   /**
    * A string which determines the active step name.
    */
-  active: string
+  activeStepName: string
   /** @internal */
   private _steps: WizardStep[] = []
 
   constructor(props: WizardProps & ComponentStoreProps<HTMLDivElement>) {
     super(ComponentName.WIZARD, props)
 
-    this.active = props.active || (props.steps[0] ? props.steps[0].name : '')
+    this.activeStepName = props.activeStepName || (props.steps[0] ? props.steps[0].name : '')
     this.onStepChange = props.onStepChange || noop
     this.steps = props.steps as WizardStep[]
   }
@@ -29,37 +29,39 @@ export class WizardStore extends ComponentStore<HTMLDivElement> {
   /**
    * Goes to the next step.
    */
-  onClickNext = async () => {
+  onClickNextStep = async () => {
     let previous: string
 
-    previous = this.active
+    previous = this.activeStepName
+    Logger.debug(this.id, 'onClickNext', `The previous step has been set to ${previous}.`)
 
-    if (this.step.canGoNext()) {
-      this.active = this.nextStep.name
-      Logger.debug(this.id, 'onClickNext', `The active step has been set to ${this.active}.`)
+    if (this.activeStep.canGoNext()) {
+      this.activeStepName = this.nextStep.name
+      Logger.debug(this.id, 'onClickNext', `The active step has been set to ${this.activeStepName}.`)
 
       this.update()
     }
 
-    await tcp(() => this.onStepChange(previous, this.active, DirectionHorizontal.RIGHT))
+    await tcp(() => this.onStepChange(previous, this.activeStepName, DirectionHorizontal.RIGHT))
   }
 
   /**
    * Goes to the previous step.
    */
-  onClickPrevious = async () => {
+  onClickPreviousStep = async () => {
     let previous: string
 
-    previous = this.active
+    previous = this.activeStepName
+    Logger.debug(this.id, 'onClickPrevious', `The previous step has been set to ${previous}.`)
 
-    if (this.step.canGoBack()) {
-      this.active = this.previousStep.name
-      Logger.debug(this.id, 'onClickPrevious', `The active step has been set to ${this.active}.`)
+    if (this.activeStep.canGoBack()) {
+      this.activeStepName = this.previousStep.name
+      Logger.debug(this.id, 'onClickPrevious', `The active step has been set to ${this.activeStepName}.`)
 
       this.update()
     }
 
-    await tcp(() => this.onStepChange(previous, this.active, DirectionHorizontal.LEFT))
+    await tcp(() => this.onStepChange(previous, this.activeStepName, DirectionHorizontal.LEFT))
   }
 
   /**
@@ -78,20 +80,20 @@ export class WizardStore extends ComponentStore<HTMLDivElement> {
     return this.steps.findIndex((v: WizardStep) => v.name === name)
   }
 
-  get index(): number {
-    return this.findStepIndexByName(this.active)
+  get activeStep(): WizardStep {
+    return this.steps.find((v: WizardStep) => v.name === this.activeStepName) || Dummy.wizardStep
+  }
+
+  get activeStepIndex(): number {
+    return this.findStepIndexByName(this.activeStepName)
   }
 
   get nextStep(): WizardStep {
-    return this.steps[this.index + 1] || this.steps[this.steps.length - 1]
+    return this.steps[this.activeStepIndex + 1] || this.steps[this.steps.length - 1]
   }
 
   get previousStep(): WizardStep {
-    return this.steps[this.index - 1] || this.steps[0]
-  }
-
-  get step(): WizardStep {
-    return this.steps.find((v: WizardStep) => v.name === this.active) || Dummy.wizardStep
+    return this.steps[this.activeStepIndex - 1] || this.steps[0]
   }
 
   /**
@@ -102,11 +104,11 @@ export class WizardStore extends ComponentStore<HTMLDivElement> {
   }
 
   get isFirstStep(): boolean {
-    return this.findStepIndexByName(this.active) === 0
+    return this.activeStepIndex === 0
   }
 
   get isLastStep(): boolean {
-    return this.findStepIndexByName(this.active) === this.steps.length - 1
+    return this.activeStepIndex === this.steps.length - 1
   }
 
   set steps(steps: WizardStep[]) {

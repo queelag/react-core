@@ -1,3 +1,4 @@
+import { Logger } from '@queelag/core'
 import { MouseEvent } from 'react'
 import { ComponentName } from '../definitions/enums'
 import { ComponentStoreProps } from '../definitions/interfaces'
@@ -11,6 +12,10 @@ import { ComponentStore } from '../modules/component.store'
  */
 export class TagStore extends ComponentStore<HTMLDivElement> {
   /**
+   * A boolean which determines if this tag is destroyable or not.
+   */
+  destroyable: boolean
+  /**
    * A boolean which determines if this tag has been destroyed or not.
    */
   destroyed: boolean
@@ -18,7 +23,8 @@ export class TagStore extends ComponentStore<HTMLDivElement> {
   constructor(props: TagProps & ComponentStoreProps<HTMLDivElement>) {
     super(ComponentName.TAG, props)
 
-    this.destroyed = false
+    this.destroyable = props.destroyable || false
+    this.destroyed = props.destroyed || false
   }
 
   /**
@@ -27,8 +33,22 @@ export class TagStore extends ComponentStore<HTMLDivElement> {
   onClickDestroy = (event: MouseEvent) => {
     event.stopPropagation()
 
+    if (this.isNotDestroyable) {
+      return Logger.warn(this.id, 'onClickDestroy', `Execution stopped, destroyable is falsy.`)
+    }
+
     this.destroyed = true
+    Logger.debug(this.id, 'onClickDestroy', `The destroyed state has been set to true.`)
+
     this.update()
+  }
+
+  get isDestroyable(): boolean {
+    return this.destroyable === false
+  }
+
+  get isNotDestroyable(): boolean {
+    return this.destroyable === true
   }
 
   get isDestroyed(): boolean {

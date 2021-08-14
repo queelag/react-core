@@ -1,8 +1,9 @@
-import { noop, NumberUtils } from '@queelag/core'
+import { Logger, noop, NumberUtils } from '@queelag/core'
 import { ComponentName } from '../definitions/enums'
 import { ComponentStoreProps, OnboardingItem } from '../definitions/interfaces'
 import { OnboardingProps } from '../definitions/props'
 import { ComponentStore } from '../modules/component.store'
+import { Dummy } from '../modules/dummy'
 
 /**
  * An abstraction for Onboarding stores, handles cursors and items.
@@ -13,7 +14,7 @@ export class OnboardingStore extends ComponentStore<HTMLDivElement> {
   /**
    * A number which determines the active item index.
    */
-  active: number
+  activeItemIndex: number
   /**
    * An array of {@link OnboardingItem}.
    */
@@ -22,7 +23,7 @@ export class OnboardingStore extends ComponentStore<HTMLDivElement> {
   constructor(props: OnboardingProps & ComponentStoreProps<HTMLDivElement>) {
     super(ComponentName.ONBOARDING, props)
 
-    this.active = 0
+    this.activeItemIndex = props.activeItemIndex || 0
     this.items = props.items
     this.onEnd = props.onEnd || noop
   }
@@ -31,7 +32,9 @@ export class OnboardingStore extends ComponentStore<HTMLDivElement> {
    * Goes the the previous item.
    */
   onClickPrevious = (): void => {
-    this.active = NumberUtils.limit(this.active - 1, 0)
+    this.activeItemIndex = NumberUtils.limit(this.activeItemIndex - 1, 0)
+    Logger.debug(this.id, 'onClickPrevious', `The active item index has been set to ${this.activeItemIndex}.`)
+
     this.update()
   }
 
@@ -39,8 +42,15 @@ export class OnboardingStore extends ComponentStore<HTMLDivElement> {
    * Goes to the next item.
    */
   onClickNext = (): void => {
-    this.active += 1
-    if (this.isOver) return this.onEnd()
+    if (this.isOver) {
+      this.onEnd()
+      Logger.debug(this.id, 'onClickNext', `The onEnd function has been called.`, this.onEnd)
+
+      return
+    }
+
+    this.activeItemIndex += 1
+    Logger.debug(this.id, 'onClickNext', `The active item index has been set to ${this.activeItemIndex}.`)
 
     this.update()
   }
@@ -50,17 +60,22 @@ export class OnboardingStore extends ComponentStore<HTMLDivElement> {
    */
   onClickSkip = (): void => {
     this.onEnd()
+    Logger.debug(this.id, 'onClickSkip', `The onEnd function has been called.`, this.onEnd)
   }
 
   /**
    * Triggered by onClickNext if there are no more items or by onClickSkip.
    */
-  onEnd(): void {}
+  onEnd(): any {}
+
+  get activeItem(): OnboardingItem {
+    return this.items[this.activeItemIndex] || Dummy.onboardingItem
+  }
 
   /**
    * Checks if there are no more items.
    */
   get isOver(): boolean {
-    return this.active === this.items.length
+    return this.activeItemIndex >= this.items.length - 1
   }
 }

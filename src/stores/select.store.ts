@@ -39,21 +39,27 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
    * Sets the option value to store[path] if the mode is SINGLE otherwise pushes or removes it if the mode is MULTIPLE.
    */
   onClickOption = (option: SelectOption): void => {
-    let value: any
-
     switch (this.mode) {
       case SelectMode.MULTIPLE:
-        value = this.value as SelectOptionValue[]
-        this.store[this.path] = value.includes(option.value) ? value.filter((v: SelectOptionValue) => v !== option.value) : value.concat(option.value)
+        if (this.valueAsMultiple.includes(option.value)) {
+          this.store[this.path] = this.valueAsMultiple.filter((v: SelectOptionValue) => v !== option.value) as any
+          Logger.debug(this.id, 'onClickOption', this.mode, `The option ${option.value} has been removed from the value.`, this.value, option)
+
+          break
+        }
+
+        this.store[this.path] = this.valueAsMultiple.concat(option.value) as any
+        Logger.debug(this.id, 'onClickOption', this.mode, `The option ${option.value} has been pushed to the value.`, this.value, option)
+
         break
       case SelectMode.SINGLE:
         this.store[this.path] = option.value as any
+        Logger.debug(this.id, 'onClickOption', this.mode, `The option ${option.value} has been set as the value.`, this.value)
+
         break
     }
 
-    this.touched = true
-    this.validation = this.schema.validate(this.value)
-
+    this.touch()
     this.resetQuery()
   }
 
@@ -61,12 +67,23 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
    * Removes an option from store[path] if the mode is MULTIPLE.
    */
   onClickRemove = (option: SelectOption): void => {
-    this.onClickOption(option)
+    switch (this.mode) {
+      case SelectMode.MULTIPLE:
+        if (this.valueAsMultiple.includes(option.value)) {
+          this.store[this.path] = this.valueAsMultiple.filter((v: SelectOptionValue) => v !== option.value) as any
+          Logger.debug(this.id, 'onClickRemove', this.mode, `The option ${option.value} has been removed from the value.`, this.value, option)
+        }
+
+        break
+      case SelectMode.SINGLE:
+        Logger.warn(this.id, 'onClickRemove', this.mode, `The remove function does not work with this mode.`)
+        break
+    }
   }
 
   onChangeQuery = (event: ChangeEvent<HTMLInputElement>): void => {
     this.query = event.target.value
-    Logger.debug(this.id, 'onChangeQuery', `The query value has been set to ${this.query}.`)
+    Logger.debug(this.id, 'onChangeQuery', `The query has been set to ${this.query}.`)
 
     if (this.query.length <= 0) {
       this.resetValue()
@@ -95,13 +112,15 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
     switch (this.mode) {
       case SelectMode.MULTIPLE:
         this.store[this.path] = [] as any
+        Logger.debug(this.id, 'resetValue', this.mode, `The value has been set to an empty array.`)
+
         break
       case SelectMode.SINGLE:
-        this.store[this.path] = this.dummyOption as any
+        this.store[this.path] = '' as any
+        Logger.debug(this.id, 'resetValue', this.mode, `The value has been set to an empty string.`)
+
         break
     }
-
-    Logger.debug(this.id, 'resetValue', `The value has been reset.`)
   }
 
   findLabelByValue(value: SelectOptionValue): string {
@@ -138,6 +157,24 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
         return (this.store[this.path] as any) || []
       case SelectMode.SINGLE:
         return (this.store[this.path] as any) || ''
+    }
+  }
+
+  get valueAsMultiple(): SelectOptionValue[] {
+    switch (this.mode) {
+      case SelectMode.MULTIPLE:
+        return []
+      case SelectMode.SINGLE:
+        return this.value as SelectOptionValue[]
+    }
+  }
+
+  get valueAsSingle(): SelectOptionValue {
+    switch (this.mode) {
+      case SelectMode.MULTIPLE:
+        return ''
+      case SelectMode.SINGLE:
+        return this.value as SelectOptionValue
     }
   }
 

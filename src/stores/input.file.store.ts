@@ -1,4 +1,4 @@
-import { Base64, IDUtils, Logger, tcp } from '@queelag/core'
+import { Base64, IDUtils, Logger } from '@queelag/core'
 import { ChangeEvent } from 'react'
 import * as S from 'superstruct'
 import { ComponentName, InputFileMode } from '../definitions/enums'
@@ -24,7 +24,8 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
     super(ComponentName.INPUT_FILE, props)
 
     this.mode = props.mode || InputFileMode.SINGLE
-    this.validation = this.schema.validate(this.value)
+
+    this.validate()
   }
 
   /**
@@ -33,53 +34,42 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
   onChange = async (event: ChangeEvent<HTMLInputElement>): Promise<void> => {
     switch (this.mode) {
       case InputFileMode.MULTIPLE:
-        let files: File[], buffers: ArrayBuffer[] | Error, items: InputFileItem[]
+        let files: File[], items: InputFileItem[]
 
         files = [...(event.target.files || [])]
         if (files.length <= 0) return Logger.error(this.id, 'onChange', `Failed to find any file.`, event.target.files)
 
-        buffers = await tcp(async () => {
-          buffers = []
+        items = []
+        await Promise.all(
+          files.map(async (v: File, k: number) => {
+            let item: InputFileItem
 
-          for (let i = 0; i < files.length; i++) {
-            buffers.push(await files[i].arrayBuffer())
-          }
+            item = Dummy.inputFileItem
+            item.buffer = await v.arrayBuffer()
+            item.base64 = Base64.encode(item.buffer)
+            item.id = IDUtils.unique(items.map((v: InputFileItem) => v.id))
+            item.name = v.name
+            item.size = v.size
+            item.timestamp = v.lastModified
+            item.type = v.type
 
-          return buffers
-        })
-        if (buffers instanceof Error) return
-
-        items = files.reduce((r: InputFileItem[], v: File, k: number) => {
-          let item: InputFileItem
-
-          item = Dummy.inputFileItem
-          item.base64 = Base64.encode((buffers as ArrayBuffer[])[k])
-          item.buffer = (buffers as ArrayBuffer[])[k]
-          item.id = IDUtils.unique(r.map((v: InputFileItem) => v.id))
-          item.name = v.name
-          item.size = v.size
-          item.timestamp = v.lastModified
-          item.type = v.type
-
-          return [...r, item]
-        }, [])
+            items.push(item)
+          })
+        )
 
         this.store[this.path] = items as any
-        Logger.debug(this.id, 'onChange', `The items have been set to the value.`, items)
+        Logger.debug(this.id, 'onChange', `The items have been set as the value.`, items)
 
         break
       case InputFileMode.SINGLE:
-        let file: File | null, buffer: ArrayBuffer | Error, item: InputFileItem
+        let file: File | null, item: InputFileItem
 
         file = event.target.files && event.target.files[0]
         if (!file) return Logger.error(this.id, 'onChange', `Failed to find the first file.`, event.target.files)
 
-        buffer = await tcp(() => (file as File).arrayBuffer())
-        if (buffer instanceof Error) return
-
         item = Dummy.inputFileItem
-        item.base64 = Base64.encode(buffer)
-        item.buffer = buffer
+        item.buffer = await file.arrayBuffer()
+        item.base64 = Base64.encode(item.buffer)
         item.id = IDUtils.unique()
         item.name = file.name
         item.size = file.size
@@ -87,15 +77,12 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
         item.type = file.type
 
         this.store[this.path] = item as any
-        Logger.debug(this.id, 'onChange', `The item has been set to the value.`, item)
+        Logger.debug(this.id, 'onChange', `The item has been set as the value.`, item)
 
         break
     }
 
-    this.touched = true
-    this.validation = this.schema.validate(this.value)
-
-    this.update()
+    this.touch()
   }
 
   /**
@@ -115,8 +102,7 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
         break
     }
 
-    this.validation = this.schema.validate(this.value)
-    this.update()
+    this.touch()
   }
 
   /**
@@ -136,8 +122,7 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
         break
     }
 
-    this.validation = this.schema.validate(this.value)
-    this.update()
+    this.validate()
   }
 
   /**

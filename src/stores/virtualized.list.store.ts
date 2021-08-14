@@ -71,12 +71,12 @@ export class VirtualizedListStore<T> extends ComponentStore<HTMLUListElement> {
     switch (this.orientation) {
       case Orientation.HORIZONTAL:
         this.itemElementWidth = NumberUtils.parseFloat(getComputedStyle(this.dummyRef.current).width) + this.gutter
-        Logger.debug(this.id, 'readItemElementHeightOrWidth', `The item element width has been set to ${this.itemElementWidth}.`)
+        Logger.debug(this.id, 'readItemElementHeightOrWidth', this.orientation, `The item element width has been set to ${this.itemElementWidth}.`)
 
         break
       case Orientation.VERTICAL:
         this.itemElementHeight = NumberUtils.parseFloat(getComputedStyle(this.dummyRef.current).height) + this.gutter
-        Logger.debug(this.id, 'readItemElementHeightOrWidth', `The item element height has been set to ${this.itemElementHeight}.`)
+        Logger.debug(this.id, 'readItemElementHeightOrWidth', this.orientation, `The item element height has been set to ${this.itemElementHeight}.`)
 
         break
     }
@@ -99,7 +99,7 @@ export class VirtualizedListStore<T> extends ComponentStore<HTMLUListElement> {
           height = NumberUtils.parseFloat(getComputedStyle(element.parentElement || document.createElement('div')).height)
           if (height > 0) {
             this.parentElementHeight = height
-            Logger.debug(this.id, 'readElementHeightOrWidth', `The parent element height has been set to ${height}.`)
+            Logger.debug(this.id, 'readElementHeightOrWidth', this.orientation, `The parent element height has been set to ${height}.`)
 
             return this.update()
           }
@@ -109,7 +109,7 @@ export class VirtualizedListStore<T> extends ComponentStore<HTMLUListElement> {
           width = NumberUtils.parseFloat(getComputedStyle(element.parentElement || document.createElement('div')).width)
           if (width > 0) {
             this.parentElementWidth = width
-            Logger.debug(this.id, 'readElementHeightOrWidth', `The parent element width has been set to ${width}.`)
+            Logger.debug(this.id, 'readElementHeightOrWidth', this.orientation, `The parent element width has been set to ${width}.`)
 
             return this.update()
           }
@@ -142,13 +142,5 @@ export class VirtualizedListStore<T> extends ComponentStore<HTMLUListElement> {
 
   get isItemsEmpty(): boolean {
     return this.items.length <= 0
-  }
-
-  get isOrientationHorizontal(): boolean {
-    return this.orientation === Orientation.HORIZONTAL
-  }
-
-  get isOrientationVertical(): boolean {
-    return this.orientation === Orientation.VERTICAL
   }
 }

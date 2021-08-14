@@ -159,7 +159,7 @@ export interface LocalizableTextProps extends WithColor, WithLocalizationProps {
 
 /** @category Prop */
 export interface OnboardingProps extends HTMLDivProps {
-  active?: number
+  activeItemIndex?: number
   items: OnboardingItem[]
   onEnd?: () => any
 }
@@ -191,7 +191,7 @@ export interface SVGElementProps extends React.SVGProps<SVGSVGElement> {}
 /** @category Prop */
 export interface TagProps extends HTMLDivProps, WithBackground, WithColor, WithIcon, WithLayer {
   destroyable?: boolean
-  onDestroy?: () => any
+  destroyed?: boolean
   text: string
 }
 
@@ -207,7 +207,7 @@ export interface VirtualizedListProps<T> extends HTMLUListProps, WithOrientation
 
 /** @category Prop */
 export interface WizardProps extends HTMLDivProps {
-  active?: string
+  activeStepName?: string
   onStepChange?: WizardOnStepChange
   steps: WizardStepPartial[]
 }

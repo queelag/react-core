@@ -2,7 +2,7 @@ import { Environment } from '@queelag/core'
 import { MutableRefObject } from 'react'
 import { Blank } from '../components/Blank'
 import { Color, Theme } from '../definitions/enums'
-import { AppearanceData, ColorPickerConfiguration, ColorPickerConfigurationValue, InputFileItem, WizardStep } from '../definitions/interfaces'
+import { AppearanceData, ColorPickerConfiguration, ColorPickerConfigurationValue, InputFileItem, OnboardingItem, WizardStep } from '../definitions/interfaces'
 
 /** @internal */
 export class Dummy {
@@ -45,6 +45,14 @@ export class Dummy {
       size: 0,
       timestamp: 0,
       type: ''
+    }
+  }
+
+  static get onboardingItem(): OnboardingItem {
+    return {
+      description: '',
+      picture: '',
+      title: ''
     }
   }
 

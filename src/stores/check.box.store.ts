@@ -1,3 +1,4 @@
+import { Logger } from '@queelag/core'
 import * as S from 'superstruct'
 import { ComponentName } from '../definitions/enums'
 import { ComponentFormFieldStoreProps } from '../definitions/with.superstruct.interfaces'
@@ -13,16 +14,18 @@ export class CheckBoxStore<U extends object> extends ComponentFormFieldStore<HTM
   constructor(props: CheckBoxProps<U> & ComponentFormFieldStoreProps<HTMLDivElement, U>) {
     super(ComponentName.CHECKBOX, props)
 
-    this.validation = this.schema.validate(this.value)
+    this.validate()
   }
 
   onClick = (): void => {
-    if (this.isEnabled) {
-      this.store[this.path] = !this.value as any
-
-      this.touched = true
-      this.validation = this.schema.validate(this.value)
+    if (this.isDisabled) {
+      return Logger.warn(this.id, 'onClick', `Execution stopped, disabled is truthy.`)
     }
+
+    this.store[this.path] = !this.value as any
+    Logger.debug(this.id, 'onClick', `The value has been set to ${this.value}.`)
+
+    this.touch()
   }
 
   get schema(): S.Struct<boolean> {

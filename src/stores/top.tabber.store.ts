@@ -1,3 +1,4 @@
+import { Logger } from '@queelag/core'
 import { Blank } from '../components/Blank'
 import { ComponentName } from '../definitions/enums'
 import { ComponentStoreProps } from '../definitions/interfaces'
@@ -14,7 +15,7 @@ export class TopTabberStore extends ComponentStore<HTMLDivElement> {
   /**
    * A string which determines the active item name.
    */
-  active: string
+  activeItemName: string
   /**
    * An array of {@link TopTabberItem}.
    */
@@ -23,7 +24,7 @@ export class TopTabberStore extends ComponentStore<HTMLDivElement> {
   constructor(props: TopTabberProps & ComponentStoreProps<HTMLDivElement>) {
     super(ComponentName.TOP_TABBER, props)
 
-    this.active = props.active || props.items[0].name
+    this.activeItemName = props.activeItemName || props.items[0].name
     this.items = props.items
   }
 
@@ -31,7 +32,9 @@ export class TopTabberStore extends ComponentStore<HTMLDivElement> {
    * Sets item as active.
    */
   onClickItem(item: TopTabberItem): void {
-    this.active = item.name
+    this.activeItemName = item.name
+    Logger.debug(this.id, 'onClickItem', `The active item name has been set to ${this.activeItemName}.`)
+
     this.update()
   }
 
@@ -49,6 +52,10 @@ export class TopTabberStore extends ComponentStore<HTMLDivElement> {
 
   findNextItem(name: string): TopTabberItem {
     return this.items[this.findItemIndexByName(name) + 1] || this.items[this.items.length - 1]
+  }
+
+  get activeItem(): TopTabberItem {
+    return this.findItemByName(this.activeItemName)
   }
 
   private get dummyItem(): TopTabberItem {

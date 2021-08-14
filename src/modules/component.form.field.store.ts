@@ -1,3 +1,4 @@
+import { Logger } from '@queelag/core'
 import * as S from 'superstruct'
 import { ComponentFormFieldStoreProps } from '../definitions/with.superstruct.interfaces'
 import { ComponentStore } from './component.store'
@@ -59,8 +60,20 @@ export class ComponentFormFieldStore<T extends Element, U extends object> extend
    * Sets touched to true and validates the current value against the schema.
    */
   touch(): void {
-    this.touched = true
+    if (this.hasNotBeenTouched) {
+      this.touched = true
+      Logger.debug(this.id, 'touch', `The touched state has been set to true.`)
+    }
+
+    this.validate()
+  }
+
+  /**
+   * Validates the value against the schema.
+   */
+  validate(): void {
     this.validation = this.schema.validate(this.value)
+    Logger.debug(this.id, 'validate', `The value has been validated against the schema.`, this.validation, this.schema, this.value)
 
     this.update()
   }
@@ -86,44 +99,30 @@ export class ComponentFormFieldStore<T extends Element, U extends object> extend
     return this.store[this.path]
   }
 
-  /**
-   * Checks if this field has been touched.
-   */
   get hasBeenTouched(): boolean {
     return this.touched === true
   }
 
-  /**
-   * Checks if the validation failed.
-   */
+  get hasNotBeenTouched(): boolean {
+    return this.touched === true
+  }
+
   get hasError(): boolean {
     return this.validation[0] !== undefined
   }
 
-  /**
-   * Checks if this field is disabled.
-   */
   get isDisabled(): boolean {
     return this.disabled === true
   }
 
-  /**
-   * Checks if this field is enabled.
-   */
   get isEnabled(): boolean {
     return this.disabled === false
   }
 
-  /**
-   * Returns true if this field has been touched and the validation failed.
-   */
   get isErrorVisible(): boolean {
     return this.hasBeenTouched && this.hasError
   }
 
-  /**
-   * Checks if the validation succeded.
-   */
   get isValid(): boolean {
     return this.validation[0] === undefined
   }

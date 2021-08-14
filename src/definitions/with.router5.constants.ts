@@ -27,7 +27,7 @@ export const SIDEBAR_PROPS_KEYS: (keyof SidebarProps)[] = ['footer', 'items', 'r
 export const SIDEBAR_STORE_KEYS: (keyof SidebarProps & keyof SidebarStore)[] = ['items', 'router']
 
 /** @category Constant */
-export const TOP_TABBER_PROPS_KEYS: (keyof TopTabberProps)[] = ['active', 'items']
+export const TOP_TABBER_PROPS_KEYS: (keyof TopTabberProps)[] = ['activeItemName', 'items']
 
 /** @category Constant */
-export const TOP_TABBER_STORE_KEYS: (keyof TopTabberProps & keyof TopTabberStore)[] = ['active', 'items']
+export const TOP_TABBER_STORE_KEYS: (keyof TopTabberProps & keyof TopTabberStore)[] = ['activeItemName', 'items']
