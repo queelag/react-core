@@ -38,9 +38,13 @@ export class Dummy {
 
   static get inputFileItem(): InputFileItem {
     return {
-      data: '',
+      base64: '',
+      buffer: new ArrayBuffer(0),
       id: '',
-      name: ''
+      name: '',
+      size: 0,
+      timestamp: 0,
+      type: ''
     }
   }
 

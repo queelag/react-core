@@ -1,27 +1,34 @@
 import * as S from 'superstruct'
-import { InputFileItem } from '../definitions/interfaces'
 
 /**
  * @category Module
  */
 export class Schema {
-  static get any(): S.Struct {
+  static get any() {
     return S.any()
   }
 
-  static get inputFileItemOptional(): S.Describe<InputFileItem> {
+  static get inputFileItemOptional() {
     return S.object({
-      data: S.string(),
+      base64: S.string(),
+      buffer: S.instance(ArrayBuffer),
       id: S.string(),
-      name: S.string()
+      name: S.string(),
+      size: S.number(),
+      timestamp: S.number(),
+      type: S.string()
     })
   }
 
-  static get inputFileItemRequired(): S.Describe<InputFileItem> {
+  static get inputFileItemRequired() {
     return S.object({
-      data: S.size(S.string(), 1, Infinity),
+      base64: S.size(S.string(), 1, Infinity),
+      buffer: S.instance(ArrayBuffer),
       id: S.size(S.string(), 1, Infinity),
-      name: S.size(S.string(), 1, Infinity)
+      name: S.size(S.string(), 1, Infinity),
+      size: S.size(S.number(), 1, Infinity),
+      timestamp: S.size(S.number(), 1, Infinity),
+      type: S.size(S.string(), 1, Infinity)
     })
   }
 }

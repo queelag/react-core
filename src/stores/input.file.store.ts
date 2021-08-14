@@ -1,4 +1,4 @@
-import { Base64, IDUtils, tcp } from '@queelag/core'
+import { Base64, IDUtils, Logger, tcp } from '@queelag/core'
 import { ChangeEvent } from 'react'
 import * as S from 'superstruct'
 import { ComponentName, InputFileMode } from '../definitions/enums'
@@ -33,67 +33,111 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
   onChange = async (event: ChangeEvent<HTMLInputElement>): Promise<void> => {
     switch (this.mode) {
       case InputFileMode.MULTIPLE:
-        let buffers: ArrayBuffer[] | Error, items: InputFileItem[]
+        let files: File[], buffers: ArrayBuffer[] | Error, items: InputFileItem[]
+
+        files = [...(event.target.files || [])]
+        if (files.length <= 0) return Logger.error(this.id, 'onChange', `Failed to find any file.`, event.target.files)
 
         buffers = await tcp(async () => {
           buffers = []
 
-          for (let i = 0; i < (event.target.files?.length || 0); i++) {
-            buffers.push(await (event.target.files?.item(i) as File).arrayBuffer())
+          for (let i = 0; i < files.length; i++) {
+            buffers.push(await files[i].arrayBuffer())
           }
 
           return buffers
         })
         if (buffers instanceof Error) return
 
-        items = buffers.reduce((r: InputFileItem[], v: ArrayBuffer, k: number) => {
+        items = files.reduce((r: InputFileItem[], v: File, k: number) => {
           let item: InputFileItem
 
           item = Dummy.inputFileItem
-          item.data = Base64.encode(v)
+          item.base64 = Base64.encode((buffers as ArrayBuffer[])[k])
+          item.buffer = (buffers as ArrayBuffer[])[k]
           item.id = IDUtils.unique(r.map((v: InputFileItem) => v.id))
-          item.name = event.target.files ? event.target.files[k].name : ''
+          item.name = v.name
+          item.size = v.size
+          item.timestamp = v.lastModified
+          item.type = v.type
 
           return [...r, item]
         }, [])
 
         this.store[this.path] = items as any
+        Logger.debug(this.id, 'onChange', `The items have been set to the value.`, items)
 
         break
       case InputFileMode.SINGLE:
-        let buffer: ArrayBuffer | Error, item: InputFileItem
+        let file: File | null, buffer: ArrayBuffer | Error, item: InputFileItem
 
-        buffer = await tcp(async () => (event.target.files ? event.target.files[0].arrayBuffer() : new ArrayBuffer(0)))
+        file = event.target.files && event.target.files[0]
+        if (!file) return Logger.error(this.id, 'onChange', `Failed to find the first file.`, event.target.files)
+
+        buffer = await tcp(() => (file as File).arrayBuffer())
         if (buffer instanceof Error) return
 
         item = Dummy.inputFileItem
-        item.data = Base64.encode(buffer)
+        item.base64 = Base64.encode(buffer)
+        item.buffer = buffer
         item.id = IDUtils.unique()
-        item.name = event.target.files ? event.target.files[0].name : ''
+        item.name = file.name
+        item.size = file.size
+        item.timestamp = file.lastModified
+        item.type = file.type
 
         this.store[this.path] = item as any
+        Logger.debug(this.id, 'onChange', `The item has been set to the value.`, item)
 
         break
     }
 
     this.touched = true
     this.validation = this.schema.validate(this.value)
+
+    this.update()
   }
 
   /**
    * Resets store[path] if the mode is SINGLE otherwise filters out the item.
    */
-  onRemove = async (item: InputFileItem): Promise<void> => {
+  onRemove = (item: InputFileItem): void => {
     switch (this.mode) {
       case InputFileMode.MULTIPLE:
         this.store[this.path] = (this.value as InputFileItem[]).filter((v: InputFileItem) => v.id != item.id) as any
+        Logger.debug(this.id, 'onRemove', `The item ${item.id} has been removed from the value.`, this.value, item)
+
         break
       case InputFileMode.SINGLE:
         this.store[this.path] = Dummy.inputFileItem as any
+        Logger.debug(this.id, 'onRemove', `The value has been reset.`, this.value)
+
         break
     }
 
     this.validation = this.schema.validate(this.value)
+    this.update()
+  }
+
+  /**
+   * Resets store[path] if the mode is SINGLE otherwise it empties the array.
+   */
+  onClear = (): void => {
+    switch (this.mode) {
+      case InputFileMode.MULTIPLE:
+        this.store[this.path] = [] as any
+        Logger.debug(this.id, 'onClear', `The value has been set to an empty array.`, this.value)
+
+        break
+      case InputFileMode.SINGLE:
+        this.store[this.path] = Dummy.inputFileItem as any
+        Logger.debug(this.id, 'onClear', `The value has been reset.`, this.value)
+
+        break
+    }
+
+    this.validation = this.schema.validate(this.value)
+    this.update()
   }
 
   /**
@@ -111,10 +155,10 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
   /**
    * A custom schema which validates the value against {@link InputFileItem}.
    */
-  get schema(): S.Describe<InputFileItem> | S.Struct<InputFileItem[]> {
+  get schema() {
     switch (this.mode) {
       case InputFileMode.MULTIPLE:
-        return S.array(this.required ? Schema.inputFileItemRequired : Schema.inputFileItemOptional)
+        return S.size(S.array(this.required ? Schema.inputFileItemRequired : Schema.inputFileItemOptional), 1, Infinity)
       case InputFileMode.SINGLE:
         return this.required ? Schema.inputFileItemRequired : Schema.inputFileItemOptional
       default:
@@ -151,7 +195,7 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
   }
 
   /** @internal */
-  set schema(schema: S.Describe<InputFileItem> | S.Struct<InputFileItem[]>) {
+  set schema(schema) {
     this._schema = schema
   }
 }

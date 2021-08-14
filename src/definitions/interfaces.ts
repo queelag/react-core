@@ -35,9 +35,13 @@ export interface ComponentStoreProps<T extends Element> extends WithLayer, WithO
 }
 
 export interface InputFileItem {
-  data: string
+  base64: string
+  buffer: ArrayBuffer
   id: ID
   name: string
+  size: number
+  timestamp: number
+  type: string
 }
 
 export interface OnboardingItem extends WithDescription, WithTitle {

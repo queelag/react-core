@@ -1,4 +1,4 @@
-import { noop, tcp } from '@queelag/core'
+import { Logger, noop, tcp } from '@queelag/core'
 import { ComponentName, DirectionHorizontal } from '../definitions/enums'
 import { ComponentStoreProps, WizardStep, WizardStepPartial } from '../definitions/interfaces'
 import { WizardProps } from '../definitions/props'
@@ -23,7 +23,7 @@ export class WizardStore extends ComponentStore<HTMLDivElement> {
 
     this.active = props.active || (props.steps[0] ? props.steps[0].name : '')
     this.onStepChange = props.onStepChange || noop
-    this.steps = props.steps
+    this.steps = props.steps as WizardStep[]
   }
 
   /**
@@ -36,6 +36,8 @@ export class WizardStore extends ComponentStore<HTMLDivElement> {
 
     if (this.step.canGoNext()) {
       this.active = this.nextStep.name
+      Logger.debug(this.id, 'onClickNext', `The active step has been set to ${this.active}.`)
+
       this.update()
     }
 
@@ -52,6 +54,8 @@ export class WizardStore extends ComponentStore<HTMLDivElement> {
 
     if (this.step.canGoBack()) {
       this.active = this.previousStep.name
+      Logger.debug(this.id, 'onClickPrevious', `The active step has been set to ${this.active}.`)
+
       this.update()
     }
 
@@ -105,7 +109,7 @@ export class WizardStore extends ComponentStore<HTMLDivElement> {
     return this.findStepIndexByName(this.active) === this.steps.length - 1
   }
 
-  set steps(steps: WizardStepPartial[]) {
+  set steps(steps: WizardStep[]) {
     this._steps = steps.map((v: WizardStepPartial) => Object.assign({}, Dummy.wizardStep, v))
   }
 }
