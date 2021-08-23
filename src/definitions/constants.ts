@@ -97,10 +97,10 @@ export const FORM_PROPS_KEYS: (keyof FormProps)[] = []
 export const FORM_STORE_KEYS: (keyof FormProps & keyof FormStore)[] = []
 
 /** @category Constant */
-export const ICON_PROPS_KEYS: (keyof IconProps)[] = ['color', 'layer', 'size', 'svg', 'thickness']
+export const ICON_PROPS_KEYS: (keyof IconProps)[] = ['color', 'layer', 'size', 'source', 'thickness']
 
 /** @category Constant */
-export const ICON_STORE_KEYS: (keyof IconProps & keyof IconStore)[] = ['color', 'svg', 'thickness']
+export const ICON_STORE_KEYS: (keyof IconProps & keyof IconStore)[] = ['color', 'source', 'thickness']
 
 /** @category Constant */
 export const IMAGE_EMPTY_BASE64: string = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='

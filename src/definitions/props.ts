@@ -77,6 +77,7 @@ export interface EmptyProps extends HTMLDivProps, WithDescription, WithLayer, Wi
 
 /** @category Prop */
 export interface FormProps extends Omit<HTMLFormProps, 'onSubmit'> {
+  disabled?: boolean
   onSubmit: (event: FormEvent<HTMLFormElement>) => any
 }
 
@@ -113,8 +114,8 @@ export interface HTMLUListProps extends React.DetailedHTMLProps<React.HTMLAttrib
 export interface IconProps extends Omit<React.SVGProps<SVGSVGElement>, 'fill' | 'orientation' | 'stroke'>, WithColor, WithLayer {
   fill?: boolean | string
   size?: number
+  source?: string
   stroke?: boolean | string
-  svg?: string
   thickness?: number
 }
 

@@ -1,4 +1,4 @@
-import { tcp } from '@queelag/core'
+import { Logger, tcp } from '@queelag/core'
 import { FormEvent } from 'react'
 import { CheckBoxCollector } from '../collectors/check.box.collector'
 import { InputCollector } from '../collectors/input.collector'
@@ -19,9 +19,15 @@ import { SelectStore } from './select.store'
  * @category Store
  */
 export class FormStore extends ComponentStore<HTMLFormElement> {
+  /**
+   * A boolean which determines if this form is disabled or not.
+   */
+  disabled: boolean
+
   constructor(props: FormProps & ComponentStoreProps<HTMLFormElement>) {
     super(ComponentName.FORM, props)
 
+    this.disabled = props.disabled || false
     this.onSubmit = props.onSubmit
   }
 
@@ -87,6 +93,14 @@ export class FormStore extends ComponentStore<HTMLFormElement> {
     return stores
   }
 
+  get isDisabled(): boolean {
+    return this.disabled === true
+  }
+
+  get isEnabled(): boolean {
+    return this.disabled === false
+  }
+
   /**
    * Checks if every child field is valid.
    */
@@ -103,13 +117,27 @@ export class FormStore extends ComponentStore<HTMLFormElement> {
   set onSubmit(onSubmit: (event: FormEvent<HTMLFormElement>) => any) {
     this._onSubmit = async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault()
+      event.stopPropagation()
+
+      if (this.isDisabled) {
+        return Logger.warn(this.id, 'onSubmit', `Execution stopped, disabled is truthy.`)
+      }
 
       this.checkBoxStores.forEach((v: CheckBoxStore<any>) => v.touch())
       this.inputStores.forEach((v: InputStore<any>) => v.touch())
       this.inputFileStores.forEach((v: InputFileStore<any>) => v.touch())
       this.selectStores.forEach((v: SelectStore<any>) => v.touch())
 
-      this.isValid && (await tcp(() => onSubmit(event)))
+      if (this.isValid) {
+        this.disabled = true
+        Logger.debug(this.id, 'onSubmit', `The disabled state has been set to true.`)
+
+        await tcp(() => onSubmit(event))
+        Logger.debug(this.id, 'onSubmit', `The onSubmit function has been fired.`, onSubmit)
+
+        this.disabled = false
+        Logger.debug(this.id, 'onSubmit', `The disabled state has been set to false.`)
+      }
 
       this.inputStores.forEach((v: InputStore<any>) => v.element.blur())
     }

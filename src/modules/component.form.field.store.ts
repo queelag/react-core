@@ -93,7 +93,7 @@ export class ComponentFormFieldStore<T extends Element, U extends object> extend
   }
 
   /**
-   * Anything read from store[path]
+   * Anything read from store[path].
    */
   get value(): any {
     return this.store[this.path]
@@ -104,7 +104,7 @@ export class ComponentFormFieldStore<T extends Element, U extends object> extend
   }
 
   get hasNotBeenTouched(): boolean {
-    return this.touched === true
+    return this.touched === false
   }
 
   get hasError(): boolean {

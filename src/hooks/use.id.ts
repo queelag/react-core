@@ -10,9 +10,7 @@ export function useID(prefix: string, customID: string = ''): ID {
   const [id, setID] = useState<ID>(customID)
 
   useEffect(() => {
-    if (id.length <= 0) {
-      setID(IDUtils.prefixed(prefix))
-    }
+    setID(IDUtils.prefixed(prefix))
   }, [customID, prefix])
 
   return id

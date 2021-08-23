@@ -52,9 +52,6 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
     this.source = props.source
   }
 
-  /**
-   * An event triggered by a failure whilst loading this image.
-   */
   onError = (event?: SyntheticEvent<HTMLImageElement>): void => {
     this.status = ImageStatus.ERROR
     Logger.error(this.id, 'onError', `The status has been set to ${ImageStatus.ERROR}.`, event)

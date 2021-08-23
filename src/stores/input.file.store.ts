@@ -53,7 +53,7 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
             item.timestamp = v.lastModified
             item.type = v.type
 
-            items.push(item)
+            items[k] = item
           })
         )
 

@@ -30,56 +30,56 @@ export class ColorPicker {
   }
 
   /**
-   * Picks a layered background color from a {@link FeedbackType}
+   * Picks a layered background color from a {@link FeedbackType}.
    */
   static backgroundByFeedbackType(type: FeedbackType, layer?: Layer): string {
     return this.background(this.byFeedbackType(type), layer)
   }
 
   /**
-   * Picks a layered background color from a string
+   * Picks a layered background color from a string.
    */
   static backgroundByString(color: string, layer?: Layer): string {
     return Object.values(Color).includes(color as Color) ? this.background(color as Color, layer) : color
   }
 
   /**
-   * Picks a layered border color from a {@link FeedbackType}
+   * Picks a layered border color from a {@link FeedbackType}.
    */
   static borderByFeedbackType(type: FeedbackType, layer?: Layer): string {
     return this.border(this.byFeedbackType(type), layer)
   }
 
   /**
-   * Picks a layered border color from a string
+   * Picks a layered border color from a string.
    */
   static borderByString(color: string, layer?: Layer): string {
     return Object.values(Color).includes(color as Color) ? this.border(color as Color, layer) : color
   }
 
   /**
-   * Picks a layered divide color from a {@link FeedbackType}
+   * Picks a layered divide color from a {@link FeedbackType}.
    */
   static divideByFeedbackType(type: FeedbackType, layer?: Layer): string {
     return this.divide(this.byFeedbackType(type), layer)
   }
 
   /**
-   * Picks a layered divide color from a string
+   * Picks a layered divide color from a string.
    */
   static divideByString(color: string, layer?: Layer): string {
     return Object.values(Color).includes(color as Color) ? this.divide(color as Color, layer) : color
   }
 
   /**
-   * Picks a layered text color from a {@link FeedbackType}
+   * Picks a layered text color from a {@link FeedbackType}.
    */
   static textByFeedbackType(type: FeedbackType, layer?: Layer): string {
     return this.text(this.byFeedbackType(type), layer)
   }
 
   /**
-   * Picks a layered text color from a string
+   * Picks a layered text color from a string.
    */
   static textByString(color: string, layer?: Layer): string {
     return Object.values(Color).includes(color as Color) ? this.text(color as Color, layer) : color

@@ -119,8 +119,4 @@ export interface WizardStep {
   title: string
 }
 
-export interface WizardStepPartial extends WithDescription, WithName, WithTitle {
-  canGoBack?: () => boolean
-  canGoNext?: () => boolean
-  content?: ReactNode
-}
+export interface WizardStepPartial extends Partial<WizardStep> {}

@@ -15,7 +15,11 @@ export class IconStore extends ComponentStore<SVGSVGElement> {
   /** @internal */
   private _color: string = ''
   /** @internal */
-  private _svg: string = ''
+  private _source: string = ''
+  /**
+   * A string which contains the raw svg.
+   */
+  svg: string
   /**
    * A number which determines the stroke thickness.
    */
@@ -26,7 +30,8 @@ export class IconStore extends ComponentStore<SVGSVGElement> {
 
     this.color = props.color || Color.MONO
     this.size = props.size || 0
-    this.svg = props.svg || ''
+    this.svg = '<svg viewbox="0 0 0 0"></svg>'
+    this.source = props.source || ''
     this.thickness = props.thickness || 0
   }
 
@@ -45,10 +50,10 @@ export class IconStore extends ComponentStore<SVGSVGElement> {
   }
 
   /**
-   * Returns the raw svg.
+   * Returns the source.
    */
-  get svg(): string {
-    return this._svg
+  get source(): string {
+    return this._source
   }
 
   /**
@@ -64,48 +69,51 @@ export class IconStore extends ComponentStore<SVGSVGElement> {
   }
 
   /** @internal */
-  set svg(svg: string) {
+  set source(source: string) {
     ;(async () => {
       switch (true) {
-        case /^(https?:\/\/|\/)/.test(svg):
+        case /^(https?:\/\/|\/)/.test(source):
           let cached: string | undefined, response: Response | Error, text: string | Error
 
-          cached = Cache.icons.get(svg)
+          cached = Cache.icons.get(source)
           if (cached) {
             this.svg = cached
-            Logger.debug(this.id, 'setSVG', `The svg has been set to the cached one.`)
+            Logger.debug(this.id, 'setSource', `The svg has been set to the cached one.`)
 
             return
           }
 
           if (Environment.isWindowNotDefined) {
-            return Logger.error(this.id, 'setSVG', `The window is not defined.`)
+            return Logger.warn(this.id, 'setSource', `The window is not defined.`)
           }
 
-          response = await tcp(() => window.fetch(svg))
+          response = await tcp(() => window.fetch(source))
           if (response instanceof Error) return
 
           text = await tcp(() => (response as Response).text())
           if (text instanceof Error) return
 
-          this._svg = text
-          Logger.debug(this.id, 'setSVG', `The svg has been set to the fetched text value.`)
+          this.svg = text
+          Logger.debug(this.id, 'setSource', `The svg has been set to the fetched text value.`)
 
-          Cache.icons.set(svg, text)
-          Logger.debug(this.id, 'setSVG', `The svg has been cached.`)
+          Cache.icons.set(source, text)
+          Logger.debug(this.id, 'setSource', `The svg has been cached.`)
 
           break
-        case /svg/.test(svg):
-          this._svg = svg
-          Logger.debug(this.id, 'setSVG', `The svg has been set.`)
+        case /svg/.test(source):
+          this.svg = source
+          Logger.debug(this.id, 'setSource', `The svg has been set.`)
 
           break
         default:
-          this._svg = '<svg viewbox="0 0 0 0"></svg>'
-          Logger.debug(this.id, 'setSVG', `The svg has been set to a fallback.`)
+          this.svg = '<svg viewbox="0 0 0 0"></svg>'
+          Logger.debug(this.id, 'setSource', `The svg has been set to a fallback.`)
 
           break
       }
+
+      this._source = source
+      Logger.debug(this.id, 'setSource', `The source has been set.`)
 
       this.update()
     })()
