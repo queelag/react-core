@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>TagStore | @queelag/react-core - v1.0.22</title>
-	<meta name="description" content="Documentation for @queelag/react-core - v1.0.22">
+	<title>TagStore | @queelag/react-core - v1.0.23</title>
+	<meta name="description" content="Documentation for @queelag/react-core - v1.0.23">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<script async src="../assets/js/search.js" id="search-script"></script>
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">@queelag/react-core - v1.0.22</a>
+					<a href="../index.html" class="title">@queelag/react-core - v1.0.23</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -52,7 +52,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../index.html">@queelag/react-core - v1.0.22</a>
+					<a href="../index.html">@queelag/react-core - v1.0.23</a>
 				</li>
 				<li>
 					<a href="TagStore.html">TagStore</a>
@@ -98,6 +98,7 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="TagStore.html#destroyable" class="tsd-kind-icon">destroyable</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="TagStore.html#destroyed" class="tsd-kind-icon">destroyed</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="TagStore.html#id" class="tsd-kind-icon">id</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="TagStore.html#layer" class="tsd-kind-icon">layer</a></li>
@@ -114,11 +115,13 @@
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="TagStore.html#element" class="tsd-kind-icon">element</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="TagStore.html#elementComputedHeight" class="tsd-kind-icon">element<wbr>Computed<wbr>Height</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="TagStore.html#elementComputedWidth" class="tsd-kind-icon">element<wbr>Computed<wbr>Width</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="TagStore.html#isDestroyable" class="tsd-kind-icon">is<wbr>Destroyable</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="TagStore.html#isDestroyed" class="tsd-kind-icon">is<wbr>Destroyed</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="TagStore.html#isLayerOne" class="tsd-kind-icon">is<wbr>Layer<wbr>One</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="TagStore.html#isLayerThree" class="tsd-kind-icon">is<wbr>Layer<wbr>Three</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="TagStore.html#isLayerTwo" class="tsd-kind-icon">is<wbr>Layer<wbr>Two</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="TagStore.html#isLayerZero" class="tsd-kind-icon">is<wbr>Layer<wbr>Zero</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="TagStore.html#isNotDestroyable" class="tsd-kind-icon">is<wbr>Not<wbr>Destroyable</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="TagStore.html#isNotDestroyed" class="tsd-kind-icon">is<wbr>Not<wbr>Destroyed</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="TagStore.html#isOrientationHorizontal" class="tsd-kind-icon">is<wbr>Orientation<wbr>Horizontal</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="TagStore.html#isOrientationVertical" class="tsd-kind-icon">is<wbr>Orientation<wbr>Vertical</a></li>
@@ -155,7 +158,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="ComponentStore.html">ComponentStore</a>.<a href="ComponentStore.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/fd280fd/src/stores/tag.store.ts#L18">src/stores/tag.store.ts:18</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/stores/tag.store.ts#L23">src/stores/tag.store.ts:23</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -172,12 +175,27 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="destroyable" class="tsd-anchor"></a>
+					<h3>destroyable</h3>
+					<div class="tsd-signature tsd-kind-icon">destroyable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/stores/tag.store.ts#L17">src/stores/tag.store.ts:17</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A boolean which determines if this tag is destroyable or not.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="destroyed" class="tsd-anchor"></a>
 					<h3>destroyed</h3>
 					<div class="tsd-signature tsd-kind-icon">destroyed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/fd280fd/src/stores/tag.store.ts#L16">src/stores/tag.store.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/stores/tag.store.ts#L21">src/stores/tag.store.ts:21</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -193,7 +211,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="ComponentStore.html">ComponentStore</a>.<a href="ComponentStore.html#id">id</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/fd280fd/src/modules/component.store.ts#L17">src/modules/component.store.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/modules/component.store.ts#L17">src/modules/component.store.ts:17</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -209,7 +227,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="ComponentStore.html">ComponentStore</a>.<a href="ComponentStore.html#layer">layer</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/fd280fd/src/modules/component.store.ts#L21">src/modules/component.store.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/modules/component.store.ts#L21">src/modules/component.store.ts:21</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -225,7 +243,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="ComponentStore.html">ComponentStore</a>.<a href="ComponentStore.html#name">name</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/fd280fd/src/modules/component.store.ts#L25">src/modules/component.store.ts:25</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/modules/component.store.ts#L25">src/modules/component.store.ts:25</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -241,7 +259,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="ComponentStore.html">ComponentStore</a>.<a href="ComponentStore.html#orientation">orientation</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/fd280fd/src/modules/component.store.ts#L29">src/modules/component.store.ts:29</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/modules/component.store.ts#L29">src/modules/component.store.ts:29</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -257,7 +275,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="ComponentStore.html">ComponentStore</a>.<a href="ComponentStore.html#ref">ref</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/fd280fd/src/modules/component.store.ts#L33">src/modules/component.store.ts:33</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/modules/component.store.ts#L33">src/modules/component.store.ts:33</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -273,7 +291,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="ComponentStore.html">ComponentStore</a>.<a href="ComponentStore.html#shape">shape</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/fd280fd/src/modules/component.store.ts#L37">src/modules/component.store.ts:37</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/modules/component.store.ts#L37">src/modules/component.store.ts:37</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -289,7 +307,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="ComponentStore.html">ComponentStore</a>.<a href="ComponentStore.html#size">size</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/fd280fd/src/modules/component.store.ts#L41">src/modules/component.store.ts:41</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/modules/component.store.ts#L41">src/modules/component.store.ts:41</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -311,7 +329,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/fd280fd/src/modules/component.store.ts#L62">src/modules/component.store.ts:62</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/modules/component.store.ts#L62">src/modules/component.store.ts:62</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -333,7 +351,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/fd280fd/src/modules/component.store.ts#L69">src/modules/component.store.ts:69</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/modules/component.store.ts#L69">src/modules/component.store.ts:69</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -355,7 +373,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/fd280fd/src/modules/component.store.ts#L76">src/modules/component.store.ts:76</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/modules/component.store.ts#L76">src/modules/component.store.ts:76</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -364,6 +382,23 @@
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="isDestroyable" class="tsd-anchor"></a>
+					<h3>is<wbr>Destroyable</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> isDestroyable<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/stores/tag.store.ts#L46">src/stores/tag.store.ts:46</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -377,7 +412,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/fd280fd/src/stores/tag.store.ts#L34">src/stores/tag.store.ts:34</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/stores/tag.store.ts#L54">src/stores/tag.store.ts:54</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -394,7 +429,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/fd280fd/src/modules/component.store.ts#L84">src/modules/component.store.ts:84</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/modules/component.store.ts#L84">src/modules/component.store.ts:84</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -411,7 +446,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/fd280fd/src/modules/component.store.ts#L92">src/modules/component.store.ts:92</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/modules/component.store.ts#L92">src/modules/component.store.ts:92</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -428,7 +463,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/fd280fd/src/modules/component.store.ts#L88">src/modules/component.store.ts:88</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/modules/component.store.ts#L88">src/modules/component.store.ts:88</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -445,7 +480,24 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/fd280fd/src/modules/component.store.ts#L80">src/modules/component.store.ts:80</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/modules/component.store.ts#L80">src/modules/component.store.ts:80</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="isNotDestroyable" class="tsd-anchor"></a>
+					<h3>is<wbr>Not<wbr>Destroyable</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> isNotDestroyable<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/stores/tag.store.ts#L50">src/stores/tag.store.ts:50</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -462,7 +514,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/fd280fd/src/stores/tag.store.ts#L38">src/stores/tag.store.ts:38</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/stores/tag.store.ts#L58">src/stores/tag.store.ts:58</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -479,7 +531,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/fd280fd/src/modules/component.store.ts#L96">src/modules/component.store.ts:96</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/modules/component.store.ts#L96">src/modules/component.store.ts:96</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -496,7 +548,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/fd280fd/src/modules/component.store.ts#L100">src/modules/component.store.ts:100</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/modules/component.store.ts#L100">src/modules/component.store.ts:100</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -513,7 +565,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/fd280fd/src/modules/component.store.ts#L104">src/modules/component.store.ts:104</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/modules/component.store.ts#L104">src/modules/component.store.ts:104</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -530,7 +582,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/fd280fd/src/modules/component.store.ts#L108">src/modules/component.store.ts:108</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/modules/component.store.ts#L108">src/modules/component.store.ts:108</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -547,7 +599,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/fd280fd/src/modules/component.store.ts#L112">src/modules/component.store.ts:112</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/modules/component.store.ts#L112">src/modules/component.store.ts:112</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -564,7 +616,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/fd280fd/src/modules/component.store.ts#L116">src/modules/component.store.ts:116</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/modules/component.store.ts#L116">src/modules/component.store.ts:116</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -581,7 +633,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/fd280fd/src/modules/component.store.ts#L120">src/modules/component.store.ts:120</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/modules/component.store.ts#L120">src/modules/component.store.ts:120</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -598,7 +650,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/fd280fd/src/modules/component.store.ts#L124">src/modules/component.store.ts:124</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/modules/component.store.ts#L124">src/modules/component.store.ts:124</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -615,7 +667,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/fd280fd/src/modules/component.store.ts#L128">src/modules/component.store.ts:128</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/modules/component.store.ts#L128">src/modules/component.store.ts:128</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -632,7 +684,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/fd280fd/src/modules/component.store.ts#L132">src/modules/component.store.ts:132</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/modules/component.store.ts#L132">src/modules/component.store.ts:132</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -652,7 +704,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/fd280fd/src/stores/tag.store.ts#L27">src/stores/tag.store.ts:27</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/stores/tag.store.ts#L33">src/stores/tag.store.ts:33</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -681,7 +733,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="ComponentStore.html">ComponentStore</a>.<a href="ComponentStore.html#update">update</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/queelag/react-core/blob/fd280fd/src/modules/component.store.ts#L57">src/modules/component.store.ts:57</a></li>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/34f84d3/src/modules/component.store.ts#L57">src/modules/component.store.ts:57</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -712,6 +764,9 @@
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
 								<a href="TagStore.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="TagStore.html#destroyable" class="tsd-kind-icon">destroyable</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="TagStore.html#destroyed" class="tsd-kind-icon">destroyed</a>
@@ -747,6 +802,9 @@
 								<a href="TagStore.html#elementComputedWidth" class="tsd-kind-icon">element<wbr>Computed<wbr>Width</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="TagStore.html#isDestroyable" class="tsd-kind-icon">is<wbr>Destroyable</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="TagStore.html#isDestroyed" class="tsd-kind-icon">is<wbr>Destroyed</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
@@ -760,6 +818,9 @@
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
 								<a href="TagStore.html#isLayerZero" class="tsd-kind-icon">is<wbr>Layer<wbr>Zero</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="TagStore.html#isNotDestroyable" class="tsd-kind-icon">is<wbr>Not<wbr>Destroyable</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="TagStore.html#isNotDestroyed" class="tsd-kind-icon">is<wbr>Not<wbr>Destroyed</a>
