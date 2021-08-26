@@ -1,4 +1,4 @@
-import { ObjectUtils, WindowUtils } from '@queelag/core'
+import { ObjectUtils, rv, WindowUtils } from '@queelag/core'
 import React, { Fragment, SyntheticEvent, useEffect } from 'react'
 import { IMAGE_EMPTY_BASE64, IMAGE_PROPS_KEYS, IMAGE_STORE_KEYS } from '../definitions/constants'
 import { ImageProps } from '../definitions/props'
@@ -34,24 +34,28 @@ export function Image(props: ImageProps) {
     props.onLoad && props.onLoad(event)
   }
 
+  const onLoadStart = (event: SyntheticEvent<HTMLImageElement>) => {
+    store.onLoadStart(event)
+    props.onLoadStart && props.onLoadStart(event)
+  }
+
   useEffect(() => WindowUtils.addEventListenerAndReturnRemover('resize', () => store.update()), [])
+  useEffect(() => () => rv(() => store.isStatusLoading && store.deleteEmptyFromCache()), [])
 
   return (
     <Fragment>
       {store.isStatusLoaded && (
-        <img
-          {...ObjectUtils.omit(props, IMAGE_PROPS_KEYS)}
-          id={store.id}
-          onError={onError}
-          onLoad={onLoad}
-          ref={store.ref}
-          src={store.source}
-          style={store.getStyle(props)}
-        />
+        <img {...ObjectUtils.omit(props, IMAGE_PROPS_KEYS)} id={store.id} onError={onError} ref={store.ref} src={store.source} style={store.getStyle(props)} />
       )}
       {store.isFallbackVisible && <img {...ObjectUtils.omit(props, IMAGE_PROPS_KEYS)} ref={store.ref} src={IMAGE_EMPTY_BASE64} style={store.getStyle(props)} />}
       {store.isStatusLoading && (
-        <img onError={onError} onLoad={onLoad} src={store.source} style={{ opacity: 0, pointerEvents: 'none', position: 'absolute' }} />
+        <img
+          onError={onError}
+          onLoad={onLoad}
+          onLoadStart={onLoadStart}
+          src={store.source}
+          style={{ opacity: 0, pointerEvents: 'none', position: 'absolute' }}
+        />
       )}
     </Fragment>
   )

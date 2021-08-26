@@ -98,6 +98,7 @@ export enum FormFieldType {
 }
 
 export enum ImageStatus {
+  IDLE = 'IDLE',
   ERROR = 'ERROR',
   LOADED = 'LOADED',
   LOADING = 'LOADING'

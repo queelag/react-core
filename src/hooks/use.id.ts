@@ -1,4 +1,4 @@
-import { ID, IDUtils } from '@queelag/core'
+import { Environment, ID, IDUtils } from '@queelag/core'
 import { useEffect, useState } from 'react'
 
 /**
@@ -6,11 +6,18 @@ import { useEffect, useState } from 'react'
  *
  * @category Hook
  */
-export function useID(prefix: string, customID: string = ''): ID {
-  const [id, setID] = useState<ID>(customID)
+export function useID(prefix: string, customID: ID = '', initialID: ID = Environment.isWindowDefined ? IDUtils.prefixed(prefix) : ''): ID {
+  const [id, setID] = useState<ID>(customID || initialID)
 
   useEffect(() => {
-    setID(IDUtils.prefixed(prefix))
+    switch (true) {
+      case customID.length > 0:
+        setID(customID)
+        break
+      case id.length <= 0:
+        setID(IDUtils.prefixed(prefix))
+        break
+    }
   }, [customID, prefix])
 
   return id

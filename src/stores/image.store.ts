@@ -1,6 +1,5 @@
 import { Cache, ImageUtils, Logger } from '@queelag/core'
 import { CSSProperties, SyntheticEvent } from 'react'
-import { IMAGE_EMPTY_BASE64 } from '../definitions/constants'
 import { ComponentName, ImageStatus, Orientation } from '../definitions/enums'
 import { ComponentStoreProps } from '../definitions/interfaces'
 import { ImageProps } from '../definitions/props'
@@ -38,23 +37,22 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
    */
   status: ImageStatus
   /** @internal */
-  private _source: string = IMAGE_EMPTY_BASE64
+  private _source: string = ''
 
   constructor(props: ImageProps & ComponentStoreProps<HTMLImageElement>) {
     super(ComponentName.IMAGE, props)
 
     this.alpha = props.alpha || false
-    this.cache = typeof props.cache === 'boolean' ? props.cache : true
+    this.cache = props.cache || true
     this.orientation = props.orientation || Orientation.HORIZONTAL
     this.quality = props.quality || 0.8
     this.ratio = props.ratio || 0
-    this.status = ImageStatus.LOADING
+    this.status = ImageStatus.IDLE
     this.source = props.source
   }
 
-  onError = (event?: SyntheticEvent<HTMLImageElement>): void => {
-    Cache.images.delete(this.source)
-    Logger.debug(this.id, 'onError', `The empty source has been deleted from the cache.`)
+  onError = (event: SyntheticEvent<HTMLImageElement>): void => {
+    this.deleteEmptyFromCache()
 
     this.status = ImageStatus.ERROR
     Logger.error(this.id, 'onError', `The status has been set to ${ImageStatus.ERROR}.`, event)
@@ -72,6 +70,25 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
     Logger.debug(this.id, 'onLoad', `The status has been set to ${ImageStatus.LOADED}.`, event)
 
     this.update()
+  }
+
+  onLoadStart = (event: SyntheticEvent<HTMLImageElement>): void => {
+    if (this.isCacheable) {
+      Cache.images.set(this.source, '')
+      Logger.debug(this.id, 'setSource', `An empty string has been cached.`)
+    }
+  }
+
+  deleteEmptyFromCache(): void {
+    if (this.isCacheable) {
+      if ((Cache.images.get(this.source) || '').length > 0) {
+        Logger.warn(this.id, 'deleteEmptyFromCache', `The cached value is not empty.`)
+        return
+      }
+
+      Cache.images.delete(this.source)
+      Logger.debug(this.id, 'deleteFromCache', `The empty cached value has been deleted.`)
+    }
   }
 
   /**
@@ -160,9 +177,6 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
 
         return
       }
-
-      Cache.images.set(source, '')
-      Logger.debug(this.id, 'setSource', `An empty string has been cached.`)
 
       this._source = source
       Logger.debug(this.id, 'setSource', `The source has been set.`)
