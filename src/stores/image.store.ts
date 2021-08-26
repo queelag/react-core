@@ -157,7 +157,12 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
       if (typeof cached === 'string') {
         if (cached.length <= 0) {
           Logger.debug(this.id, 'setSource', `Another store is loading the same source.`)
-          await new Promise<void>((r) => setInterval(() => (Cache.images.get(source) || Cache.images.get(source) === undefined) && r(), 100))
+          await new Promise<void>((r) =>
+            setInterval(() => {
+              cached = Cache.images.get(source)
+              if (cached || cached === undefined) r()
+            }, 100)
+          )
 
           if (cached === undefined) {
             this.status = ImageStatus.ERROR

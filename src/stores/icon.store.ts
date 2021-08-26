@@ -79,7 +79,12 @@ export class IconStore extends ComponentStore<SVGSVGElement> {
           if (typeof cached === 'string') {
             if (cached.length <= 0) {
               Logger.debug(this.id, 'setSource', `Another store is fetching the same source.`)
-              await new Promise<void>((r) => setInterval(() => (Cache.icons.get(source) || Cache.icons.get(source) === undefined) && r(), 100))
+              await new Promise<void>((r) =>
+                setInterval(() => {
+                  cached = Cache.icons.get(source)
+                  if (cached || cached === undefined) r()
+                }, 100)
+              )
 
               if (cached === undefined) {
                 Logger.debug(this.id, 'setSource', `The other store failed to fetch the source.`)
