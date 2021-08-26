@@ -92,8 +92,8 @@ export class IconStore extends ComponentStore<SVGSVGElement> {
               }
             }
 
-            this._source = cached
-            Logger.debug(this.id, 'setSource', `The source has been set to the cached one.`)
+            this.svg = cached
+            Logger.debug(this.id, 'setSource', `The svg has been set to the cached one.`)
 
             this.update()
 
