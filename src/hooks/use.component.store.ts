@@ -21,7 +21,7 @@ export const useComponentStore = <
   const ref = useSafeRef(tagName)
   const update = useForceUpdate()
   const store = useMemo(() => new Store({ ...props, ref, update }), [])
-  const id = useID(store.name, props.id, store.id)
+  const id = useID(store.name, props.id)
 
   useEffect(() => {
     store.id = id

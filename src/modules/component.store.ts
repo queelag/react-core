@@ -1,4 +1,4 @@
-import { Environment, ID, IDUtils, noop, NumberUtils } from '@queelag/core'
+import { ID, noop, NumberUtils } from '@queelag/core'
 import { MutableRefObject } from 'react'
 import { Layer, Orientation, Shape, Size } from '../definitions/enums'
 import { ComponentStoreProps } from '../definitions/interfaces'
@@ -41,7 +41,7 @@ export class ComponentStore<T extends Element> {
   size: Size | number | string
 
   constructor(name: string, props: ComponentStoreProps<T>) {
-    this.id = props.id || Environment.isWindowDefined ? IDUtils.prefixed(name) : ''
+    this.id = props.id || ''
     this.layer = props.layer || Layer.ZERO
     this.name = name
     this.orientation = props.orientation || Orientation.HORIZONTAL
