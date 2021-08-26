@@ -76,9 +76,21 @@ export class IconStore extends ComponentStore<SVGSVGElement> {
           let cached: string | undefined, response: Response | Error, text: string | Error
 
           cached = Cache.icons.get(source)
-          if (cached) {
-            this.svg = cached
-            Logger.debug(this.id, 'setSource', `The svg has been set to the cached one.`)
+          if (typeof cached === 'string') {
+            if (cached.length <= 0) {
+              Logger.debug(this.id, 'setSource', `Another store is fetching the same source.`)
+              await new Promise<void>((r) => setInterval(() => (Cache.icons.get(source) || Cache.icons.get(source) === undefined) && r(), 100))
+
+              if (cached === undefined) {
+                Logger.debug(this.id, 'setSource', `The other store failed to fetch the source.`)
+                return
+              }
+            }
+
+            this._source = cached
+            Logger.debug(this.id, 'setSource', `The source has been set to the cached one.`)
+
+            this.update()
 
             return
           }
@@ -87,11 +99,21 @@ export class IconStore extends ComponentStore<SVGSVGElement> {
             return Logger.warn(this.id, 'setSource', `The window is not defined.`)
           }
 
+          Cache.icons.set(source, '')
+          Logger.debug(this.id, 'setSource', `An empty string has been cached.`)
+
           response = await tcp(() => window.fetch(source))
-          if (response instanceof Error) return
+          if (response instanceof Error) return Cache.icons.delete(source)
 
           text = await tcp(() => (response as Response).text())
-          if (text instanceof Error) return
+          if (text instanceof Error) return Cache.icons.delete(source)
+
+          if (text.length <= 0) {
+            Cache.icons.delete(source)
+            Logger.debug(this.id, 'setSource', `The response text is empty.`)
+
+            return
+          }
 
           this.svg = text
           Logger.debug(this.id, 'setSource', `The svg has been set to the fetched text value.`)

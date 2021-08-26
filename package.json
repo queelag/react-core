@@ -6,7 +6,7 @@
   },
   "devDependencies": {
     "@microsoft/api-extractor": "^7.18.4",
-    "@queelag/core": "^1.0.10",
+    "@queelag/core": "^1.0.11",
     "@rollup/plugin-typescript": "^8.2.3",
     "@types/jest": "^26.0.24",
     "@types/js-cookie": "^2.2.7",

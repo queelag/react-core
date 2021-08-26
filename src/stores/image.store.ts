@@ -53,6 +53,9 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
   }
 
   onError = (event?: SyntheticEvent<HTMLImageElement>): void => {
+    Cache.images.delete(this.source)
+    Logger.debug(this.id, 'onError', `The empty source has been deleted from the cache.`)
+
     this.status = ImageStatus.ERROR
     Logger.error(this.id, 'onError', `The status has been set to ${ImageStatus.ERROR}.`, event)
 
@@ -130,10 +133,37 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
 
   /** @internal */
   set source(source: string) {
-    let cached: string | undefined
+    ;(async () => {
+      let cached: string | undefined
 
-    cached = Cache.images.get(source)
-    if (!cached) {
+      cached = Cache.images.get(source)
+      if (typeof cached === 'string') {
+        if (cached.length <= 0) {
+          Logger.debug(this.id, 'setSource', `Another store is loading the same source.`)
+          await new Promise<void>((r) => setInterval(() => (Cache.images.get(source) || Cache.images.get(source) === undefined) && r(), 100))
+
+          if (cached === undefined) {
+            this.status = ImageStatus.ERROR
+            Logger.debug(this.id, 'setSource', `The other store failed to fetch the source, the status has been set to ${this.status}.`)
+
+            return
+          }
+        }
+
+        this._source = cached
+        Logger.debug(this.id, 'setSource', `The source has been set to the cached one.`)
+
+        this.status = ImageStatus.LOADED
+        Logger.debug(this.id, 'setSource', `The status has been set to ${this.status}.`)
+
+        this.update()
+
+        return
+      }
+
+      Cache.images.set(source, '')
+      Logger.debug(this.id, 'setSource', `An empty string has been cached.`)
+
       this._source = source
       Logger.debug(this.id, 'setSource', `The source has been set.`)
 
@@ -141,16 +171,6 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
       Logger.debug(this.id, 'setSource', `The status has been set to ${this.status}.`)
 
       this.update()
-
-      return
-    }
-
-    this._source = cached as string
-    Logger.debug(this.id, 'setSource', `The source has been set to the cached one.`)
-
-    this.status = ImageStatus.LOADED
-    Logger.debug(this.id, 'setSource', `The status has been set to ${this.status}.`)
-
-    this.update()
+    })()
   }
 }
