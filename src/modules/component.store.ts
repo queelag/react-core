@@ -1,7 +1,8 @@
-import { ID, noop, NumberUtils } from '@queelag/core'
+import { ID, IDUtils, noop, NumberUtils } from '@queelag/core'
 import { MutableRefObject } from 'react'
 import { Layer, Orientation, Shape, Size } from '../definitions/enums'
 import { ComponentStoreProps } from '../definitions/interfaces'
+import { Configuration } from './configuration'
 import { Dummy } from './dummy'
 
 /**
@@ -41,7 +42,7 @@ export class ComponentStore<T extends Element> {
   size: Size | number | string
 
   constructor(name: string, props: ComponentStoreProps<T>) {
-    this.id = props.id || ''
+    this.id = props.id || Configuration.isComponentStoreGeneratingIDOnConstruction ? IDUtils.prefixed(name) : ''
     this.layer = props.layer || Layer.ZERO
     this.name = name
     this.orientation = props.orientation || Orientation.HORIZONTAL

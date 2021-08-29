@@ -6,19 +6,22 @@ import { useEffect, useState } from 'react'
  *
  * @category Hook
  */
-export function useID(prefix: string, customID: ID = ''): ID {
-  const [id, setID] = useState<ID>(customID)
+export function useID(prefix: string, customID: ID = '', initialID: ID = ''): ID {
+  const [id, setID] = useState<ID>(customID || initialID)
 
   useEffect(() => {
     switch (true) {
       case customID.length > 0:
         setID(customID)
         break
+      case initialID.length > 0:
+        setID(initialID)
+        break
       default:
         setID(IDUtils.prefixed(prefix))
         break
     }
-  }, [customID, prefix])
+  }, [customID, initialID, prefix])
 
   return id
 }

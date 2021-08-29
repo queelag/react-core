@@ -1,6 +1,6 @@
 import { Cache, ImageUtils, Logger } from '@queelag/core'
 import { CSSProperties, SyntheticEvent } from 'react'
-import { ComponentName, ImageStatus, Orientation } from '../definitions/enums'
+import { ComponentName, ImageStatus } from '../definitions/enums'
 import { ComponentStoreProps } from '../definitions/interfaces'
 import { ImageProps } from '../definitions/props'
 import { ComponentStore } from '../modules/component.store'
@@ -21,17 +21,9 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
    */
   cache: boolean
   /**
-   * An {@link Orientation} used to calculate the ratio.
-   */
-  orientation: Orientation
-  /**
    * A number which determines the quality of the cached image.
    */
   quality: number
-  /**
-   * A number which determines ratioed height or width based on the orientation.
-   */
-  ratio: number
   /**
    * An {@link ImageStatus} which determines the status of the image.
    */
@@ -43,10 +35,8 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
     super(ComponentName.IMAGE, props)
 
     this.alpha = props.alpha || false
-    this.cache = props.cache || true
-    this.orientation = props.orientation || Orientation.HORIZONTAL
+    this.cache = props.cache || false
     this.quality = props.quality || 0.8
-    this.ratio = props.ratio || 0
     this.status = ImageStatus.IDLE
     this.source = props.source
   }
@@ -61,7 +51,7 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
   }
 
   onLoad = (event: SyntheticEvent<HTMLImageElement>): void => {
-    if (this.isCacheable) {
+    if (this.isCacheable && this.isNotCached) {
       Cache.images.set(this.source, ImageUtils.toBase64(this.element, this.alpha, this.quality))
       Logger.debug(this.id, 'onLoad', `The base64 value of the image has been cached.`)
     }
@@ -73,7 +63,7 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
   }
 
   onLoadStart = (event: SyntheticEvent<HTMLImageElement>): void => {
-    if (this.isCacheable) {
+    if (this.isCacheable && this.isNotCached) {
       Cache.images.set(this.source, '')
       Logger.debug(this.id, 'setSource', `An empty string has been cached.`)
     }
@@ -81,7 +71,7 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
 
   deleteEmptyFromCache(): void {
     if (this.isCacheable) {
-      if ((Cache.images.get(this.source) || '').length > 0) {
+      if (this.isCached) {
         Logger.warn(this.id, 'deleteEmptyFromCache', `The cached value is not empty.`)
         return
       }
@@ -98,16 +88,9 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
     return {
       ...props.style,
       ...ShapeUtils.findStyle(this.shape, typeof props.size === 'number' ? props.size : 0),
-      height: props.height || props.size || props.style?.height || this.height || undefined,
-      width: props.width || props.size || props.style?.width || this.width || undefined
+      height: props.height || props.size || props.style?.height || undefined,
+      width: props.width || props.size || props.style?.width || undefined
     }
-  }
-
-  /**
-   * Calculates a ratioed height based on this image element width if ratio is not zero.
-   */
-  get height(): number {
-    return this.isOrientationVertical ? (this.ratio > 0 ? this.elementComputedWidth * this.ratio : 0) : 0
   }
 
   /**
@@ -115,13 +98,6 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
    */
   get source(): string {
     return this._source
-  }
-
-  /**
-   * Calculates a ratioed width based on this image element height if ratio is not zero.
-   */
-  get width(): number {
-    return this.isOrientationHorizontal ? (this.ratio > 0 ? this.elementComputedHeight * this.ratio : 0) : 0
   }
 
   get isCacheable(): boolean {
@@ -132,12 +108,24 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
     return this.cache === false
   }
 
+  get isCached(): boolean {
+    return (Cache.images.get(this.source) || '').length > 0
+  }
+
+  get isNotCached(): boolean {
+    return !this.isCached
+  }
+
   get isFallbackVisible(): boolean {
-    return this.isStatusError || this.isStatusLoading
+    return this.isStatusIdle || this.isStatusError || this.isStatusLoading
   }
 
   get isStatusError(): boolean {
     return this.status === ImageStatus.ERROR
+  }
+
+  get isStatusIdle(): boolean {
+    return this.status === ImageStatus.IDLE
   }
 
   get isStatusLoaded(): boolean {

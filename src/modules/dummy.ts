@@ -2,7 +2,15 @@ import { Environment } from '@queelag/core'
 import { MutableRefObject } from 'react'
 import { Blank } from '../components/Blank'
 import { Color, Theme } from '../definitions/enums'
-import { AppearanceData, ColorPickerConfiguration, ColorPickerConfigurationValue, InputFileItem, OnboardingItem, WizardStep } from '../definitions/interfaces'
+import {
+  AppearanceData,
+  ColorPickerConfiguration,
+  ColorPickerConfigurationValue,
+  ConfigurationData,
+  InputFileItem,
+  OnboardingItem,
+  WizardStep
+} from '../definitions/interfaces'
 
 /** @internal */
 export class Dummy {
@@ -33,6 +41,14 @@ export class Dummy {
       gray: ['', '', '', ''],
       mono: '',
       monoInverted: ''
+    }
+  }
+
+  static get configurationData(): ConfigurationData {
+    return {
+      ComponentStore: {
+        generateIDOnConstruction: false
+      }
     }
   }
 

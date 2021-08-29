@@ -34,6 +34,12 @@ export interface ComponentStoreProps<T extends Element> extends WithLayer, WithO
   update?: () => void
 }
 
+export interface ConfigurationData {
+  ComponentStore: {
+    generateIDOnConstruction: boolean
+  }
+}
+
 export interface InputFileItem {
   base64: string
   buffer: ArrayBuffer

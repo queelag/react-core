@@ -106,10 +106,10 @@ export const ICON_STORE_KEYS: (keyof IconProps & keyof IconStore)[] = ['color', 
 export const IMAGE_EMPTY_BASE64: string = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='
 
 /** @category Constant */
-export const IMAGE_PROPS_KEYS: (keyof ImageProps)[] = ['alpha', 'cache', 'orientation', 'quality', 'ratio', 'shape', 'size', 'source']
+export const IMAGE_PROPS_KEYS: (keyof ImageProps)[] = ['alpha', 'cache', 'quality', 'shape', 'size', 'source']
 
 /** @category Constant */
-export const IMAGE_STORE_KEYS: (keyof ImageProps & keyof ImageStore)[] = ['alpha', 'cache', 'quality', 'ratio', 'source']
+export const IMAGE_STORE_KEYS: (keyof ImageProps & keyof ImageStore)[] = ['alpha', 'cache', 'quality', 'source']
 
 /** @category Constant */
 export const LIST_PROPS_KEYS: (keyof ListProps<any>)[] = ['empty', 'items', 'renderItem']

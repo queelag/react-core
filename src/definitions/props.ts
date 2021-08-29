@@ -120,11 +120,10 @@ export interface IconProps extends Omit<React.SVGProps<SVGSVGElement>, 'fill' | 
 }
 
 /** @category Prop */
-export interface ImageProps extends Omit<HTMLImageProps, 'src'>, WithOrientation, WithShape, WithSize {
+export interface ImageProps extends Omit<HTMLImageProps, 'src'>, WithShape, WithSize {
   alpha?: boolean
   cache?: boolean
   quality?: number
-  ratio?: number
   source: string
 }
 

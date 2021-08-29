@@ -40,7 +40,7 @@ export function Image(props: ImageProps) {
   }
 
   useEffect(() => WindowUtils.addEventListenerAndReturnRemover('resize', () => store.update()), [])
-  useEffect(() => () => rv(() => store.isStatusLoading && store.deleteEmptyFromCache()), [])
+  useEffect(() => () => rv(() => store.deleteEmptyFromCache()), [])
 
   return (
     <Fragment>
@@ -50,9 +50,11 @@ export function Image(props: ImageProps) {
       {store.isFallbackVisible && <img {...ObjectUtils.omit(props, IMAGE_PROPS_KEYS)} ref={store.ref} src={IMAGE_EMPTY_BASE64} style={store.getStyle(props)} />}
       {store.isStatusLoading && (
         <img
+          {...ObjectUtils.omit(props, IMAGE_PROPS_KEYS)}
           onError={onError}
           onLoad={onLoad}
           onLoadStart={onLoadStart}
+          ref={store.ref}
           src={store.source}
           style={{ opacity: 0, pointerEvents: 'none', position: 'absolute' }}
         />
