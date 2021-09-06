@@ -4,7 +4,7 @@ import { Dummy } from './dummy'
 export class Configuration {
   static data: ConfigurationData = Dummy.configurationData
 
-  static isComponentStoreGeneratingIDOnConstruction(): boolean {
+  static get isComponentStoreGeneratingIDOnConstruction(): boolean {
     return this.data.ComponentStore.generateIDOnConstruction === true
   }
 }

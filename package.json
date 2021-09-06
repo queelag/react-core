@@ -1,8 +1,7 @@
 {
   "author": "Dario Sechi",
   "dependencies": {
-    "react-window": "^1.8.6",
-    "squircleyjs": "^1.1.0"
+    "react-window": "^1.8.6"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "^7.18.4",

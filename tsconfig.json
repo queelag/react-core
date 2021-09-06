@@ -9,6 +9,7 @@
     "module": "ESNext",
     "moduleResolution": "node",
     "outDir": "dist",
+    "allowJs": true,
     "resolveJsonModule": true,
     "strict": true,
     "target": "ESNext"

@@ -1,7 +1,5 @@
-import { ID, IDUtils, tc } from '@queelag/core'
+import { ID, IDUtils } from '@queelag/core'
 import { CSSProperties } from 'react'
-// @ts-ignore
-import { createSquircle } from 'squircleyjs'
 import { ComponentName, Shape } from '../definitions/enums'
 
 /**
@@ -12,6 +10,50 @@ import { ComponentName, Shape } from '../definitions/enums'
 export class ShapeUtils {
   /** @internal */
   private static squircleCache: Map<string, ID> = new Map()
+
+  static createSquircle(size: number, curvature: number = 0.75): SVGSVGElement {
+    let arc: number, path: SVGPathElement, clip: SVGClipPathElement, svg: SVGSVGElement
+
+    arc = Math.min(size / 2, size / 2) * (1 - curvature)
+
+    path = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+    path.setAttribute(
+      'd',
+      `
+        M 0 ${size / 2}
+        C 0 ${arc}, ${arc} 0, ${size / 2} 0
+        S ${size} ${arc}, ${size} ${size / 2}, ${size - arc} ${size}
+          ${size / 2} ${size}, 0 ${size - arc}, 0 ${size / 2}
+      `
+    )
+    path.setAttribute(
+      'transform',
+      `
+        rotate(
+            ${0},
+            ${size / 2},
+            ${size / 2}
+        )
+        translate(
+            ${(size - size) / 2},
+            ${(size - size) / 2}
+        )
+      `
+    )
+
+    clip = document.createElementNS('http://www.w3.org/2000/svg', 'clipPath')
+    clip.setAttribute('id', IDUtils.prefixed(ComponentName.SQUIRCLE))
+    clip.appendChild(path)
+
+    svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+    svg.setAttribute('fill', 'black')
+    svg.setAttribute('version', '1.1')
+    svg.setAttribute('viewBox', `0 0 ${size} ${size}`)
+    svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
+    svg.appendChild(clip)
+
+    return svg
+  }
 
   /**
    * Returns the appropriate styles for shape, size and curvature.
@@ -25,37 +67,24 @@ export class ShapeUtils {
       case Shape.SQUARE:
         return {}
       case Shape.SQUIRCLE:
-        let potential: string | undefined, svg: SVGElement | Error, id: string
+        let cached: ID | undefined, svg: SVGSVGElement, clip: SVGClipPathElement
 
-        potential = this.squircleCache.get(this.toSquircleCacheKey(size, curvature))
-        if (potential) return { clipPath: `url(#${potential})` }
+        cached = this.squircleCache.get(this.toSquircleCacheKey(curvature, size))
+        if (cached) return { clipPath: `url(#${cached})` }
 
-        svg = tc(() =>
-          createSquircle({
-            format: 'SVGNode',
-            viewBox: [0, 0, size, size],
-            width: size,
-            height: size,
-            curvature: curvature,
-            fill: '#000',
-            rotate: 0
-          })
-        )
-        if (svg instanceof Error) return {}
+        svg = this.createSquircle(size, curvature)
+        clip = svg.querySelector('clipPath') as SVGClipPathElement
 
-        id = IDUtils.prefixed(ComponentName.SQUIRCLE)
-        svg.innerHTML = `<clipPath id='${id}'>${svg.innerHTML}</clipPath>`
-
-        this.squircleCache.set(this.toSquircleCacheKey(size, curvature), id)
+        this.squircleCache.set(this.toSquircleCacheKey(curvature, size), clip.id)
         this.squirclesContainer.appendChild(svg)
 
-        return { clipPath: `url(#${id})` }
+        return { clipPath: `url(#${clip.id})` }
     }
   }
 
   /** @internal */
-  private static toSquircleCacheKey(size: number, curvature: number): string {
-    return [size, curvature].join(',')
+  private static toSquircleCacheKey(curvature: number, size: number): string {
+    return [curvature, size].join(',')
   }
 
   /** @internal */

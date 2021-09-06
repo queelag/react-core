@@ -1,8 +1,9 @@
-import { Theme } from '../definitions/enums'
+import { Environment, LocalStorage, Logger } from '@queelag/core'
+import { LocalStorageName, Theme } from '../definitions/enums'
 import { AppearanceData } from '../definitions/interfaces'
 import { Dummy } from './dummy'
 
-export class Appearance {
+class _ {
   data: AppearanceData
 
   constructor() {
@@ -10,50 +11,78 @@ export class Appearance {
     this.registerThemeEventListener()
   }
 
-  async initialize(): Promise<boolean> {
-    this.setTheme(Theme.SYSTEM)
+  onChangeTheme(theme: Theme): any {}
 
-    // if (Environment.isWindowDefined) {
-    //   return LocalStorage.get(LocalStorageName.APPEARANCE, this.data)
-    // }
+  private onChangeThemeInternal(theme: Theme): boolean {
+    this.data.theme = theme
+    Logger.debug('Appearance', 'onChangeThemeInternal', `The theme has been set to ${theme}.`)
+
+    return this.onChangeTheme(theme)
+  }
+
+  async initialize(): Promise<boolean> {
+    this.onChangeTheme(this.themeByPrefersColorScheme)
+
+    if (Environment.isWindowDefined) {
+      let get: boolean
+
+      get = LocalStorage.get(LocalStorageName.APPEARANCE, this.data)
+      if (!get) return false
+
+      this.onChangeTheme(this.data.theme)
+    }
 
     return true
   }
 
-  toggleTheme = async (): Promise<boolean> => {
+  async toggleTheme(): Promise<boolean> {
     switch (this.data.theme) {
       case Theme.DARK:
-        return this.setTheme(Theme.LIGHT)
+        return this.onChangeThemeInternal(Theme.LIGHT)
       case Theme.LIGHT:
-        return this.setTheme(Theme.DARK)
+        return this.onChangeThemeInternal(Theme.DARK)
       case Theme.SYSTEM:
-        return this.setTheme(Theme.SYSTEM)
+        return this.onChangeThemeInternal(this.themeByPrefersColorScheme === Theme.DARK ? Theme.LIGHT : Theme.DARK)
     }
   }
 
   async setTheme(theme: Theme): Promise<boolean> {
     switch (theme) {
       case Theme.DARK:
-        this.htmlElement.className = Theme.DARK.toLowerCase()
-        break
       case Theme.LIGHT:
-        this.htmlElement.className = Theme.LIGHT.toLowerCase()
+        this.onChangeThemeInternal(theme)
         break
       case Theme.SYSTEM:
-        return this.setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches ? Theme.DARK : Theme.LIGHT)
+        this.setThemeByPrefersColorScheme()
+        break
     }
 
-    // if (Environment.isWindowDefined) {
-    //   return LocalStorage.set(LocalStorageName.APPEARANCE, this.data)
-    // }
+    if (Environment.isWindowDefined) {
+      return LocalStorage.set(LocalStorageName.APPEARANCE, this.data)
+    }
 
     return true
   }
 
+  setThemeByPrefersColorScheme(): boolean {
+    if (this.isThemeSystem) {
+      this.data.theme = Theme.SYSTEM
+      Logger.debug('Appearance', 'onChangeThemeInternal', `The theme has been set to ${Theme.SYSTEM}.`)
+
+      this.onChangeTheme(this.themeByPrefersColorScheme)
+
+      return true
+    }
+
+    return false
+  }
+
   private registerThemeEventListener(): void {
-    window
-      .matchMedia('(prefers-color-scheme: dark)')
-      .addEventListener('change', (v: MediaQueryListEvent) => this.setTheme(v.matches ? Theme.DARK : Theme.LIGHT))
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (v: MediaQueryListEvent) => this.setThemeByPrefersColorScheme())
+  }
+
+  get themeByPrefersColorScheme(): Theme {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? Theme.DARK : Theme.LIGHT
   }
 
   get isThemeDark(): boolean {
@@ -67,8 +96,6 @@ export class Appearance {
   get isThemeSystem(): boolean {
     return this.data.theme === Theme.SYSTEM
   }
-
-  private get htmlElement(): HTMLHtmlElement {
-    return document.querySelector('html') || document.createElement('html')
-  }
 }
+
+export const Appearance = new _()

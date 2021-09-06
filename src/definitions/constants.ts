@@ -94,7 +94,7 @@ export const EMPTY_PROPS_KEYS: (keyof EmptyProps)[] = ['description', 'layer', '
 export const FORM_PROPS_KEYS: (keyof FormProps)[] = []
 
 /** @category Constant */
-export const FORM_STORE_KEYS: (keyof FormProps & keyof FormStore)[] = []
+export const FORM_STORE_KEYS: (keyof FormProps & keyof FormStore)[] = ['disabled', 'onSubmit']
 
 /** @category Constant */
 export const ICON_PROPS_KEYS: (keyof IconProps)[] = ['color', 'layer', 'size', 'source', 'thickness']
