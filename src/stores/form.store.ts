@@ -139,7 +139,10 @@ export class FormStore extends ComponentStore<HTMLFormElement> {
         Logger.debug(this.id, 'onSubmit', `The disabled state has been set to false.`)
       }
 
-      this.inputStores.forEach((v: InputStore<any>) => v.element.blur())
+      this.checkBoxStores.forEach((v: CheckBoxStore<any>) => v.validate())
+      this.inputStores.forEach((v: InputStore<any>) => v.validate())
+      this.inputFileStores.forEach((v: InputFileStore<any>) => v.validate())
+      this.selectStores.forEach((v: SelectStore<any>) => v.validate())
     }
   }
 }
