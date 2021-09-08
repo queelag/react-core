@@ -122,7 +122,7 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
         break
     }
 
-    this.validate()
+    this.touch()
   }
 
   /**

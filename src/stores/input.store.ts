@@ -83,7 +83,7 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
         break
     }
 
-    this.touch()
+    this.validate()
   }
 
   /**
@@ -93,7 +93,7 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
     this.focused = false
     Logger.debug(this.id, 'onBlur', 'The focused state has been set to false.')
 
-    this.update()
+    this.touch()
   }
 
   /**
