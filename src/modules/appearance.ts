@@ -61,12 +61,26 @@ class _ {
   }
 
   private registerThemeEventListener(): void {
-    window
-      .matchMedia('(prefers-color-scheme: dark)')
-      .addEventListener('change', (v: MediaQueryListEvent) => this.isThemeSystem && this.setTheme(Theme.SYSTEM, false))
+    let media: MediaQueryList
+
+    if (typeof window.matchMedia === 'undefined') {
+      Logger.warn('Appearance', 'registerThemeEventListener', `window.matchMedia is not defined.`)
+      return
+    }
+
+    media = window.matchMedia('(prefers-color-scheme: dark)')
+    if (typeof media.addEventListener !== 'function')
+      return Logger.warn('Appearance', 'registerThemeEventListener', `window.matchMedia.addEventListener is not defined.`)
+
+    media.addEventListener('change', (v: MediaQueryListEvent) => this.isThemeSystem && this.setTheme(Theme.SYSTEM, false))
   }
 
   get themeByPrefersColorScheme(): Theme {
+    if (typeof window.matchMedia === 'undefined') {
+      Logger.warn('Appearance', 'themeByPrefersColorScheme', `window.matchMedia is not defined.`)
+      return Theme.LIGHT
+    }
+
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? Theme.DARK : Theme.LIGHT
   }
 
