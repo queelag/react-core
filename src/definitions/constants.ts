@@ -124,13 +124,13 @@ export const LIST_ITEM_PROPS_KEYS: (keyof ListItemProps)[] = ['avatar', 'descrip
 export const LOADING_PROPS_KEYS: (keyof LoadingProps)[] = ['description', 'title']
 
 /** @category Constant */
-export const LOCALIZABLE_LABEL_PROPS_KEYS: (keyof LocalizableLabelProps)[] = ['color', 'inject', 'layer', 'path']
+export const LOCALIZABLE_LABEL_PROPS_KEYS: (keyof LocalizableLabelProps<any>)[] = ['color', 'inject', 'layer', 'path']
 
 /** @category Constant */
-export const LOCALIZABLE_SPAN_PROPS_KEYS: (keyof LocalizableSpanProps)[] = ['color', 'inject', 'layer', 'path']
+export const LOCALIZABLE_SPAN_PROPS_KEYS: (keyof LocalizableSpanProps<any>)[] = ['color', 'inject', 'layer', 'path']
 
 /** @category Constant */
-export const LOCALIZABLE_TEXT_PROPS_KEYS: (keyof LocalizableTextProps)[] = ['color', 'element', 'inject', 'layer', 'path']
+export const LOCALIZABLE_TEXT_PROPS_KEYS: (keyof LocalizableTextProps<any>)[] = ['color', 'element', 'inject', 'layer', 'path']
 
 /** @category Constant */
 export const ONBOARDING_PROPS_KEYS: (keyof OnboardingProps)[] = ['activeItemIndex', 'items', 'onEnd']

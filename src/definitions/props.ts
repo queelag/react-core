@@ -128,7 +128,7 @@ export interface ImageProps extends Omit<HTMLImageProps, 'src'>, WithShape, With
 }
 
 /** @category Prop */
-export interface LabelProps extends HTMLLabelProps, WithColor, WithLayer, WithLocalizationProps {}
+export interface LabelProps<T extends object> extends HTMLLabelProps, WithColor, WithLayer, WithLocalizationProps<T> {}
 
 /** @category Prop */
 export interface ListProps<T> extends HTMLUListProps {
@@ -147,13 +147,13 @@ export interface ListItemProps extends HTMLDivProps, WithDescription, WithLayer,
 export interface LoadingProps extends HTMLDivProps, WithDescription, WithTitle {}
 
 /** @category Prop */
-export interface LocalizableLabelProps extends HTMLLabelProps, Omit<LocalizableTextProps, 'element'> {}
+export interface LocalizableLabelProps<T extends object> extends HTMLLabelProps, Omit<LocalizableTextProps<T>, 'element'> {}
 
 /** @category Prop */
-export interface LocalizableSpanProps extends HTMLSpanProps, Omit<LocalizableTextProps, 'element'> {}
+export interface LocalizableSpanProps<T extends object> extends HTMLSpanProps, Omit<LocalizableTextProps<T>, 'element'> {}
 
 /** @category Prop */
-export interface LocalizableTextProps extends WithColor, WithLocalizationProps {
+export interface LocalizableTextProps<T extends object> extends WithColor, WithLocalizationProps<T> {
   element: (props: any) => JSX.Element
 }
 

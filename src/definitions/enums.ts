@@ -109,6 +109,12 @@ export enum InputFileMode {
   SINGLE = 'SINGLE'
 }
 
+export enum InputTouchTrigger {
+  BLUR = 'BLUR',
+  CHANGE = 'CHANGE',
+  NONE = 'NONE'
+}
+
 export enum InputType {
   BUFFER = 'BUFFER',
   DATE = 'DATE',

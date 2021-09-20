@@ -83,8 +83,8 @@ export interface WithLayer {
   layer?: Layer
 }
 
-export interface WithLocalizationProps {
-  inject?: any[]
+export interface WithLocalizationProps<T extends object> {
+  inject?: T
   path?: string
 }
 

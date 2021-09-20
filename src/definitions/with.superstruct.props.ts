@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import { InputTouchTrigger } from '..'
 import { InputFileMode, InputType, SelectMode } from './enums'
 import { SelectOption } from './interfaces'
 import { HTMLDivProps, HTMLInputProps } from './props'
@@ -11,6 +12,7 @@ export interface CheckBoxProps<T extends object> extends HTMLDivProps, WithFormF
 export interface InputProps<T extends object> extends Omit<HTMLInputProps, 'prefix' | 'type'>, WithFormFieldProps<T> {
   prefix?: ReactNode
   suffix?: ReactNode
+  touchTrigger?: InputTouchTrigger
   type?: InputType
 }
 

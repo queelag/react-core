@@ -16,10 +16,10 @@ export const CHECK_BOX_PROPS_KEYS: (keyof CheckBoxProps<any>)[] = WITH_FORM_FIEL
 export const CHECK_BOX_STORE_KEYS: (keyof CheckBoxProps<any> & keyof CheckBoxStore<any>)[] = []
 
 /** @category Constant */
-export const INPUT_PROPS_KEYS: (keyof InputProps<any>)[] = [...WITH_FORM_FIELD_PROPS_KEYS, 'prefix', 'suffix', 'type']
+export const INPUT_PROPS_KEYS: (keyof InputProps<any>)[] = [...WITH_FORM_FIELD_PROPS_KEYS, 'prefix', 'suffix', 'touchTrigger', 'type']
 
 /** @category Constant */
-export const INPUT_STORE_KEYS: (keyof InputProps<any> & keyof InputStore<any>)[] = ['type']
+export const INPUT_STORE_KEYS: (keyof InputProps<any> & keyof InputStore<any>)[] = ['touchTrigger', 'type']
 
 /** @category Constant */
 export const INPUT_FILE_PROPS_KEYS: (keyof InputFileProps<any>)[] = [...WITH_FORM_FIELD_PROPS_KEYS, 'mode']

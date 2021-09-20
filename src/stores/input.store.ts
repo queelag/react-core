@@ -1,6 +1,6 @@
 import { Logger, NumberUtils } from '@queelag/core'
 import { ChangeEvent } from 'react'
-import { ComponentName, InputType } from '../definitions/enums'
+import { ComponentName, InputTouchTrigger, InputType } from '../definitions/enums'
 import { ComponentFormFieldStoreProps } from '../definitions/with.superstruct.interfaces'
 import { InputProps } from '../definitions/with.superstruct.props'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
@@ -20,6 +20,10 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
    */
   obscured: boolean
   /**
+   * An {@link InputTouchTrigger} which determines when this input is marked as touched.
+   */
+  touchTrigger: InputTouchTrigger
+  /**
    * An {@link InputType} which determines how the internal logic behaves.
    */
   type: InputType
@@ -29,6 +33,7 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
 
     this.focused = false
     this.obscured = true
+    this.touchTrigger = props.touchTrigger || InputTouchTrigger.BLUR
     this.type = props.type || InputType.TEXT
   }
 
@@ -83,6 +88,7 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
         break
     }
 
+    this.isTouchTriggerChange && this.touch()
     this.validate()
   }
 
@@ -93,7 +99,7 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
     this.focused = false
     Logger.debug(this.id, 'onBlur', 'The focused state has been set to false.')
 
-    this.touch()
+    this.isTouchTriggerBlur && this.touch()
   }
 
   /**
@@ -169,6 +175,14 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
 
   get isFocused(): boolean {
     return this.focused === true
+  }
+
+  get isTouchTriggerBlur(): boolean {
+    return this.touchTrigger === InputTouchTrigger.BLUR
+  }
+
+  get isTouchTriggerChange(): boolean {
+    return this.touchTrigger === InputTouchTrigger.CHANGE
   }
 
   get isTypeBuffer(): boolean {

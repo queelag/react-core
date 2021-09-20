@@ -5,7 +5,7 @@ import { HTMLElementProps, LocalizableTextProps } from '../definitions/props'
 import { ColorPicker } from '../pickers/color.picker'
 import { ReactUtils } from '../utils/react.utils'
 
-export function LocalizableText(props: HTMLElementProps & LocalizableTextProps) {
+export function LocalizableText<T extends object>(props: HTMLElementProps & LocalizableTextProps<T>) {
   const renderLocalized = () => (
     <props.element
       {...ObjectUtils.omit(props, LOCALIZABLE_TEXT_PROPS_KEYS)}
