@@ -7,7 +7,17 @@ import { WithFormFieldProps } from './with.superstruct.interfaces'
 import { CheckBoxProps, InputFileProps, InputProps, SelectProps, SwitchProps } from './with.superstruct.props'
 
 /** @category Constant */
-export const WITH_FORM_FIELD_PROPS_KEYS: (keyof WithFormFieldProps<any>)[] = ['disabled', 'label', 'layer', 'path', 'required', 'schema', 'store', 'touched']
+export const WITH_FORM_FIELD_PROPS_KEYS: (keyof WithFormFieldProps<any>)[] = [
+  'disabled',
+  'icon',
+  'label',
+  'layer',
+  'path',
+  'required',
+  'schema',
+  'store',
+  'touched'
+]
 
 /** @category Constant */
 export const CHECK_BOX_PROPS_KEYS: (keyof CheckBoxProps<any>)[] = WITH_FORM_FIELD_PROPS_KEYS

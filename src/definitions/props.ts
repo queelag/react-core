@@ -1,4 +1,5 @@
 import { FormEvent, ReactNode } from 'react'
+import { WizardStore } from '../stores/wizard.store'
 import { ButtonVariant } from './enums'
 import {
   OnboardingItem,
@@ -73,7 +74,7 @@ export interface DialogProps extends HTMLDivProps, WithDescription, WithFooter, 
 export interface DividerProps extends HTMLDivProps, WithColor, WithLayer, WithOrientation {}
 
 /** @category Prop */
-export interface EmptyProps extends HTMLDivProps, WithDescription, WithLayer, WithTitle {}
+export interface EmptyProps extends HTMLDivProps, WithDescription, WithIcon, WithLayer, WithTitle {}
 
 /** @category Prop */
 export interface FormProps extends Omit<HTMLFormProps, 'onSubmit'> {
@@ -157,6 +158,12 @@ export interface LocalizableTextProps<T extends object> extends WithColor, WithL
   element: (props: any) => JSX.Element
 }
 
+export interface MeterProps extends HTMLDivProps, WithColor, WithShape, WithSize {
+  maximum?: number
+  minimum?: number
+  value: number
+}
+
 /** @category Prop */
 export interface OnboardingProps extends HTMLDivProps {
   activeItemIndex?: number
@@ -192,6 +199,7 @@ export interface SVGElementProps extends React.SVGProps<SVGSVGElement> {}
 export interface TagProps extends HTMLDivProps, WithBackground, WithColor, WithIcon, WithLayer {
   destroyable?: boolean
   destroyed?: boolean
+  onDestroy?: () => any
   text: string
 }
 
@@ -200,6 +208,7 @@ export interface VirtualizedListProps<T> extends HTMLUListProps, WithOrientation
   dummy: () => JSX.Element
   empty?: () => JSX.Element
   gutter?: number
+  innerClassName?: string
   itemParentProps?: HTMLDivProps
   items: T[]
   renderItem: (v: T, k: number) => JSX.Element
@@ -210,4 +219,8 @@ export interface WizardProps extends HTMLDivProps {
   activeStepName?: string
   onStepChange?: WizardOnStepChange
   steps: WizardStepPartial[]
+}
+
+export interface WizardStepContentProps {
+  store: WizardStore
 }

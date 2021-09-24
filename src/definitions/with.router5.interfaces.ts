@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import type { RouteContext } from 'react-router5/dist/types'
 import type { Options } from 'router5'
 import type { Params } from 'router5/dist/types/base'
 import { WithColor, WithDescription, WithIcon, WithTitle } from './interfaces'
@@ -26,4 +27,8 @@ export interface WithRoute {
     options?: Options
     params?: Params
   }
+}
+
+export interface WithRouterContext {
+  context: RouteContext
 }

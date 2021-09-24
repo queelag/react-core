@@ -177,6 +177,14 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
     return this.focused === true
   }
 
+  get isObscured(): boolean {
+    return this.obscured === true
+  }
+
+  get isNotObscured(): boolean {
+    return this.obscured === false
+  }
+
   get isTouchTriggerBlur(): boolean {
     return this.touchTrigger === InputTouchTrigger.BLUR
   }

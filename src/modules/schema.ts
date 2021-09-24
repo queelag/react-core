@@ -4,6 +4,10 @@ import * as S from 'superstruct'
  * @category Module
  */
 export class Schema {
+  static enum(_enum: any) {
+    return S.define('enum', (v: unknown) => (Object.values(_enum).includes(v) ? true : { message: `Must be one of ${Object.values(_enum).join(', ')}.` }))
+  }
+
   static get any() {
     return S.any()
   }
@@ -30,5 +34,13 @@ export class Schema {
       timestamp: S.size(S.number(), 1, Infinity),
       type: S.size(S.string(), 1, Infinity)
     })
+  }
+
+  static get requiredString() {
+    return S.size(S.string(), 1, Number.MAX_SAFE_INTEGER)
+  }
+
+  static get S() {
+    return S
   }
 }

@@ -1,4 +1,4 @@
-import { Logger } from '@queelag/core'
+import { Logger, noop } from '@queelag/core'
 import { MouseEvent } from 'react'
 import { ComponentName } from '../definitions/enums'
 import { ComponentStoreProps } from '../definitions/interfaces'
@@ -25,7 +25,10 @@ export class TagStore extends ComponentStore<HTMLDivElement> {
 
     this.destroyable = props.destroyable || false
     this.destroyed = props.destroyed || false
+    this.onDestroy = props.onDestroy || noop
   }
+
+  onDestroy(): any {}
 
   /**
    * Destroys this tag.
@@ -39,6 +42,8 @@ export class TagStore extends ComponentStore<HTMLDivElement> {
 
     this.destroyed = true
     Logger.debug(this.id, 'onClickDestroy', `The destroyed state has been set to true.`)
+
+    this.onDestroy()
 
     this.update()
   }

@@ -1,9 +1,9 @@
 import type * as S from 'superstruct'
-import { ComponentStoreProps, WithLayer } from './interfaces'
+import { ComponentStoreProps, WithIcon, WithLayer } from './interfaces'
 
 export interface ComponentFormFieldStoreProps<T extends Element, U extends object> extends ComponentStoreProps<T>, WithFormFieldProps<U> {}
 
-export interface WithFormFieldProps<T extends object> extends WithLayer {
+export interface WithFormFieldProps<T extends object> extends WithIcon, WithLayer {
   disabled?: boolean
   label?: string
   path?: keyof T

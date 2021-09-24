@@ -88,25 +88,22 @@ export class VirtualizedListStore<T> extends ComponentStore<HTMLUListElement> {
    * Computes the parent element width if the orientation is HORIZONTAL otherwise if the orientation is VERTICAL computes its height.
    */
   readParentElementHeightOrWidth(): void {
-    let element: Element | null, height: number, width: number
+    let element: Element | null, parent: Element, height: number, width: number
 
     element = this.element
     if (element.parentElement === null) return Logger.error(this.id, 'readElementHeightOrWidth', `The element has no parent.`)
 
     while (true) {
+      element = element.parentElement
+      if (element === null) return Logger.debug(this.id, 'readElementHeightOrWidth', `The parent element has no parent.`)
+
       switch (this.orientation) {
         case Orientation.HORIZONTAL:
-          height = NumberUtils.parseFloat(getComputedStyle(element.parentElement || document.createElement('div')).height)
-          if (height > 0) {
-            this.parentElementHeight = height
-            Logger.debug(this.id, 'readElementHeightOrWidth', this.orientation, `The parent element height has been set to ${height}.`)
+          width =
+            NumberUtils.parseFloat(getComputedStyle(element).width) -
+            NumberUtils.parseFloat(getComputedStyle(element).paddingLeft) -
+            NumberUtils.parseFloat(getComputedStyle(element).paddingRight)
 
-            return this.update()
-          }
-
-          break
-        case Orientation.VERTICAL:
-          width = NumberUtils.parseFloat(getComputedStyle(element.parentElement || document.createElement('div')).width)
           if (width > 0) {
             this.parentElementWidth = width
             Logger.debug(this.id, 'readElementHeightOrWidth', this.orientation, `The parent element width has been set to ${width}.`)
@@ -115,10 +112,21 @@ export class VirtualizedListStore<T> extends ComponentStore<HTMLUListElement> {
           }
 
           break
-      }
+        case Orientation.VERTICAL:
+          height =
+            NumberUtils.parseFloat(getComputedStyle(element).height) -
+            NumberUtils.parseFloat(getComputedStyle(element).paddingBottom) -
+            NumberUtils.parseFloat(getComputedStyle(element).paddingTop)
 
-      element = element.parentElement
-      if (element === null) return Logger.debug(this.id, 'readElementHeightOrWidth', `The parent element has no parent.`)
+          if (height > 0) {
+            this.parentElementHeight = height
+            Logger.debug(this.id, 'readElementHeightOrWidth', this.orientation, `The parent element height has been set to ${height}.`)
+
+            return this.update()
+          }
+
+          break
+      }
     }
   }
 

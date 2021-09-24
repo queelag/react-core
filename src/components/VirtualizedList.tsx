@@ -25,7 +25,8 @@ import { VirtualizedListStore } from '../stores/virtualized.list.store'
  */
 export function VirtualizedList<T>(props: VirtualizedListProps<T>) {
   const dummyRef = useSafeRef('div')
-  const store = useComponentStore(VirtualizedListStore, { ...props, dummyRef }, VIRTUALIZED_LIST_STORE_KEYS as any, 'ul')
+  const innerRef = useSafeRef('div')
+  const store = useComponentStore(VirtualizedListStore, { ...props, dummyRef, innerRef }, VIRTUALIZED_LIST_STORE_KEYS as any, 'ul')
 
   useEffect(() => {
     store.readItemElementHeightOrWidth()
@@ -41,6 +42,10 @@ export function VirtualizedList<T>(props: VirtualizedListProps<T>) {
     return () => window.removeEventListener('resize', listener)
   }, [])
 
+  useEffect(() => {
+    innerRef.current.className = props.innerClassName || ''
+  }, [])
+
   return (
     <ul
       {...ObjectUtils.omit(props, VIRTUALIZED_LIST_PROPS_KEYS)}
@@ -54,6 +59,7 @@ export function VirtualizedList<T>(props: VirtualizedListProps<T>) {
       {store.isItemsEmpty && props.empty && <props.empty />}
       {store.hasItems && (
         <FixedSizeList
+          innerRef={innerRef}
           height={store.elementHeight}
           itemCount={store.items.length}
           itemKey={store.itemKey}
@@ -69,7 +75,7 @@ export function VirtualizedList<T>(props: VirtualizedListProps<T>) {
         </FixedSizeList>
       )}
       <div ref={dummyRef} style={{ left: 0, opacity: 0, pointerEvents: 'none', position: 'absolute', top: 0 }}>
-        {props.dummy}
+        {<props.dummy />}
       </div>
     </ul>
   )

@@ -1,5 +1,6 @@
 import { ID } from '@queelag/core'
 import { LegacyRef, MutableRefObject, ReactNode } from 'react'
+import { WizardStepContentProps } from '..'
 import { Color, FeedbackType, Layer, Orientation, Shape, Size, Theme } from './enums'
 import { IconProps } from './props'
 import { SelectOptionValue } from './types'
@@ -119,7 +120,7 @@ export interface WithTitle {
 export interface WizardStep {
   canGoBack: () => boolean
   canGoNext: () => boolean
-  content: ReactNode
+  content: (props: WizardStepContentProps) => JSX.Element
   description: string
   name: string
   title: string

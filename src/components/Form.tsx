@@ -33,6 +33,7 @@ export function Form(props: FormProps) {
   return (
     <form {...ObjectUtils.omit(props, FORM_PROPS_KEYS)} id={store.id} onSubmit={store.onSubmit} ref={store.ref}>
       {props.children}
+      <button style={{ display: 'none' }} type='submit' />
     </form>
   )
 }

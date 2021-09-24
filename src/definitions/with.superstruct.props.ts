@@ -1,6 +1,5 @@
 import { ReactNode } from 'react'
-import { InputTouchTrigger } from '..'
-import { InputFileMode, InputType, SelectMode } from './enums'
+import { InputFileMode, InputTouchTrigger, InputType, SelectMode } from './enums'
 import { SelectOption } from './interfaces'
 import { HTMLDivProps, HTMLInputProps } from './props'
 import { WithFormFieldProps } from './with.superstruct.interfaces'

@@ -1,4 +1,4 @@
-import type { Router } from 'router5'
+import { RouteContext } from 'react-router5/dist/types'
 import { Blank } from '../components/Blank'
 import { ComponentName } from '../definitions/enums'
 import { ComponentStoreProps } from '../definitions/interfaces'
@@ -13,26 +13,26 @@ import { ComponentStore } from '../modules/component.store'
  */
 export class BottomTabberStore extends ComponentStore<HTMLDivElement> {
   /**
+   * A router5 context.
+   */
+  context: RouteContext
+  /**
    * An array of {@link BottomTabberItem}.
    */
   items: BottomTabberItem[]
-  /**
-   * A router5 instance.
-   */
-  router: Router
 
   constructor(props: BottomTabberProps & ComponentStoreProps<HTMLDivElement>) {
     super(ComponentName.BOTTOM_TABBER, props)
 
+    this.context = props.context
     this.items = props.items
-    this.router = props.router
   }
 
   /**
    * Navigates to the item route.
    */
   onClickItem(item: BottomTabberItem): void {
-    this.router.navigate(item.route.name, item.route.params || {}, item.route.options || {})
+    this.context.router.navigate(item.route.name, item.route.params || {}, { ...item.route.options, replace: true })
   }
 
   findItemByName(name: string): BottomTabberItem {

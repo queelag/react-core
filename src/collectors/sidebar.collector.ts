@@ -1,4 +1,3 @@
-import createRouter from 'router5'
 import { ComponentCollector } from '../modules/component.collector'
 import { SidebarStore } from '../stores/sidebar.store'
 
@@ -7,4 +6,4 @@ import { SidebarStore } from '../stores/sidebar.store'
  *
  * @category Collector
  */
-export const SidebarCollector = new ComponentCollector<SidebarStore>(new SidebarStore({ items: [], router: createRouter() }))
+export const SidebarCollector = new ComponentCollector<SidebarStore>(new SidebarStore({ context: {} as any, items: [] }))

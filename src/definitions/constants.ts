@@ -1,3 +1,4 @@
+import { MeterProps, MeterStore } from '..'
 import { AvatarStore } from '../stores/avatar.store'
 import { ButtonStore } from '../stores/button.store'
 import { DividerStore } from '../stores/divider.store'
@@ -131,6 +132,12 @@ export const LOCALIZABLE_SPAN_PROPS_KEYS: (keyof LocalizableSpanProps<any>)[] = 
 
 /** @category Constant */
 export const LOCALIZABLE_TEXT_PROPS_KEYS: (keyof LocalizableTextProps<any>)[] = ['color', 'element', 'inject', 'layer', 'path']
+
+/** @category Constant */
+export const METER_PROPS_KEYS: (keyof MeterProps)[] = ['maximum', 'minimum', 'value']
+
+/** @category Constant */
+export const METER_STORE_KEYS: (keyof MeterProps & keyof MeterStore)[] = []
 
 /** @category Constant */
 export const ONBOARDING_PROPS_KEYS: (keyof OnboardingProps)[] = ['activeItemIndex', 'items', 'onEnd']

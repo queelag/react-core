@@ -1,8 +1,6 @@
-import type { RouteContext } from 'react-router5/dist/types'
-import type { Router } from 'router5'
 import { WithHeader, WithTitle } from './interfaces'
 import { HTMLDivProps } from './props'
-import { BottomSheetItem, BottomTabberItem, ContextMenuItem, SidebarItem, TopTabberItem } from './with.router5.interfaces'
+import { BottomSheetItem, BottomTabberItem, ContextMenuItem, SidebarItem, TopTabberItem, WithRouterContext } from './with.router5.interfaces'
 
 /** @category Prop */
 export interface BottomSheetProps extends HTMLDivProps, WithHeader, WithTitle {
@@ -10,9 +8,8 @@ export interface BottomSheetProps extends HTMLDivProps, WithHeader, WithTitle {
 }
 
 /** @category Prop */
-export interface BottomTabberProps extends HTMLDivProps {
+export interface BottomTabberProps extends HTMLDivProps, WithRouterContext {
   items: BottomTabberItem[]
-  router: Router
 }
 
 /** @category Prop */
@@ -21,24 +18,21 @@ export interface ContextMenuProps extends HTMLDivProps {
 }
 
 /** @category Prop */
-export interface HeaderProps extends HTMLDivProps {
+export interface HeaderProps extends HTMLDivProps, WithRouterContext {
   logo?: JSX.Element
-  router: Router
   title?: string
 }
 
 /** @category Prop */
-export interface RouterRendererProps extends HTMLDivProps {
-  context: RouteContext
-  fallback?: (props: { context: RouteContext }) => JSX.Element
-  map: Map<string, (props: { context: RouteContext }) => JSX.Element>
+export interface RouterRendererProps extends HTMLDivProps, WithRouterContext {
+  fallback?: () => JSX.Element
+  map: Map<string, () => JSX.Element>
 }
 
 /** @category Prop */
-export interface SidebarProps extends HTMLDivProps {
+export interface SidebarProps extends HTMLDivProps, WithRouterContext {
   footer?: JSX.Element
   items: SidebarItem[]
-  router: Router
 }
 
 /** @category Prop */
