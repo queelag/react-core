@@ -72,6 +72,10 @@ export interface WithDescription {
   description?: string
 }
 
+export interface WithDestructive {
+  destructive?: boolean
+}
+
 export interface WithFeedbackType {
   type: FeedbackType
 }

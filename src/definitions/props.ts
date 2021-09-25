@@ -6,13 +6,13 @@ import {
   WithBackground,
   WithColor,
   WithDescription,
+  WithDestructive,
   WithFeedbackType,
   WithFooter,
   WithHeader,
   WithIcon,
   WithLayer,
   WithLocalizationProps,
-  WithName,
   WithOrientation,
   WithShape,
   WithSize,
@@ -23,6 +23,12 @@ import { StatisticValue, WizardOnStepChange } from './types'
 
 /** @category Prop */
 export interface AlertProps extends HTMLDivProps, WithDescription, WithTitle, WithFeedbackType {}
+
+/** @category Prop */
+export interface AlertDialogProps extends DialogProps, WithDestructive {
+  onClickCancel?: () => any
+  onClickConfirm: () => any
+}
 
 /** @category Prop */
 export interface AvatarProps extends HTMLDivProps, WithBackground, WithColor, WithShape {
@@ -46,14 +52,13 @@ export interface BadgeProps extends HTMLDivProps {
 }
 
 /** @category Prop */
-export interface ButtonProps extends HTMLButtonProps, WithBackground, WithColor, WithIcon, WithShape, WithSize, WithTitle {
-  destructive?: boolean
+export interface ButtonProps extends HTMLButtonProps, WithBackground, WithColor, WithDestructive, WithIcon, WithShape, WithSize, WithTitle {
   spinning?: boolean
   variant?: ButtonVariant
 }
 
 /** @category Prop */
-export interface CardProps extends HTMLDivProps, WithHeader, WithLayer, WithFooter, WithTitle {}
+export interface CardProps extends HTMLDivProps, WithDescription, WithHeader, WithLayer, WithFooter, WithTitle {}
 
 /** @category Prop */
 export interface ColorableDivProps extends HTMLDivProps, WithLayer {
@@ -64,7 +69,7 @@ export interface ColorableDivProps extends HTMLDivProps, WithLayer {
 }
 
 /** @category Prop */
-export interface DialogProps extends HTMLDivProps, WithDescription, WithFooter, WithHeader, Partial<WithName>, WithTitle {
+export interface DialogProps extends HTMLDivProps, WithDescription, WithFooter, WithHeader, WithTitle {
   buttons?: Partial<ButtonProps>[]
   onHide?: () => any
   onShow?: () => any
