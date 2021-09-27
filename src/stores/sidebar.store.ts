@@ -43,6 +43,10 @@ export class SidebarStore extends ComponentStore<HTMLDivElement> {
     return this.items.findIndex((v: SidebarItem) => v.route.name === name)
   }
 
+  isItemActive(item: SidebarItem): boolean {
+    return item.route.name === this.context.route.name
+  }
+
   private get dummyItem(): SidebarItem {
     return {
       icon: Blank,

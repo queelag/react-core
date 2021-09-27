@@ -1,4 +1,5 @@
 import { FormEvent, ReactNode } from 'react'
+import { DisclosureSection } from '..'
 import { WizardStore } from '../stores/wizard.store'
 import { ButtonVariant } from './enums'
 import {
@@ -76,6 +77,11 @@ export interface DialogProps extends HTMLDivProps, WithDescription, WithFooter, 
 }
 
 /** @category Prop */
+export interface DisclosureProps extends HTMLDListProps {
+  sections: DisclosureSection[]
+}
+
+/** @category Prop */
 export interface DividerProps extends HTMLDivProps, WithColor, WithLayer, WithOrientation {}
 
 /** @category Prop */
@@ -138,7 +144,7 @@ export interface LabelProps<T extends object> extends HTMLLabelProps, WithColor,
 
 /** @category Prop */
 export interface ListProps<T> extends HTMLUListProps {
-  empty?: ReactNode
+  empty?: (props: any) => JSX.Element
   items: T[]
   renderItem: (v: T, k: number) => ReactNode
 }
@@ -210,8 +216,8 @@ export interface TagProps extends HTMLDivProps, WithBackground, WithColor, WithI
 
 /** @category Prop */
 export interface VirtualizedListProps<T> extends HTMLUListProps, WithOrientation {
-  dummy: () => JSX.Element
-  empty?: () => JSX.Element
+  dummy: (props: any) => JSX.Element
+  empty?: (props: any) => JSX.Element
   gutter?: number
   innerClassName?: string
   itemParentProps?: HTMLDivProps

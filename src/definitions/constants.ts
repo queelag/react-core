@@ -1,4 +1,4 @@
-import { MeterProps, MeterStore } from '..'
+import { DisclosureProps, MeterProps, MeterStore } from '..'
 import { AvatarStore } from '../stores/avatar.store'
 import { ButtonStore } from '../stores/button.store'
 import { DividerStore } from '../stores/divider.store'
@@ -80,7 +80,10 @@ export const CARD_PROPS_KEYS: (keyof CardProps)[] = ['header', 'layer', 'footer'
 export const COLORABLE_DIV_PROPS_KEYS: (keyof ColorableDivProps)[] = ['background', 'border', 'divide', 'layer', 'text']
 
 /** @category Constant */
-export const DIALOG_PROPS_KEYS: (keyof DialogProps)[] = ['buttons', 'description', 'footer', 'header', 'name', 'onHide', 'onShow', 'title']
+export const DIALOG_PROPS_KEYS: (keyof DialogProps)[] = ['buttons', 'description', 'footer', 'header', 'onHide', 'onShow', 'title']
+
+/** @category Constant */
+export const DISCLOSURE_PROPS_KEYS: (keyof DisclosureProps)[] = ['sections']
 
 /** @category Constant */
 export const DIVIDER_PROPS_KEYS: (keyof DividerProps)[] = ['color', 'layer', 'orientation']
@@ -168,6 +171,7 @@ export const VIRTUALIZED_LIST_PROPS_KEYS: (keyof VirtualizedListProps<any>)[] = 
   'dummy',
   'empty',
   'gutter',
+  'innerClassName',
   'itemParentProps',
   'items',
   'orientation',

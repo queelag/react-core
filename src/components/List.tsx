@@ -26,7 +26,7 @@ export function List<T>(props: ListProps<T>) {
 
   return (
     <ul {...ObjectUtils.omit(props, LIST_PROPS_KEYS)} id={store.id}>
-      {store.isItemsEmpty && props.empty}
+      {store.isItemsEmpty && props.empty && <props.empty />}
       {store.hasItems && store.items.map(props.renderItem)}
       {props.children}
     </ul>

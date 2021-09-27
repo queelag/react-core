@@ -43,6 +43,10 @@ export class BottomTabberStore extends ComponentStore<HTMLDivElement> {
     return this.items.findIndex((v: BottomTabberItem) => v.route.name === name)
   }
 
+  isItemActive(item: BottomTabberItem): boolean {
+    return item.route.name === this.context.route.name
+  }
+
   private get dummyItem(): BottomTabberItem {
     return {
       icon: Blank,

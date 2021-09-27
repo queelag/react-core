@@ -41,6 +41,11 @@ export interface ConfigurationData {
   }
 }
 
+export interface DisclosureSection extends WithDescription, WithIcon, Required<WithTitle> {
+  content?: ReactNode
+  expanded?: boolean
+}
+
 export interface InputFileItem {
   base64: string
   buffer: ArrayBuffer

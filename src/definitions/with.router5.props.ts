@@ -1,3 +1,4 @@
+import { WithFooter } from '..'
 import { WithHeader, WithTitle } from './interfaces'
 import { HTMLDivProps } from './props'
 import { BottomSheetItem, BottomTabberItem, ContextMenuItem, SidebarItem, TopTabberItem, WithRouterContext } from './with.router5.interfaces'
@@ -30,8 +31,7 @@ export interface RouterRendererProps extends HTMLDivProps, WithRouterContext {
 }
 
 /** @category Prop */
-export interface SidebarProps extends HTMLDivProps, WithRouterContext {
-  footer?: JSX.Element
+export interface SidebarProps extends HTMLDivProps, WithFooter, WithHeader, WithRouterContext, WithTitle {
   items: SidebarItem[]
 }
 
