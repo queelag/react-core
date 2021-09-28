@@ -1,4 +1,4 @@
-import { Logger, NumberUtils } from '@queelag/core'
+import { Logger, NumberUtils, TextCodec } from '@queelag/core'
 import { ChangeEvent } from 'react'
 import { ComponentName, InputTouchTrigger, InputType } from '../definitions/enums'
 import { ComponentFormFieldStoreProps } from '../definitions/with.superstruct.interfaces'
@@ -63,7 +63,7 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
   onChange = (event: ChangeEvent<HTMLInputElement>): void => {
     switch (this.type) {
       case InputType.BUFFER:
-        this.store[this.path] = new TextEncoder().encode(event.target.value) as any
+        this.store[this.path] = TextCodec.encode(event.target.value) as any
         Logger.debug(this.id, 'onChange', this.type, `The value has been set.`, this.value)
 
         break

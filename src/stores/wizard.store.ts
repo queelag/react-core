@@ -36,10 +36,7 @@ export class WizardStore extends ComponentStore<HTMLDivElement> {
     Logger.debug(this.id, 'onClickNext', `The previous step has been set to ${previous}.`)
 
     if (this.activeStep.canGoNext()) {
-      this.activeStepName = this.nextStep.name
-      Logger.debug(this.id, 'onClickNext', `The active step has been set to ${this.activeStepName}.`)
-
-      this.update()
+      this.setActiveStepName(this.nextStep.name)
     }
 
     await tcp(() => this.onStepChange(previous, this.activeStepName, DirectionHorizontal.RIGHT))
@@ -55,10 +52,7 @@ export class WizardStore extends ComponentStore<HTMLDivElement> {
     Logger.debug(this.id, 'onClickPrevious', `The previous step has been set to ${previous}.`)
 
     if (this.activeStep.canGoBack()) {
-      this.activeStepName = this.previousStep.name
-      Logger.debug(this.id, 'onClickPrevious', `The active step has been set to ${this.activeStepName}.`)
-
-      this.update()
+      this.setActiveStepName(this.previousStep.name)
     }
 
     await tcp(() => this.onStepChange(previous, this.activeStepName, DirectionHorizontal.LEFT))
@@ -75,6 +69,13 @@ export class WizardStore extends ComponentStore<HTMLDivElement> {
    * Triggered by the onClickPrevious, onClickNext and onClickExit events.
    */
   onStepChange = (from: string, to: string, direction: DirectionHorizontal): any => {}
+
+  setActiveStepName(name: string): void {
+    this.activeStepName = name
+    Logger.debug(this.id, 'setActiveStepName', `The active step has been set to ${this.activeStepName}.`)
+
+    this.update()
+  }
 
   findStepIndexByName(name: string): number {
     return this.steps.findIndex((v: WizardStep) => v.name === name)

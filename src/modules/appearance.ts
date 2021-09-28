@@ -1,25 +1,28 @@
-import { Environment, LocalStorage, Logger } from '@queelag/core'
+import { Environment, LocalStorage, Logger, Storage } from '@queelag/core'
 import { LocalStorageName, Theme } from '../definitions/enums'
 import { AppearanceData } from '../definitions/interfaces'
 import { Dummy } from './dummy'
 
 class _ {
   data: AppearanceData
+  storage: Storage
 
   constructor() {
     this.data = Dummy.appearanceData
+    this.storage = LocalStorage
+
     this.registerThemeEventListener()
   }
 
   onChangeTheme(theme: Theme): any {}
 
-  initialize(): boolean {
+  async initialize(): Promise<boolean> {
     this.setTheme(Theme.SYSTEM, false)
 
     if (Environment.isWindowDefined) {
       let get: boolean
 
-      get = LocalStorage.get(LocalStorageName.APPEARANCE, this.data)
+      get = await this.storage.get(LocalStorageName.APPEARANCE, this.data)
       if (!get) return false
 
       this.setTheme(this.data.theme, false)
@@ -28,7 +31,7 @@ class _ {
     return true
   }
 
-  toggleTheme(): boolean {
+  async toggleTheme(): Promise<boolean> {
     switch (this.data.theme) {
       case Theme.DARK:
         return this.setTheme(Theme.LIGHT)
@@ -39,7 +42,7 @@ class _ {
     }
   }
 
-  setTheme(theme: Theme, store: boolean = true): boolean {
+  async setTheme(theme: Theme, store: boolean = true): Promise<boolean> {
     this.data.theme = theme
     Logger.debug('Appearance', 'setTheme', `The theme has been set to ${theme}.`)
 
@@ -54,7 +57,7 @@ class _ {
     }
 
     if (Environment.isWindowDefined && store) {
-      return LocalStorage.set(LocalStorageName.APPEARANCE, this.data)
+      return this.storage.set(LocalStorageName.APPEARANCE, this.data)
     }
 
     return true
