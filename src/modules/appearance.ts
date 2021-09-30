@@ -66,9 +66,12 @@ class _ {
   private registerThemeEventListener(): void {
     let media: MediaQueryList
 
+    if (Environment.isWindowNotDefined) {
+      return Logger.warn('Appearance', 'registerThemeEventListener', `window is not defined.`)
+    }
+
     if (typeof window.matchMedia === 'undefined') {
-      Logger.warn('Appearance', 'registerThemeEventListener', `window.matchMedia is not defined.`)
-      return
+      return Logger.warn('Appearance', 'registerThemeEventListener', `window.matchMedia is not defined.`)
     }
 
     media = window.matchMedia('(prefers-color-scheme: dark)')
@@ -79,6 +82,11 @@ class _ {
   }
 
   get themeByPrefersColorScheme(): Theme {
+    if (Environment.isWindowNotDefined) {
+      Logger.warn('Appearance', 'themeByPrefersColorScheme', `window is not defined.`)
+      return Theme.LIGHT
+    }
+
     if (typeof window.matchMedia === 'undefined') {
       Logger.warn('Appearance', 'themeByPrefersColorScheme', `window.matchMedia is not defined.`)
       return Theme.LIGHT

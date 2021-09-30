@@ -1,6 +1,8 @@
+import { Environment } from '@queelag/core'
+
 export class Screen {
-  static height: number = window.innerHeight
-  static width: number = window.innerWidth
+  static height: number = Environment.isWindowDefined ? window.innerHeight : 0
+  static width: number = Environment.isWindowDefined ? window.innerWidth : 0
 
   static get isMobile(): boolean {
     return this.isTiny
