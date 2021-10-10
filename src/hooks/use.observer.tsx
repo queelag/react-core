@@ -1,4 +1,4 @@
-import { Observer } from 'mobx-react'
+import { Observer } from 'mobx-react-lite'
 import React from 'react'
 
 /**
