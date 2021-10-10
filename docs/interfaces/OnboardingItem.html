@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>OnboardingItem | @queelag/react-core - v1.0.37</title>
-	<meta name="description" content="Documentation for @queelag/react-core - v1.0.37">
+	<title>OnboardingItem | @queelag/react-core - v1.0.39</title>
+	<meta name="description" content="Documentation for @queelag/react-core - v1.0.39">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<script async src="../assets/js/search.js" id="search-script"></script>
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">@queelag/react-core - v1.0.37</a>
+					<a href="../index.html" class="title">@queelag/react-core - v1.0.39</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -52,7 +52,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../index.html">@queelag/react-core - v1.0.37</a>
+					<a href="../index.html">@queelag/react-core - v1.0.39</a>
 				</li>
 				<li>
 					<a href="OnboardingItem.html">OnboardingItem</a>
@@ -72,6 +72,12 @@
 						<a href="WithDescription.html" class="tsd-signature-type" data-tsd-kind="Interface">WithDescription</a>
 					</li>
 					<li>
+						<a href="WithIcon.html" class="tsd-signature-type" data-tsd-kind="Interface">WithIcon</a>
+					</li>
+					<li>
+						<a href="WithImage.html" class="tsd-signature-type" data-tsd-kind="Interface">WithImage</a>
+					</li>
+					<li>
 						<a href="WithTitle.html" class="tsd-signature-type" data-tsd-kind="Interface">WithTitle</a>
 						<ul class="tsd-hierarchy">
 							<li>
@@ -85,18 +91,26 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
+						<section class="tsd-index-section tsd-is-inherited">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="OnboardingItem.html#description" class="tsd-kind-icon">description</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="OnboardingItem.html#picture" class="tsd-kind-icon">picture</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="OnboardingItem.html#iconProps" class="tsd-kind-icon">icon<wbr>Props</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="OnboardingItem.html#image" class="tsd-kind-icon">image</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="OnboardingItem.html#imageProps" class="tsd-kind-icon">image<wbr>Props</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="OnboardingItem.html#title" class="tsd-kind-icon">title</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-inherited">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="OnboardingItem.html#icon" class="tsd-kind-icon">icon</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group ">
+			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="description" class="tsd-anchor"></a>
@@ -105,17 +119,40 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="WithDescription.html">WithDescription</a>.<a href="WithDescription.html#description">description</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/c4d249d/src/definitions/interfaces.ts#L77">src/definitions/interfaces.ts:77</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/6e26905/src/definitions/interfaces.ts#L75">src/definitions/interfaces.ts:75</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="picture" class="tsd-anchor"></a>
-					<h3>picture</h3>
-					<div class="tsd-signature tsd-kind-icon">picture<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="iconProps" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> icon<wbr>Props</h3>
+					<div class="tsd-signature tsd-kind-icon">icon<wbr>Props<span class="tsd-signature-symbol">:</span> <a href="IconProps.html" class="tsd-signature-type" data-tsd-kind="Interface">IconProps</a></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="WithIcon.html">WithIcon</a>.<a href="WithIcon.html#iconProps">iconProps</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/c4d249d/src/definitions/interfaces.ts#L60">src/definitions/interfaces.ts:60</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/6e26905/src/definitions/interfaces.ts#L88">src/definitions/interfaces.ts:88</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="image" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> image</h3>
+					<div class="tsd-signature tsd-kind-icon">image<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="WithImage.html">WithImage</a>.<a href="WithImage.html#image">image</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/6e26905/src/definitions/interfaces.ts#L92">src/definitions/interfaces.ts:92</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="imageProps" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> image<wbr>Props</h3>
+					<div class="tsd-signature tsd-kind-icon">image<wbr>Props<span class="tsd-signature-symbol">:</span> <a href="ImageProps.html" class="tsd-signature-type" data-tsd-kind="Interface">ImageProps</a></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="WithImage.html">WithImage</a>.<a href="WithImage.html#imageProps">imageProps</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/6e26905/src/definitions/interfaces.ts#L93">src/definitions/interfaces.ts:93</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -126,9 +163,36 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="WithTitle.html">WithTitle</a>.<a href="WithTitle.html#title">title</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/queelag/react-core/blob/c4d249d/src/definitions/interfaces.ts#L126">src/definitions/interfaces.ts:126</a></li>
+							<li>Defined in <a href="https://github.com/queelag/react-core/blob/6e26905/src/definitions/interfaces.ts#L130">src/definitions/interfaces.ts:130</a></li>
 						</ul>
 					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+					<a name="icon" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> icon</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">icon<span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">: </span><a href="IconProps.html" class="tsd-signature-type" data-tsd-kind="Interface">IconProps</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="WithIcon.html">WithIcon</a>.<a href="WithIcon.html#icon">icon</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/queelag/react-core/blob/6e26905/src/definitions/interfaces.ts#L87">src/definitions/interfaces.ts:87</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>props: <a href="IconProps.html" class="tsd-signature-type" data-tsd-kind="Interface">IconProps</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Element</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -150,11 +214,20 @@
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="OnboardingItem.html#description" class="tsd-kind-icon">description</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="OnboardingItem.html#picture" class="tsd-kind-icon">picture</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="OnboardingItem.html#iconProps" class="tsd-kind-icon">icon<wbr>Props</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="OnboardingItem.html#image" class="tsd-kind-icon">image</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="OnboardingItem.html#imageProps" class="tsd-kind-icon">image<wbr>Props</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="OnboardingItem.html#title" class="tsd-kind-icon">title</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+								<a href="OnboardingItem.html#icon" class="tsd-kind-icon">icon</a>
 							</li>
 						</ul>
 					</li>
