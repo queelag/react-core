@@ -67,7 +67,6 @@ export class Dummy {
   static get onboardingItem(): OnboardingItem {
     return {
       description: '',
-      picture: '',
       title: ''
     }
   }

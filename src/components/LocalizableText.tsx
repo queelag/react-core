@@ -11,6 +11,7 @@ export function LocalizableText<T extends object>(props: HTMLElementProps & Loca
       {...ObjectUtils.omit(props, LOCALIZABLE_TEXT_PROPS_KEYS)}
       className={ReactUtils.joinClassNames(props.className, ColorPicker.textByString(props.color || '', props.layer))}
       dangerouslySetInnerHTML={{ __html: Localization.get(props.path || '', props.inject) }}
+      style={{ whiteSpace: 'pre-wrap', ...props.style }}
     />
   )
 
@@ -18,6 +19,7 @@ export function LocalizableText<T extends object>(props: HTMLElementProps & Loca
     <props.element
       {...ObjectUtils.omit(props, LOCALIZABLE_TEXT_PROPS_KEYS)}
       className={ReactUtils.joinClassNames(props.className, ColorPicker.textByString(props.color || '', props.layer))}
+      style={{ whiteSpace: 'pre-wrap', ...props.style }}
     >
       {props.children}
     </props.element>

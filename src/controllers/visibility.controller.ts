@@ -123,6 +123,22 @@ export class VisibilityController {
     return this.get(name) === VisibilityController.VISIBLE
   }
 
+  get hasHidden(): boolean {
+    return [...this.data.values()].includes(VisibilityController.HIDDEN)
+  }
+
+  get hasHiding(): boolean {
+    return [...this.data.values()].includes(VisibilityController.HIDING)
+  }
+
+  get hasShowing(): boolean {
+    return [...this.data.values()].includes(VisibilityController.SHOWING)
+  }
+
+  get hasVisible(): boolean {
+    return [...this.data.values()].includes(VisibilityController.VISIBLE)
+  }
+
   static get HIDDEN(): number {
     return 0
   }

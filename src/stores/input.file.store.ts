@@ -1,4 +1,4 @@
-import { Base64, IDUtils, Logger } from '@queelag/core'
+import { Logger } from '@queelag/core'
 import { ChangeEvent } from 'react'
 import * as S from 'superstruct'
 import { ComponentName, InputFileMode } from '../definitions/enums'
@@ -8,6 +8,7 @@ import { InputFileProps } from '../definitions/with.superstruct.props'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
 import { Dummy } from '../modules/dummy'
 import { Schema } from '../modules/schema'
+import { FileUtils } from '../utils/file.utils'
 
 /**
  * An abstraction for InputFile stores, handles SINGLE and MULTIPLE modes.
@@ -40,22 +41,7 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
         if (files.length <= 0) return Logger.error(this.id, 'onChange', `Failed to find any file.`, event.target.files)
 
         items = []
-        await Promise.all(
-          files.map(async (v: File, k: number) => {
-            let item: InputFileItem
-
-            item = Dummy.inputFileItem
-            item.buffer = await v.arrayBuffer()
-            item.base64 = Base64.encode(item.buffer)
-            item.id = IDUtils.unique(items.map((v: InputFileItem) => v.id))
-            item.name = v.name
-            item.size = v.size
-            item.timestamp = v.lastModified
-            item.type = v.type
-
-            items[k] = item
-          })
-        )
+        await Promise.all(files.map(FileUtils.toInputFileItem))
 
         this.store[this.path] = items as any
         Logger.debug(this.id, 'onChange', `The items have been set as the value.`, items)
@@ -67,14 +53,7 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
         file = event.target.files && event.target.files[0]
         if (!file) return Logger.error(this.id, 'onChange', `Failed to find the first file.`, event.target.files)
 
-        item = Dummy.inputFileItem
-        item.buffer = await file.arrayBuffer()
-        item.base64 = Base64.encode(item.buffer)
-        item.id = IDUtils.unique()
-        item.name = file.name
-        item.size = file.size
-        item.timestamp = file.lastModified
-        item.type = file.type
+        item = await FileUtils.toInputFileItem(file)
 
         this.store[this.path] = item as any
         Logger.debug(this.id, 'onChange', `The item has been set as the value.`, item)

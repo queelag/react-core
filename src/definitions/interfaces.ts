@@ -1,6 +1,6 @@
 import { ID } from '@queelag/core'
 import { LegacyRef, MutableRefObject, ReactNode } from 'react'
-import { WizardStepContentProps } from '..'
+import { ImageProps, WizardStepContentProps } from '..'
 import { Color, FeedbackType, Layer, Orientation, Shape, Size, Theme } from './enums'
 import { IconProps } from './props'
 import { SelectOptionValue } from './types'
@@ -56,9 +56,7 @@ export interface InputFileItem {
   type: string
 }
 
-export interface OnboardingItem extends WithDescription, WithTitle {
-  picture: string
-}
+export interface OnboardingItem extends WithDescription, WithIcon, WithImage, WithTitle {}
 
 export interface SelectOption {
   label: string
@@ -87,6 +85,12 @@ export interface WithFeedbackType {
 
 export interface WithIcon {
   icon?: (props: IconProps) => JSX.Element
+  iconProps?: IconProps
+}
+
+export interface WithImage {
+  image?: string
+  imageProps?: ImageProps
 }
 
 export interface WithLayer {
