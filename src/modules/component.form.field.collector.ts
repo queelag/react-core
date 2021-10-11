@@ -44,6 +44,8 @@ export class ComponentFormFieldCollector<T extends Element, U extends object, V 
         if (!entry) return this.dummy
 
         return entry.get(args[1]) || this.dummy
+      default:
+        return this.dummy
     }
   }
 
