@@ -1,5 +1,6 @@
 import { Logger, tcp } from '@queelag/core'
 import { FormEvent } from 'react'
+import { SwitchCollector, SwitchStore } from '..'
 import { CheckBoxCollector } from '../collectors/check.box.collector'
 import { InputCollector } from '../collectors/input.collector'
 import { InputFileCollector } from '../collectors/input.file.collector'
@@ -45,52 +46,45 @@ export class FormStore extends ComponentStore<HTMLFormElement> {
    * An array of child CheckBox stores.
    */
   get checkBoxStores(): CheckBoxStore<any>[] {
-    let stores: CheckBoxStore<any>[] = []
-
-    this.element.querySelectorAll(`[id^='${ComponentName.CHECKBOX}']`).forEach((v: Element) => {
-      stores.push(CheckBoxCollector.get(v.id))
-    })
-
-    return stores
+    return [...this.element.querySelectorAll(`[id^='${ComponentName.CHECKBOX}']`)]
+      .map((v: Element) => CheckBoxCollector.get(v.id))
+      .filter((v: CheckBoxStore<any>) => v instanceof CheckBoxStore)
   }
 
   /**
    * An array of child Input stores.
    */
   get inputStores(): InputStore<any>[] {
-    let stores: InputStore<any>[] = []
-
-    this.element.querySelectorAll(`[id^='${ComponentName.INPUT}']`).forEach((v: Element) => {
-      stores.push(InputCollector.get(v.id))
-    })
-
-    return stores
+    return [...this.element.querySelectorAll(`[id^='${ComponentName.INPUT}']`)]
+      .map((v: Element) => InputCollector.get(v.id))
+      .filter((v: InputStore<any>) => v instanceof InputStore)
   }
 
   /**
    * An array of child InputFile stores.
    */
   get inputFileStores(): InputFileStore<any>[] {
-    let stores: InputFileStore<any>[] = []
-
-    this.element.querySelectorAll(`[id^='${ComponentName.INPUT_FILE}']`).forEach((v: Element) => {
-      stores.push(InputFileCollector.get(v.id))
-    })
-
-    return stores
+    return [...this.element.querySelectorAll(`[id^='${ComponentName.INPUT_FILE}']`)]
+      .map((v: Element) => InputFileCollector.get(v.id))
+      .filter((v: InputFileStore<any>) => v instanceof InputFileStore)
   }
 
   /**
    * An array of child Select stores.
    */
   get selectStores(): SelectStore<any>[] {
-    let stores: SelectStore<any>[] = []
+    return [...this.element.querySelectorAll(`[id^='${ComponentName.SELECT}']`)]
+      .map((v: Element) => SelectCollector.get(v.id))
+      .filter((v: SelectStore<any>) => v instanceof SelectStore)
+  }
 
-    this.element.querySelectorAll(`[id^='${ComponentName.SELECT}']`).forEach((v: Element) => {
-      stores.push(SelectCollector.get(v.id))
-    })
-
-    return stores
+  /**
+   * An array of child Switch stores.
+   */
+  get switchStores(): SwitchStore<any>[] {
+    return [...this.element.querySelectorAll(`[id^='${ComponentName.SWITCH}']`)]
+      .map((v: Element) => SwitchCollector.get(v.id))
+      .filter((v: SwitchStore<any>) => v instanceof SwitchStore)
   }
 
   get isDisabled(): boolean {
@@ -109,7 +103,8 @@ export class FormStore extends ComponentStore<HTMLFormElement> {
       this.checkBoxStores.every((v: CheckBoxStore<any>) => v.isValid) &&
       this.inputStores.every((v: InputStore<any>) => v.isValid) &&
       this.inputFileStores.every((v: InputFileStore<any>) => v.isValid) &&
-      this.selectStores.every((v: SelectStore<any>) => v.isValid)
+      this.selectStores.every((v: SelectStore<any>) => v.isValid) &&
+      this.switchStores.every((v: SwitchStore<any>) => v.isValid)
     )
   }
 
@@ -127,6 +122,7 @@ export class FormStore extends ComponentStore<HTMLFormElement> {
       this.inputStores.forEach((v: InputStore<any>) => v.touch())
       this.inputFileStores.forEach((v: InputFileStore<any>) => v.touch())
       this.selectStores.forEach((v: SelectStore<any>) => v.touch())
+      this.switchStores.forEach((v: SwitchStore<any>) => v.touch())
 
       if (this.isValid) {
         this.disabled = true
@@ -143,6 +139,7 @@ export class FormStore extends ComponentStore<HTMLFormElement> {
       this.inputStores.forEach((v: InputStore<any>) => v.validate())
       this.inputFileStores.forEach((v: InputFileStore<any>) => v.validate())
       this.selectStores.forEach((v: SelectStore<any>) => v.validate())
+      this.switchStores.forEach((v: SwitchStore<any>) => v.validate())
     }
   }
 }
