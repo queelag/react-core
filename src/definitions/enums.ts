@@ -1,5 +1,6 @@
 export enum ButtonVariant {
   NONE = 'NONE',
+  OPACITY = 'OPACITY',
   OUTLINE = 'OUTLINE',
   PRIMARY = 'PRIMARY',
   SECONDARY = 'SECONDARY',

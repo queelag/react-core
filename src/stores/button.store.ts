@@ -63,6 +63,10 @@ export class ButtonStore extends ComponentStore<HTMLButtonElement> {
     return this.variant === ButtonVariant.NONE
   }
 
+  get isVariantOpacity(): boolean {
+    return this.variant === ButtonVariant.OPACITY
+  }
+
   get isVariantOutline(): boolean {
     return this.variant === ButtonVariant.OUTLINE
   }
