@@ -1,5 +1,5 @@
 import { Base64, IDUtils } from '@queelag/core'
-import { InputFileItem } from '..'
+import { InputFileItem } from '../definitions/interfaces'
 
 export class FileUtils {
   static async toInputFileItem(file: File): Promise<InputFileItem> {

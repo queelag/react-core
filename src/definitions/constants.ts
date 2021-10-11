@@ -1,4 +1,3 @@
-import { DisclosureProps, MeterProps, MeterStore } from '..'
 import { AvatarStore } from '../stores/avatar.store'
 import { ButtonStore } from '../stores/button.store'
 import { DividerStore } from '../stores/divider.store'
@@ -6,6 +5,7 @@ import { FormStore } from '../stores/form.store'
 import { IconStore } from '../stores/icon.store'
 import { ImageStore } from '../stores/image.store'
 import { ListStore } from '../stores/list.store'
+import { MeterStore } from '../stores/meter.store'
 import { OnboardingStore } from '../stores/onboarding.store'
 import { TagStore } from '../stores/tag.store'
 import { VirtualizedListStore } from '../stores/virtualized.list.store'
@@ -19,6 +19,7 @@ import {
   CardProps,
   ColorableDivProps,
   DialogProps,
+  DisclosureProps,
   DividerProps,
   EmptyProps,
   FormProps,
@@ -30,8 +31,10 @@ import {
   LocalizableLabelProps,
   LocalizableSpanProps,
   LocalizableTextProps,
+  MeterProps,
   OnboardingProps,
   ResultProps,
+  SectionProps,
   SettingProps,
   SpinnerProps,
   StatisticProps,
@@ -150,6 +153,9 @@ export const ONBOARDING_STORE_KEYS: (keyof OnboardingProps & keyof OnboardingSto
 
 /** @category Constant */
 export const RESULT_PROPS_KEYS: (keyof ResultProps)[] = ['description', 'icon', 'title', 'type']
+
+/** @category Constant */
+export const SECTION_PROPS_KEYS: (keyof SectionProps)[] = ['description', 'layer', 'title']
 
 /** @category Constant */
 export const SETTING_PROPS_KEYS: (keyof SettingProps)[] = ['description', 'layer', 'title']

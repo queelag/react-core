@@ -1,8 +1,7 @@
 import { ID } from '@queelag/core'
 import { LegacyRef, MutableRefObject, ReactNode } from 'react'
-import { ImageProps, WizardStepContentProps } from '..'
 import { Color, FeedbackType, Layer, Orientation, Shape, Size, Theme } from './enums'
-import { IconProps } from './props'
+import { IconProps, ImageProps, WizardStepContentProps } from './props'
 import { SelectOptionValue } from './types'
 
 export interface AppearanceData {

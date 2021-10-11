@@ -1,8 +1,8 @@
 import { FormEvent, ReactNode } from 'react'
-import { DisclosureSection } from '..'
 import { WizardStore } from '../stores/wizard.store'
 import { ButtonVariant } from './enums'
 import {
+  DisclosureSection,
   OnboardingItem,
   WithBackground,
   WithColor,
@@ -189,6 +189,9 @@ export interface ParentProps {
 
 /** @category Prop */
 export interface ResultProps extends HTMLDivProps, WithDescription, WithFeedbackType, WithIcon, WithTitle {}
+
+/** @category Prop */
+export interface SectionProps extends HTMLDivProps, WithDescription, WithLayer, WithTitle {}
 
 /** @category Prop */
 export interface SettingProps extends HTMLDivProps, WithDescription, WithLayer, WithTitle {}
