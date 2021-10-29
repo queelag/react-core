@@ -6,4 +6,4 @@ import { SelectStore } from '../stores/select.store'
  *
  * @category Collector
  */
-export const SelectCollector = new ComponentFormFieldCollector<HTMLDivElement, any, SelectStore<any>>(new SelectStore({ options: [] }))
+export const SelectCollector = new ComponentFormFieldCollector<HTMLDivElement, any, SelectStore<any>>(new SelectStore({ novalidate: true, options: [] }))

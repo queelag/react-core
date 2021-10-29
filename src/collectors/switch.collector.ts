@@ -6,4 +6,4 @@ import { SwitchStore } from '../stores/switch.store'
  *
  * @category Collector
  */
-export const SwitchCollector = new ComponentFormFieldCollector<HTMLDivElement, any, SwitchStore<any>>(new SwitchStore({}))
+export const SwitchCollector = new ComponentFormFieldCollector<HTMLDivElement, any, SwitchStore<any>>(new SwitchStore({ novalidate: true }))

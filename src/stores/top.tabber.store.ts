@@ -1,9 +1,8 @@
 import { Logger } from '@queelag/core'
 import { Blank } from '../components/Blank'
 import { ComponentName } from '../definitions/enums'
-import { ComponentStoreProps } from '../definitions/interfaces'
-import { TopTabberItem } from '../definitions/with.router5.interfaces'
-import { TopTabberProps } from '../definitions/with.router5.props'
+import { ComponentStoreProps, TopTabberItem } from '../definitions/interfaces'
+import { TopTabberProps } from '../definitions/props'
 import { ComponentStore } from '../modules/component.store'
 
 /**

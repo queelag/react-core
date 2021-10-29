@@ -1,9 +1,8 @@
-import { RouteContext } from 'react-router5/dist/types'
+import { noop } from '@queelag/core'
 import { Blank } from '../components/Blank'
 import { ComponentName } from '../definitions/enums'
-import { ComponentStoreProps } from '../definitions/interfaces'
-import { BottomTabberItem } from '../definitions/with.router5.interfaces'
-import { BottomTabberProps } from '../definitions/with.router5.props'
+import { BottomTabberItem, ComponentStoreProps } from '../definitions/interfaces'
+import { BottomTabberProps } from '../definitions/props'
 import { ComponentStore } from '../modules/component.store'
 
 /**
@@ -13,10 +12,6 @@ import { ComponentStore } from '../modules/component.store'
  */
 export class BottomTabberStore extends ComponentStore<HTMLDivElement> {
   /**
-   * A router5 context.
-   */
-  context: RouteContext
-  /**
    * An array of {@link BottomTabberItem}.
    */
   items: BottomTabberItem[]
@@ -24,27 +19,23 @@ export class BottomTabberStore extends ComponentStore<HTMLDivElement> {
   constructor(props: BottomTabberProps & ComponentStoreProps<HTMLDivElement>) {
     super(ComponentName.BOTTOM_TABBER, props)
 
-    this.context = props.context
+    this.isItemActive = props.isItemActive || noop
     this.items = props.items
+    this.onClickItem = props.onClickItem || noop
   }
 
-  /**
-   * Navigates to the item route.
-   */
-  onClickItem(item: BottomTabberItem): void {
-    this.context.router.navigate(item.route.name, item.route.params || {}, { ...item.route.options, replace: true })
-  }
-
-  findItemByName(name: string): BottomTabberItem {
-    return this.items.find((v: BottomTabberItem) => v.route.name === name) || this.dummyItem
-  }
-
-  findItemIndexByName(name: string): number {
-    return this.items.findIndex((v: BottomTabberItem) => v.route.name === name)
-  }
+  onClickItem(item: BottomTabberItem): any {}
 
   isItemActive(item: BottomTabberItem): boolean {
-    return item.route.name === this.context.route.name
+    return false
+  }
+
+  get activeItem(): BottomTabberItem {
+    return this.items.find((v: BottomTabberItem) => this.isItemActive(v)) || this.dummyItem
+  }
+
+  get activeItemIndex(): number {
+    return this.items.findIndex((v: BottomTabberItem) => this.isItemActive(v))
   }
 
   private get dummyItem(): BottomTabberItem {

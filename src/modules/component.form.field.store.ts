@@ -21,6 +21,10 @@ export class ComponentFormFieldStore<T extends Element, U extends object> extend
    */
   label: string
   /**
+   * A boolean which determines if the validation should be disabled.
+   */
+  novalidate: boolean
+  /**
    * A keyof U, used to read the current value and set a new one.
    */
   path: keyof U
@@ -48,6 +52,7 @@ export class ComponentFormFieldStore<T extends Element, U extends object> extend
 
     this.disabled = props.disabled || false
     this.label = props.label || ''
+    this.novalidate = props.novalidate || false
     this.path = props.path || ('' as any)
     this.required = props.required || false
     this.schema = props.schema || Schema.any
@@ -72,6 +77,10 @@ export class ComponentFormFieldStore<T extends Element, U extends object> extend
    * Validates the value against the schema.
    */
   validate(): void {
+    if (this.novalidate) {
+      return
+    }
+
     this.validation = this.schema.validate(this.value)
     Logger.debug(this.id, 'validate', `The value has been validated against the schema.`, this.validation, this.schema, this.value)
 

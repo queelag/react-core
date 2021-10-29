@@ -1,10 +1,10 @@
 import { Logger, tcp } from '@queelag/core'
 import { FormEvent } from 'react'
-import { SwitchCollector, SwitchStore } from '..'
 import { CheckBoxCollector } from '../collectors/check.box.collector'
 import { InputCollector } from '../collectors/input.collector'
 import { InputFileCollector } from '../collectors/input.file.collector'
 import { SelectCollector } from '../collectors/select.collector'
+import { SwitchCollector } from '../collectors/switch.collector'
 import { ComponentName } from '../definitions/enums'
 import { ComponentStoreProps } from '../definitions/interfaces'
 import { FormProps } from '../definitions/props'
@@ -13,6 +13,7 @@ import { CheckBoxStore } from './check.box.store'
 import { InputFileStore } from './input.file.store'
 import { InputStore } from './input.store'
 import { SelectStore } from './select.store'
+import { SwitchStore } from './switch.store'
 
 /**
  * An abstraction for Form stores, handles validation of all child fields.

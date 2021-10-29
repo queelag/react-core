@@ -6,6 +6,7 @@ export interface ComponentFormFieldStoreProps<T extends Element, U extends objec
 export interface WithFormFieldProps<T extends object> extends WithIcon, WithLayer {
   disabled?: boolean
   label?: string
+  novalidate?: boolean
   path?: keyof T
   placeholder?: string
   required?: boolean

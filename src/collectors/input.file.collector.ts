@@ -6,4 +6,4 @@ import { InputFileStore } from '../stores/input.file.store'
  *
  * @category Collector
  */
-export const InputFileCollector = new ComponentFormFieldCollector<HTMLInputElement, any, InputFileStore<any>>(new InputFileStore({}))
+export const InputFileCollector = new ComponentFormFieldCollector<HTMLInputElement, any, InputFileStore<any>>(new InputFileStore({ novalidate: true }))

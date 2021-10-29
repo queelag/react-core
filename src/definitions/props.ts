@@ -2,8 +2,13 @@ import { FormEvent, ReactNode } from 'react'
 import { WizardStore } from '../stores/wizard.store'
 import { ButtonVariant } from './enums'
 import {
+  BottomSheetItem,
+  BottomTabberItem,
+  ContextMenuItem,
   DisclosureSection,
   OnboardingItem,
+  SidebarItem,
+  TopTabberItem,
   WithBackground,
   WithColor,
   WithDescription,
@@ -53,6 +58,18 @@ export interface BadgeProps extends HTMLDivProps {
 }
 
 /** @category Prop */
+export interface BottomSheetProps extends HTMLDivProps, WithHeader, WithTitle {
+  items?: BottomSheetItem[]
+}
+
+/** @category Prop */
+export interface BottomTabberProps extends HTMLDivProps {
+  isItemActive?: (item: BottomTabberItem) => boolean
+  items: BottomTabberItem[]
+  onClickItem?: (item: BottomTabberItem) => any
+}
+
+/** @category Prop */
 export interface ButtonProps extends HTMLButtonProps, WithBackground, WithColor, WithDestructive, WithIcon, WithShape, WithSize, WithTitle {
   spinning?: boolean
   variant?: ButtonVariant
@@ -67,6 +84,11 @@ export interface ColorableDivProps extends HTMLDivProps, WithLayer {
   border?: string
   divide?: string
   text?: string
+}
+
+/** @category Prop */
+export interface ContextMenuProps extends HTMLDivProps {
+  items: ContextMenuItem[]
 }
 
 /** @category Prop */
@@ -91,6 +113,14 @@ export interface EmptyProps extends HTMLDivProps, WithDescription, WithIcon, Wit
 export interface FormProps extends Omit<HTMLFormProps, 'onSubmit'> {
   disabled?: boolean
   onSubmit: (event: FormEvent<HTMLFormElement>) => any
+}
+
+/** @category Prop */
+export interface HeaderProps extends HTMLDivProps {
+  canNavigateBack?: boolean
+  logo?: JSX.Element
+  onClickBack?: () => any
+  title?: string
 }
 
 /** @category Prop */
@@ -191,10 +221,24 @@ export interface ParentProps {
 export interface ResultProps extends HTMLDivProps, WithDescription, WithFeedbackType, WithIcon, WithTitle {}
 
 /** @category Prop */
+export interface RouterRendererProps extends HTMLDivProps {
+  fallback?: () => JSX.Element
+  map: Map<string, () => JSX.Element>
+  route: string
+}
+
+/** @category Prop */
 export interface SectionProps extends HTMLDivProps, WithDescription, WithLayer, WithTitle {}
 
 /** @category Prop */
 export interface SettingProps extends HTMLDivProps, WithDescription, WithLayer, WithTitle {}
+
+/** @category Prop */
+export interface SidebarProps extends HTMLDivProps, WithFooter, WithHeader, WithTitle {
+  isItemActive?: (item: SidebarItem) => boolean
+  items: SidebarItem[]
+  onClickItem?: (item: SidebarItem) => any
+}
 
 /** @category Prop */
 export interface SpinnerProps extends Omit<IconProps, 'svg'> {}
@@ -215,6 +259,12 @@ export interface TagProps extends HTMLDivProps, WithBackground, WithColor, WithI
   destroyed?: boolean
   onDestroy?: () => any
   text: string
+}
+
+/** @category Prop */
+export interface TopTabberProps extends HTMLDivProps {
+  activeItemName?: string
+  items: TopTabberItem[]
 }
 
 /** @category Prop */

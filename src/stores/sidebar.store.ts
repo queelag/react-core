@@ -1,9 +1,8 @@
-import { RouteContext } from 'react-router5/dist/types'
+import { noop } from '@queelag/core'
 import { Blank } from '../components/Blank'
 import { ComponentName } from '../definitions/enums'
-import { ComponentStoreProps } from '../definitions/interfaces'
-import { SidebarItem } from '../definitions/with.router5.interfaces'
-import { SidebarProps } from '../definitions/with.router5.props'
+import { ComponentStoreProps, SidebarItem } from '../definitions/interfaces'
+import { SidebarProps } from '../definitions/props'
 import { ComponentStore } from '../modules/component.store'
 
 /**
@@ -13,10 +12,6 @@ import { ComponentStore } from '../modules/component.store'
  */
 export class SidebarStore extends ComponentStore<HTMLDivElement> {
   /**
-   * A router5 context.
-   */
-  context: RouteContext
-  /**
    * An array of {@link SidebarItem}.
    */
   items: SidebarItem[]
@@ -24,27 +19,23 @@ export class SidebarStore extends ComponentStore<HTMLDivElement> {
   constructor(props: SidebarProps & ComponentStoreProps<HTMLDivElement>) {
     super(ComponentName.SIDEBAR, props)
 
-    this.context = props.context
+    this.isItemActive = props.isItemActive || noop
     this.items = props.items
+    this.onClickItem = props.onClickItem || noop
   }
 
-  /**
-   * Navigates to the item route.
-   */
-  onClickItem(item: SidebarItem): void {
-    this.context.router.navigate(item.route.name, item.route.params || {}, { ...item.route.options, replace: true })
-  }
-
-  findItemByName(name: string): SidebarItem {
-    return this.items.find((v: SidebarItem) => v.route.name === name) || this.dummyItem
-  }
-
-  findItemIndexByName(name: string): number {
-    return this.items.findIndex((v: SidebarItem) => v.route.name === name)
-  }
+  onClickItem(item: SidebarItem): any {}
 
   isItemActive(item: SidebarItem): boolean {
-    return item.route.name === this.context.route.name
+    return false
+  }
+
+  get activeItem(): SidebarItem {
+    return this.items.find((v: SidebarItem) => this.isItemActive(v)) || this.dummyItem
+  }
+
+  get activeItemIndex(): number {
+    return this.items.findIndex((v: SidebarItem) => this.isItemActive(v))
   }
 
   private get dummyItem(): SidebarItem {

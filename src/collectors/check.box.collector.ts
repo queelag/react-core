@@ -6,4 +6,4 @@ import { CheckBoxStore } from '../stores/check.box.store'
  *
  * @category Collector
  */
-export const CheckBoxCollector = new ComponentFormFieldCollector<HTMLDivElement, any, CheckBoxStore<any>>(new CheckBoxStore({}))
+export const CheckBoxCollector = new ComponentFormFieldCollector<HTMLDivElement, any, CheckBoxStore<any>>(new CheckBoxStore({ novalidate: true }))
