@@ -10,13 +10,13 @@ import { ComponentStore } from '../modules/component.store'
  *
  * @category Store
  */
-export class SidebarStore extends ComponentStore<HTMLDivElement> {
+export class SidebarStore<T> extends ComponentStore<HTMLDivElement> {
   /**
    * An array of {@link SidebarItem}.
    */
-  items: SidebarItem[]
+  items: SidebarItem<T>[]
 
-  constructor(props: SidebarProps & ComponentStoreProps<HTMLDivElement>) {
+  constructor(props: SidebarProps<T> & ComponentStoreProps<HTMLDivElement>) {
     super(ComponentName.SIDEBAR, props)
 
     this.isItemActive = props.isItemActive || noop
@@ -24,26 +24,24 @@ export class SidebarStore extends ComponentStore<HTMLDivElement> {
     this.onClickItem = props.onClickItem || noop
   }
 
-  onClickItem(item: SidebarItem): any {}
+  onClickItem(item: SidebarItem<T>): any {}
 
-  isItemActive(item: SidebarItem): boolean {
+  isItemActive(item: SidebarItem<T>): boolean {
     return false
   }
 
-  get activeItem(): SidebarItem {
-    return this.items.find((v: SidebarItem) => this.isItemActive(v)) || this.dummyItem
+  get activeItem(): SidebarItem<T> {
+    return this.items.find((v: SidebarItem<T>) => this.isItemActive(v)) || this.dummyItem
   }
 
   get activeItemIndex(): number {
-    return this.items.findIndex((v: SidebarItem) => this.isItemActive(v))
+    return this.items.findIndex((v: SidebarItem<T>) => this.isItemActive(v))
   }
 
-  private get dummyItem(): SidebarItem {
+  private get dummyItem(): SidebarItem<T> {
     return {
       icon: Blank,
-      route: {
-        name: ''
-      }
+      route: undefined as any
     }
   }
 }

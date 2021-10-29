@@ -8,11 +8,11 @@ export interface AppearanceData {
   theme: Theme
 }
 
-export interface BottomSheetItem extends WithColor, WithDescription, WithIcon, WithRoute, WithTitle {
+export interface BottomSheetItem<T> extends WithColor, WithDescription, WithIcon, WithRoute<T>, WithTitle {
   onClick?: () => any
 }
 
-export interface BottomTabberItem extends WithIcon, Required<WithRoute> {}
+export interface BottomTabberItem<T> extends WithIcon, Required<WithRoute<T>> {}
 
 export interface ColorPickerConfigurationValue {
   any: (color: Color) => [string, string, string, string]
@@ -46,7 +46,7 @@ export interface ConfigurationData {
   }
 }
 
-export interface ContextMenuItem extends WithIcon, WithRoute, WithTitle {
+export interface ContextMenuItem<T> extends WithIcon, WithRoute<T>, WithTitle {
   onClick?: () => any
 }
 
@@ -72,7 +72,7 @@ export interface SelectOption {
   value: SelectOptionValue
 }
 
-export interface SidebarItem extends WithIcon, Required<WithRoute> {}
+export interface SidebarItem<T> extends WithIcon, Required<WithRoute<T>> {}
 
 export interface TopTabberItem {
   component: ReactNode
@@ -134,8 +134,8 @@ export interface WithOrientation {
   orientation?: Orientation
 }
 
-export interface WithRoute {
-  route?: any
+export interface WithRoute<T> {
+  route?: T
 }
 
 export interface WithShape {

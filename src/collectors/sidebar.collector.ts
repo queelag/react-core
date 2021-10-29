@@ -6,4 +6,4 @@ import { SidebarStore } from '../stores/sidebar.store'
  *
  * @category Collector
  */
-export const SidebarCollector = new ComponentCollector<SidebarStore>(new SidebarStore({ items: [] }))
+export const SidebarCollector = new ComponentCollector<SidebarStore<any>>(new SidebarStore({ items: [] }))

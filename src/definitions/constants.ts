@@ -81,13 +81,13 @@ export const BACKDROP_PROPS_KEYS: (keyof BackdropProps)[] = ['opacity']
 export const BADGE_PROPS_KEYS: (keyof BadgeProps)[] = ['value']
 
 /** @category Constant */
-export const BOTTOM_SHEET_PROPS_KEYS: (keyof BottomSheetProps)[] = ['header', 'items', 'title']
+export const BOTTOM_SHEET_PROPS_KEYS: (keyof BottomSheetProps<any>)[] = ['header', 'items', 'title']
 
 /** @category Constant */
-export const BOTTOM_TABBER_PROPS_KEYS: (keyof BottomTabberProps)[] = ['isItemActive', 'items', 'onClickItem']
+export const BOTTOM_TABBER_PROPS_KEYS: (keyof BottomTabberProps<any>)[] = ['isItemActive', 'items', 'onClickItem']
 
 /** @category Constant */
-export const BOTTOM_TABBER_STORE_KEYS: (keyof BottomTabberProps & keyof BottomTabberStore)[] = ['isItemActive', 'items', 'onClickItem']
+export const BOTTOM_TABBER_STORE_KEYS: (keyof BottomTabberProps<any> & keyof BottomTabberStore<any>)[] = ['isItemActive', 'items', 'onClickItem']
 
 /** @category Constant */
 export const BUTTON_PROPS_KEYS: (keyof ButtonProps)[] = ['background', 'color', 'destructive', 'icon', 'layer', 'shape', 'size', 'spinning', 'title', 'variant']
@@ -102,7 +102,7 @@ export const CARD_PROPS_KEYS: (keyof CardProps)[] = ['header', 'layer', 'footer'
 export const COLORABLE_DIV_PROPS_KEYS: (keyof ColorableDivProps)[] = ['background', 'border', 'divide', 'layer', 'text']
 
 /** @category Constant */
-export const CONTEXT_MENU_PROPS_KEYS: (keyof ContextMenuProps)[] = ['items']
+export const CONTEXT_MENU_PROPS_KEYS: (keyof ContextMenuProps<any>)[] = ['items']
 
 /** @category Constant */
 export const DIALOG_PROPS_KEYS: (keyof DialogProps)[] = ['buttons', 'description', 'footer', 'header', 'onHide', 'onShow', 'title']
@@ -189,10 +189,10 @@ export const SECTION_PROPS_KEYS: (keyof SectionProps)[] = ['description', 'layer
 export const SETTING_PROPS_KEYS: (keyof SettingProps)[] = ['description', 'layer', 'title']
 
 /** @category Constant */
-export const SIDEBAR_PROPS_KEYS: (keyof SidebarProps)[] = ['footer', 'isItemActive', 'items', 'onClickItem']
+export const SIDEBAR_PROPS_KEYS: (keyof SidebarProps<any>)[] = ['footer', 'isItemActive', 'items', 'onClickItem']
 
 /** @category Constant */
-export const SIDEBAR_STORE_KEYS: (keyof SidebarProps & keyof SidebarStore)[] = ['isItemActive', 'items', 'onClickItem']
+export const SIDEBAR_STORE_KEYS: (keyof SidebarProps<any> & keyof SidebarStore<any>)[] = ['isItemActive', 'items', 'onClickItem']
 
 /** @category Constant */
 export const SPINNER_PROPS_KEYS: (keyof SpinnerProps)[] = ['color', 'layer', 'size', 'thickness']

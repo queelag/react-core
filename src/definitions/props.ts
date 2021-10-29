@@ -58,15 +58,15 @@ export interface BadgeProps extends HTMLDivProps {
 }
 
 /** @category Prop */
-export interface BottomSheetProps extends HTMLDivProps, WithHeader, WithTitle {
-  items?: BottomSheetItem[]
+export interface BottomSheetProps<T> extends HTMLDivProps, WithHeader, WithTitle {
+  items?: BottomSheetItem<T>[]
 }
 
 /** @category Prop */
-export interface BottomTabberProps extends HTMLDivProps {
-  isItemActive?: (item: BottomTabberItem) => boolean
-  items: BottomTabberItem[]
-  onClickItem?: (item: BottomTabberItem) => any
+export interface BottomTabberProps<T> extends HTMLDivProps {
+  isItemActive?: (item: BottomTabberItem<T>) => boolean
+  items: BottomTabberItem<T>[]
+  onClickItem?: (item: BottomTabberItem<T>) => any
 }
 
 /** @category Prop */
@@ -87,8 +87,8 @@ export interface ColorableDivProps extends HTMLDivProps, WithLayer {
 }
 
 /** @category Prop */
-export interface ContextMenuProps extends HTMLDivProps {
-  items: ContextMenuItem[]
+export interface ContextMenuProps<T> extends HTMLDivProps {
+  items: ContextMenuItem<T>[]
 }
 
 /** @category Prop */
@@ -234,10 +234,10 @@ export interface SectionProps extends HTMLDivProps, WithDescription, WithLayer, 
 export interface SettingProps extends HTMLDivProps, WithDescription, WithLayer, WithTitle {}
 
 /** @category Prop */
-export interface SidebarProps extends HTMLDivProps, WithFooter, WithHeader, WithTitle {
-  isItemActive?: (item: SidebarItem) => boolean
-  items: SidebarItem[]
-  onClickItem?: (item: SidebarItem) => any
+export interface SidebarProps<T> extends HTMLDivProps, WithFooter, WithHeader, WithTitle {
+  isItemActive?: (item: SidebarItem<T>) => boolean
+  items: SidebarItem<T>[]
+  onClickItem?: (item: SidebarItem<T>) => any
 }
 
 /** @category Prop */

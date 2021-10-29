@@ -10,13 +10,13 @@ import { ComponentStore } from '../modules/component.store'
  *
  * @category Store
  */
-export class BottomTabberStore extends ComponentStore<HTMLDivElement> {
+export class BottomTabberStore<T> extends ComponentStore<HTMLDivElement> {
   /**
    * An array of {@link BottomTabberItem}.
    */
-  items: BottomTabberItem[]
+  items: BottomTabberItem<T>[]
 
-  constructor(props: BottomTabberProps & ComponentStoreProps<HTMLDivElement>) {
+  constructor(props: BottomTabberProps<T> & ComponentStoreProps<HTMLDivElement>) {
     super(ComponentName.BOTTOM_TABBER, props)
 
     this.isItemActive = props.isItemActive || noop
@@ -24,26 +24,24 @@ export class BottomTabberStore extends ComponentStore<HTMLDivElement> {
     this.onClickItem = props.onClickItem || noop
   }
 
-  onClickItem(item: BottomTabberItem): any {}
+  onClickItem(item: BottomTabberItem<T>): any {}
 
-  isItemActive(item: BottomTabberItem): boolean {
+  isItemActive(item: BottomTabberItem<T>): boolean {
     return false
   }
 
-  get activeItem(): BottomTabberItem {
-    return this.items.find((v: BottomTabberItem) => this.isItemActive(v)) || this.dummyItem
+  get activeItem(): BottomTabberItem<T> {
+    return this.items.find((v: BottomTabberItem<T>) => this.isItemActive(v)) || this.dummyItem
   }
 
   get activeItemIndex(): number {
-    return this.items.findIndex((v: BottomTabberItem) => this.isItemActive(v))
+    return this.items.findIndex((v: BottomTabberItem<T>) => this.isItemActive(v))
   }
 
-  private get dummyItem(): BottomTabberItem {
+  private get dummyItem(): BottomTabberItem<T> {
     return {
       icon: Blank,
-      route: {
-        name: ''
-      }
+      route: undefined as any
     }
   }
 }
