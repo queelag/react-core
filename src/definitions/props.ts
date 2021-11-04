@@ -38,9 +38,7 @@ export interface AlertDialogProps extends DialogProps, WithDestructive {
 }
 
 /** @category Prop */
-export interface AvatarProps extends HTMLDivProps, WithBackground, WithColor, WithImage, WithShape {
-  icon?: (props: IconProps) => JSX.Element
-  iconProps?: IconProps
+export interface AvatarProps extends HTMLDivProps, WithBackground, WithColor, WithIcon, WithImage, WithShape {
   size: number
   text?: string
   textProps?: HTMLElementProps
@@ -182,7 +180,7 @@ export interface ListProps<T> extends HTMLUListProps {
 /** @category Prop */
 export interface ListItemProps extends HTMLDivProps, WithDescription, WithLayer, WithTitle {
   avatar?: AvatarProps
-  image?: ImageProps
+  image?: HTMLImageProps
 }
 
 /** @category Prop */
