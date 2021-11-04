@@ -15,7 +15,7 @@ export class IconStore extends ComponentStore<SVGSVGElement> {
   /** @internal */
   private _color: string = ''
   /** @internal */
-  private _source: string = ''
+  private _src: string = ''
   /**
    * A string which contains the raw svg.
    */
@@ -31,7 +31,7 @@ export class IconStore extends ComponentStore<SVGSVGElement> {
     this.color = props.color || Color.MONO
     this.size = props.size || 0
     this.svg = '<svg viewbox="0 0 0 0"></svg>'
-    this.source = props.source || ''
+    this.src = props.src || ''
     this.thickness = props.thickness || 0
   }
 
@@ -52,8 +52,8 @@ export class IconStore extends ComponentStore<SVGSVGElement> {
   /**
    * Returns the source.
    */
-  get source(): string {
-    return this._source
+  get src(): string {
+    return this._src
   }
 
   /**
@@ -69,19 +69,19 @@ export class IconStore extends ComponentStore<SVGSVGElement> {
   }
 
   /** @internal */
-  set source(source: string) {
+  set src(src: string) {
     ;(async () => {
       switch (true) {
-        case /^(https?:\/\/|\/)/.test(source):
+        case /^(https?:\/\/|\/)/.test(src):
           let cached: string | undefined, response: Response | Error, text: string | Error
 
-          cached = Cache.icons.get(source)
+          cached = Cache.icons.get(src)
           if (typeof cached === 'string') {
             if (cached.length <= 0) {
               Logger.debug(this.id, 'setSource', `Another store is fetching the same source.`)
               await new Promise<void>((r) =>
                 setInterval(() => {
-                  cached = Cache.icons.get(source)
+                  cached = Cache.icons.get(src)
                   if (cached || cached === undefined) r()
                 }, 100)
               )
@@ -102,17 +102,17 @@ export class IconStore extends ComponentStore<SVGSVGElement> {
             return Logger.warn(this.id, 'setSource', `The window is not defined.`)
           }
 
-          Cache.icons.set(source, '')
+          Cache.icons.set(src, '')
           Logger.debug(this.id, 'setSource', `An empty string has been cached.`)
 
-          response = await tcp(() => window.fetch(source))
-          if (response instanceof Error) return Cache.icons.delete(source)
+          response = await tcp(() => window.fetch(src))
+          if (response instanceof Error) return Cache.icons.delete(src)
 
           text = await tcp(() => (response as Response).text())
-          if (text instanceof Error) return Cache.icons.delete(source)
+          if (text instanceof Error) return Cache.icons.delete(src)
 
           if (text.length <= 0) {
-            Cache.icons.delete(source)
+            Cache.icons.delete(src)
             Logger.debug(this.id, 'setSource', `The response text is empty.`)
 
             return
@@ -121,12 +121,12 @@ export class IconStore extends ComponentStore<SVGSVGElement> {
           this.svg = text
           Logger.debug(this.id, 'setSource', `The svg has been set to the fetched text value.`)
 
-          Cache.icons.set(source, text)
+          Cache.icons.set(src, text)
           Logger.debug(this.id, 'setSource', `The svg has been cached.`)
 
           break
-        case /svg/.test(source):
-          this.svg = source
+        case /svg/.test(src):
+          this.svg = src
           Logger.debug(this.id, 'setSource', `The svg has been set.`)
 
           break
@@ -137,7 +137,7 @@ export class IconStore extends ComponentStore<SVGSVGElement> {
           break
       }
 
-      this._source = source
+      this._src = src
       Logger.debug(this.id, 'setSource', `The source has been set.`)
 
       this.update()

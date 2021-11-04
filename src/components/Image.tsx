@@ -15,7 +15,7 @@ import { ImageStore } from '../stores/image.store'
  * import { Image } from '@queelag/react-core'
  *
  * function App() {
- *   return <Image source='https://website.com/linktoimage.png' />
+ *   return <Image src='https://website.com/linktoimage.png' />
  * }
  * ```
  *
@@ -45,7 +45,7 @@ export function Image(props: ImageProps) {
   return (
     <Fragment>
       {store.isStatusLoaded && (
-        <img {...ObjectUtils.omit(props, IMAGE_PROPS_KEYS)} id={store.id} onError={onError} ref={store.ref} src={store.source} style={store.getStyle(props)} />
+        <img {...ObjectUtils.omit(props, IMAGE_PROPS_KEYS)} id={store.id} onError={onError} ref={store.ref} src={store.src} style={store.getStyle(props)} />
       )}
       {store.isFallbackVisible && <img {...ObjectUtils.omit(props, IMAGE_PROPS_KEYS)} ref={store.ref} src={IMAGE_EMPTY_BASE64} style={store.getStyle(props)} />}
       {store.isStatusLoading && (
@@ -55,7 +55,7 @@ export function Image(props: ImageProps) {
           onLoad={onLoad}
           onLoadStart={onLoadStart}
           ref={store.ref}
-          src={store.source}
+          src={store.src}
           style={{ opacity: 0, pointerEvents: 'none', position: 'absolute' }}
         />
       )}

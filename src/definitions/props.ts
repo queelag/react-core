@@ -17,6 +17,7 @@ import {
   WithFooter,
   WithHeader,
   WithIcon,
+  WithImage,
   WithLayer,
   WithLocalizationProps,
   WithOrientation,
@@ -37,11 +38,9 @@ export interface AlertDialogProps extends DialogProps, WithDestructive {
 }
 
 /** @category Prop */
-export interface AvatarProps extends HTMLDivProps, WithBackground, WithColor, WithShape {
+export interface AvatarProps extends HTMLDivProps, WithBackground, WithColor, WithImage, WithShape {
   icon?: (props: IconProps) => JSX.Element
   iconProps?: IconProps
-  image?: string
-  imageProps?: ImageProps
   size: number
   text?: string
   textProps?: HTMLElementProps
@@ -76,7 +75,7 @@ export interface ButtonProps extends HTMLButtonProps, WithBackground, WithColor,
 }
 
 /** @category Prop */
-export interface CardProps extends HTMLDivProps, WithDescription, WithHeader, WithLayer, WithFooter, WithTitle {}
+export interface CardProps extends HTMLDivProps, WithDescription, WithHeader, WithImage, WithLayer, WithFooter, WithTitle {}
 
 /** @category Prop */
 export interface ColorableDivProps extends HTMLDivProps, WithLayer {
@@ -151,22 +150,23 @@ export interface HTMLParagraphProps extends React.DetailedHTMLProps<React.HTMLAt
 export interface HTMLSpanProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement> {}
 /** @category Prop */
 export interface HTMLUListProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLUListElement>, HTMLUListElement> {}
+/** @category Prop */
+export interface HTMLVideoProps extends React.DetailedHTMLProps<React.VideoHTMLAttributes<HTMLVideoElement>, HTMLVideoElement> {}
 
 /** @category Prop */
 export interface IconProps extends Omit<React.SVGProps<SVGSVGElement>, 'fill' | 'orientation' | 'stroke'>, WithColor, WithLayer {
   fill?: boolean | string
   size?: number
-  source?: string
+  src?: string
   stroke?: boolean | string
   thickness?: number
 }
 
 /** @category Prop */
-export interface ImageProps extends Omit<HTMLImageProps, 'src'>, WithShape, WithSize {
+export interface ImageProps extends HTMLImageProps, WithShape, WithSize {
   alpha?: boolean
   cache?: boolean
   quality?: number
-  source: string
 }
 
 /** @category Prop */

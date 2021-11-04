@@ -129,19 +129,19 @@ export const FORM_STORE_KEYS: (keyof FormProps & keyof FormStore)[] = ['disabled
 export const HEADER_PROPS_KEYS: (keyof HeaderProps)[] = ['canNavigateBack', 'logo', 'onClickBack', 'title']
 
 /** @category Constant */
-export const ICON_PROPS_KEYS: (keyof IconProps)[] = ['color', 'layer', 'size', 'source', 'thickness']
+export const ICON_PROPS_KEYS: (keyof IconProps)[] = ['color', 'layer', 'size', 'src', 'thickness']
 
 /** @category Constant */
-export const ICON_STORE_KEYS: (keyof IconProps & keyof IconStore)[] = ['color', 'source', 'thickness']
+export const ICON_STORE_KEYS: (keyof IconProps & keyof IconStore)[] = ['color', 'src', 'thickness']
 
 /** @category Constant */
 export const IMAGE_EMPTY_BASE64: string = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='
 
 /** @category Constant */
-export const IMAGE_PROPS_KEYS: (keyof ImageProps)[] = ['alpha', 'cache', 'quality', 'shape', 'size', 'source']
+export const IMAGE_PROPS_KEYS: (keyof ImageProps)[] = ['alpha', 'cache', 'quality', 'shape', 'size']
 
 /** @category Constant */
-export const IMAGE_STORE_KEYS: (keyof ImageProps & keyof ImageStore)[] = ['alpha', 'cache', 'quality', 'source']
+export const IMAGE_STORE_KEYS: (keyof ImageProps & keyof ImageStore)[] = ['alpha', 'cache', 'quality', 'src']
 
 /** @category Constant */
 export const LIST_PROPS_KEYS: (keyof ListProps<any>)[] = ['empty', 'items', 'renderItem']

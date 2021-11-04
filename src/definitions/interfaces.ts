@@ -1,7 +1,7 @@
 import { ID } from '@queelag/core'
 import { LegacyRef, MutableRefObject, ReactNode } from 'react'
 import { Color, FeedbackType, Layer, Orientation, Shape, Size, Theme } from './enums'
-import { IconProps, ImageProps, WizardStepContentProps } from './props'
+import { HTMLImageProps, IconProps, WizardStepContentProps } from './props'
 import { SelectOptionValue } from './types'
 
 export interface AppearanceData {
@@ -106,7 +106,7 @@ export interface WithIcon {
 
 export interface WithImage {
   image?: string
-  imageProps?: ImageProps
+  imageProps?: HTMLImageProps
 }
 
 export interface WithLayer {

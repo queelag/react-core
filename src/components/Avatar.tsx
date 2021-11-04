@@ -53,7 +53,7 @@ export function Avatar(props: AvatarProps) {
           style={{ ...props.iconProps?.style, position: 'absolute' }}
         />
       )}
-      {props.image && <Image {...props.imageProps} size={store.size} source={props.image} style={{ ...props.imageProps?.style, zIndex: 10 }} />}
+      {props.image && <Image {...props.imageProps} size={store.size} src={props.image} style={{ ...props.imageProps?.style, zIndex: 10 }} />}
       {props.text && (
         <b
           {...props.textProps}

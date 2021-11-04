@@ -29,7 +29,7 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
    */
   status: ImageStatus
   /** @internal */
-  private _source: string = ''
+  private _src: string = ''
 
   constructor(props: ImageProps & ComponentStoreProps<HTMLImageElement>) {
     super(ComponentName.IMAGE, props)
@@ -38,7 +38,7 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
     this.cache = props.cache || false
     this.quality = props.quality || 0.8
     this.status = ImageStatus.IDLE
-    this.source = props.source
+    this.src = props.src || ''
   }
 
   onError = (event: SyntheticEvent<HTMLImageElement>): void => {
@@ -52,7 +52,7 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
 
   onLoad = (event: SyntheticEvent<HTMLImageElement>): void => {
     if (this.isCacheable && this.isNotCached) {
-      Cache.images.set(this.source, ImageUtils.toBase64(this.element, this.alpha, this.quality))
+      Cache.images.set(this.src, ImageUtils.toBase64(this.element, this.alpha, this.quality))
       Logger.debug(this.id, 'onLoad', `The base64 value of the image has been cached.`)
     }
 
@@ -64,7 +64,7 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
 
   onLoadStart = (event: SyntheticEvent<HTMLImageElement>): void => {
     if (this.isCacheable && this.isNotCached) {
-      Cache.images.set(this.source, '')
+      Cache.images.set(this.src, '')
       Logger.debug(this.id, 'setSource', `An empty string has been cached.`)
     }
   }
@@ -76,7 +76,7 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
         return
       }
 
-      Cache.images.delete(this.source)
+      Cache.images.delete(this.src)
       Logger.debug(this.id, 'deleteFromCache', `The empty cached value has been deleted.`)
     }
   }
@@ -96,8 +96,8 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
   /**
    * Returns a base64 URI.
    */
-  get source(): string {
-    return this._source
+  get src(): string {
+    return this._src
   }
 
   get isCacheable(): boolean {
@@ -109,7 +109,7 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
   }
 
   get isCached(): boolean {
-    return (Cache.images.get(this.source) || '').length > 0
+    return (Cache.images.get(this.src) || '').length > 0
   }
 
   get isNotCached(): boolean {
@@ -137,17 +137,17 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
   }
 
   /** @internal */
-  set source(source: string) {
+  set src(src: string) {
     ;(async () => {
       let cached: string | undefined
 
-      cached = Cache.images.get(source)
+      cached = Cache.images.get(src)
       if (typeof cached === 'string') {
         if (cached.length <= 0) {
           Logger.debug(this.id, 'setSource', `Another store is loading the same source.`)
           await new Promise<void>((r) =>
             setInterval(() => {
-              cached = Cache.images.get(source)
+              cached = Cache.images.get(src)
               if (cached || cached === undefined) r()
             }, 100)
           )
@@ -160,7 +160,7 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
           }
         }
 
-        this._source = cached
+        this._src = cached
         Logger.debug(this.id, 'setSource', `The source has been set to the cached one.`)
 
         this.status = ImageStatus.LOADED
@@ -171,7 +171,7 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
         return
       }
 
-      this._source = source
+      this._src = src
       Logger.debug(this.id, 'setSource', `The source has been set.`)
 
       this.status = ImageStatus.LOADING
