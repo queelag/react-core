@@ -10,13 +10,13 @@ import { ComponentStore } from '../modules/component.store'
  *
  * @category Store
  */
-export class SidebarStore<T> extends ComponentStore<HTMLDivElement> {
+export class SidebarStore<T> extends ComponentStore {
   /**
    * An array of {@link SidebarItem}.
    */
   items: SidebarItem<T>[]
 
-  constructor(props: SidebarProps<T> & ComponentStoreProps<HTMLDivElement>) {
+  constructor(props: SidebarProps<T> & ComponentStoreProps) {
     super(ComponentName.SIDEBAR, props)
 
     this.isItemActive = props.isItemActive || noop

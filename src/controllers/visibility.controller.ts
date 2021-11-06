@@ -7,7 +7,7 @@ import { Logger } from '@queelag/core'
  *
  * ```typescript
  * import React, { useEffect } from 'react'
- * import { Backdrop, ModalProps, VisibilityController } from '@queelag/react-core'
+ * import { ModalProps, VisibilityController } from '@queelag/react-core'
  * import { makeObservable, observer } from 'mobx'
  *
  * class _ModalController extends VisibilityController {
@@ -32,7 +32,7 @@ import { Logger } from '@queelag/core'
  *
  *   return (
  *     <div className="container" style={{ position: 'relative' }}>
- *       <Backdrop onClick={onClickBackdrop} />
+ *       <div onClick={onClickBackdrop} />
  *       <div className="content" style={{ position: 'absolute' }} />
  *     </div>
  *   )

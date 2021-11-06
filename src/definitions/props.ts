@@ -1,6 +1,20 @@
-import { FormEvent, ReactNode } from 'react'
-import { WizardStore } from '../stores/wizard.store'
-import { ButtonVariant } from './enums'
+import { FormEvent, MutableRefObject, ReactNode } from 'react'
+import { OmitLegacyRef } from '..'
+import type { AvatarStore } from '../stores/avatar.store'
+import type { BottomTabberStore } from '../stores/bottom.tabber.store'
+import type { ButtonStore } from '../stores/button.store'
+import type { DividerStore } from '../stores/divider.store'
+import type { FormStore } from '../stores/form.store'
+import type { IconStore } from '../stores/icon.store'
+import type { ImageStore } from '../stores/image.store'
+import type { ListStore } from '../stores/list.store'
+import type { OnboardingStore } from '../stores/onboarding.store'
+import type { SidebarStore } from '../stores/sidebar.store'
+import type { TagStore } from '../stores/tag.store'
+import type { TopTabberStore } from '../stores/top.tabber.store'
+import type { VirtualizedListStore } from '../stores/virtualized.list.store'
+import type { WizardStore } from '../stores/wizard.store'
+import type { ButtonVariant } from './enums'
 import {
   BottomSheetItem,
   BottomTabberItem,
@@ -15,6 +29,7 @@ import {
   WithDestructive,
   WithFeedbackType,
   WithFooter,
+  WithGetStore,
   WithHeader,
   WithIcon,
   WithImage,
@@ -38,15 +53,10 @@ export interface AlertDialogProps extends DialogProps, WithDestructive {
 }
 
 /** @category Prop */
-export interface AvatarProps extends HTMLDivProps, WithBackground, WithColor, WithIcon, WithImage, WithShape {
+export interface AvatarProps extends HTMLDivProps, WithBackground, WithColor, WithGetStore<HTMLDivElement, AvatarStore>, WithIcon, WithImage, WithShape {
   size: number
   text?: string
   textProps?: HTMLElementProps
-}
-
-/** @category Prop */
-export interface BackdropProps extends HTMLDivProps {
-  opacity?: number
 }
 
 /** @category Prop */
@@ -60,20 +70,29 @@ export interface BottomSheetProps<T> extends HTMLDivProps, WithHeader, WithTitle
 }
 
 /** @category Prop */
-export interface BottomTabberProps<T> extends HTMLDivProps {
+export interface BottomTabberProps<T> extends HTMLDivProps, WithGetStore<HTMLDivElement, BottomTabberStore<T>> {
   isItemActive?: (item: BottomTabberItem<T>) => boolean
   items: BottomTabberItem<T>[]
   onClickItem?: (item: BottomTabberItem<T>) => any
 }
 
 /** @category Prop */
-export interface ButtonProps extends HTMLButtonProps, WithBackground, WithColor, WithDestructive, WithIcon, WithShape, WithSize, WithTitle {
+export interface ButtonProps
+  extends HTMLButtonProps,
+    WithBackground,
+    WithColor,
+    WithDestructive,
+    WithGetStore<HTMLButtonElement, ButtonStore>,
+    WithIcon,
+    WithShape,
+    WithSize,
+    WithTitle {
   spinning?: boolean
   variant?: ButtonVariant
 }
 
 /** @category Prop */
-export interface CardProps extends HTMLDivProps, WithDescription, WithHeader, WithImage, WithLayer, WithFooter, WithTitle {}
+export interface CardProps extends HTMLDivProps, WithDescription, WithFooter, WithHeader, WithImage, WithLayer, WithTitle {}
 
 /** @category Prop */
 export interface ColorableDivProps extends HTMLDivProps, WithLayer {
@@ -101,13 +120,13 @@ export interface DisclosureProps extends HTMLDListProps {
 }
 
 /** @category Prop */
-export interface DividerProps extends HTMLDivProps, WithColor, WithLayer, WithOrientation {}
+export interface DividerProps extends HTMLDivProps, WithColor, WithGetStore<HTMLDivElement, DividerStore>, WithLayer, WithOrientation {}
 
 /** @category Prop */
 export interface EmptyProps extends HTMLDivProps, WithDescription, WithIcon, WithLayer, WithTitle {}
 
 /** @category Prop */
-export interface FormProps extends Omit<HTMLFormProps, 'onSubmit'> {
+export interface FormProps extends Omit<HTMLFormProps, 'onSubmit'>, WithGetStore<HTMLFormElement, FormStore> {
   disabled?: boolean
   onSubmit: (event: FormEvent<HTMLFormElement>) => any
 }
@@ -121,38 +140,38 @@ export interface HeaderProps extends HTMLDivProps {
 }
 
 /** @category Prop */
-export interface HTMLAnchorProps extends React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement> {}
+export interface HTMLAnchorProps extends OmitLegacyRef<JSX.IntrinsicElements['a']> {}
 /** @category Prop */
-export interface HTMLButtonProps extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {}
+export interface HTMLButtonProps extends OmitLegacyRef<JSX.IntrinsicElements['button']> {}
 /** @category Prop */
-export interface HTMLDivProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
+export interface HTMLDivProps extends OmitLegacyRef<JSX.IntrinsicElements['div']> {}
 /** @category Prop */
-export interface HTMLDListProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLDListElement>, HTMLDListElement> {}
+export interface HTMLDListProps extends OmitLegacyRef<JSX.IntrinsicElements['dl']> {}
 /** @category Prop */
-export interface HTMLElementProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> {}
+export interface HTMLElementProps extends OmitLegacyRef<JSX.IntrinsicElements['abbr']> {}
 /** @category Prop */
-export interface HTMLImageProps extends React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement> {}
+export interface HTMLImageProps extends OmitLegacyRef<JSX.IntrinsicElements['img']> {}
 /** @category Prop */
-export interface HTMLInputProps extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {}
+export interface HTMLInputProps extends OmitLegacyRef<JSX.IntrinsicElements['input']> {}
 /** @category Prop */
-export interface HTMLLabelProps extends React.DetailedHTMLProps<React.LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement> {}
+export interface HTMLLabelProps extends OmitLegacyRef<JSX.IntrinsicElements['label']> {}
 /** @category Prop */
-export interface HTMLLIProps extends React.DetailedHTMLProps<React.LiHTMLAttributes<HTMLLIElement>, HTMLLIElement> {}
+export interface HTMLLIProps extends OmitLegacyRef<JSX.IntrinsicElements['li']> {}
 /** @category Prop */
-export interface HTMLFormProps extends React.DetailedHTMLProps<React.FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> {}
+export interface HTMLFormProps extends OmitLegacyRef<JSX.IntrinsicElements['form']> {}
 /** @category Prop */
-export interface HTMLOListProps extends React.DetailedHTMLProps<React.OlHTMLAttributes<HTMLOListElement>, HTMLOListElement> {}
+export interface HTMLOListProps extends OmitLegacyRef<JSX.IntrinsicElements['ol']> {}
 /** @category Prop */
-export interface HTMLParagraphProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement> {}
+export interface HTMLParagraphProps extends OmitLegacyRef<JSX.IntrinsicElements['p']> {}
 /** @category Prop */
-export interface HTMLSpanProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement> {}
+export interface HTMLSpanProps extends OmitLegacyRef<JSX.IntrinsicElements['span']> {}
 /** @category Prop */
-export interface HTMLUListProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLUListElement>, HTMLUListElement> {}
+export interface HTMLUListProps extends OmitLegacyRef<JSX.IntrinsicElements['ul']> {}
 /** @category Prop */
-export interface HTMLVideoProps extends React.DetailedHTMLProps<React.VideoHTMLAttributes<HTMLVideoElement>, HTMLVideoElement> {}
+export interface HTMLVideoProps extends OmitLegacyRef<JSX.IntrinsicElements['video']> {}
 
 /** @category Prop */
-export interface IconProps extends Omit<React.SVGProps<SVGSVGElement>, 'fill' | 'orientation' | 'stroke'>, WithColor, WithLayer {
+export interface IconProps extends Omit<SVGElementProps, 'fill' | 'orientation' | 'stroke'>, WithColor, WithGetStore<SVGSVGElement, IconStore>, WithLayer {
   fill?: boolean | string
   size?: number
   src?: string
@@ -161,7 +180,7 @@ export interface IconProps extends Omit<React.SVGProps<SVGSVGElement>, 'fill' | 
 }
 
 /** @category Prop */
-export interface ImageProps extends HTMLImageProps, WithShape, WithSize {
+export interface ImageProps extends HTMLImageProps, WithGetStore<HTMLImageElement, ImageStore>, WithShape, WithSize {
   alpha?: boolean
   cache?: boolean
   quality?: number
@@ -171,14 +190,14 @@ export interface ImageProps extends HTMLImageProps, WithShape, WithSize {
 export interface LabelProps<T extends object> extends HTMLLabelProps, WithColor, WithLayer, WithLocalizationProps<T> {}
 
 /** @category Prop */
-export interface ListProps<T> extends HTMLUListProps {
+export interface ListProps<T> extends HTMLUListProps, WithGetStore<HTMLUListElement, ListStore<T>> {
   empty?: (props: any) => JSX.Element
   items: T[]
   renderItem: (v: T, k: number) => ReactNode
 }
 
 /** @category Prop */
-export interface ListItemProps extends HTMLDivProps, WithDescription, WithLayer, WithTitle {
+export interface ListItemProps extends HTMLLIProps, WithDescription, WithLayer, WithTitle {
   avatar?: AvatarProps
   image?: HTMLImageProps
 }
@@ -204,7 +223,7 @@ export interface MeterProps extends HTMLDivProps, WithColor, WithShape, WithSize
 }
 
 /** @category Prop */
-export interface OnboardingProps extends HTMLDivProps {
+export interface OnboardingProps extends HTMLDivProps, WithGetStore<HTMLDivElement, OnboardingStore> {
   activeItemIndex?: number
   items: OnboardingItem[]
   onEnd?: () => any
@@ -232,7 +251,7 @@ export interface SectionProps extends HTMLDivProps, WithDescription, WithLayer, 
 export interface SettingProps extends HTMLDivProps, WithDescription, WithLayer, WithTitle {}
 
 /** @category Prop */
-export interface SidebarProps<T> extends HTMLDivProps, WithFooter, WithHeader, WithTitle {
+export interface SidebarProps<T> extends HTMLDivProps, WithFooter, WithGetStore<HTMLDivElement, SidebarStore<T>>, WithHeader, WithTitle {
   isItemActive?: (item: SidebarItem<T>) => boolean
   items: SidebarItem<T>[]
   onClickItem?: (item: SidebarItem<T>) => any
@@ -249,10 +268,10 @@ export interface StatisticProps extends HTMLDivProps, WithFeedbackType, WithIcon
 }
 
 /** @category Prop */
-export interface SVGElementProps extends React.SVGProps<SVGSVGElement> {}
+export interface SVGElementProps extends OmitLegacyRef<JSX.IntrinsicElements['svg']> {}
 
 /** @category Prop */
-export interface TagProps extends HTMLDivProps, WithBackground, WithColor, WithIcon, WithLayer {
+export interface TagProps extends HTMLDivProps, WithBackground, WithColor, WithGetStore<HTMLDivElement, TagStore>, WithIcon, WithLayer {
   destroyable?: boolean
   destroyed?: boolean
   onDestroy?: () => any
@@ -260,13 +279,13 @@ export interface TagProps extends HTMLDivProps, WithBackground, WithColor, WithI
 }
 
 /** @category Prop */
-export interface TopTabberProps extends HTMLDivProps {
+export interface TopTabberProps extends HTMLDivProps, WithGetStore<HTMLDivElement, TopTabberStore> {
   activeItemName?: string
   items: TopTabberItem[]
 }
 
 /** @category Prop */
-export interface VirtualizedListProps<T> extends HTMLUListProps, WithOrientation {
+export interface VirtualizedListProps<T> extends HTMLUListProps, WithGetStore<HTMLUListElement, VirtualizedListStore<T>>, WithOrientation {
   dummy: (props: any) => JSX.Element
   empty?: (props: any) => JSX.Element
   gutter?: number
@@ -276,8 +295,13 @@ export interface VirtualizedListProps<T> extends HTMLUListProps, WithOrientation
   renderItem: (v: T, k: number) => JSX.Element
 }
 
+export interface VirtualizedListStoreProps<T> extends VirtualizedListProps<T> {
+  dummyRef: MutableRefObject<HTMLDivElement>
+  innerRef: MutableRefObject<HTMLDivElement>
+}
+
 /** @category Prop */
-export interface WizardProps extends HTMLDivProps {
+export interface WizardProps extends HTMLDivProps, WithGetStore<HTMLDivElement, WizardStore> {
   activeStepName?: string
   onStepChange?: WizardOnStepChange
   steps: WizardStepPartial[]

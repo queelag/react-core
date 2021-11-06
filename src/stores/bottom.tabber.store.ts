@@ -10,13 +10,13 @@ import { ComponentStore } from '../modules/component.store'
  *
  * @category Store
  */
-export class BottomTabberStore<T> extends ComponentStore<HTMLDivElement> {
+export class BottomTabberStore<T> extends ComponentStore {
   /**
    * An array of {@link BottomTabberItem}.
    */
   items: BottomTabberItem<T>[]
 
-  constructor(props: BottomTabberProps<T> & ComponentStoreProps<HTMLDivElement>) {
+  constructor(props: BottomTabberProps<T> & ComponentStoreProps) {
     super(ComponentName.BOTTOM_TABBER, props)
 
     this.isItemActive = props.isItemActive || noop

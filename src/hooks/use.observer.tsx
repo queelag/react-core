@@ -6,4 +6,4 @@ import React from 'react'
  *
  * @category Hook
  */
-export const useObserver = (fn: () => JSX.Element) => <Observer>{() => fn()}</Observer>
+export const useObserver = (fn: () => JSX.Element) => <Observer>{fn}</Observer>

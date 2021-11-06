@@ -10,7 +10,7 @@ import { ComponentStore } from '../modules/component.store'
  *
  * @category Store
  */
-export class TopTabberStore extends ComponentStore<HTMLDivElement> {
+export class TopTabberStore extends ComponentStore {
   /**
    * A string which determines the active item name.
    */
@@ -20,7 +20,7 @@ export class TopTabberStore extends ComponentStore<HTMLDivElement> {
    */
   items: TopTabberItem[]
 
-  constructor(props: TopTabberProps & ComponentStoreProps<HTMLDivElement>) {
+  constructor(props: TopTabberProps & ComponentStoreProps) {
     super(ComponentName.TOP_TABBER, props)
 
     this.activeItemName = props.activeItemName || props.items[0].name

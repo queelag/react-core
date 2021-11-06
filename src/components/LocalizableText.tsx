@@ -1,16 +1,17 @@
 import { Localization, ObjectUtils } from '@queelag/core'
-import React from 'react'
+import React, { ForwardedRef, forwardRef } from 'react'
 import { LOCALIZABLE_TEXT_PROPS_KEYS } from '../definitions/constants'
 import { HTMLElementProps, LocalizableTextProps } from '../definitions/props'
 import { ColorPicker } from '../pickers/color.picker'
 import { ReactUtils } from '../utils/react.utils'
 
-export function LocalizableText<T extends object>(props: HTMLElementProps & LocalizableTextProps<T>) {
+export const LocalizableText = forwardRef(<T extends object>(props: HTMLElementProps & LocalizableTextProps<T>, ref: ForwardedRef<any>) => {
   const renderLocalized = () => (
     <props.element
       {...ObjectUtils.omit(props, LOCALIZABLE_TEXT_PROPS_KEYS)}
       className={ReactUtils.joinClassNames(props.className, ColorPicker.textByString(props.color || '', props.layer))}
       dangerouslySetInnerHTML={{ __html: Localization.get(props.path || '', props.inject) }}
+      ref={ref}
       style={{ whiteSpace: 'pre-wrap', ...props.style }}
     />
   )
@@ -19,6 +20,7 @@ export function LocalizableText<T extends object>(props: HTMLElementProps & Loca
     <props.element
       {...ObjectUtils.omit(props, LOCALIZABLE_TEXT_PROPS_KEYS)}
       className={ReactUtils.joinClassNames(props.className, ColorPicker.textByString(props.color || '', props.layer))}
+      ref={ref}
       style={{ whiteSpace: 'pre-wrap', ...props.style }}
     >
       {props.children}
@@ -26,4 +28,4 @@ export function LocalizableText<T extends object>(props: HTMLElementProps & Loca
   )
 
   return props.path ? renderLocalized() : renderChildren()
-}
+})

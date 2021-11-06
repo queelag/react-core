@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { ForwardedRef, forwardRef } from 'react'
 import { HTMLSpanProps, LocalizableSpanProps } from '../definitions/props'
 import { LocalizableText } from './LocalizableText'
 
-export function LocalizableSpan<T extends object>(props: LocalizableSpanProps<T>) {
-  return <LocalizableText {...props} element={(p: HTMLSpanProps) => <span {...p} />} />
-}
+export const LocalizableSpan = forwardRef(<T extends object>(props: LocalizableSpanProps<T>, ref: ForwardedRef<HTMLSpanElement>) => {
+  return <LocalizableText {...props} element={(p: HTMLSpanProps) => <span {...p} />} ref={ref} />
+})

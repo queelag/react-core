@@ -1,5 +1,5 @@
 import { ObjectUtils } from '@queelag/core'
-import React from 'react'
+import React, { ForwardedRef, forwardRef } from 'react'
 import { LIST_PROPS_KEYS, LIST_STORE_KEYS } from '../definitions/constants'
 import { ListProps } from '../definitions/props'
 import { useComponentStore } from '../hooks/use.component.store'
@@ -21,14 +21,14 @@ import { ListStore } from '../stores/list.store'
  *
  * @category Component
  */
-export function List<T>(props: ListProps<T>) {
-  const store = useComponentStore(ListStore, props, LIST_STORE_KEYS as any, 'ul')
+export const List = forwardRef(<T extends any>(props: ListProps<T>, ref: ForwardedRef<HTMLUListElement>) => {
+  const store = useComponentStore<ListStore<T>>(ListStore, props, LIST_STORE_KEYS, 'ul')
 
   return (
-    <ul {...ObjectUtils.omit(props, LIST_PROPS_KEYS)} id={store.id}>
+    <ul {...ObjectUtils.omit(props, LIST_PROPS_KEYS)} id={store.id} ref={ref}>
       {store.isItemsEmpty && props.empty && <props.empty />}
       {store.hasItems && store.items.map(props.renderItem)}
       {props.children}
     </ul>
   )
-}
+})

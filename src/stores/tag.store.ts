@@ -10,7 +10,7 @@ import { ComponentStore } from '../modules/component.store'
  *
  * @category Store
  */
-export class TagStore extends ComponentStore<HTMLDivElement> {
+export class TagStore extends ComponentStore {
   /**
    * A boolean which determines if this tag is destroyable or not.
    */
@@ -20,7 +20,7 @@ export class TagStore extends ComponentStore<HTMLDivElement> {
    */
   destroyed: boolean
 
-  constructor(props: TagProps & ComponentStoreProps<HTMLDivElement>) {
+  constructor(props: TagProps & ComponentStoreProps) {
     super(ComponentName.TAG, props)
 
     this.destroyable = props.destroyable || false

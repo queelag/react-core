@@ -1,5 +1,5 @@
 import { ObjectUtils } from '@queelag/core'
-import React from 'react'
+import React, { ForwardedRef, forwardRef } from 'react'
 import { AVATAR_PROPS_KEYS, AVATAR_STORE_KEYS } from '../definitions/constants'
 import { AvatarProps } from '../definitions/props'
 import { useComponentStore } from '../hooks/use.component.store'
@@ -24,7 +24,7 @@ import { Image } from './Image'
  *
  * @category Component
  */
-export function Avatar(props: AvatarProps) {
+export const Avatar = forwardRef((props: AvatarProps, ref: ForwardedRef<HTMLDivElement>) => {
   const store = useComponentStore(AvatarStore, props, AVATAR_STORE_KEYS)
 
   return (
@@ -32,6 +32,7 @@ export function Avatar(props: AvatarProps) {
       {...ObjectUtils.omit(props, AVATAR_PROPS_KEYS)}
       className={ReactUtils.joinClassNames(props.className, store.background)}
       id={store.id}
+      ref={ref}
       style={{
         ...props.style,
         ...ShapeUtils.findStyle(store.shape, props.size),
@@ -65,4 +66,4 @@ export function Avatar(props: AvatarProps) {
       )}
     </div>
   )
-}
+})

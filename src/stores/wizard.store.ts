@@ -10,7 +10,7 @@ import { Dummy } from '../modules/dummy'
  *
  * @category Store
  */
-export class WizardStore extends ComponentStore<HTMLDivElement> {
+export class WizardStore extends ComponentStore {
   /**
    * A string which determines the active step name.
    */
@@ -18,7 +18,7 @@ export class WizardStore extends ComponentStore<HTMLDivElement> {
   /** @internal */
   private _steps: WizardStep[] = []
 
-  constructor(props: WizardProps & ComponentStoreProps<HTMLDivElement>) {
+  constructor(props: WizardProps & ComponentStoreProps) {
     super(ComponentName.WIZARD, props)
 
     this.activeStepName = props.activeStepName || (props.steps[0] ? props.steps[0].name || '' : '')

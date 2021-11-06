@@ -1,7 +1,9 @@
 import { ID } from '@queelag/core'
 import { LegacyRef, MutableRefObject, ReactNode } from 'react'
-import { Color, FeedbackType, Layer, Orientation, Shape, Size, Theme } from './enums'
-import { HTMLImageProps, IconProps, WizardStepContentProps } from './props'
+import { WizardStepContentProps } from '..'
+import type { ComponentStore } from '../modules/component.store'
+import type { Color, FeedbackType, Layer, Orientation, Shape, Size, Theme } from './enums'
+import { HTMLImageProps, IconProps } from './props'
 import { SelectOptionValue } from './types'
 
 export interface AppearanceData {
@@ -34,7 +36,7 @@ export interface ColorPickerConfiguration {
   text: ColorPickerConfigurationValue
 }
 
-export interface ComponentStoreProps<T extends Element> extends WithLayer, WithOrientation, WithShape, WithSize {
+export interface ComponentStoreProps<T extends Element = HTMLDivElement> extends WithGetStore<T, any>, WithLayer, WithOrientation, WithShape, WithSize {
   id?: ID
   ref?: LegacyRef<T> | MutableRefObject<T>
   update?: () => void
@@ -99,8 +101,20 @@ export interface WithFeedbackType {
   type: FeedbackType
 }
 
+export interface WithFooter {
+  footer?: ReactNode
+}
+
+export interface WithGetStore<T extends Element, U extends ComponentStore<T>> {
+  getStore?: (store: U) => void
+}
+
+export interface WithHeader {
+  header?: ReactNode
+}
+
 export interface WithIcon {
-  icon?: (props: IconProps) => JSX.Element
+  icon?: (props: IconProps) => any
   iconProps?: IconProps
 }
 
@@ -116,14 +130,6 @@ export interface WithLayer {
 export interface WithLocalizationProps<T extends object> {
   inject?: T
   path?: string
-}
-
-export interface WithFooter {
-  footer?: ReactNode
-}
-
-export interface WithHeader {
-  header?: ReactNode
 }
 
 export interface WithName {
@@ -153,7 +159,7 @@ export interface WithTitle {
 export interface WizardStep {
   canGoBack: () => boolean
   canGoNext: () => boolean
-  content: (props: WizardStepContentProps) => JSX.Element
+  content: (props: WizardStepContentProps) => any
   description: string
   name: string
   title: string

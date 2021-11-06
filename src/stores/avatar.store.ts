@@ -9,13 +9,13 @@ import { ColorPicker } from '../pickers/color.picker'
  *
  * @category Store
  */
-export class AvatarStore extends ComponentStore<HTMLDivElement> {
+export class AvatarStore extends ComponentStore {
   /** @internal */
   private _background: string = ''
   /** @internal */
   private _color: string = ''
 
-  constructor(props: AvatarProps & ComponentStoreProps<HTMLDivElement>) {
+  constructor(props: AvatarProps & ComponentStoreProps) {
     super(ComponentName.AVATAR, props)
 
     this.background = props.background || Color.GRAY

@@ -1,5 +1,5 @@
 import { Logger } from '@queelag/core'
-import * as S from 'superstruct'
+import { boolean, refine, Struct } from 'superstruct'
 import { ComponentName } from '../definitions/enums'
 import { ComponentFormFieldStoreProps } from '../definitions/with.superstruct.interfaces'
 import { CheckBoxProps } from '../definitions/with.superstruct.props'
@@ -10,8 +10,8 @@ import { ComponentFormFieldStore } from '../modules/component.form.field.store'
  *
  * @category Store
  */
-export class CheckBoxStore<U extends object> extends ComponentFormFieldStore<HTMLDivElement, U> {
-  constructor(props: CheckBoxProps<U> & ComponentFormFieldStoreProps<HTMLDivElement, U>) {
+export class CheckBoxStore<T extends object> extends ComponentFormFieldStore<HTMLDivElement, T> {
+  constructor(props: CheckBoxProps<T> & ComponentFormFieldStoreProps<HTMLDivElement, T>) {
     super(ComponentName.CHECKBOX, props)
 
     this.validate()
@@ -28,15 +28,15 @@ export class CheckBoxStore<U extends object> extends ComponentFormFieldStore<HTM
     this.touch()
   }
 
-  get schema(): S.Struct<boolean> {
-    return this.required ? S.refine(S.boolean(), 'true', (v: boolean) => v === true) : S.boolean()
+  get schema(): Struct<boolean> {
+    return this.required ? refine(boolean(), 'true', (v: boolean) => v === true) : boolean()
   }
 
   get value(): boolean {
     return this.store[this.path] as any
   }
 
-  set schema(schema: S.Struct<boolean>) {
+  set schema(schema: Struct<boolean>) {
     this._schema = schema
   }
 }

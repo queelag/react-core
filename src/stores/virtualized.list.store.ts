@@ -2,7 +2,7 @@ import { Logger, NumberUtils, ObjectUtils } from '@queelag/core'
 import { MutableRefObject } from 'react'
 import { ComponentName, Orientation } from '../definitions/enums'
 import { ComponentStoreProps } from '../definitions/interfaces'
-import { VirtualizedListProps } from '../definitions/props'
+import { VirtualizedListStoreProps } from '../definitions/props'
 import { ComponentStore } from '../modules/component.store'
 
 /**
@@ -44,7 +44,7 @@ export class VirtualizedListStore<T> extends ComponentStore<HTMLUListElement> {
    */
   parentElementWidth: number
 
-  constructor(props: VirtualizedListProps<T> & ComponentStoreProps<HTMLUListElement> & { dummyRef: MutableRefObject<HTMLDivElement> }) {
+  constructor(props: VirtualizedListStoreProps<T> & ComponentStoreProps<HTMLUListElement>) {
     super(ComponentName.VIRTUALIZED_LIST, props)
 
     this.dummyRef = props.dummyRef

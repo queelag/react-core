@@ -1,5 +1,5 @@
 import { Logger } from '@queelag/core'
-import * as S from 'superstruct'
+import { Struct, StructError } from 'superstruct'
 import { ComponentFormFieldStoreProps } from '../definitions/with.superstruct.interfaces'
 import { ComponentStore } from './component.store'
 import { Schema } from './schema'
@@ -33,7 +33,7 @@ export class ComponentFormFieldStore<T extends Element, U extends object> extend
    */
   required: boolean
   /** @internal */
-  protected _schema: S.Struct<any, any> = Schema.any
+  protected _schema: Struct<any, any> = Schema.any
   /**
    * An object with interface U.
    */
@@ -45,7 +45,7 @@ export class ComponentFormFieldStore<T extends Element, U extends object> extend
   /**
    * A result of superstruct validation, used to determine if there's an error and what the message is.
    */
-  validation: [S.StructError | undefined, any]
+  validation: [StructError | undefined, any]
 
   constructor(name: string, props: ComponentFormFieldStoreProps<T, U>) {
     super(name, props)
@@ -97,7 +97,7 @@ export class ComponentFormFieldStore<T extends Element, U extends object> extend
   /**
    * A superstruct struct, used for validation.
    */
-  get schema(): S.Struct<any, any> {
+  get schema(): Struct<any, any> {
     return this._schema
   }
 
@@ -137,7 +137,7 @@ export class ComponentFormFieldStore<T extends Element, U extends object> extend
   }
 
   /** @internal */
-  set schema(schema: S.Struct<any, any>) {
+  set schema(schema: Struct<any, any>) {
     this._schema = schema
   }
 }

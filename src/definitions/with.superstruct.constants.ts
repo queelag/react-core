@@ -1,14 +1,15 @@
-import { CheckBoxStore } from '../stores/check.box.store'
-import { InputFileStore } from '../stores/input.file.store'
-import { InputStore } from '../stores/input.store'
-import { SelectStore } from '../stores/select.store'
-import { SwitchStore } from '../stores/switch.store'
+import type { CheckBoxStore } from '../stores/check.box.store'
+import type { InputFileStore } from '../stores/input.file.store'
+import type { InputStore } from '../stores/input.store'
+import type { SelectStore } from '../stores/select.store'
+import type { SwitchStore } from '../stores/switch.store'
 import { WithFormFieldProps } from './with.superstruct.interfaces'
 import { CheckBoxProps, InputFileProps, InputProps, SelectProps, SwitchProps } from './with.superstruct.props'
 
 /** @category Constant */
-export const WITH_FORM_FIELD_PROPS_KEYS: (keyof WithFormFieldProps<any>)[] = [
+export const WITH_FORM_FIELD_PROPS_KEYS: (keyof WithFormFieldProps<any, any, any>)[] = [
   'disabled',
+  'getStore',
   'icon',
   'label',
   'layer',

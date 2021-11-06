@@ -1,5 +1,5 @@
 import { ObjectUtils } from '@queelag/core'
-import React from 'react'
+import React, { ForwardedRef, forwardRef } from 'react'
 import { ICON_PROPS_KEYS, ICON_STORE_KEYS } from '../definitions/constants'
 import { IconProps } from '../definitions/props'
 import { useComponentStore } from '../hooks/use.component.store'
@@ -22,7 +22,7 @@ import { ReactUtils } from '../utils/react.utils'
  *
  * @category Component
  */
-export function Icon(props: IconProps) {
+export const Icon = forwardRef((props: IconProps, ref: ForwardedRef<SVGSVGElement>) => {
   const store = useComponentStore(IconStore, props, ICON_STORE_KEYS, 'svg')
 
   return (
@@ -32,6 +32,7 @@ export function Icon(props: IconProps) {
       dangerouslySetInnerHTML={{ __html: store.html }}
       fill={typeof props.fill === 'boolean' ? (props.fill ? 'currentColor' : 'none') : props.fill}
       height={store.size}
+      ref={ref}
       stroke={typeof props.stroke === 'boolean' ? (props.stroke ? 'currentColor' : 'none') : props.stroke}
       strokeWidth={store.thickness}
       style={{
@@ -48,4 +49,4 @@ export function Icon(props: IconProps) {
       width={store.size}
     />
   )
-}
+})

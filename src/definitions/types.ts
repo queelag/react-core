@@ -1,4 +1,7 @@
-import { DirectionHorizontal } from './enums'
+import { Attributes, ClassAttributes } from 'react'
+import type { DirectionHorizontal } from './enums'
+
+export type OmitLegacyRef<U extends ClassAttributes<T>, T = any> = Omit<U, 'ref'> & Attributes
 
 export type SelectOptionValue = string
 

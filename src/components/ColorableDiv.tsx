@@ -1,5 +1,5 @@
 import { ObjectUtils } from '@queelag/core'
-import React from 'react'
+import React, { ForwardedRef, forwardRef } from 'react'
 import { COLORABLE_DIV_PROPS_KEYS } from '../definitions/constants'
 import { ColorableDivProps } from '../definitions/props'
 import { ColorPicker } from '../pickers/color.picker'
@@ -21,7 +21,7 @@ import { ReactUtils } from '../utils/react.utils'
  *
  * @category Component
  */
-export function ColorableDiv(props: ColorableDivProps) {
+export const ColorableDiv = forwardRef((props: ColorableDivProps, ref: ForwardedRef<HTMLDivElement>) => {
   return (
     <div
       {...ObjectUtils.omit(props, COLORABLE_DIV_PROPS_KEYS)}
@@ -32,8 +32,7 @@ export function ColorableDiv(props: ColorableDivProps) {
         props.text && ColorPicker.textByString(props.text, props.layer),
         props.className
       )}
-    >
-      {props.children}
-    </div>
+      ref={ref}
+    />
   )
-}
+})

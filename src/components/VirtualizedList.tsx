@@ -26,7 +26,7 @@ import { VirtualizedListStore } from '../stores/virtualized.list.store'
 export function VirtualizedList<T>(props: VirtualizedListProps<T>) {
   const dummyRef = useSafeRef('div')
   const innerRef = useSafeRef('div')
-  const store = useComponentStore(VirtualizedListStore, { ...props, dummyRef, innerRef }, VIRTUALIZED_LIST_STORE_KEYS as any, 'ul')
+  const store = useComponentStore<VirtualizedListStore<T>>(VirtualizedListStore, { ...props, dummyRef, innerRef }, VIRTUALIZED_LIST_STORE_KEYS, 'ul')
 
   useEffect(() => {
     store.readItemElementHeightOrWidth()

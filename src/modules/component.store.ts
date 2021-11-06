@@ -11,7 +11,7 @@ import { Dummy } from './dummy'
  * @category Module
  * @template T The DOM element.
  */
-export class ComponentStore<T extends Element> {
+export class ComponentStore<T extends Element = HTMLDivElement> {
   /**
    * A string which identifies a component.
    */

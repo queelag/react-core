@@ -6,16 +6,16 @@ import { ComponentStore } from '../modules/component.store'
 import { useComponentStore } from './use.component.store'
 
 export const useCollectableComponentStore = <
-  K extends keyof ElementTagNameMap,
-  U extends ComponentStore<ElementTagNameMap[K]>,
-  V extends ComponentStoreProps<ElementTagNameMap[K]>
+  S extends ComponentStore<ElementTagNameMap[K]> = any,
+  P extends ComponentStoreProps<ElementTagNameMap[K]> = any,
+  K extends keyof ElementTagNameMap = any
 >(
-  Store: { new (props: V): U },
-  props: V,
-  Collector: ComponentCollector<U>,
-  keys: (keyof U & keyof V)[] = [],
+  Store: { new (props: P): S },
+  props: P,
+  Collector: ComponentCollector<S>,
+  keys: (keyof S & keyof P)[] = [],
   tagName: K = 'div' as K
-): U => {
+): S => {
   const store = useComponentStore(Store, props, keys, tagName)
 
   Collector.set(store)

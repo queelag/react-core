@@ -1,16 +1,20 @@
-import type * as S from 'superstruct'
-import { ComponentStoreProps, WithIcon, WithLayer } from './interfaces'
+import type { Struct } from 'superstruct'
+import type { ComponentFormFieldStore } from '../modules/component.form.field.store'
+import { ComponentStoreProps, WithGetStore, WithIcon, WithLayer } from './interfaces'
 
-export interface ComponentFormFieldStoreProps<T extends Element, U extends object> extends ComponentStoreProps<T>, WithFormFieldProps<U> {}
+export interface ComponentFormFieldStoreProps<T extends Element, U extends object> extends ComponentStoreProps<T>, WithFormFieldProps<T, any, U> {}
 
-export interface WithFormFieldProps<T extends object> extends WithIcon, WithLayer {
+export interface WithFormFieldProps<T extends Element, U extends ComponentFormFieldStore<T, V>, V extends object>
+  extends WithGetStore<T, U>,
+    WithIcon,
+    WithLayer {
   disabled?: boolean
   label?: string
   novalidate?: boolean
   path?: keyof T
   placeholder?: string
   required?: boolean
-  schema?: S.Struct<any, any>
+  schema?: Struct<any, any>
   store?: T
   touched?: boolean
 }

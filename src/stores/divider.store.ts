@@ -8,13 +8,13 @@ import { ComponentStore } from '../modules/component.store'
  *
  * @category Store
  */
-export class DividerStore extends ComponentStore<HTMLDivElement> {
+export class DividerStore extends ComponentStore {
   /**
    * An {@link Orientation} which determines the style.
    */
   orientation: Orientation
 
-  constructor(props: DividerProps & ComponentStoreProps<HTMLDivElement>) {
+  constructor(props: DividerProps & ComponentStoreProps) {
     super(ComponentName.DIVIDER, props)
 
     this.orientation = props.orientation || Orientation.HORIZONTAL

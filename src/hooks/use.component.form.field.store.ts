@@ -8,17 +8,17 @@ import { useComponentStore } from './use.component.store'
 const KEYS: (keyof ComponentFormFieldStore<any, any>)[] = ['disabled', 'label', 'layer', 'path', 'required', 'schema', 'store', 'touched']
 
 export const useComponentFormFieldStore = <
-  K extends keyof ElementTagNameMap,
-  U extends object,
-  V extends ComponentFormFieldStore<ElementTagNameMap[K], U>,
-  W extends ComponentFormFieldStoreProps<ElementTagNameMap[K], U>
+  S extends ComponentFormFieldStore<ElementTagNameMap[K], O> = any,
+  P extends ComponentFormFieldStoreProps<ElementTagNameMap[K], O> = any,
+  O extends object = any,
+  K extends keyof ElementTagNameMap = any
 >(
-  Store: { new (props: W): V },
-  props: W,
-  Collector: ComponentFormFieldCollector<ElementTagNameMap[K], U, V>,
-  keys: (keyof V & keyof W)[] = [],
+  Store: { new (props: P): S },
+  props: P,
+  Collector: ComponentFormFieldCollector<ElementTagNameMap[K], O, S>,
+  keys: (keyof S & keyof P)[] = [],
   tagName: K = 'div' as K
-): V => {
+): S => {
   const store = useComponentStore(Store, props, [...(KEYS as any), ...keys], tagName)
 
   Collector.set(store)

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ForwardedRef, forwardRef } from 'react'
 
 /**
  * A component composed of a div with display set to 'none'.
@@ -16,6 +16,6 @@ import React from 'react'
  *
  * @category Component
  */
-export function Blank() {
-  return <div style={{ display: 'none' }} />
-}
+export const Blank = forwardRef((props: any, ref: ForwardedRef<HTMLDivElement>) => {
+  return <div ref={ref} style={{ display: 'none' }} />
+})

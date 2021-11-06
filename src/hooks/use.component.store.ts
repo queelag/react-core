@@ -9,15 +9,15 @@ import { useSafeRef } from './use.safe.ref'
 const KEYS: (keyof ComponentStore<any>)[] = ['id', 'layer', 'orientation', 'shape', 'size']
 
 export const useComponentStore = <
-  K extends keyof ElementTagNameMap,
-  U extends ComponentStore<ElementTagNameMap[K]>,
-  V extends ComponentStoreProps<ElementTagNameMap[K]>
+  S extends ComponentStore<ElementTagNameMap[K]> = any,
+  P extends ComponentStoreProps<ElementTagNameMap[K]> = any,
+  K extends keyof ElementTagNameMap = any
 >(
-  Store: { new (props: V): U },
-  props: V,
-  keys: (keyof U & keyof V)[] = [],
+  Store: { new (props: P): S },
+  props: P,
+  keys: (keyof S & keyof P)[] = [],
   tagName: K = 'div' as K
-): U => {
+): S => {
   const ref = useSafeRef(tagName)
   const update = useForceUpdate()
   const store = useMemo(() => new Store({ ...props, ref, update }), [])
@@ -31,6 +31,10 @@ export const useComponentStore = <
   useEffect(() => {
     StoreUtils.updateKeys(store, props, [...(KEYS as any), ...keys], update)
   }, [props])
+
+  useEffect(() => {
+    props.getStore && props.getStore(store)
+  }, [])
 
   return store
 }

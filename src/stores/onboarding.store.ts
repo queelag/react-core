@@ -10,7 +10,7 @@ import { Dummy } from '../modules/dummy'
  *
  * @category Store
  */
-export class OnboardingStore extends ComponentStore<HTMLDivElement> {
+export class OnboardingStore extends ComponentStore {
   /**
    * A number which determines the active item index.
    */
@@ -20,7 +20,7 @@ export class OnboardingStore extends ComponentStore<HTMLDivElement> {
    */
   items: OnboardingItem[]
 
-  constructor(props: OnboardingProps & ComponentStoreProps<HTMLDivElement>) {
+  constructor(props: OnboardingProps & ComponentStoreProps) {
     super(ComponentName.ONBOARDING, props)
 
     this.activeItemIndex = props.activeItemIndex || 0
