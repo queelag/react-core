@@ -6,6 +6,7 @@ import type { FormStore } from '../stores/form.store'
 import type { IconStore } from '../stores/icon.store'
 import type { ImageStore } from '../stores/image.store'
 import type { ListStore } from '../stores/list.store'
+import type { MeterStore } from '../stores/meter.store'
 import type { OnboardingStore } from '../stores/onboarding.store'
 import type { SidebarStore } from '../stores/sidebar.store'
 import type { TagStore } from '../stores/tag.store'
@@ -174,6 +175,9 @@ export const LOCALIZABLE_TEXT_PROPS_KEYS: (keyof LocalizableTextProps<any>)[] = 
 
 /** @category Constant */
 export const METER_PROPS_KEYS: (keyof MeterProps)[] = ['maximum', 'minimum', 'value']
+
+/** @category Constant */
+export const METER_STORE_KEYS: (keyof MeterProps & keyof MeterStore)[] = []
 
 /** @category Constant */
 export const ONBOARDING_PROPS_KEYS: (keyof OnboardingProps)[] = ['activeItemIndex', 'getStore', 'items', 'onEnd']

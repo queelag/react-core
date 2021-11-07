@@ -68,16 +68,16 @@ class _ {
     let media: MediaQueryList
 
     if (Environment.isWindowNotDefined) {
-      return ModuleLogger.warn('Appearance', 'registerThemeEventListener', `window is not defined.`)
+      return ModuleLogger.warn('Appearance', 'registerThemeEventListener', `The window is not defined.`)
     }
 
     if (typeof window.matchMedia === 'undefined') {
-      return ModuleLogger.warn('Appearance', 'registerThemeEventListener', `window.matchMedia is not defined.`)
+      return ModuleLogger.warn('Appearance', 'registerThemeEventListener', `The window.matchMedia function is not defined.`)
     }
 
     media = window.matchMedia('(prefers-color-scheme: dark)')
     if (typeof media.addEventListener !== 'function')
-      return ModuleLogger.warn('Appearance', 'registerThemeEventListener', `window.matchMedia.addEventListener is not defined.`)
+      return ModuleLogger.warn('Appearance', 'registerThemeEventListener', `The window.matchMedia.addEventListener function is not defined.`)
 
     media.addEventListener('change', (v: MediaQueryListEvent) => this.isThemeSystem && this.setTheme(Theme.SYSTEM, false))
   }

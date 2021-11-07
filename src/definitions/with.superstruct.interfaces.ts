@@ -11,10 +11,10 @@ export interface WithFormFieldProps<T extends Element, U extends ComponentFormFi
   disabled?: boolean
   label?: string
   novalidate?: boolean
-  path?: keyof T
+  path?: keyof V
   placeholder?: string
   required?: boolean
   schema?: Struct<any, any>
-  store?: T
+  store?: V
   touched?: boolean
 }
