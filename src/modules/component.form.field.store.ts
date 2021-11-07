@@ -1,6 +1,6 @@
-import { Logger } from '@queelag/core'
 import { Struct, StructError } from 'superstruct'
 import { ComponentFormFieldStoreProps } from '../definitions/with.superstruct.interfaces'
+import { ModuleLogger } from '../loggers/module.logger'
 import { ComponentStore } from './component.store'
 import { Schema } from './schema'
 
@@ -67,7 +67,7 @@ export class ComponentFormFieldStore<T extends Element, U extends object> extend
   touch(): void {
     if (this.hasNotBeenTouched) {
       this.touched = true
-      Logger.debug(this.id, 'touch', `The touched state has been set to true.`)
+      ModuleLogger.verbose(this.id, 'touch', `The touched state has been set to true.`)
     }
 
     this.validate()
@@ -82,7 +82,7 @@ export class ComponentFormFieldStore<T extends Element, U extends object> extend
     }
 
     this.validation = this.schema.validate(this.value)
-    Logger.debug(this.id, 'validate', `The value has been validated against the schema.`, this.validation, this.schema, this.value)
+    ModuleLogger.debug(this.id, 'validate', `The value has been validated against the schema.`, this.validation, this.schema, this.value)
 
     this.update()
   }

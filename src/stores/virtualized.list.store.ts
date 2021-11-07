@@ -1,8 +1,9 @@
-import { Logger, NumberUtils, ObjectUtils } from '@queelag/core'
+import { NumberUtils, ObjectUtils } from '@queelag/core'
 import { MutableRefObject } from 'react'
 import { ComponentName, Orientation } from '../definitions/enums'
 import { ComponentStoreProps } from '../definitions/interfaces'
 import { VirtualizedListStoreProps } from '../definitions/props'
+import { StoreLogger } from '../loggers/store.logger'
 import { ComponentStore } from '../modules/component.store'
 
 /**
@@ -71,12 +72,12 @@ export class VirtualizedListStore<T> extends ComponentStore<HTMLUListElement> {
     switch (this.orientation) {
       case Orientation.HORIZONTAL:
         this.itemElementWidth = NumberUtils.parseFloat(getComputedStyle(this.dummyRef.current).width) + this.gutter
-        Logger.debug(this.id, 'readItemElementHeightOrWidth', this.orientation, `The item element width has been set to ${this.itemElementWidth}.`)
+        StoreLogger.verbose(this.id, 'readItemElementHeightOrWidth', this.orientation, `The item element width has been set to ${this.itemElementWidth}.`)
 
         break
       case Orientation.VERTICAL:
         this.itemElementHeight = NumberUtils.parseFloat(getComputedStyle(this.dummyRef.current).height) + this.gutter
-        Logger.debug(this.id, 'readItemElementHeightOrWidth', this.orientation, `The item element height has been set to ${this.itemElementHeight}.`)
+        StoreLogger.verbose(this.id, 'readItemElementHeightOrWidth', this.orientation, `The item element height has been set to ${this.itemElementHeight}.`)
 
         break
     }
@@ -91,11 +92,11 @@ export class VirtualizedListStore<T> extends ComponentStore<HTMLUListElement> {
     let element: Element | null, parent: Element, height: number, width: number
 
     element = this.element
-    if (element.parentElement === null) return Logger.error(this.id, 'readElementHeightOrWidth', `The element has no parent.`)
+    if (element.parentElement === null) return StoreLogger.error(this.id, 'readElementHeightOrWidth', `The element has no parent.`)
 
     while (true) {
       element = element.parentElement
-      if (element === null) return Logger.debug(this.id, 'readElementHeightOrWidth', `The parent element has no parent.`)
+      if (element === null) return StoreLogger.verbose(this.id, 'readElementHeightOrWidth', `The parent element has no parent.`)
 
       switch (this.orientation) {
         case Orientation.HORIZONTAL:
@@ -106,7 +107,7 @@ export class VirtualizedListStore<T> extends ComponentStore<HTMLUListElement> {
 
           if (width > 0) {
             this.parentElementWidth = width
-            Logger.debug(this.id, 'readElementHeightOrWidth', this.orientation, `The parent element width has been set to ${width}.`)
+            StoreLogger.verbose(this.id, 'readElementHeightOrWidth', this.orientation, `The parent element width has been set to ${width}.`)
 
             return this.update()
           }
@@ -120,7 +121,7 @@ export class VirtualizedListStore<T> extends ComponentStore<HTMLUListElement> {
 
           if (height > 0) {
             this.parentElementHeight = height
-            Logger.debug(this.id, 'readElementHeightOrWidth', this.orientation, `The parent element height has been set to ${height}.`)
+            StoreLogger.verbose(this.id, 'readElementHeightOrWidth', this.orientation, `The parent element height has been set to ${height}.`)
 
             return this.update()
           }

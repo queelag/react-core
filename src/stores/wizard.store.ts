@@ -1,7 +1,8 @@
-import { Logger, noop, tcp } from '@queelag/core'
+import { noop, tcp } from '@queelag/core'
 import { ComponentName, DirectionHorizontal } from '../definitions/enums'
 import { ComponentStoreProps, WizardStep, WizardStepPartial } from '../definitions/interfaces'
 import { WizardProps } from '../definitions/props'
+import { StoreLogger } from '../loggers/store.logger'
 import { ComponentStore } from '../modules/component.store'
 import { Dummy } from '../modules/dummy'
 
@@ -33,7 +34,7 @@ export class WizardStore extends ComponentStore {
     let previous: string
 
     previous = this.activeStepName
-    Logger.debug(this.id, 'onClickNext', `The previous step has been set to ${previous}.`)
+    StoreLogger.debug(this.id, 'onClickNext', `The previous step has been set to ${previous}.`)
 
     if (this.activeStep.canGoNext()) {
       this.setActiveStepName(this.nextStep.name)
@@ -49,7 +50,7 @@ export class WizardStore extends ComponentStore {
     let previous: string
 
     previous = this.activeStepName
-    Logger.debug(this.id, 'onClickPrevious', `The previous step has been set to ${previous}.`)
+    StoreLogger.debug(this.id, 'onClickPrevious', `The previous step has been set to ${previous}.`)
 
     if (this.activeStep.canGoBack()) {
       this.setActiveStepName(this.previousStep.name)
@@ -72,7 +73,7 @@ export class WizardStore extends ComponentStore {
 
   setActiveStepName(name: string): void {
     this.activeStepName = name
-    Logger.debug(this.id, 'setActiveStepName', `The active step has been set to ${this.activeStepName}.`)
+    StoreLogger.debug(this.id, 'setActiveStepName', `The active step has been set to ${this.activeStepName}.`)
 
     this.update()
   }

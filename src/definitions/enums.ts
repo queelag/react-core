@@ -135,7 +135,7 @@ export enum Layer {
   THREE = 3
 }
 
-export enum LocalStorageName {
+export enum ReactCoreLocalStorageName {
   APPEARANCE = 'APPEARANCE'
 }
 

@@ -1,8 +1,9 @@
-import { Logger, NumberUtils, TextCodec } from '@queelag/core'
+import { NumberUtils, TextCodec } from '@queelag/core'
 import { ChangeEvent } from 'react'
 import { ComponentName, InputTouchTrigger, InputType } from '../definitions/enums'
 import { ComponentFormFieldStoreProps } from '../definitions/with.superstruct.interfaces'
 import { InputProps } from '../definitions/with.superstruct.props'
+import { StoreLogger } from '../loggers/store.logger'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
 
 /**
@@ -64,17 +65,17 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
     switch (this.type) {
       case InputType.BUFFER:
         this.store[this.path] = TextCodec.encode(event.target.value) as any
-        Logger.debug(this.id, 'onChange', this.type, `The value has been set.`, this.value)
+        StoreLogger.debug(this.id, 'onChange', this.type, `The value has been set.`, this.value)
 
         break
       case InputType.DATE:
         this.store[this.path] = 0 as any
-        Logger.debug(this.id, 'onChange', this.type, `The value has been set to ${this.value}.`)
+        StoreLogger.debug(this.id, 'onChange', this.type, `The value has been set to ${this.value}.`)
 
         break
       case InputType.NUMBER:
         this.store[this.path] = (event.target.value.length > 0 ? NumberUtils.parseFloat(event.target.value) : '') as any
-        Logger.debug(this.id, 'onChange', this.type, `The value has been set to ${this.value}.`)
+        StoreLogger.debug(this.id, 'onChange', this.type, `The value has been set to ${this.value}.`)
 
         break
       case InputType.EMAIL:
@@ -83,7 +84,7 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
       case InputType.TEXT:
       case InputType.URL:
         this.store[this.path] = event.target.value as any
-        Logger.debug(this.id, 'onChange', this.type, `The value has been set to ${this.value}.`)
+        StoreLogger.debug(this.id, 'onChange', this.type, `The value has been set to ${this.value}.`)
 
         break
     }
@@ -97,7 +98,7 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
    */
   onBlur = (): void => {
     this.focused = false
-    Logger.debug(this.id, 'onBlur', 'The focused state has been set to false.')
+    StoreLogger.verbose(this.id, 'onBlur', 'The focused state has been set to false.')
 
     this.isTouchTriggerBlur && this.touch()
   }
@@ -107,7 +108,7 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
    */
   onFocus = (): void => {
     this.focused = true
-    Logger.debug(this.id, 'onFocus', `The focused state has been set to true.`)
+    StoreLogger.verbose(this.id, 'onFocus', `The focused state has been set to true.`)
 
     this.update()
   }
@@ -117,11 +118,11 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
    */
   onClickToggleObscuration = (): void => {
     this.obscured = !this.obscured
-    Logger.debug(this.id, 'onClickToggleObscuration', `The obscuration has been set to ${this.obscured}.`)
+    StoreLogger.verbose(this.id, 'onClickToggleObscuration', `The obscuration has been set to ${this.obscured}.`)
 
     if (this.isTypeBuffer) {
       this.element.type = this.obscured ? 'password' : 'text'
-      Logger.debug(this.id, 'onClickToggleObscuration', `The element type has been set to ${this.element.type}.`)
+      StoreLogger.verbose(this.id, 'onClickToggleObscuration', `The element type has been set to ${this.element.type}.`)
     }
 
     this.update()

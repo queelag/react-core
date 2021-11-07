@@ -1,4 +1,4 @@
-import { Logger } from '@queelag/core'
+import { ModuleLogger } from '../loggers/module.logger'
 
 /**
  * A generic controller for handling visibility states.
@@ -54,15 +54,15 @@ export class VisibilityController {
    */
   hide(name: string, delay: number = 0): void {
     if (this.isHidden(name)) {
-      return Logger.warn('VisibilityController', 'hide', `The key ${name} is already hidden.`)
+      return ModuleLogger.warn('VisibilityController', 'hide', `The key ${name} is already hidden.`)
     }
 
     this.data.set(name, VisibilityController.HIDING)
-    Logger.debug('VisibilityController', 'hide', `The key ${name} is hiding.`, this.data.get(name))
+    ModuleLogger.debug('VisibilityController', 'hide', `The key ${name} is hiding.`, this.data.get(name))
 
     setTimeout(() => {
       this.data.set(name, VisibilityController.HIDDEN)
-      Logger.debug('VisibilityController', 'hide', `The key ${name} is hidden.`, this.data.get(name))
+      ModuleLogger.debug('VisibilityController', 'hide', `The key ${name} is hidden.`, this.data.get(name))
     }, delay)
   }
 
@@ -71,15 +71,15 @@ export class VisibilityController {
    */
   show(name: string, delay: number = 0): void {
     if (this.isVisible(name)) {
-      return Logger.warn('VisibilityController', 'show', `The key ${name} is already visible.`, this.data.get(name))
+      return ModuleLogger.warn('VisibilityController', 'show', `The key ${name} is already visible.`, this.data.get(name))
     }
 
     this.data.set(name, VisibilityController.SHOWING)
-    Logger.debug('VisibilityController', 'hide', `The key ${name} is showing.`, this.data.get(name))
+    ModuleLogger.debug('VisibilityController', 'hide', `The key ${name} is showing.`, this.data.get(name))
 
     setTimeout(() => {
       this.data.set(name, VisibilityController.VISIBLE)
-      Logger.debug('VisibilityController', 'hide', `The key ${name} is visible.`, this.data.get(name))
+      ModuleLogger.debug('VisibilityController', 'hide', `The key ${name} is visible.`, this.data.get(name))
     }, delay)
   }
 

@@ -1,8 +1,9 @@
-import { Logger, noop } from '@queelag/core'
+import { noop } from '@queelag/core'
 import { MouseEvent } from 'react'
 import { ComponentName } from '../definitions/enums'
 import { ComponentStoreProps } from '../definitions/interfaces'
 import { TagProps } from '../definitions/props'
+import { StoreLogger } from '../loggers/store.logger'
 import { ComponentStore } from '../modules/component.store'
 
 /**
@@ -37,11 +38,11 @@ export class TagStore extends ComponentStore {
     event.stopPropagation()
 
     if (this.isNotDestroyable) {
-      return Logger.warn(this.id, 'onClickDestroy', `Execution stopped, destroyable is falsy.`)
+      return StoreLogger.warn(this.id, 'onClickDestroy', `Execution stopped, destroyable is falsy.`)
     }
 
     this.destroyed = true
-    Logger.debug(this.id, 'onClickDestroy', `The destroyed state has been set to true.`)
+    StoreLogger.debug(this.id, 'onClickDestroy', `The destroyed state has been set to true.`)
 
     this.onDestroy()
 

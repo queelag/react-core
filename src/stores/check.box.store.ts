@@ -1,8 +1,8 @@
-import { Logger } from '@queelag/core'
 import { boolean, refine, Struct } from 'superstruct'
 import { ComponentName } from '../definitions/enums'
 import { ComponentFormFieldStoreProps } from '../definitions/with.superstruct.interfaces'
 import { CheckBoxProps } from '../definitions/with.superstruct.props'
+import { StoreLogger } from '../loggers/store.logger'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
 
 /**
@@ -19,11 +19,11 @@ export class CheckBoxStore<T extends object> extends ComponentFormFieldStore<HTM
 
   onClick = (): void => {
     if (this.isDisabled) {
-      return Logger.warn(this.id, 'onClick', `Execution stopped, disabled is truthy.`)
+      return StoreLogger.warn(this.id, 'onClick', `Execution stopped, disabled is truthy.`)
     }
 
     this.store[this.path] = !this.value as any
-    Logger.debug(this.id, 'onClick', `The value has been set to ${this.value}.`)
+    StoreLogger.debug(this.id, 'onClick', `The value has been set to ${this.value}.`)
 
     this.touch()
   }

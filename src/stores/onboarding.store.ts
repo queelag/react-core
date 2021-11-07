@@ -1,7 +1,8 @@
-import { Logger, noop, NumberUtils } from '@queelag/core'
+import { noop, NumberUtils } from '@queelag/core'
 import { ComponentName } from '../definitions/enums'
 import { ComponentStoreProps, OnboardingItem } from '../definitions/interfaces'
 import { OnboardingProps } from '../definitions/props'
+import { StoreLogger } from '../loggers/store.logger'
 import { ComponentStore } from '../modules/component.store'
 import { Dummy } from '../modules/dummy'
 
@@ -33,7 +34,7 @@ export class OnboardingStore extends ComponentStore {
    */
   onClickPrevious = (): void => {
     this.activeItemIndex = NumberUtils.limit(this.activeItemIndex - 1, 0)
-    Logger.debug(this.id, 'onClickPrevious', `The active item index has been set to ${this.activeItemIndex}.`)
+    StoreLogger.debug(this.id, 'onClickPrevious', `The active item index has been set to ${this.activeItemIndex}.`)
 
     this.update()
   }
@@ -44,13 +45,13 @@ export class OnboardingStore extends ComponentStore {
   onClickNext = (): void => {
     if (this.isOver) {
       this.onEnd()
-      Logger.debug(this.id, 'onClickNext', `The onEnd function has been called.`, this.onEnd)
+      StoreLogger.debug(this.id, 'onClickNext', `The onEnd function has been called.`, this.onEnd)
 
       return
     }
 
     this.activeItemIndex += 1
-    Logger.debug(this.id, 'onClickNext', `The active item index has been set to ${this.activeItemIndex}.`)
+    StoreLogger.debug(this.id, 'onClickNext', `The active item index has been set to ${this.activeItemIndex}.`)
 
     this.update()
   }
@@ -60,7 +61,7 @@ export class OnboardingStore extends ComponentStore {
    */
   onClickSkip = (): void => {
     this.onEnd()
-    Logger.debug(this.id, 'onClickSkip', `The onEnd function has been called.`, this.onEnd)
+    StoreLogger.debug(this.id, 'onClickSkip', `The onEnd function has been called.`, this.onEnd)
   }
 
   /**

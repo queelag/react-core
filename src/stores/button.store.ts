@@ -1,8 +1,9 @@
-import { Logger, noop, tcp } from '@queelag/core'
+import { noop, tcp } from '@queelag/core'
 import { MouseEvent } from 'react'
 import { ButtonVariant, ComponentName } from '../definitions/enums'
 import { ComponentStoreProps } from '../definitions/interfaces'
 import { ButtonProps } from '../definitions/props'
+import { StoreLogger } from '../loggers/store.logger'
 import { ComponentStore } from '../modules/component.store'
 
 /**
@@ -89,22 +90,23 @@ export class ButtonStore extends ComponentStore<HTMLButtonElement> {
       event.stopPropagation()
 
       if (this.isDisabled) {
-        return Logger.warn(this.id, 'onClick', `Execution stopped, disabled is truthy.`)
+        return StoreLogger.warn(this.id, 'onClick', `Execution stopped, disabled is truthy.`)
       }
 
       this.disabled = true
       this.spinning = true
 
-      Logger.debug(this.id, 'onClick', `The disabled and spinning states have been set to true.`)
+      StoreLogger.verbose(this.id, 'onClick', `The disabled and spinning states have been set to true.`)
 
       this.update()
 
       await tcp(() => onClick(event))
+      StoreLogger.debug(this.id, 'onClick', `The onClick function has been fired.`, onClick)
 
       this.disabled = false
       this.spinning = false
 
-      Logger.debug(this.id, 'onClick', `The disabled and spinning states have been set to false.`)
+      StoreLogger.verbose(this.id, 'onClick', `The disabled and spinning states have been set to false.`)
 
       this.update()
     }

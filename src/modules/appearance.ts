@@ -1,6 +1,7 @@
-import { Environment, LocalStorage, Logger, Storage } from '@queelag/core'
-import { LocalStorageName, Theme } from '../definitions/enums'
+import { Environment, LocalStorage, Storage } from '@queelag/core'
+import { ReactCoreLocalStorageName, Theme } from '../definitions/enums'
 import { AppearanceData } from '../definitions/interfaces'
+import { ModuleLogger } from '../loggers/module.logger'
 import { Dummy } from './dummy'
 
 class _ {
@@ -22,7 +23,7 @@ class _ {
     if (Environment.isWindowDefined) {
       let get: boolean
 
-      get = await this.storage.get(LocalStorageName.APPEARANCE, this.data)
+      get = await this.storage.get(ReactCoreLocalStorageName.APPEARANCE, this.data)
       if (!get) return false
 
       this.setTheme(this.data.theme, false)
@@ -44,7 +45,7 @@ class _ {
 
   async setTheme(theme: Theme, store: boolean = true): Promise<boolean> {
     this.data.theme = theme
-    Logger.debug('Appearance', 'setTheme', `The theme has been set to ${theme}.`)
+    ModuleLogger.debug('Appearance', 'setTheme', `The theme has been set to ${theme}.`)
 
     switch (theme) {
       case Theme.DARK:
@@ -57,7 +58,7 @@ class _ {
     }
 
     if (Environment.isWindowDefined && store) {
-      return this.storage.set(LocalStorageName.APPEARANCE, this.data)
+      return this.storage.set(ReactCoreLocalStorageName.APPEARANCE, this.data)
     }
 
     return true
@@ -67,28 +68,28 @@ class _ {
     let media: MediaQueryList
 
     if (Environment.isWindowNotDefined) {
-      return Logger.warn('Appearance', 'registerThemeEventListener', `window is not defined.`)
+      return ModuleLogger.warn('Appearance', 'registerThemeEventListener', `window is not defined.`)
     }
 
     if (typeof window.matchMedia === 'undefined') {
-      return Logger.warn('Appearance', 'registerThemeEventListener', `window.matchMedia is not defined.`)
+      return ModuleLogger.warn('Appearance', 'registerThemeEventListener', `window.matchMedia is not defined.`)
     }
 
     media = window.matchMedia('(prefers-color-scheme: dark)')
     if (typeof media.addEventListener !== 'function')
-      return Logger.warn('Appearance', 'registerThemeEventListener', `window.matchMedia.addEventListener is not defined.`)
+      return ModuleLogger.warn('Appearance', 'registerThemeEventListener', `window.matchMedia.addEventListener is not defined.`)
 
     media.addEventListener('change', (v: MediaQueryListEvent) => this.isThemeSystem && this.setTheme(Theme.SYSTEM, false))
   }
 
   get themeByPrefersColorScheme(): Theme {
     if (Environment.isWindowNotDefined) {
-      Logger.warn('Appearance', 'themeByPrefersColorScheme', `window is not defined.`)
+      ModuleLogger.warn('Appearance', 'themeByPrefersColorScheme', `window is not defined.`)
       return Theme.LIGHT
     }
 
     if (typeof window.matchMedia === 'undefined') {
-      Logger.warn('Appearance', 'themeByPrefersColorScheme', `window.matchMedia is not defined.`)
+      ModuleLogger.warn('Appearance', 'themeByPrefersColorScheme', `window.matchMedia is not defined.`)
       return Theme.LIGHT
     }
 

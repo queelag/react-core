@@ -1,8 +1,9 @@
-import { Cache, ImageUtils, Logger } from '@queelag/core'
+import { Cache, ImageUtils } from '@queelag/core'
 import { CSSProperties, SyntheticEvent } from 'react'
 import { ComponentName, ImageStatus } from '../definitions/enums'
 import { ComponentStoreProps } from '../definitions/interfaces'
 import { ImageProps } from '../definitions/props'
+import { StoreLogger } from '../loggers/store.logger'
 import { ComponentStore } from '../modules/component.store'
 import { ShapeUtils } from '../utils/shape.utils'
 
@@ -45,7 +46,7 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
     this.deleteEmptyFromCache()
 
     this.status = ImageStatus.ERROR
-    Logger.error(this.id, 'onError', `The status has been set to ${ImageStatus.ERROR}.`, event)
+    StoreLogger.error(this.id, 'onError', `The status has been set to ${ImageStatus.ERROR}.`, event)
 
     this.update()
   }
@@ -53,11 +54,11 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
   onLoad = (event: SyntheticEvent<HTMLImageElement>): void => {
     if (this.isCacheable && this.isNotCached) {
       Cache.images.set(this.src, ImageUtils.toBase64(this.element, this.alpha, this.quality))
-      Logger.debug(this.id, 'onLoad', `The base64 value of the image has been cached.`)
+      StoreLogger.verbose(this.id, 'onLoad', `The base64 value of the image has been cached.`)
     }
 
     this.status = ImageStatus.LOADED
-    Logger.debug(this.id, 'onLoad', `The status has been set to ${ImageStatus.LOADED}.`, event)
+    StoreLogger.verbose(this.id, 'onLoad', `The status has been set to ${ImageStatus.LOADED}.`, event)
 
     this.update()
   }
@@ -65,19 +66,19 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
   onLoadStart = (event: SyntheticEvent<HTMLImageElement>): void => {
     if (this.isCacheable && this.isNotCached) {
       Cache.images.set(this.src, '')
-      Logger.debug(this.id, 'setSource', `An empty string has been cached.`)
+      StoreLogger.verbose(this.id, 'setSource', `An empty string has been cached.`)
     }
   }
 
   deleteEmptyFromCache(): void {
     if (this.isCacheable) {
       if (this.isCached) {
-        Logger.warn(this.id, 'deleteEmptyFromCache', `The cached value is not empty.`)
+        StoreLogger.warn(this.id, 'deleteEmptyFromCache', `The cached value is not empty.`)
         return
       }
 
       Cache.images.delete(this.src)
-      Logger.debug(this.id, 'deleteFromCache', `The empty cached value has been deleted.`)
+      StoreLogger.verbose(this.id, 'deleteFromCache', `The empty cached value has been deleted.`)
     }
   }
 
@@ -144,7 +145,8 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
       cached = Cache.images.get(src)
       if (typeof cached === 'string') {
         if (cached.length <= 0) {
-          Logger.debug(this.id, 'setSource', `Another store is loading the same source.`)
+          StoreLogger.verbose(this.id, 'setSource', `Another store is loading the same source.`)
+
           await new Promise<void>((r) =>
             setInterval(() => {
               cached = Cache.images.get(src)
@@ -154,17 +156,17 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
 
           if (cached === undefined) {
             this.status = ImageStatus.ERROR
-            Logger.debug(this.id, 'setSource', `The other store failed to fetch the source, the status has been set to ${this.status}.`)
+            StoreLogger.error(this.id, 'setSource', `The other store failed to fetch the source, the status has been set to ${this.status}.`)
 
             return
           }
         }
 
         this._src = cached
-        Logger.debug(this.id, 'setSource', `The source has been set to the cached one.`)
+        StoreLogger.verbose(this.id, 'setSource', `The source has been set to the cached one.`)
 
         this.status = ImageStatus.LOADED
-        Logger.debug(this.id, 'setSource', `The status has been set to ${this.status}.`)
+        StoreLogger.verbose(this.id, 'setSource', `The status has been set to ${this.status}.`)
 
         this.update()
 
@@ -172,10 +174,10 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
       }
 
       this._src = src
-      Logger.debug(this.id, 'setSource', `The source has been set.`)
+      StoreLogger.verbose(this.id, 'setSource', `The source has been set.`)
 
       this.status = ImageStatus.LOADING
-      Logger.debug(this.id, 'setSource', `The status has been set to ${this.status}.`)
+      StoreLogger.verbose(this.id, 'setSource', `The status has been set to ${this.status}.`)
 
       this.update()
     })()

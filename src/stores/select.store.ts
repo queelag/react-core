@@ -1,4 +1,3 @@
-import { Logger } from '@queelag/core'
 import { ChangeEvent } from 'react'
 import * as S from 'superstruct'
 import { ComponentName, SelectMode } from '../definitions/enums'
@@ -6,6 +5,7 @@ import { SelectOption } from '../definitions/interfaces'
 import { SelectOptionValue } from '../definitions/types'
 import { ComponentFormFieldStoreProps } from '../definitions/with.superstruct.interfaces'
 import { SelectProps } from '../definitions/with.superstruct.props'
+import { StoreLogger } from '../loggers/store.logger'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
 
 /**
@@ -43,18 +43,18 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
       case SelectMode.MULTIPLE:
         if (this.valueAsMultiple.includes(option.value)) {
           this.store[this.path] = this.valueAsMultiple.filter((v: SelectOptionValue) => v !== option.value) as any
-          Logger.debug(this.id, 'onClickOption', this.mode, `The option ${option.value} has been removed from the value.`, this.value, option)
+          StoreLogger.debug(this.id, 'onClickOption', this.mode, `The option ${option.value} has been removed from the value.`, this.value, option)
 
           break
         }
 
         this.store[this.path] = this.valueAsMultiple.concat(option.value) as any
-        Logger.debug(this.id, 'onClickOption', this.mode, `The option ${option.value} has been pushed to the value.`, this.value, option)
+        StoreLogger.debug(this.id, 'onClickOption', this.mode, `The option ${option.value} has been pushed to the value.`, this.value, option)
 
         break
       case SelectMode.SINGLE:
         this.store[this.path] = option.value as any
-        Logger.debug(this.id, 'onClickOption', this.mode, `The option ${option.value} has been set as the value.`, this.value)
+        StoreLogger.debug(this.id, 'onClickOption', this.mode, `The option ${option.value} has been set as the value.`, this.value)
 
         break
     }
@@ -71,19 +71,19 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
       case SelectMode.MULTIPLE:
         if (this.valueAsMultiple.includes(option.value)) {
           this.store[this.path] = this.valueAsMultiple.filter((v: SelectOptionValue) => v !== option.value) as any
-          Logger.debug(this.id, 'onClickRemove', this.mode, `The option ${option.value} has been removed from the value.`, this.value, option)
+          StoreLogger.debug(this.id, 'onClickRemove', this.mode, `The option ${option.value} has been removed from the value.`, this.value, option)
         }
 
         break
       case SelectMode.SINGLE:
-        Logger.warn(this.id, 'onClickRemove', this.mode, `The remove function does not work with this mode.`)
+        StoreLogger.warn(this.id, 'onClickRemove', this.mode, `The remove function does not work with this mode.`)
         break
     }
   }
 
   onChangeQuery = (event: ChangeEvent<HTMLInputElement>): void => {
     this.query = event.target.value
-    Logger.debug(this.id, 'onChangeQuery', `The query has been set to ${this.query}.`)
+    StoreLogger.debug(this.id, 'onChangeQuery', `The query has been set to ${this.query}.`)
 
     if (this.query.length <= 0) {
       this.resetValue()
@@ -103,7 +103,7 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
 
   resetQuery(): void {
     this.query = ''
-    Logger.debug(this.id, 'resetQuery', `The query has been reset.`)
+    StoreLogger.debug(this.id, 'resetQuery', `The query has been reset.`)
 
     this.update()
   }
@@ -112,12 +112,12 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
     switch (this.mode) {
       case SelectMode.MULTIPLE:
         this.store[this.path] = [] as any
-        Logger.debug(this.id, 'resetValue', this.mode, `The value has been set to an empty array.`)
+        StoreLogger.debug(this.id, 'resetValue', this.mode, `The value has been set to an empty array.`)
 
         break
       case SelectMode.SINGLE:
         this.store[this.path] = '' as any
-        Logger.debug(this.id, 'resetValue', this.mode, `The value has been set to an empty string.`)
+        StoreLogger.debug(this.id, 'resetValue', this.mode, `The value has been set to an empty string.`)
 
         break
     }
@@ -184,10 +184,6 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
 
   get isModeSingle(): boolean {
     return this.mode === SelectMode.SINGLE
-  }
-
-  private get dummyOption(): SelectOption {
-    return { label: '', value: '' }
   }
 
   /** @internal */

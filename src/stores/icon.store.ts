@@ -1,7 +1,8 @@
-import { Environment, Logger, tcp } from '@queelag/core'
+import { Environment, tcp } from '@queelag/core'
 import { Color, ComponentName } from '../definitions/enums'
 import { ComponentStoreProps } from '../definitions/interfaces'
 import { IconProps } from '../definitions/props'
+import { StoreLogger } from '../loggers/store.logger'
 import { Cache } from '../modules/cache'
 import { ComponentStore } from '../modules/component.store'
 import { ColorPicker } from '../pickers/color.picker'
@@ -78,7 +79,8 @@ export class IconStore extends ComponentStore<SVGSVGElement> {
           cached = Cache.icons.get(src)
           if (typeof cached === 'string') {
             if (cached.length <= 0) {
-              Logger.debug(this.id, 'setSource', `Another store is fetching the same source.`)
+              StoreLogger.verbose(this.id, 'setSource', `Another store is fetching the same source.`)
+
               await new Promise<void>((r) =>
                 setInterval(() => {
                   cached = Cache.icons.get(src)
@@ -87,23 +89,23 @@ export class IconStore extends ComponentStore<SVGSVGElement> {
               )
 
               if (cached === undefined) {
-                Logger.debug(this.id, 'setSource', `The other store failed to fetch the source.`)
+                StoreLogger.error(this.id, 'setSource', `The other store failed to fetch the source.`)
                 return
               }
             }
 
             this.svg = cached
-            Logger.debug(this.id, 'setSource', `The svg has been set to the cached one.`)
+            StoreLogger.verbose(this.id, 'setSource', `The svg has been set to the cached one.`)
 
             break
           }
 
           if (Environment.isWindowNotDefined) {
-            return Logger.warn(this.id, 'setSource', `The window is not defined.`)
+            return StoreLogger.warn(this.id, 'setSource', `The window is not defined.`)
           }
 
           Cache.icons.set(src, '')
-          Logger.debug(this.id, 'setSource', `An empty string has been cached.`)
+          StoreLogger.verbose(this.id, 'setSource', `An empty string has been cached.`)
 
           response = await tcp(() => window.fetch(src))
           if (response instanceof Error) return Cache.icons.delete(src)
@@ -113,32 +115,32 @@ export class IconStore extends ComponentStore<SVGSVGElement> {
 
           if (text.length <= 0) {
             Cache.icons.delete(src)
-            Logger.debug(this.id, 'setSource', `The response text is empty.`)
+            StoreLogger.error(this.id, 'setSource', `The response text is empty.`)
 
             return
           }
 
           this.svg = text
-          Logger.debug(this.id, 'setSource', `The svg has been set to the fetched text value.`)
+          StoreLogger.verbose(this.id, 'setSource', `The svg has been set to the fetched text value.`)
 
           Cache.icons.set(src, text)
-          Logger.debug(this.id, 'setSource', `The svg has been cached.`)
+          StoreLogger.verbose(this.id, 'setSource', `The svg has been cached.`)
 
           break
         case /svg/.test(src):
           this.svg = src
-          Logger.debug(this.id, 'setSource', `The svg has been set.`)
+          StoreLogger.verbose(this.id, 'setSource', `The svg has been set.`)
 
           break
         default:
           this.svg = '<svg viewbox="0 0 0 0"></svg>'
-          Logger.debug(this.id, 'setSource', `The svg has been set to a fallback.`)
+          StoreLogger.verbose(this.id, 'setSource', `The svg has been set to a fallback.`)
 
           break
       }
 
       this._src = src
-      Logger.debug(this.id, 'setSource', `The source has been set.`)
+      StoreLogger.verbose(this.id, 'setSource', `The source has been set.`)
 
       this.update()
     })()

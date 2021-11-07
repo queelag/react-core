@@ -1,4 +1,4 @@
-import { Logger, tcp } from '@queelag/core'
+import { tcp } from '@queelag/core'
 import { FormEvent } from 'react'
 import { CheckBoxCollector } from '../collectors/check.box.collector'
 import { InputCollector } from '../collectors/input.collector'
@@ -8,6 +8,7 @@ import { SwitchCollector } from '../collectors/switch.collector'
 import { ComponentName } from '../definitions/enums'
 import { ComponentStoreProps } from '../definitions/interfaces'
 import { FormProps } from '../definitions/props'
+import { StoreLogger } from '../loggers/store.logger'
 import { ComponentStore } from '../modules/component.store'
 import { CheckBoxStore } from './check.box.store'
 import { InputFileStore } from './input.file.store'
@@ -116,7 +117,7 @@ export class FormStore extends ComponentStore<HTMLFormElement> {
       event.stopPropagation()
 
       if (this.isDisabled) {
-        return Logger.warn(this.id, 'onSubmit', `Execution stopped, disabled is truthy.`)
+        return StoreLogger.warn(this.id, 'onSubmit', `Execution stopped, disabled is truthy.`)
       }
 
       this.checkBoxStores.forEach((v: CheckBoxStore<any>) => v.touch())
@@ -127,13 +128,13 @@ export class FormStore extends ComponentStore<HTMLFormElement> {
 
       if (this.isValid) {
         this.disabled = true
-        Logger.debug(this.id, 'onSubmit', `The disabled state has been set to true.`)
+        StoreLogger.verbose(this.id, 'onSubmit', `The disabled state has been set to true.`)
 
         await tcp(() => onSubmit(event))
-        Logger.debug(this.id, 'onSubmit', `The onSubmit function has been fired.`, onSubmit)
+        StoreLogger.debug(this.id, 'onSubmit', `The onSubmit function has been fired.`, onSubmit)
 
         this.disabled = false
-        Logger.debug(this.id, 'onSubmit', `The disabled state has been set to false.`)
+        StoreLogger.verbose(this.id, 'onSubmit', `The disabled state has been set to false.`)
       }
 
       this.checkBoxStores.forEach((v: CheckBoxStore<any>) => v.validate())

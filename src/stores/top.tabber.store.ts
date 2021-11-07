@@ -1,8 +1,8 @@
-import { Logger } from '@queelag/core'
 import { Blank } from '../components/Blank'
 import { ComponentName } from '../definitions/enums'
 import { ComponentStoreProps, TopTabberItem } from '../definitions/interfaces'
 import { TopTabberProps } from '../definitions/props'
+import { StoreLogger } from '../loggers/store.logger'
 import { ComponentStore } from '../modules/component.store'
 
 /**
@@ -32,7 +32,7 @@ export class TopTabberStore extends ComponentStore {
    */
   onClickItem(item: TopTabberItem): void {
     this.activeItemName = item.name
-    Logger.debug(this.id, 'onClickItem', `The active item name has been set to ${this.activeItemName}.`)
+    StoreLogger.debug(this.id, 'onClickItem', `The active item name has been set to ${this.activeItemName}.`)
 
     this.update()
   }

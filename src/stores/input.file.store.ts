@@ -1,10 +1,10 @@
-import { Logger } from '@queelag/core'
 import { ChangeEvent } from 'react'
 import * as S from 'superstruct'
 import { ComponentName, InputFileMode } from '../definitions/enums'
 import { InputFileItem } from '../definitions/interfaces'
 import { ComponentFormFieldStoreProps } from '../definitions/with.superstruct.interfaces'
 import { InputFileProps } from '../definitions/with.superstruct.props'
+import { StoreLogger } from '../loggers/store.logger'
 import { ComponentFormFieldStore } from '../modules/component.form.field.store'
 import { Dummy } from '../modules/dummy'
 import { Schema } from '../modules/schema'
@@ -38,25 +38,25 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
         let files: File[], items: InputFileItem[]
 
         files = [...(event.target.files || [])]
-        if (files.length <= 0) return Logger.error(this.id, 'onChange', `Failed to find any file.`, event.target.files)
+        if (files.length <= 0) return StoreLogger.error(this.id, 'onChange', `Failed to find any file.`, event.target.files)
 
         items = []
         await Promise.all(files.map(FileUtils.toInputFileItem))
 
         this.store[this.path] = items as any
-        Logger.debug(this.id, 'onChange', `The items have been set as the value.`, items)
+        StoreLogger.debug(this.id, 'onChange', `The items have been set as the value.`, items)
 
         break
       case InputFileMode.SINGLE:
         let file: File | null, item: InputFileItem
 
         file = event.target.files && event.target.files[0]
-        if (!file) return Logger.error(this.id, 'onChange', `Failed to find the first file.`, event.target.files)
+        if (!file) return StoreLogger.error(this.id, 'onChange', `Failed to find the first file.`, event.target.files)
 
         item = await FileUtils.toInputFileItem(file)
 
         this.store[this.path] = item as any
-        Logger.debug(this.id, 'onChange', `The item has been set as the value.`, item)
+        StoreLogger.debug(this.id, 'onChange', `The item has been set as the value.`, item)
 
         break
     }
@@ -71,12 +71,12 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
     switch (this.mode) {
       case InputFileMode.MULTIPLE:
         this.store[this.path] = (this.value as InputFileItem[]).filter((v: InputFileItem) => v.id != item.id) as any
-        Logger.debug(this.id, 'onRemove', `The item ${item.id} has been removed from the value.`, this.value, item)
+        StoreLogger.debug(this.id, 'onRemove', `The item ${item.id} has been removed from the value.`, this.value, item)
 
         break
       case InputFileMode.SINGLE:
         this.store[this.path] = Dummy.inputFileItem as any
-        Logger.debug(this.id, 'onRemove', `The value has been reset.`, this.value)
+        StoreLogger.debug(this.id, 'onRemove', `The value has been reset.`, this.value)
 
         break
     }
@@ -91,12 +91,12 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
     switch (this.mode) {
       case InputFileMode.MULTIPLE:
         this.store[this.path] = [] as any
-        Logger.debug(this.id, 'onClear', `The value has been set to an empty array.`, this.value)
+        StoreLogger.debug(this.id, 'onClear', `The value has been set to an empty array.`, this.value)
 
         break
       case InputFileMode.SINGLE:
         this.store[this.path] = Dummy.inputFileItem as any
-        Logger.debug(this.id, 'onClear', `The value has been reset.`, this.value)
+        StoreLogger.debug(this.id, 'onClear', `The value has been reset.`, this.value)
 
         break
     }
