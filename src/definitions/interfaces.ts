@@ -114,7 +114,7 @@ export interface WithHeader {
 }
 
 export interface WithIcon {
-  icon?: (props: IconProps) => any
+  icon?: (props: IconProps) => JSX.Element
   iconProps?: IconProps
 }
 
@@ -159,7 +159,7 @@ export interface WithTitle {
 export interface WizardStep {
   canGoBack: () => boolean
   canGoNext: () => boolean
-  content: (props: WizardStepContentProps) => any
+  content: (props: WizardStepContentProps) => JSX.Element
   description: string
   name: string
   title: string
