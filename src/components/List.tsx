@@ -1,8 +1,9 @@
 import { ObjectUtils } from '@queelag/core'
-import React, { ForwardedRef, forwardRef } from 'react'
+import React, { ForwardedRef } from 'react'
 import { LIST_PROPS_KEYS, LIST_STORE_KEYS } from '../definitions/constants'
 import { ListProps } from '../definitions/props'
 import { useComponentStore } from '../hooks/use.component.store'
+import { forwardRef } from '../modules/forward.ref'
 import { ListStore } from '../stores/list.store'
 
 /**

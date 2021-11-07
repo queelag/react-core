@@ -39,7 +39,7 @@ import { ModuleLogger } from '../loggers/module.logger'
  * })
  * ```
  *
- * @category Controller
+ * @category Module
  */
 export class VisibilityController {
   /** @internal */

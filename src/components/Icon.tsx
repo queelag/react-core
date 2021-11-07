@@ -1,8 +1,9 @@
 import { ObjectUtils } from '@queelag/core'
-import React, { ForwardedRef, forwardRef } from 'react'
+import React, { ForwardedRef } from 'react'
 import { ICON_PROPS_KEYS, ICON_STORE_KEYS } from '../definitions/constants'
 import { IconProps } from '../definitions/props'
 import { useComponentStore } from '../hooks/use.component.store'
+import { forwardRef } from '../modules/forward.ref'
 import { IconStore } from '../stores/icon.store'
 import { ReactUtils } from '../utils/react.utils'
 

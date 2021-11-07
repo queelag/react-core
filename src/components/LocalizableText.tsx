@@ -1,7 +1,8 @@
 import { Localization, ObjectUtils } from '@queelag/core'
-import React, { ForwardedRef, forwardRef } from 'react'
+import React, { ForwardedRef } from 'react'
 import { LOCALIZABLE_TEXT_PROPS_KEYS } from '../definitions/constants'
 import { HTMLElementProps, LocalizableTextProps } from '../definitions/props'
+import { forwardRef } from '../modules/forward.ref'
 import { ColorPicker } from '../pickers/color.picker'
 import { ReactUtils } from '../utils/react.utils'
 

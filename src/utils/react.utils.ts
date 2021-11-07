@@ -10,6 +10,9 @@ export class ReactUtils {
   /** @hidden */
   constructor() {}
 
+  /**
+   * Creates a dummy ref safely.
+   */
   static createDummyRef<K extends keyof ElementTagNameMap>(tagName: K, options?: ElementCreationOptions): MutableRefObject<ElementTagNameMap[K]> {
     return Environment.isWindowDefined ? { current: document.createElement(tagName, options) } : ({ current: {} } as any)
   }

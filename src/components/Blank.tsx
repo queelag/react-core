@@ -1,4 +1,5 @@
-import React, { ForwardedRef, forwardRef } from 'react'
+import React, { ForwardedRef } from 'react'
+import { forwardRef } from '../modules/forward.ref'
 
 /**
  * A component composed of a div with display set to 'none'.

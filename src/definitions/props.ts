@@ -1,5 +1,4 @@
 import { FormEvent, MutableRefObject, ReactNode } from 'react'
-import { OmitLegacyRef } from '..'
 import type { AvatarStore } from '../stores/avatar.store'
 import type { BottomTabberStore } from '../stores/bottom.tabber.store'
 import type { ButtonStore } from '../stores/button.store'
@@ -41,7 +40,7 @@ import {
   WithTitle,
   WizardStepPartial
 } from './interfaces'
-import { StatisticValue, WizardOnStepChange } from './types'
+import { OmitLegacyRef, StatisticValue, WizardOnStepChange } from './types'
 
 /** @category Prop */
 export interface AlertProps extends HTMLDivProps, WithDescription, WithTitle, WithFeedbackType {}
