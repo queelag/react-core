@@ -15,13 +15,13 @@ export interface CheckBoxProps<T extends object> extends HTMLDivProps, WithFormF
 
 /** @category Prop */
 export interface FormFieldLabelProps<T extends ComponentFormFieldStore<U, V>, U extends Element, V extends object> extends HTMLLabelProps, WithIcon {
-  store: T
+  store?: T
   value?: string
 }
 
 /** @category Prop */
 export interface FormFieldErrorProps<T extends ComponentFormFieldStore<U, V>, U extends Element, V extends object> extends HTMLSpanProps {
-  store: T
+  store?: T
 }
 
 /** @category Prop */
@@ -40,7 +40,7 @@ export interface InputFileProps<T extends object> extends HTMLInputProps, WithFo
 /** @category Prop */
 export interface SelectProps<T extends object> extends HTMLDivProps, WithFormFieldProps<HTMLDivElement, SelectStore<T>, T> {
   mode?: SelectMode
-  options: SelectOption[]
+  options?: SelectOption[]
 }
 
 /** @category Prop */

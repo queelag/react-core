@@ -60,6 +60,10 @@ export class ButtonStore extends ComponentStore<HTMLButtonElement> {
     return this.spinning === false
   }
 
+  get isVariantContained(): boolean {
+    return this.variant === ButtonVariant.CONTAINED
+  }
+
   get isVariantNone(): boolean {
     return this.variant === ButtonVariant.NONE
   }
@@ -70,14 +74,6 @@ export class ButtonStore extends ComponentStore<HTMLButtonElement> {
 
   get isVariantOutline(): boolean {
     return this.variant === ButtonVariant.OUTLINE
-  }
-
-  get isVariantPrimary(): boolean {
-    return this.variant === ButtonVariant.PRIMARY
-  }
-
-  get isVariantSecondary(): boolean {
-    return this.variant === ButtonVariant.SECONDARY
   }
 
   get isVariantText(): boolean {

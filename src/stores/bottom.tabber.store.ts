@@ -20,7 +20,7 @@ export class BottomTabberStore<T> extends ComponentStore {
     super(ComponentName.BOTTOM_TABBER, props)
 
     this.isItemActive = props.isItemActive || noop
-    this.items = props.items
+    this.items = props.items || []
     this.onClickItem = props.onClickItem || noop
   }
 

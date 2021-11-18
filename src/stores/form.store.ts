@@ -1,4 +1,4 @@
-import { tcp } from '@queelag/core'
+import { noop, tcp } from '@queelag/core'
 import { FormEvent } from 'react'
 import { CheckBoxCollector } from '../collectors/check.box.collector'
 import { InputCollector } from '../collectors/input.collector'
@@ -31,7 +31,7 @@ export class FormStore extends ComponentStore<HTMLFormElement> {
     super(ComponentName.FORM, props)
 
     this.disabled = props.disabled || false
-    this.onSubmit = props.onSubmit
+    this.onSubmit = props.onSubmit || noop
   }
 
   /** @internal */

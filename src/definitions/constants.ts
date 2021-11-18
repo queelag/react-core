@@ -1,4 +1,5 @@
 import type { AvatarStore } from '../stores/avatar.store'
+import type { BadgeStore } from '../stores/badge.store'
 import type { BottomTabberStore } from '../stores/bottom.tabber.store'
 import type { ButtonStore } from '../stores/button.store'
 import type { DividerStore } from '../stores/divider.store'
@@ -14,6 +15,7 @@ import type { TopTabberStore } from '../stores/top.tabber.store'
 import type { VirtualizedListStore } from '../stores/virtualized.list.store'
 import type { WizardStore } from '../stores/wizard.store'
 import {
+  AlertDialogProps,
   AlertProps,
   AvatarProps,
   BadgeProps,
@@ -28,7 +30,6 @@ import {
   DividerProps,
   EmptyProps,
   FormProps,
-  HeaderProps,
   IconProps,
   ImageProps,
   ListItemProps,
@@ -40,7 +41,6 @@ import {
   MeterProps,
   OnboardingProps,
   ResultProps,
-  RouterRendererProps,
   SectionProps,
   SettingProps,
   SidebarProps,
@@ -54,6 +54,20 @@ import {
 
 /** @category Constant */
 export const ALERT_PROPS_KEYS: (keyof AlertProps)[] = ['description', 'title', 'type']
+
+/** @category Constant */
+export const ALERT_DIALOG_PROPS_KEYS: (keyof AlertDialogProps)[] = [
+  'buttons',
+  'description',
+  'destructive',
+  'footer',
+  'header',
+  'onClickCancel',
+  'onClickConfirm',
+  'onHide',
+  'onShow',
+  'title'
+]
 
 /** @category Constant */
 export const AVATAR_PROPS_KEYS: (keyof AvatarProps)[] = [
@@ -75,7 +89,10 @@ export const AVATAR_PROPS_KEYS: (keyof AvatarProps)[] = [
 export const AVATAR_STORE_KEYS: (keyof AvatarProps & keyof AvatarStore)[] = ['background', 'color']
 
 /** @category Constant */
-export const BADGE_PROPS_KEYS: (keyof BadgeProps)[] = ['value']
+export const BADGE_PROPS_KEYS: (keyof BadgeProps)[] = ['getStore', 'value']
+
+/** @category Constant */
+export const BADGE_STORE_KEYS: (keyof BadgeProps & keyof BadgeStore)[] = ['value']
 
 /** @category Constant */
 export const BOTTOM_SHEET_PROPS_KEYS: (keyof BottomSheetProps<any>)[] = ['header', 'items', 'title']
@@ -105,7 +122,7 @@ export const BUTTON_PROPS_KEYS: (keyof ButtonProps)[] = [
 export const BUTTON_STORE_KEYS: (keyof ButtonProps & keyof ButtonStore)[] = ['disabled', 'onClick', 'spinning', 'variant']
 
 /** @category Constant */
-export const CARD_PROPS_KEYS: (keyof CardProps)[] = ['header', 'layer', 'footer', 'title']
+export const CARD_PROPS_KEYS: (keyof CardProps<any>)[] = ['description', 'footer', 'header', 'image', 'imageProps', 'title']
 
 /** @category Constant */
 export const COLORABLE_DIV_PROPS_KEYS: (keyof ColorableDivProps)[] = ['background', 'border', 'divide', 'layer', 'text']
@@ -117,7 +134,7 @@ export const CONTEXT_MENU_PROPS_KEYS: (keyof ContextMenuProps<any>)[] = ['items'
 export const DIALOG_PROPS_KEYS: (keyof DialogProps)[] = ['buttons', 'description', 'footer', 'header', 'onHide', 'onShow', 'title']
 
 /** @category Constant */
-export const DISCLOSURE_PROPS_KEYS: (keyof DisclosureProps)[] = ['sections']
+export const DISCLOSURE_PROPS_KEYS: (keyof DisclosureProps)[] = ['items']
 
 /** @category Constant */
 export const DIVIDER_PROPS_KEYS: (keyof DividerProps)[] = ['color', 'getStore', 'layer', 'orientation']
@@ -126,16 +143,13 @@ export const DIVIDER_PROPS_KEYS: (keyof DividerProps)[] = ['color', 'getStore', 
 export const DIVIDER_STORE_KEYS: (keyof DividerProps & keyof DividerStore)[] = []
 
 /** @category Constant */
-export const EMPTY_PROPS_KEYS: (keyof EmptyProps)[] = ['description', 'layer', 'title']
+export const EMPTY_PROPS_KEYS: (keyof EmptyProps)[] = ['description', 'icon', 'iconProps', 'title']
 
 /** @category Constant */
-export const FORM_PROPS_KEYS: (keyof FormProps)[] = ['getStore']
+export const FORM_PROPS_KEYS: (keyof FormProps)[] = ['disabled', 'getStore']
 
 /** @category Constant */
 export const FORM_STORE_KEYS: (keyof FormProps & keyof FormStore)[] = ['disabled', 'onSubmit']
-
-/** @category Constant */
-export const HEADER_PROPS_KEYS: (keyof HeaderProps)[] = ['canNavigateBack', 'logo', 'onClickBack', 'title']
 
 /** @category Constant */
 export const ICON_PROPS_KEYS: (keyof IconProps)[] = ['color', 'getStore', 'layer', 'size', 'src', 'thickness']
@@ -156,10 +170,10 @@ export const IMAGE_STORE_KEYS: (keyof ImageProps & keyof ImageStore)[] = ['alpha
 export const LIST_PROPS_KEYS: (keyof ListProps<any>)[] = ['empty', 'getStore', 'items', 'renderItem']
 
 /** @category Constant */
-export const LIST_STORE_KEYS: (keyof ListProps<any> & keyof ListStore<any>)[] = ['items']
+export const LIST_STORE_KEYS: (keyof ListProps<any> & keyof ListStore<any>)[] = ['items', 'renderItem']
 
 /** @category Constant */
-export const LIST_ITEM_PROPS_KEYS: (keyof ListItemProps)[] = ['avatar', 'description', 'image', 'layer', 'title']
+export const LIST_ITEM_PROPS_KEYS: (keyof ListItemProps<any>)[] = ['avatar', 'avatarProps', 'description', 'image', 'imageProps', 'title']
 
 /** @category Constant */
 export const LOADING_PROPS_KEYS: (keyof LoadingProps)[] = ['description', 'title']
@@ -174,46 +188,43 @@ export const LOCALIZABLE_SPAN_PROPS_KEYS: (keyof LocalizableSpanProps<any>)[] = 
 export const LOCALIZABLE_TEXT_PROPS_KEYS: (keyof LocalizableTextProps<any>)[] = ['color', 'element', 'inject', 'layer', 'path']
 
 /** @category Constant */
-export const METER_PROPS_KEYS: (keyof MeterProps)[] = ['maximum', 'minimum', 'value']
+export const METER_PROPS_KEYS: (keyof MeterProps)[] = ['color', 'maximum', 'minimum', 'shape', 'size', 'value']
 
 /** @category Constant */
-export const METER_STORE_KEYS: (keyof MeterProps & keyof MeterStore)[] = []
+export const METER_STORE_KEYS: (keyof MeterProps & keyof MeterStore)[] = ['value']
 
 /** @category Constant */
 export const ONBOARDING_PROPS_KEYS: (keyof OnboardingProps)[] = ['activeItemIndex', 'getStore', 'items', 'onEnd']
 
 /** @category Constant */
-export const ONBOARDING_STORE_KEYS: (keyof OnboardingProps & keyof OnboardingStore)[] = ['items', 'onEnd']
+export const ONBOARDING_STORE_KEYS: (keyof OnboardingProps & keyof OnboardingStore)[] = ['activeItemIndex', 'items', 'onEnd']
 
 /** @category Constant */
-export const RESULT_PROPS_KEYS: (keyof ResultProps)[] = ['description', 'icon', 'title', 'type']
+export const RESULT_PROPS_KEYS: (keyof ResultProps)[] = ['description', 'icon', 'iconProps', 'title', 'type']
 
 /** @category Constant */
-export const ROUTER_RENDERER_PROPS_KEYS: (keyof RouterRendererProps)[] = ['fallback', 'map', 'route']
+export const SECTION_PROPS_KEYS: (keyof SectionProps)[] = ['description', 'title']
 
 /** @category Constant */
-export const SECTION_PROPS_KEYS: (keyof SectionProps)[] = ['description', 'layer', 'title']
+export const SETTING_PROPS_KEYS: (keyof SettingProps)[] = ['description', 'title']
 
 /** @category Constant */
-export const SETTING_PROPS_KEYS: (keyof SettingProps)[] = ['description', 'layer', 'title']
-
-/** @category Constant */
-export const SIDEBAR_PROPS_KEYS: (keyof SidebarProps<any>)[] = ['footer', 'getStore', 'isItemActive', 'items', 'onClickItem']
+export const SIDEBAR_PROPS_KEYS: (keyof SidebarProps<any>)[] = ['footer', 'getStore', 'header', 'isItemActive', 'items', 'onClickItem', 'title']
 
 /** @category Constant */
 export const SIDEBAR_STORE_KEYS: (keyof SidebarProps<any> & keyof SidebarStore<any>)[] = ['isItemActive', 'items', 'onClickItem']
 
 /** @category Constant */
-export const SPINNER_PROPS_KEYS: (keyof SpinnerProps)[] = ['color', 'layer', 'size', 'thickness']
+export const SPINNER_PROPS_KEYS: (keyof SpinnerProps)[] = [...ICON_PROPS_KEYS]
 
 /** @category Constant */
-export const STATISTIC_PROPS_KEYS: (keyof StatisticProps)[] = ['icon', 'layer', 'progress', 'reference', 'title', 'type', 'value']
+export const STATISTIC_PROPS_KEYS: (keyof StatisticProps)[] = ['icon', 'iconProps', 'progress', 'reference', 'title', 'type', 'value']
 
 /** @category Constant */
-export const TAG_PROPS_KEYS: (keyof TagProps)[] = ['background', 'color', 'destroyable', 'getStore', 'icon', 'layer', 'text']
+export const TAG_PROPS_KEYS: (keyof TagProps)[] = ['background', 'color', 'destroyable', 'destroyed', 'getStore', 'icon', 'layer', 'onDestroy']
 
 /** @category Constant */
-export const TAG_STORE_KEYS: (keyof TagProps & keyof TagStore)[] = []
+export const TAG_STORE_KEYS: (keyof TagProps & keyof TagStore)[] = ['destroyable', 'destroyed']
 
 /** @category Constant */
 export const TOP_TABBER_PROPS_KEYS: (keyof TopTabberProps)[] = ['activeItemName', 'getStore', 'items']
@@ -235,7 +246,7 @@ export const VIRTUALIZED_LIST_PROPS_KEYS: (keyof VirtualizedListProps<any>)[] = 
 ]
 
 /** @category Constant */
-export const VIRTUALIZED_LIST_STORE_KEYS: (keyof VirtualizedListProps<any> & keyof VirtualizedListStore<any>)[] = ['gutter', 'items']
+export const VIRTUALIZED_LIST_STORE_KEYS: (keyof VirtualizedListProps<any> & keyof VirtualizedListStore<any>)[] = ['gutter', 'items', 'renderItem']
 
 /** @category Constant */
 export const WIZARD_PROPS_KEYS: (keyof WizardProps)[] = ['activeStepName', 'getStore', 'onStepChange', 'steps']

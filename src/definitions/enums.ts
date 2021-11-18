@@ -1,9 +1,8 @@
 export enum ButtonVariant {
+  CONTAINED = 'CONTAINED',
   NONE = 'NONE',
   OPACITY = 'OPACITY',
   OUTLINE = 'OUTLINE',
-  PRIMARY = 'PRIMARY',
-  SECONDARY = 'SECONDARY',
   TEXT = 'TEXT'
 }
 
@@ -30,50 +29,35 @@ export enum Color {
 }
 
 export enum ComponentName {
-  ALERT = 'ALERT',
   AVATAR = 'AVATAR',
   BADGE = 'BADGE',
-  BOTTOM_SHEET = 'BOTTOM_SHEET',
   BOTTOM_TABBER = 'BOTTOM_TABBER',
   BUTTON = 'BUTTON',
-  CARD = 'CARD',
   CHECKBOX = 'CHECKBOX',
-  COLLAPSE = 'COLLAPSE',
-  COLLAPSE_CHILD = 'COLLAPSE_CHILD',
-  CONTEXT_MENU = 'CONTEXT_MENU',
-  DIALOG = 'DIALOG',
   DIVIDER = 'DIVIDER',
-  EMPTY = 'EMPTY',
-  FEEDBACK_DIALOG = 'FEEDBACK_DIALOG',
   FORM = 'FORM',
-  GRID = 'GRID',
-  GRID_ITEM = 'GRID_ITEM',
-  HEADER = 'HEADER',
   ICON = 'ICON',
   IMAGE = 'IMAGE',
   INPUT = 'INPUT',
   INPUT_FILE = 'INPUT_FILE',
   LIST = 'LIST',
-  LIST_ITEM = 'LIST_ITEM',
   METER = 'METER',
-  NOTIFICATION = 'NOTIFICATION',
-  NOT_FOUND = 'NOT_FOUND',
   ONBOARDING = 'ONBOARDING',
-  PROGRESS = 'PROGRESS',
-  RESULT = 'RESULT',
-  ROUTER = 'ROUTER',
   SELECT = 'SELECT',
   SIDEBAR = 'SIDEBAR',
-  SMART_LIST = 'SMART_LIST',
-  SPINNER = 'SPINNER',
   SQUIRCLE = 'SQUIRCLE',
-  STATISTIC = 'STATISTIC',
   SWITCH = 'SWITCH',
   TAG = 'TAG',
-  TOAST = 'TOAST',
   TOP_TABBER = 'TOP_TABBER',
   VIRTUALIZED_LIST = 'VIRTUALIZED_LIST',
   WIZARD = 'WIZARD'
+}
+
+export enum Direction {
+  DOWN = 'DOWN',
+  LEFT = 'LEFT',
+  RIGHT = 'RIGHT',
+  UP = 'UP'
 }
 
 export enum DirectionHorizontal {
@@ -93,10 +77,13 @@ export enum FeedbackType {
   WARNING = 'WARNING'
 }
 
-export enum FormFieldType {
-  CHECKBOX = 'CHECKBOX',
-  INPUT = 'INPUT',
-  SELECT = 'SELECT'
+export enum HeadingVariant {
+  H1 = 1,
+  H2 = 2,
+  H3 = 3,
+  H4 = 4,
+  H5 = 5,
+  H6 = 6
 }
 
 export enum ImageStatus {

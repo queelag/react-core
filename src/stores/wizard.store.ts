@@ -22,9 +22,9 @@ export class WizardStore extends ComponentStore {
   constructor(props: WizardProps & ComponentStoreProps) {
     super(ComponentName.WIZARD, props)
 
-    this.activeStepName = props.activeStepName || (props.steps[0] ? props.steps[0].name || '' : '')
+    this.activeStepName = props.activeStepName || (props.steps ? (props.steps[0] ? props.steps[0].name || '' : '') : '')
     this.onStepChange = props.onStepChange || noop
-    this.steps = props.steps as WizardStep[]
+    this.steps = (props.steps as WizardStep[]) || []
   }
 
   /**

@@ -1,3 +1,4 @@
+import { ReactNode } from 'react'
 import { ComponentName } from '../definitions/enums'
 import { ComponentStoreProps } from '../definitions/interfaces'
 import { ListProps } from '../definitions/props'
@@ -17,7 +18,12 @@ export class ListStore<T> extends ComponentStore<HTMLUListElement> {
   constructor(props: ListProps<T> & ComponentStoreProps<HTMLUListElement>) {
     super(ComponentName.LIST, props)
 
-    this.items = props.items
+    this.items = props.items || []
+    this.renderItem = props.renderItem || (() => null)
+  }
+
+  renderItem(item: T, index: number): ReactNode {
+    return null
   }
 
   get hasItems(): boolean {

@@ -11,7 +11,7 @@ export const LocalizableText = forwardRef(<T extends object>(props: HTMLElementP
     <props.element
       {...ObjectUtils.omit(props, LOCALIZABLE_TEXT_PROPS_KEYS)}
       className={ReactUtils.joinClassNames(props.className, ColorPicker.textByString(props.color || '', props.layer))}
-      dangerouslySetInnerHTML={{ __html: Localization.get(props.path || '', props.inject) }}
+      dangerouslySetInnerHTML={{ __html: Localization.get(props.path as string, props.inject) }}
       ref={ref}
       style={{ whiteSpace: 'pre-wrap', ...props.style }}
     />
@@ -24,9 +24,9 @@ export const LocalizableText = forwardRef(<T extends object>(props: HTMLElementP
       ref={ref}
       style={{ whiteSpace: 'pre-wrap', ...props.style }}
     >
-      {props.children}
+      {props.path || props.children}
     </props.element>
   )
 
-  return props.path ? renderLocalized() : renderChildren()
+  return typeof props.path === 'string' ? renderLocalized() : renderChildren()
 })

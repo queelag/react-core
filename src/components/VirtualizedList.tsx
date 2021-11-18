@@ -56,7 +56,7 @@ export function VirtualizedList<T>(props: VirtualizedListProps<T>) {
         overflow: 'hidden'
       }}
     >
-      {store.isItemsEmpty && props.empty && <props.empty />}
+      {store.isItemsEmpty && props.empty}
       {store.hasItems && (
         <FixedSizeList
           innerRef={innerRef}
@@ -69,13 +69,13 @@ export function VirtualizedList<T>(props: VirtualizedListProps<T>) {
         >
           {({ index, style }: ListChildComponentProps) => (
             <div {...props.itemParentProps} style={{ ...props.itemParentProps?.style, ...style }}>
-              <li>{props.renderItem(store.items[index], index)}</li>
+              <li>{store.renderItem(store.items[index], index)}</li>
             </div>
           )}
         </FixedSizeList>
       )}
       <div ref={dummyRef} style={{ left: 0, opacity: 0, pointerEvents: 'none', position: 'absolute', top: 0 }}>
-        {<props.dummy />}
+        {props.dummy}
       </div>
     </ul>
   )

@@ -25,7 +25,7 @@ export class OnboardingStore extends ComponentStore {
     super(ComponentName.ONBOARDING, props)
 
     this.activeItemIndex = props.activeItemIndex || 0
-    this.items = props.items
+    this.items = props.items || []
     this.onEnd = props.onEnd || noop
   }
 

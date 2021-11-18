@@ -36,6 +36,14 @@ export class AvatarStore extends ComponentStore {
     return ColorPicker.textByString(this._color, this.layer)
   }
 
+  get iconSize(): number {
+    return (this.size as number) / 2
+  }
+
+  get textSize(): number {
+    return (this.size as number) / 3
+  }
+
   /** @internal */
   set background(background: string) {
     this._background = background

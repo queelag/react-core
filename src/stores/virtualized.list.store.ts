@@ -1,5 +1,5 @@
 import { NumberUtils, ObjectUtils } from '@queelag/core'
-import { MutableRefObject } from 'react'
+import { MutableRefObject, ReactNode } from 'react'
 import { ComponentName, Orientation } from '../definitions/enums'
 import { ComponentStoreProps } from '../definitions/interfaces'
 import { VirtualizedListStoreProps } from '../definitions/props'
@@ -52,10 +52,15 @@ export class VirtualizedListStore<T> extends ComponentStore<HTMLUListElement> {
     this.parentElementHeight = 0
     this.parentElementWidth = 0
     this.gutter = props.gutter || 0
-    this.items = props.items
+    this.items = props.items || []
     this.itemElementHeight = 0
     this.itemElementWidth = 0
     this.orientation = props.orientation || Orientation.VERTICAL
+    this.renderItem = props.renderItem || (() => null)
+  }
+
+  renderItem(item: T, index: number): ReactNode {
+    return null
   }
 
   /**
@@ -89,7 +94,7 @@ export class VirtualizedListStore<T> extends ComponentStore<HTMLUListElement> {
    * Computes the parent element width if the orientation is HORIZONTAL otherwise if the orientation is VERTICAL computes its height.
    */
   readParentElementHeightOrWidth(): void {
-    let element: Element | null, parent: Element, height: number, width: number
+    let element: Element | null, height: number, width: number
 
     element = this.element
     if (element.parentElement === null) return StoreLogger.error(this.id, 'readElementHeightOrWidth', `The element has no parent.`)

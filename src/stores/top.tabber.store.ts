@@ -23,8 +23,8 @@ export class TopTabberStore extends ComponentStore {
   constructor(props: TopTabberProps & ComponentStoreProps) {
     super(ComponentName.TOP_TABBER, props)
 
-    this.activeItemName = props.activeItemName || props.items[0].name
-    this.items = props.items
+    this.activeItemName = props.activeItemName || (props.items ? (props.items[0] ? props.items[0].name : '') : '')
+    this.items = props.items || []
   }
 
   /**
@@ -59,7 +59,7 @@ export class TopTabberStore extends ComponentStore {
 
   private get dummyItem(): TopTabberItem {
     return {
-      component: Blank,
+      children: Blank,
       name: ''
     }
   }

@@ -1,6 +1,5 @@
 import { Environment } from '@queelag/core'
 import { MutableRefObject } from 'react'
-import { Blank } from '../components/Blank'
 import { Color, Theme } from '../definitions/enums'
 import {
   AppearanceData,
@@ -79,7 +78,7 @@ export class Dummy {
     return {
       canGoBack: () => true,
       canGoNext: () => true,
-      content: Blank,
+      children: () => null,
       description: '',
       name: '',
       title: ''

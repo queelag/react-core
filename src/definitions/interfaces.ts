@@ -2,14 +2,14 @@ import { ID } from '@queelag/core'
 import { LegacyRef, MutableRefObject, ReactNode } from 'react'
 import type { ComponentStore } from '../modules/component.store'
 import type { Color, FeedbackType, Layer, Orientation, Shape, Size, Theme } from './enums'
-import { HTMLImageProps, IconProps, WizardStepContentProps } from './props'
+import { IconProps, WizardStepContentProps } from './props'
 import { SelectOptionValue } from './types'
 
 export interface AppearanceData {
   theme: Theme
 }
 
-export interface BottomSheetItem<T> extends WithColor, WithDescription, WithIcon, WithRoute<T>, WithTitle {
+export interface BottomSheetItem<T> extends WithDescription, WithIcon, WithRoute<T>, WithTitle {
   onClick?: () => any
 }
 
@@ -51,8 +51,8 @@ export interface ContextMenuItem<T> extends WithIcon, WithRoute<T>, WithTitle {
   onClick?: () => any
 }
 
-export interface DisclosureSection extends WithDescription, WithIcon, Required<WithTitle> {
-  content?: ReactNode
+export interface DisclosureItem extends WithDescription, WithIcon, WithTitle {
+  children?: ReactNode
   expanded?: boolean
 }
 
@@ -76,20 +76,25 @@ export interface SelectOption {
 export interface SidebarItem<T> extends WithIcon, Required<WithRoute<T>> {}
 
 export interface TopTabberItem {
-  component: ReactNode
+  children: ReactNode
   name: string
 }
 
+export interface WithAvatar {
+  avatar?: string
+  avatarProps?: string
+}
+
 export interface WithBackground extends WithLayer {
-  background?: string
+  background?: Color | string
 }
 
 export interface WithColor extends WithLayer {
-  color?: string
+  color?: Color | string
 }
 
 export interface WithDescription {
-  description?: string
+  description?: ReactNode
 }
 
 export interface WithDestructive {
@@ -117,9 +122,9 @@ export interface WithIcon {
   iconProps?: IconProps
 }
 
-export interface WithImage {
+export interface WithImage<T = any> {
   image?: string
-  imageProps?: HTMLImageProps
+  imageProps?: T
 }
 
 export interface WithLayer {
@@ -128,7 +133,7 @@ export interface WithLayer {
 
 export interface WithLocalizationProps<T extends object> {
   inject?: T
-  path?: string
+  path?: ReactNode
 }
 
 export interface WithName {
@@ -152,16 +157,16 @@ export interface WithSize {
 }
 
 export interface WithTitle {
-  title?: string
+  title?: ReactNode
 }
 
 export interface WizardStep {
   canGoBack: () => boolean
   canGoNext: () => boolean
-  content: (props: WizardStepContentProps) => JSX.Element
-  description: string
+  children: (props: WizardStepContentProps) => ReactNode
+  description: ReactNode
   name: string
-  title: string
+  title: ReactNode
 }
 
 export interface WizardStepPartial extends Partial<WizardStep> {}

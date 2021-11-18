@@ -20,7 +20,7 @@ export class SidebarStore<T> extends ComponentStore {
     super(ComponentName.SIDEBAR, props)
 
     this.isItemActive = props.isItemActive || noop
-    this.items = props.items
+    this.items = props.items || []
     this.onClickItem = props.onClickItem || noop
   }
 

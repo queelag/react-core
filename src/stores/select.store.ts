@@ -31,7 +31,7 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
     super(ComponentName.SELECT, props)
 
     this.mode = props.mode || SelectMode.SINGLE
-    this.options = props.options
+    this.options = props.options || []
     this.query = ''
   }
 

@@ -3,6 +3,8 @@ import type { DirectionHorizontal } from './enums'
 
 export type OmitLegacyRef<U extends ClassAttributes<T>, T = any> = Omit<U, 'ref'> & RefAttributes<T>
 
+export type OmitTitle<T extends { title?: string }> = Omit<T, 'title'>
+
 export type SelectOptionValue = string
 
 export type StatisticValue = number | string

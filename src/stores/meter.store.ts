@@ -9,7 +9,14 @@ import { ComponentStore } from '../modules/component.store'
  * @category Store
  */
 export class MeterStore extends ComponentStore<HTMLDivElement> {
+  /**
+   * The value of the meter.
+   */
+  value: number
+
   constructor(props: MeterProps & ComponentStoreProps<HTMLDivElement>) {
     super(ComponentName.METER, props)
+
+    this.value = props.value || 0
   }
 }

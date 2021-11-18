@@ -51,19 +51,19 @@ export const Avatar = forwardRef((props: AvatarProps, ref: ForwardedRef<HTMLDivE
         <props.icon
           {...props.iconProps}
           color={props.iconProps?.color || store.color}
-          size={props.iconProps?.size || props.size / 2}
+          size={props.iconProps?.size || store.iconSize}
           style={{ ...props.iconProps?.style, position: 'absolute' }}
         />
       )}
       {props.image && <Image {...props.imageProps} size={store.size} src={props.image} style={{ ...props.imageProps?.style, zIndex: 10 }} />}
       {props.text && (
-        <b
+        <span
           {...props.textProps}
           className={ReactUtils.joinClassNames(props.textProps?.className, store.color)}
-          style={{ fontSize: props.size / 3, textTransform: 'uppercase', ...props.textProps?.style, position: 'absolute' }}
+          style={{ fontSize: store.textSize, textTransform: 'uppercase', ...props.textProps?.style, position: 'absolute' }}
         >
           {props.text}
-        </b>
+        </span>
       )}
     </div>
   )
