@@ -21,7 +21,7 @@ class _ {
     this.setTheme(Theme.SYSTEM, false)
 
     if (Environment.isWindowDefined) {
-      let get: boolean
+      let get: AppearanceData | Error
 
       get = await this.storage.get(ReactCoreLocalStorageName.APPEARANCE, this.data)
       if (!get) return false
@@ -58,7 +58,12 @@ class _ {
     }
 
     if (Environment.isWindowDefined && store) {
-      return this.storage.set(ReactCoreLocalStorageName.APPEARANCE, this.data)
+      let storage: void | Error
+
+      storage = await this.storage.set(ReactCoreLocalStorageName.APPEARANCE, this.data)
+      if (storage instanceof Error) return false
+
+      return true
     }
 
     return true
