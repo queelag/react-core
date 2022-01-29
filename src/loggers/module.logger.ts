@@ -1,3 +1,4 @@
 import { Logger } from '@queelag/core'
+import { LoggerName } from '../definitions/enums'
 
-export const ModuleLogger: Logger = new Logger('ReactCoreModule')
+export const ModuleLogger = new Logger(LoggerName.MODULE)

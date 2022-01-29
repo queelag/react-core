@@ -122,8 +122,13 @@ export enum Layer {
   THREE = 3
 }
 
-export enum ReactCoreLocalStorageName {
+export enum LocalStorageName {
   APPEARANCE = 'APPEARANCE'
+}
+
+export enum LoggerName {
+  MODULE = 'REACT_CORE_MODULE',
+  STORE = 'REACT_CORE_STORE'
 }
 
 export enum Orientation {

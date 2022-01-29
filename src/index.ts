@@ -22,7 +22,28 @@ export * from './components/Parent'
 export * from './components/RouterRenderer'
 export * from './components/VirtualizedList'
 export * from './definitions/constants'
-export * from './definitions/enums'
+export {
+  ButtonVariant,
+  Color,
+  ComponentName,
+  Direction,
+  DirectionHorizontal,
+  DirectionVertical,
+  FeedbackType,
+  HeadingVariant,
+  ImageStatus,
+  InputFileMode,
+  InputTouchTrigger,
+  InputType,
+  Layer,
+  LocalStorageName as ReactCoreLocalStorageName,
+  LoggerName as ReactCoreLoggerName,
+  Orientation,
+  SelectMode,
+  Shape,
+  Size,
+  Theme
+} from './definitions/enums'
 export * from './definitions/interfaces'
 export * from './definitions/props'
 export * from './definitions/types'

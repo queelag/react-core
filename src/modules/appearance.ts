@@ -1,5 +1,5 @@
 import { Environment, LocalStorage, Storage } from '@queelag/core'
-import { ReactCoreLocalStorageName, Theme } from '../definitions/enums'
+import { LocalStorageName, Theme } from '../definitions/enums'
 import { AppearanceData } from '../definitions/interfaces'
 import { ModuleLogger } from '../loggers/module.logger'
 import { Dummy } from './dummy'
@@ -23,7 +23,7 @@ class _ {
     if (Environment.isWindowDefined) {
       let get: AppearanceData | Error
 
-      get = await this.storage.get(ReactCoreLocalStorageName.APPEARANCE, this.data)
+      get = await this.storage.get(LocalStorageName.APPEARANCE, this.data)
       if (!get) return false
 
       this.setTheme(this.data.theme, false)
@@ -60,7 +60,7 @@ class _ {
     if (Environment.isWindowDefined && store) {
       let storage: void | Error
 
-      storage = await this.storage.set(ReactCoreLocalStorageName.APPEARANCE, this.data)
+      storage = await this.storage.set(LocalStorageName.APPEARANCE, this.data)
       if (storage instanceof Error) return false
 
       return true
