@@ -1,4 +1,4 @@
-import { ID } from '@queelag/core'
+import { Environment, ID } from '@queelag/core'
 import { CSSProperties } from 'react'
 import { Shape } from '../definitions/enums'
 import { Squircle } from '../modules/squircle'
@@ -25,6 +25,10 @@ export class ShapeUtils {
 
         cached = Squircle.cache.get(Squircle.toCacheKey(curvature, size))
         if (cached) return { clipPath: `url(#${cached})` }
+
+        if (Environment.isWindowNotDefined) {
+          return {}
+        }
 
         svg = Squircle.create(size, curvature)
         clip = svg.querySelector('clipPath') as SVGClipPathElement
