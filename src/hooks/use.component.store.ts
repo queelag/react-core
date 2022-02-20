@@ -24,7 +24,7 @@ export const useComponentStore = <
   const id = useID(store.name, props.id, store.id)
 
   useEffect(() => {
-    if (id !== store.id) {
+    if (id === store.id) {
       return
     }
 
