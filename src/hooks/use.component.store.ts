@@ -2,6 +2,7 @@ import { ElementTagNameMap, StoreUtils } from '@queelag/core'
 import { useEffect, useMemo } from 'react'
 import { ComponentStoreProps } from '../definitions/interfaces'
 import { ComponentStore } from '../modules/component.store'
+import { Configuration } from '../modules/configuration'
 import { useForceUpdate } from './use.force.update'
 import { useID } from './use.id'
 import { useSafeRef } from './use.safe.ref'
@@ -21,13 +22,9 @@ export const useComponentStore = <
   const ref = useSafeRef(tagName)
   const update = useForceUpdate()
   const store = useMemo(() => new Store({ ...props, ref, update }), [])
-  const id = useID(store.name, props.id, store.id)
+  const id = useID(store.name, props.id, Configuration.isComponentStoreGeneratingIDOnConstruction ? store.id : undefined)
 
   useEffect(() => {
-    if (id === store.id) {
-      return
-    }
-
     store.id = id
     store.update()
   }, [id])
