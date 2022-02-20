@@ -73,7 +73,7 @@ export class TextAreaStore<T extends object> extends ComponentFormFieldStore<HTM
               return
             }
 
-            this.store[this.path] = [...(this.value as string[]), this.query] as any
+            this.store[this.path] = [...this.valueAsStringArray, this.query.replace(/\n$/m, '')] as any
             StoreLogger.debug(this.id, 'onKeyUp', `The query has been pushed to the value.`, this.value)
 
             this.query = ''
