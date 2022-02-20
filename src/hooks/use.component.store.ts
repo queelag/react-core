@@ -24,9 +24,13 @@ export const useComponentStore = <
   const id = useID(store.name, props.id, store.id)
 
   useEffect(() => {
+    if (id !== store.id) {
+      return
+    }
+
     store.id = id
     store.update()
-  }, [props.id])
+  }, [id])
 
   useEffect(() => {
     StoreUtils.updateKeys(store, props, [...(KEYS as any), ...keys], update)

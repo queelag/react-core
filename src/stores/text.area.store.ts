@@ -29,7 +29,7 @@ export class TextAreaStore<T extends object> extends ComponentFormFieldStore<HTM
   touchTrigger: TextAreaTouchTrigger
 
   constructor(props: TextAreaProps<T> & ComponentFormFieldStoreProps<HTMLTextAreaElement, T>) {
-    super(ComponentName.INPUT, props)
+    super(ComponentName.TEXT_AREA, props)
 
     this.focused = false
     this.mode = props.mode || TextAreaMode.SINGLE

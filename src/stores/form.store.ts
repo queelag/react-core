@@ -5,6 +5,7 @@ import { InputCollector } from '../collectors/input.collector'
 import { InputFileCollector } from '../collectors/input.file.collector'
 import { SelectCollector } from '../collectors/select.collector'
 import { SwitchCollector } from '../collectors/switch.collector'
+import { TextAreaCollector } from '../collectors/text.area.collector'
 import { ComponentName } from '../definitions/enums'
 import { ComponentStoreProps } from '../definitions/interfaces'
 import { FormProps } from '../definitions/props'
@@ -15,6 +16,7 @@ import { InputFileStore } from './input.file.store'
 import { InputStore } from './input.store'
 import { SelectStore } from './select.store'
 import { SwitchStore } from './switch.store'
+import { TextAreaStore } from './text.area.store'
 
 /**
  * An abstraction for Form stores, handles validation of all child fields.
@@ -89,6 +91,15 @@ export class FormStore extends ComponentStore<HTMLFormElement> {
       .filter((v: SwitchStore<any>) => v instanceof SwitchStore)
   }
 
+  /**
+   * An array of child TextArea stores.
+   */
+  get textAreaStores(): TextAreaStore<any>[] {
+    return [...this.element.querySelectorAll(`[id^='${ComponentName.TEXT_AREA}']`)]
+      .map((v: Element) => TextAreaCollector.get(v.id))
+      .filter((v: TextAreaStore<any>) => v instanceof TextAreaStore)
+  }
+
   get isDisabled(): boolean {
     return this.disabled === true
   }
@@ -106,7 +117,8 @@ export class FormStore extends ComponentStore<HTMLFormElement> {
       this.inputStores.every((v: InputStore<any>) => v.isValid) &&
       this.inputFileStores.every((v: InputFileStore<any>) => v.isValid) &&
       this.selectStores.every((v: SelectStore<any>) => v.isValid) &&
-      this.switchStores.every((v: SwitchStore<any>) => v.isValid)
+      this.switchStores.every((v: SwitchStore<any>) => v.isValid) &&
+      this.textAreaStores.every((v: TextAreaStore<any>) => v.isValid)
     )
   }
 
@@ -125,6 +137,7 @@ export class FormStore extends ComponentStore<HTMLFormElement> {
       this.inputFileStores.forEach((v: InputFileStore<any>) => v.touch())
       this.selectStores.forEach((v: SelectStore<any>) => v.touch())
       this.switchStores.forEach((v: SwitchStore<any>) => v.touch())
+      this.textAreaStores.forEach((v: TextAreaStore<any>) => v.touch())
 
       if (this.isValid) {
         this.disabled = true
@@ -142,6 +155,7 @@ export class FormStore extends ComponentStore<HTMLFormElement> {
       this.inputFileStores.forEach((v: InputFileStore<any>) => v.validate())
       this.selectStores.forEach((v: SelectStore<any>) => v.validate())
       this.switchStores.forEach((v: SwitchStore<any>) => v.validate())
+      this.textAreaStores.forEach((v: TextAreaStore<any>) => v.validate())
     }
   }
 }
