@@ -48,6 +48,7 @@ export enum ComponentName {
   SQUIRCLE = 'SQUIRCLE',
   SWITCH = 'SWITCH',
   TAG = 'TAG',
+  TEXT_AREA = 'TEXT_AREA',
   TOP_TABBER = 'TOP_TABBER',
   VIRTUALIZED_LIST = 'VIRTUALIZED_LIST',
   WIZARD = 'WIZARD'
@@ -94,6 +95,11 @@ export enum ImageStatus {
 }
 
 export enum InputFileMode {
+  MULTIPLE = 'MULTIPLE',
+  SINGLE = 'SINGLE'
+}
+
+export enum InputMode {
   MULTIPLE = 'MULTIPLE',
   SINGLE = 'SINGLE'
 }
@@ -153,6 +159,17 @@ export enum Size {
   LARGE = 'LARGE',
   MEDIUM = 'MEDIUM',
   SMALL = 'SMALL'
+}
+
+export enum TextAreaMode {
+  MULTIPLE = 'MULTIPLE',
+  SINGLE = 'SINGLE'
+}
+
+export enum TextAreaTouchTrigger {
+  BLUR = 'BLUR',
+  CHANGE = 'CHANGE',
+  NONE = 'NONE'
 }
 
 export enum Theme {

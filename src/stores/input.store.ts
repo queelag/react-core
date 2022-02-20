@@ -1,6 +1,6 @@
 import { NumberUtils, TextCodec } from '@queelag/core'
-import { ChangeEvent } from 'react'
-import { ComponentName, InputTouchTrigger, InputType } from '../definitions/enums'
+import { ChangeEvent, KeyboardEvent } from 'react'
+import { ComponentName, InputMode, InputTouchTrigger, InputType } from '../definitions/enums'
 import { ComponentFormFieldStoreProps } from '../definitions/with.superstruct.interfaces'
 import { InputProps } from '../definitions/with.superstruct.props'
 import { StoreLogger } from '../loggers/store.logger'
@@ -17,9 +17,17 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
    */
   focused: boolean
   /**
+   * An {@link InputMode} which determines how the internal logic behaves.
+   */
+  mode: InputMode
+  /**
    * A boolean which determines if this input value is obscured or not.
    */
   obscured: boolean
+  /**
+   * A string which contains the potential value to be pushed when the mode is set to MULTIPLE.
+   */
+  query: string
   /**
    * An {@link InputTouchTrigger} which determines when this input is marked as touched.
    */
@@ -33,7 +41,9 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
     super(ComponentName.INPUT, props)
 
     this.focused = false
+    this.mode = props.mode || InputMode.SINGLE
     this.obscured = true
+    this.query = ''
     this.touchTrigger = props.touchTrigger || InputTouchTrigger.BLUR
     this.type = props.type || InputType.TEXT
   }
@@ -82,6 +92,22 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
       case InputType.PASSWORD:
       case InputType.TEL:
       case InputType.TEXT:
+        switch (this.mode) {
+          case InputMode.MULTIPLE:
+            this.query = event.target.value
+            StoreLogger.debug(this.id, 'onChange', this.type, this.mode, `The query has been set to ${this.query}.`)
+
+            this.update()
+
+            break
+          case InputMode.SINGLE:
+            this.store[this.path] = event.target.value as any
+            StoreLogger.debug(this.id, 'onChange', this.type, this.mode, `The value has been set to ${this.value}.`)
+
+            break
+        }
+
+        break
       case InputType.URL:
         this.store[this.path] = event.target.value as any
         StoreLogger.debug(this.id, 'onChange', this.type, `The value has been set to ${this.value}.`)
@@ -91,6 +117,39 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
 
     this.isTouchTriggerChange && this.touch()
     this.validate()
+  }
+
+  /**
+   * Pushes query to store[path] if the type is TEXT and the mode is MULTIPLE.
+   */
+  onKeyUp = (event: KeyboardEvent<HTMLInputElement>): void => {
+    switch (event.key) {
+      case 'Enter':
+        switch (this.type) {
+          case InputType.TEXT:
+            switch (this.mode) {
+              case InputMode.MULTIPLE:
+                if (this.query.length <= 0) {
+                  StoreLogger.warn(this.id, 'onKeyUp', `The query is empty.`)
+                  return
+                }
+
+                this.store[this.path] = [...(this.value as string[]), this.query] as any
+                StoreLogger.debug(this.id, 'onKeyUp', `The query has been pushed to the value.`, this.value)
+
+                this.query = ''
+                StoreLogger.debug(this.id, 'onKeyUp', `The query has been reset.`)
+
+                this.update()
+
+                break
+            }
+
+            break
+        }
+
+        break
+    }
   }
 
   /**
@@ -154,7 +213,7 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
   /**
    * A value read from store[path].
    */
-  get value(): number | string | undefined {
+  get value(): number | string | string[] | undefined {
     switch (this.type) {
       case InputType.BUFFER:
         return undefined
@@ -165,9 +224,31 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
       case InputType.PASSWORD:
       case InputType.TEL:
       case InputType.TEXT:
+        switch (this.mode) {
+          case InputMode.MULTIPLE:
+            return (this.store[this.path] as any) || []
+          case InputMode.SINGLE:
+            return (this.store[this.path] as any) || ''
+        }
       case InputType.URL:
         return (this.store[this.path] as any) || ''
     }
+  }
+
+  get valueAsNumber(): number {
+    return this.value as number
+  }
+
+  get valueAsString(): string {
+    return this.value as string
+  }
+
+  get valueAsStringArray(): string[] {
+    return this.value as string[]
+  }
+
+  get valueAsUndefined(): undefined {
+    return this.value as undefined
   }
 
   get isBlurred(): boolean {
@@ -176,6 +257,14 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
 
   get isFocused(): boolean {
     return this.focused === true
+  }
+
+  get isModeMultiple(): boolean {
+    return this.mode === InputMode.MULTIPLE
+  }
+
+  get isModeSingle(): boolean {
+    return this.mode === InputMode.SINGLE
   }
 
   get isObscured(): boolean {

@@ -26,7 +26,7 @@ export const useComponentStore = <
   useEffect(() => {
     store.id = id
     store.update()
-  }, [id])
+  }, [props.id])
 
   useEffect(() => {
     StoreUtils.updateKeys(store, props, [...(KEYS as any), ...keys], update)

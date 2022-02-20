@@ -5,6 +5,7 @@ export * from './collectors/input.file.collector'
 export * from './collectors/select.collector'
 export * from './collectors/sidebar.collector'
 export * from './collectors/switch.collector'
+export * from './collectors/text.area.collector'
 export * from './collectors/wizard.collector'
 export * from './components/Avatar'
 export * from './components/Blank'
@@ -33,6 +34,7 @@ export {
   HeadingVariant,
   ImageStatus,
   InputFileMode,
+  InputMode,
   InputTouchTrigger,
   InputType,
   Layer,
@@ -42,6 +44,8 @@ export {
   SelectMode,
   Shape,
   Size,
+  TextAreaMode,
+  TextAreaTouchTrigger,
   Theme
 } from './definitions/enums'
 export * from './definitions/interfaces'
@@ -88,6 +92,7 @@ export * from './stores/select.store'
 export * from './stores/sidebar.store'
 export * from './stores/switch.store'
 export * from './stores/tag.store'
+export * from './stores/text.area.store'
 export * from './stores/top.tabber.store'
 export * from './stores/virtualized.list.store'
 export * from './stores/wizard.store'

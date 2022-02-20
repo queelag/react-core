@@ -5,9 +5,10 @@ import type { InputFileStore } from '../stores/input.file.store'
 import type { InputStore } from '../stores/input.store'
 import type { SelectStore } from '../stores/select.store'
 import type { SwitchStore } from '../stores/switch.store'
-import type { InputFileMode, InputTouchTrigger, InputType, SelectMode } from './enums'
+import type { TextAreaStore } from '../stores/text.area.store'
+import type { InputFileMode, InputMode, InputTouchTrigger, InputType, SelectMode, TextAreaMode, TextAreaTouchTrigger } from './enums'
 import { SelectOption, WithIcon } from './interfaces'
-import { HTMLDivProps, HTMLInputProps, HTMLLabelProps, HTMLSpanProps } from './props'
+import { HTMLDivProps, HTMLInputProps, HTMLLabelProps, HTMLSpanProps, HTMLTextAreaProps } from './props'
 import { WithFormFieldProps } from './with.superstruct.interfaces'
 
 /** @category Prop */
@@ -26,6 +27,7 @@ export interface FormFieldErrorProps<T extends ComponentFormFieldStore<U, V>, U 
 
 /** @category Prop */
 export interface InputProps<T extends object> extends Omit<HTMLInputProps, 'prefix' | 'type'>, WithFormFieldProps<HTMLInputElement, InputStore<T>, T> {
+  mode?: InputMode
   prefix?: ReactNode
   suffix?: ReactNode
   touchTrigger?: InputTouchTrigger
@@ -45,3 +47,11 @@ export interface SelectProps<T extends object> extends HTMLDivProps, WithFormFie
 
 /** @category Prop */
 export interface SwitchProps<T extends object> extends HTMLDivProps, WithFormFieldProps<HTMLDivElement, SwitchStore<T>, T> {}
+
+/** @category Prop */
+export interface TextAreaProps<T extends object>
+  extends Omit<HTMLTextAreaProps, 'prefix' | 'type'>,
+    WithFormFieldProps<HTMLTextAreaElement, TextAreaStore<T>, T> {
+  mode?: TextAreaMode
+  touchTrigger?: TextAreaTouchTrigger
+}
