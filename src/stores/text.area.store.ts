@@ -56,8 +56,15 @@ export class TextAreaStore<T extends object> extends ComponentFormFieldStore<HTM
         break
     }
 
-    this.isTouchTriggerChange && this.touch()
-    this.validate()
+    switch (this.touchTrigger) {
+      case TextAreaTouchTrigger.BLUR:
+      case TextAreaTouchTrigger.NONE:
+        this.validate()
+        break
+      case TextAreaTouchTrigger.CHANGE:
+        this.touch()
+        break
+    }
   }
 
   /**
@@ -80,12 +87,39 @@ export class TextAreaStore<T extends object> extends ComponentFormFieldStore<HTM
             StoreLogger.debug(this.id, 'onKeyUp', `The query has been reset.`)
 
             this.update()
+            this.touch()
 
             break
         }
 
         break
     }
+  }
+
+  /**
+   * Removes an item from store[path] if the mode is MULTIPLE.
+   */
+  onClickRemoveItem = (item: string): void => {
+    switch (this.mode) {
+      case TextAreaMode.MULTIPLE:
+        this.store[this.path] = this.valueAsStringArray.filter((v: string) => v !== item) as any
+        StoreLogger.debug(this.id, 'onClickRemoveItem', `The item ${item} has been removed from the value.`, this.value)
+
+        this.touch()
+
+        break
+      case TextAreaMode.SINGLE:
+        StoreLogger.warn(this.id, 'onClickRemoveItem', `The remove function does not work with the ${this.mode} mode.`)
+        break
+    }
+  }
+
+  /**
+   * Resets store[path].
+   */
+  onClear = (): void => {
+    this.resetValue()
+    this.touch()
   }
 
   /**
@@ -106,6 +140,28 @@ export class TextAreaStore<T extends object> extends ComponentFormFieldStore<HTM
     StoreLogger.verbose(this.id, 'onFocus', `The focused state has been set to true.`)
 
     this.update()
+  }
+
+  resetQuery(): void {
+    this.query = ''
+    StoreLogger.debug(this.id, 'resetQuery', `The query has been reset.`)
+
+    this.update()
+  }
+
+  resetValue(): void {
+    switch (this.mode) {
+      case TextAreaMode.MULTIPLE:
+        this.store[this.path] = [] as any
+        StoreLogger.debug(this.id, 'resetValue', this.mode, `The value has been set to an empty array.`)
+
+        break
+      case TextAreaMode.SINGLE:
+        this.store[this.path] = '' as any
+        StoreLogger.debug(this.id, 'resetValue', this.mode, `The value has been set to an empty string.`)
+
+        break
+    }
   }
 
   /**
@@ -150,5 +206,9 @@ export class TextAreaStore<T extends object> extends ComponentFormFieldStore<HTM
 
   get isTouchTriggerChange(): boolean {
     return this.touchTrigger === TextAreaTouchTrigger.CHANGE
+  }
+
+  get isTouchTriggerNone(): boolean {
+    return this.touchTrigger === TextAreaTouchTrigger.NONE
   }
 }

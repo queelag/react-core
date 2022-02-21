@@ -10,6 +10,7 @@ import { ComponentName } from '../definitions/enums'
 import { ComponentStoreProps } from '../definitions/interfaces'
 import { FormProps } from '../definitions/props'
 import { StoreLogger } from '../loggers/store.logger'
+import { ComponentFormFieldStore } from '../modules/component.form.field.store'
 import { ComponentStore } from '../modules/component.store'
 import { CheckBoxStore } from './check.box.store'
 import { InputFileStore } from './input.file.store'
@@ -44,6 +45,13 @@ export class FormStore extends ComponentStore<HTMLFormElement> {
    */
   get onSubmit(): (event: FormEvent<HTMLFormElement>) => any {
     return this._onSubmit
+  }
+
+  /**
+   * An array of child FormField stores.
+   */
+  get stores(): ComponentFormFieldStore<any, any>[] {
+    return [...this.checkBoxStores, ...this.inputStores, ...this.inputFileStores, ...this.selectStores, ...this.switchStores, ...this.textAreaStores]
   }
 
   /**
@@ -112,14 +120,7 @@ export class FormStore extends ComponentStore<HTMLFormElement> {
    * Checks if every child field is valid.
    */
   get isValid(): boolean {
-    return (
-      this.checkBoxStores.every((v: CheckBoxStore<any>) => v.isValid) &&
-      this.inputStores.every((v: InputStore<any>) => v.isValid) &&
-      this.inputFileStores.every((v: InputFileStore<any>) => v.isValid) &&
-      this.selectStores.every((v: SelectStore<any>) => v.isValid) &&
-      this.switchStores.every((v: SwitchStore<any>) => v.isValid) &&
-      this.textAreaStores.every((v: TextAreaStore<any>) => v.isValid)
-    )
+    return this.stores.every((v: ComponentFormFieldStore<any, any>) => v.isValid)
   }
 
   /** @internal */
@@ -132,12 +133,10 @@ export class FormStore extends ComponentStore<HTMLFormElement> {
         return StoreLogger.warn(this.id, 'onSubmit', `Execution stopped, disabled is truthy.`)
       }
 
-      this.checkBoxStores.forEach((v: CheckBoxStore<any>) => v.touch())
-      this.inputStores.forEach((v: InputStore<any>) => v.touch())
-      this.inputFileStores.forEach((v: InputFileStore<any>) => v.touch())
-      this.selectStores.forEach((v: SelectStore<any>) => v.touch())
-      this.switchStores.forEach((v: SwitchStore<any>) => v.touch())
-      this.textAreaStores.forEach((v: TextAreaStore<any>) => v.touch())
+      this.stores.forEach((v: ComponentFormFieldStore<any, any>) => {
+        v.touch()
+        v.validate()
+      })
 
       if (this.isValid) {
         this.disabled = true
@@ -149,13 +148,6 @@ export class FormStore extends ComponentStore<HTMLFormElement> {
         this.disabled = false
         StoreLogger.verbose(this.id, 'onSubmit', `The disabled state has been set to false.`)
       }
-
-      this.checkBoxStores.forEach((v: CheckBoxStore<any>) => v.validate())
-      this.inputStores.forEach((v: InputStore<any>) => v.validate())
-      this.inputFileStores.forEach((v: InputFileStore<any>) => v.validate())
-      this.selectStores.forEach((v: SelectStore<any>) => v.validate())
-      this.switchStores.forEach((v: SwitchStore<any>) => v.validate())
-      this.textAreaStores.forEach((v: TextAreaStore<any>) => v.validate())
     }
   }
 }

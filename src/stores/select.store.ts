@@ -41,14 +41,14 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
   onClickOption = (option: SelectOption): void => {
     switch (this.mode) {
       case SelectMode.MULTIPLE:
-        if (this.valueAsMultiple.includes(option.value)) {
-          this.store[this.path] = this.valueAsMultiple.filter((v: SelectOptionValue) => v !== option.value) as any
+        if (this.valueAsStringArray.includes(option.value)) {
+          this.store[this.path] = this.valueAsStringArray.filter((v: SelectOptionValue) => v !== option.value) as any
           StoreLogger.debug(this.id, 'onClickOption', this.mode, `The option ${option.value} has been removed from the value.`, this.value, option)
 
           break
         }
 
-        this.store[this.path] = this.valueAsMultiple.concat(option.value) as any
+        this.store[this.path] = this.valueAsStringArray.concat(option.value) as any
         StoreLogger.debug(this.id, 'onClickOption', this.mode, `The option ${option.value} has been pushed to the value.`, this.value, option)
 
         break
@@ -59,20 +59,20 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
         break
     }
 
-    this.touch()
     this.resetQuery()
+    this.touch()
   }
 
   /**
    * Removes an option from store[path] if the mode is MULTIPLE.
    */
-  onClickRemove = (option: SelectOption): void => {
+  onClickRemoveOption = (option: SelectOption): void => {
     switch (this.mode) {
       case SelectMode.MULTIPLE:
-        if (this.valueAsMultiple.includes(option.value)) {
-          this.store[this.path] = this.valueAsMultiple.filter((v: SelectOptionValue) => v !== option.value) as any
-          StoreLogger.debug(this.id, 'onClickRemove', this.mode, `The option ${option.value} has been removed from the value.`, this.value, option)
-        }
+        this.store[this.path] = this.valueAsStringArray.filter((v: SelectOptionValue) => v !== option.value) as any
+        StoreLogger.debug(this.id, 'onClickRemove', this.mode, `The option ${option.value} has been removed from the value.`, this.value, option)
+
+        this.touch()
 
         break
       case SelectMode.SINGLE:
@@ -160,22 +160,12 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
     }
   }
 
-  get valueAsMultiple(): SelectOptionValue[] {
-    switch (this.mode) {
-      case SelectMode.MULTIPLE:
-        return []
-      case SelectMode.SINGLE:
-        return this.value as SelectOptionValue[]
-    }
+  get valueAsString(): SelectOptionValue {
+    return this.value as SelectOptionValue
   }
 
-  get valueAsSingle(): SelectOptionValue {
-    switch (this.mode) {
-      case SelectMode.MULTIPLE:
-        return ''
-      case SelectMode.SINGLE:
-        return this.value as SelectOptionValue
-    }
+  get valueAsStringArray(): SelectOptionValue[] {
+    return this.value as SelectOptionValue[]
   }
 
   get isModeMultiple(): boolean {

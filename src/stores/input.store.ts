@@ -49,7 +49,7 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
   }
 
   /** @internal */
-  detachInputFromReact(autoFocus: boolean = false): void {
+  detachInputFromReact(props: InputProps<T> & ComponentFormFieldStoreProps<HTMLInputElement, T>): void {
     let input: HTMLInputElement
 
     input = document.createElement('input')
@@ -65,7 +65,7 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
 
     this.element.replaceWith(input)
 
-    autoFocus && input.focus()
+    props.autoFocus && input.focus()
   }
 
   /**
@@ -115,8 +115,15 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
         break
     }
 
-    this.isTouchTriggerChange && this.touch()
-    this.validate()
+    switch (this.touchTrigger) {
+      case InputTouchTrigger.BLUR:
+      case InputTouchTrigger.NONE:
+        this.validate()
+        break
+      case InputTouchTrigger.CHANGE:
+        this.touch()
+        break
+    }
   }
 
   /**
@@ -134,22 +141,55 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
                   return
                 }
 
-                this.store[this.path] = [...(this.value as string[]), this.query] as any
+                this.store[this.path] = [...this.valueAsStringArray, this.query] as any
                 StoreLogger.debug(this.id, 'onKeyUp', `The query has been pushed to the value.`, this.value)
 
                 this.query = ''
                 StoreLogger.debug(this.id, 'onKeyUp', `The query has been reset.`)
 
                 this.update()
+                this.touch()
 
                 break
             }
+            break
+        }
+        break
+    }
+  }
 
+  /**
+   * Removes an item from store[path] if the mode is MULTIPLE.
+   */
+  onClickRemoveItem = (item: string): void => {
+    switch (this.type) {
+      case InputType.TEXT:
+        switch (this.mode) {
+          case InputMode.MULTIPLE:
+            this.store[this.path] = this.valueAsStringArray.filter((v: string) => v !== item) as any
+            StoreLogger.debug(this.id, 'onClickRemoveItem', `The item ${item} has been removed from the value.`, this.value)
+
+            this.touch()
+
+            break
+          case InputMode.SINGLE:
+            StoreLogger.warn(this.id, 'onClickRemoveItem', `The remove function does not work with the ${this.mode} mode.`)
             break
         }
 
         break
+      default:
+        StoreLogger.warn(this.id, 'onClickRemoveItem', `The remove function does not work with the ${this.type} type.`)
+        break
     }
+  }
+
+  /**
+   * Resets store[path].
+   */
+  onClear = (): void => {
+    this.resetValue()
+    this.touch()
   }
 
   /**
@@ -185,6 +225,48 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
     }
 
     this.update()
+  }
+
+  resetQuery(): void {
+    this.query = ''
+    StoreLogger.debug(this.id, 'resetQuery', `The query has been reset.`)
+
+    this.update()
+  }
+
+  resetValue(): void {
+    switch (this.type) {
+      case InputType.BUFFER:
+        this.store[this.path] = undefined as any
+        StoreLogger.debug(this.id, 'resetValue', this.type, this.mode, `The value has been set to undefined.`)
+        break
+      case InputType.DATE:
+      case InputType.NUMBER:
+        this.store[this.path] = 0 as any
+        StoreLogger.debug(this.id, 'resetValue', this.type, this.mode, `The value has been set to 0.`)
+        break
+      case InputType.EMAIL:
+      case InputType.PASSWORD:
+      case InputType.TEL:
+      case InputType.URL:
+        this.store[this.path] = '' as any
+        StoreLogger.debug(this.id, 'resetValue', this.type, this.mode, `The value has been set to an empty string.`)
+        break
+      case InputType.TEXT:
+        switch (this.mode) {
+          case InputMode.MULTIPLE:
+            this.store[this.path] = [] as any
+            StoreLogger.debug(this.id, 'resetValue', this.type, this.mode, `The value has been set to an empty array.`)
+
+            break
+          case InputMode.SINGLE:
+            this.store[this.path] = '' as any
+            StoreLogger.debug(this.id, 'resetValue', this.type, this.mode, `The value has been set to an empty string.`)
+
+            break
+        }
+        break
+    }
   }
 
   /**
@@ -223,6 +305,8 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
       case InputType.EMAIL:
       case InputType.PASSWORD:
       case InputType.TEL:
+      case InputType.URL:
+        return (this.store[this.path] as any) || ''
       case InputType.TEXT:
         switch (this.mode) {
           case InputMode.MULTIPLE:
@@ -230,8 +314,6 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
           case InputMode.SINGLE:
             return (this.store[this.path] as any) || ''
         }
-      case InputType.URL:
-        return (this.store[this.path] as any) || ''
     }
   }
 
@@ -281,6 +363,10 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
 
   get isTouchTriggerChange(): boolean {
     return this.touchTrigger === InputTouchTrigger.CHANGE
+  }
+
+  get isTouchTriggerNone(): boolean {
+    return this.touchTrigger === InputTouchTrigger.NONE
   }
 
   get isTypeBuffer(): boolean {

@@ -1,5 +1,4 @@
 import { FormEvent, MutableRefObject, ReactNode } from 'react'
-import { HeadingVariant } from '..'
 import type { AvatarStore } from '../stores/avatar.store'
 import type { BadgeStore } from '../stores/badge.store'
 import type { BottomTabberStore } from '../stores/bottom.tabber.store'
@@ -15,7 +14,7 @@ import type { TagStore } from '../stores/tag.store'
 import type { TopTabberStore } from '../stores/top.tabber.store'
 import type { VirtualizedListStore } from '../stores/virtualized.list.store'
 import type { WizardStore } from '../stores/wizard.store'
-import type { ButtonVariant, Color } from './enums'
+import type { ButtonVariant, Color, HeadingVariant } from './enums'
 import {
   BottomSheetItem,
   BottomTabberItem,

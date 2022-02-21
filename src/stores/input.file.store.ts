@@ -65,19 +65,17 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
   }
 
   /**
-   * Resets store[path] if the mode is SINGLE otherwise filters out the item.
+   * Removes an item from store[path] if the mode is MULTIPLE.
    */
-  onRemove = (item: InputFileItem): void => {
+  onClickRemoveItem = (item: InputFileItem): void => {
     switch (this.mode) {
       case InputFileMode.MULTIPLE:
         this.store[this.path] = (this.value as InputFileItem[]).filter((v: InputFileItem) => v.id != item.id) as any
-        StoreLogger.debug(this.id, 'onRemove', `The item ${item.id} has been removed from the value.`, this.value, item)
+        StoreLogger.debug(this.id, 'onRemove', this.mode, `The item ${item.id} has been removed from the value.`, item, this.value)
 
         break
       case InputFileMode.SINGLE:
-        this.store[this.path] = Dummy.inputFileItem as any
-        StoreLogger.debug(this.id, 'onRemove', `The value has been reset.`, this.value)
-
+        StoreLogger.warn(this.id, 'onClickRemove', this.mode, `The remove function does not work with this mode.`)
         break
     }
 
@@ -88,20 +86,23 @@ export class InputFileStore<T extends object> extends ComponentFormFieldStore<HT
    * Resets store[path] if the mode is SINGLE otherwise it empties the array.
    */
   onClear = (): void => {
+    this.resetValue()
+    this.touch()
+  }
+
+  resetValue(): void {
     switch (this.mode) {
       case InputFileMode.MULTIPLE:
         this.store[this.path] = [] as any
-        StoreLogger.debug(this.id, 'onClear', `The value has been set to an empty array.`, this.value)
+        StoreLogger.debug(this.id, 'resetValue', this.mode, `The value has been set to an empty array.`, this.value)
 
         break
       case InputFileMode.SINGLE:
         this.store[this.path] = Dummy.inputFileItem as any
-        StoreLogger.debug(this.id, 'onClear', `The value has been reset.`, this.value)
+        StoreLogger.debug(this.id, 'resetValue', this.mode, `The value has been reset.`, this.value)
 
         break
     }
-
-    this.touch()
   }
 
   /**

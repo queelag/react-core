@@ -24,6 +24,8 @@ export class SwitchStore<T extends object> extends ComponentFormFieldStore<HTMLD
 
     this.store[this.path] = !this.value as any
     StoreLogger.debug(this.id, 'onChange', `The value has been set to ${this.value}.`)
+
+    this.touch()
   }
 
   /**
