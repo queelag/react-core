@@ -130,6 +130,7 @@ export class TextAreaStore<T extends object> extends ComponentFormFieldStore<HTM
     StoreLogger.verbose(this.id, 'onBlur', 'The focused state has been set to false.')
 
     this.isTouchTriggerBlur && this.touch()
+    this.update()
   }
 
   /**

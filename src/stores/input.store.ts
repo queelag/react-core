@@ -200,6 +200,7 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
     StoreLogger.verbose(this.id, 'onBlur', 'The focused state has been set to false.')
 
     this.isTouchTriggerBlur && this.touch()
+    this.update()
   }
 
   /**
