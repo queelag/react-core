@@ -1,5 +1,5 @@
 import { ID } from '@queelag/core'
-import { LegacyRef, MutableRefObject, ReactNode } from 'react'
+import { LegacyRef, MutableRefObject, ReactElement, ReactNode } from 'react'
 import type { ComponentStore } from '../modules/component.store'
 import type { Color, FeedbackType, Layer, Orientation, Shape, Size, Theme } from './enums'
 import { IconProps, WizardStepContentProps } from './props'
@@ -163,7 +163,7 @@ export interface WithTitle {
 export interface WizardStep {
   canGoBack: () => boolean
   canGoNext: () => boolean
-  children: (props: WizardStepContentProps) => ReactNode
+  children: (props: WizardStepContentProps) => ReactElement
   description: ReactNode
   name: string
   title: ReactNode
