@@ -78,7 +78,7 @@ export class Dummy {
     return {
       canGoBack: () => true,
       canGoNext: () => true,
-      children: () => null,
+      children: () => ({ key: null, props: {}, type: 'div' }),
       description: '',
       name: '',
       title: ''
