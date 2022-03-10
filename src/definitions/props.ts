@@ -197,7 +197,7 @@ export interface LabelProps<T extends object> extends HTMLLabelProps, WithColor,
 
 /** @category Prop */
 export interface ListProps<T> extends HTMLUListProps, WithGetStore<HTMLUListElement, ListStore<T>> {
-  empty?: (props: any) => JSX.Element
+  empty?: ReactNode
   items?: T[]
   renderItem?: (item: T, index: number) => ReactNode
 }
@@ -302,6 +302,7 @@ export interface VirtualizedListProps<T> extends HTMLUListProps, WithGetStore<HT
   innerClassName?: string
   itemParentProps?: HTMLDivProps
   items?: T[]
+  size?: number
   renderItem?: (v: T, k: number) => JSX.Element
 }
 

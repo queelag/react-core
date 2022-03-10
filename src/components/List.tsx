@@ -27,7 +27,7 @@ export const List = forwardRef(<T extends any>(props: ListProps<T>, ref: Forward
 
   return (
     <ul {...ObjectUtils.omit(props, LIST_PROPS_KEYS)} id={store.id} ref={ref}>
-      {store.isItemsEmpty && props.empty && <props.empty />}
+      {store.isItemsEmpty && props.empty}
       {store.hasItems && store.items.map(store.renderItem)}
       {props.children}
     </ul>

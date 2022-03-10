@@ -1,4 +1,4 @@
-import { ObjectUtils } from '@queelag/core'
+import { NumberUtils, ObjectUtils } from '@queelag/core'
 import React, { useEffect } from 'react'
 import { FixedSizeList, Layout, ListChildComponentProps } from 'react-window'
 import { VIRTUALIZED_LIST_PROPS_KEYS, VIRTUALIZED_LIST_STORE_KEYS } from '../definitions/constants'
@@ -44,7 +44,7 @@ export function VirtualizedList<T>(props: VirtualizedListProps<T>) {
 
   useEffect(() => {
     innerRef.current.className = props.innerClassName || ''
-  }, [])
+  }, [props.innerClassName, innerRef])
 
   return (
     <ul
@@ -52,8 +52,9 @@ export function VirtualizedList<T>(props: VirtualizedListProps<T>) {
       id={store.id}
       ref={store.ref}
       style={{
-        ...props.style,
-        overflow: 'hidden'
+        height: typeof store.size === 'number' ? NumberUtils.limit(store.itemElementHeight * store.items.length, 0, store.size) : undefined,
+        overflow: 'hidden',
+        ...props.style
       }}
     >
       {store.isItemsEmpty && props.empty}
