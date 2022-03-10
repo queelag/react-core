@@ -140,14 +140,24 @@ export class VirtualizedListStore<T> extends ComponentStore<HTMLUListElement> {
    * Returns the parent element height if the orientation is VERTICAL otherwise returns 100%.
    */
   get elementHeight(): number | string {
-    return this.isOrientationVertical ? this.parentElementHeight : '100%'
+    switch (this.orientation) {
+      case Orientation.HORIZONTAL:
+        return '100%'
+      case Orientation.VERTICAL:
+        return typeof this.size === 'number' ? NumberUtils.limit(this.items.length, 0, this.size) * this.itemElementHeight : this.parentElementHeight
+    }
   }
 
   /**
    * Returns the parent element width if the orientation is HORIZONTAL otherwise returns 100%.
    */
   get elementWidth(): number | string {
-    return this.isOrientationHorizontal ? this.parentElementWidth : '100%'
+    switch (this.orientation) {
+      case Orientation.HORIZONTAL:
+        return typeof this.size === 'number' ? NumberUtils.limit(this.items.length, 0, this.size) * this.itemElementWidth : this.parentElementWidth
+      case Orientation.VERTICAL:
+        return '100%'
+    }
   }
 
   get hasItems(): boolean {

@@ -1,4 +1,4 @@
-import { NumberUtils, ObjectUtils } from '@queelag/core'
+import { ObjectUtils } from '@queelag/core'
 import React, { useEffect } from 'react'
 import { FixedSizeList, Layout, ListChildComponentProps } from 'react-window'
 import { VIRTUALIZED_LIST_PROPS_KEYS, VIRTUALIZED_LIST_STORE_KEYS } from '../definitions/constants'
@@ -36,7 +36,10 @@ export function VirtualizedList<T>(props: VirtualizedListProps<T>) {
   useEffect(() => {
     let listener: () => void
 
-    listener = () => store.update()
+    listener = () => {
+      store.readItemElementHeightOrWidth()
+      store.readParentElementHeightOrWidth()
+    }
     window.addEventListener('resize', listener)
 
     return () => window.removeEventListener('resize', listener)
@@ -52,7 +55,6 @@ export function VirtualizedList<T>(props: VirtualizedListProps<T>) {
       id={store.id}
       ref={store.ref}
       style={{
-        height: typeof store.size === 'number' ? NumberUtils.limit(store.itemElementHeight * store.items.length, 0, store.size) : undefined,
         overflow: 'hidden',
         ...props.style
       }}
@@ -70,7 +72,7 @@ export function VirtualizedList<T>(props: VirtualizedListProps<T>) {
         >
           {({ index, style }: ListChildComponentProps) => (
             <div {...props.itemParentProps} style={{ ...props.itemParentProps?.style, ...style }}>
-              <li>{store.renderItem(store.items[index], index)}</li>
+              {store.renderItem(store.items[index], index)}
             </div>
           )}
         </FixedSizeList>

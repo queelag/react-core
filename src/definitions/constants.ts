@@ -241,7 +241,8 @@ export const VIRTUALIZED_LIST_PROPS_KEYS: (keyof VirtualizedListProps<any>)[] = 
   'innerClassName',
   'itemParentProps',
   'items',
-  'renderItem'
+  'renderItem',
+  'size'
 ]
 
 /** @category Constant */
