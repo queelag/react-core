@@ -1,6 +1,6 @@
 import { ID, IDUtils, noop, NumberUtils } from '@queelag/core'
 import { MutableRefObject } from 'react'
-import { Layer, Orientation, Shape, Size } from '../definitions/enums'
+import { ComponentLifeCycle, Layer, Orientation, Shape, Size } from '../definitions/enums'
 import { ComponentStoreProps } from '../definitions/interfaces'
 import { Configuration } from './configuration'
 import { Dummy } from './dummy'
@@ -20,6 +20,14 @@ export class ComponentStore<T extends Element = HTMLDivElement> {
    * A {@link Layer} which determines the position on the Z axis.
    */
   layer: Layer
+  /**
+   * A {@link ComponentLifeCycle} which determines the life cycle of a component.
+   */
+  life: ComponentLifeCycle
+  /**
+   * A boolean which determines if the component is mounted or not.
+   */
+  mounted: boolean
   /**
    * A string which helps identify a component, used as a prefix for the id.
    */
@@ -44,12 +52,28 @@ export class ComponentStore<T extends Element = HTMLDivElement> {
   constructor(name: string, props: ComponentStoreProps<T>) {
     this.id = props.id || Configuration.isComponentStoreGeneratingIDOnConstruction ? IDUtils.prefixed(name) : ''
     this.layer = props.layer || Layer.ZERO
+    this.life = ComponentLifeCycle.CONSTRUCTED
+    this.mounted = false
     this.name = name
     this.orientation = props.orientation || Orientation.HORIZONTAL
     this.ref = (props.ref as any) || Dummy.ref
     this.shape = props.shape || Shape.NONE
     this.size = props.size || Size.MEDIUM
     this.update = props.update || noop
+  }
+
+  /**
+   * Marks the component as mounted.
+   */
+  mount(): void {
+    this.life = ComponentLifeCycle.MOUNTED
+  }
+
+  /**
+   * Marks the component as unmounted.
+   */
+  unmount(): void {
+    this.life = ComponentLifeCycle.UNMOUNTED
   }
 
   /**
@@ -92,6 +116,14 @@ export class ComponentStore<T extends Element = HTMLDivElement> {
 
   get isLayerThree(): boolean {
     return this.layer === Layer.THREE
+  }
+
+  get isMounted(): boolean {
+    return this.mounted === true
+  }
+
+  get isNotMounted(): boolean {
+    return this.mounted === false
   }
 
   get isOrientationHorizontal(): boolean {

@@ -54,6 +54,12 @@ export enum ComponentName {
   WIZARD = 'WIZARD'
 }
 
+export enum ComponentLifeCycle {
+  CONSTRUCTED = 'CONSTRUCTED',
+  MOUNTED = 'MOUNTED',
+  UNMOUNTED = 'UNMOUNTED'
+}
+
 export enum Direction {
   DOWN = 'DOWN',
   LEFT = 'LEFT',

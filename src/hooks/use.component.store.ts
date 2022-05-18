@@ -25,6 +25,11 @@ export const useComponentStore = <
   const id = useID(store.name, props.id, Configuration.isComponentStoreGeneratingIDOnConstruction ? store.id : undefined)
 
   useEffect(() => {
+    store.mount()
+    return () => store.unmount()
+  }, [])
+
+  useEffect(() => {
     store.id = id
     store.update()
   }, [id])
