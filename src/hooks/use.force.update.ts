@@ -14,10 +14,10 @@ export function useForceUpdate(): () => void {
   const dispatch = () => {
     switch (cycle) {
       case ComponentLifeCycle.CONSTRUCTED:
+      case ComponentLifeCycle.UNMOUNTED:
+        break
       case ComponentLifeCycle.MOUNTED:
         return reducer[1]()
-      case ComponentLifeCycle.UNMOUNTED:
-        return
     }
   }
 
