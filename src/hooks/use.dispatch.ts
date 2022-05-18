@@ -3,11 +3,11 @@ import { ComponentLifeCycle } from '../definitions/enums'
 import { useLifeCycle } from './use.life.cycle'
 
 /**
- * Forces a re-render.
+ * Forces a re-render if the component is mounted.
  *
  * @category Hook
  */
-export function useForceUpdate(): () => void {
+export function useDispatch(): () => void {
   const cycle = useLifeCycle()
   const reducer = useReducer(() => ({}), {})
 

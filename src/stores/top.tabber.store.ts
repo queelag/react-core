@@ -1,4 +1,3 @@
-import { Blank } from '../components/Blank'
 import { ComponentName } from '../definitions/enums'
 import { ComponentStoreProps, TopTabberItem } from '../definitions/interfaces'
 import { TopTabberProps } from '../definitions/props'
@@ -34,7 +33,7 @@ export class TopTabberStore extends ComponentStore {
     this.activeItemName = item.name
     StoreLogger.debug(this.id, 'onClickItem', `The active item name has been set to ${this.activeItemName}.`)
 
-    this.update()
+    this.dispatch()
   }
 
   findItemByName(name: string): TopTabberItem {
@@ -59,7 +58,7 @@ export class TopTabberStore extends ComponentStore {
 
   private get dummyItem(): TopTabberItem {
     return {
-      children: Blank,
+      children: null,
       name: ''
     }
   }

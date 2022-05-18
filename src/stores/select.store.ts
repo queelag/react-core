@@ -89,7 +89,7 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
       this.resetValue()
     }
 
-    this.update()
+    this.dispatch()
   }
 
   onCollapse = (): void => {
@@ -105,7 +105,7 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
     this.query = ''
     StoreLogger.debug(this.id, 'resetQuery', `The query has been reset.`)
 
-    this.update()
+    this.dispatch()
   }
 
   resetValue(): void {

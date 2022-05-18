@@ -142,7 +142,7 @@ export class IconStore extends ComponentStore<SVGSVGElement> {
       this._src = src
       StoreLogger.verbose(this.id, 'setSource', `The source has been set.`)
 
-      this.update()
+      this.dispatch()
     })()
   }
 }

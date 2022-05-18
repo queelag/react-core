@@ -75,7 +75,7 @@ export class WizardStore extends ComponentStore {
     this.activeStepName = name
     StoreLogger.debug(this.id, 'setActiveStepName', `The active step has been set to ${this.activeStepName}.`)
 
-    this.update()
+    this.dispatch()
   }
 
   findStepIndexByName(name: string): number {

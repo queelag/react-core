@@ -94,7 +94,7 @@ export class ButtonStore extends ComponentStore<HTMLButtonElement> {
 
       StoreLogger.verbose(this.id, 'onClick', `The disabled and spinning states have been set to true.`)
 
-      this.update()
+      this.dispatch()
 
       await tcp(() => onClick(event))
       StoreLogger.debug(this.id, 'onClick', `The onClick function has been fired.`, onClick)
@@ -104,7 +104,7 @@ export class ButtonStore extends ComponentStore<HTMLButtonElement> {
 
       StoreLogger.verbose(this.id, 'onClick', `The disabled and spinning states have been set to false.`)
 
-      this.update()
+      this.dispatch()
     }
   }
 }

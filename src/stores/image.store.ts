@@ -48,7 +48,7 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
     this.status = ImageStatus.ERROR
     StoreLogger.error(this.id, 'onError', `The status has been set to ${ImageStatus.ERROR}.`, event)
 
-    this.update()
+    this.dispatch()
   }
 
   onLoad = (event: SyntheticEvent<HTMLImageElement>): void => {
@@ -60,7 +60,7 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
     this.status = ImageStatus.LOADED
     StoreLogger.verbose(this.id, 'onLoad', `The status has been set to ${ImageStatus.LOADED}.`, event)
 
-    this.update()
+    this.dispatch()
   }
 
   onLoadStart = (event: SyntheticEvent<HTMLImageElement>): void => {
@@ -168,7 +168,7 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
         this.status = ImageStatus.LOADED
         StoreLogger.verbose(this.id, 'setSource', `The status has been set to ${this.status}.`)
 
-        this.update()
+        this.dispatch()
 
         return
       }
@@ -179,7 +179,7 @@ export class ImageStore extends ComponentStore<HTMLImageElement> {
       this.status = ImageStatus.LOADING
       StoreLogger.verbose(this.id, 'setSource', `The status has been set to ${this.status}.`)
 
-      this.update()
+      this.dispatch()
     })()
   }
 }

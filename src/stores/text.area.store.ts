@@ -46,7 +46,7 @@ export class TextAreaStore<T extends object> extends ComponentFormFieldStore<HTM
         this.query = event.target.value
         StoreLogger.debug(this.id, 'onChange', this.mode, `The query has been set to ${this.query}.`)
 
-        this.update()
+        this.dispatch()
 
         break
       case TextAreaMode.SINGLE:
@@ -86,7 +86,7 @@ export class TextAreaStore<T extends object> extends ComponentFormFieldStore<HTM
             this.query = ''
             StoreLogger.debug(this.id, 'onKeyUp', `The query has been reset.`)
 
-            this.update()
+            this.dispatch()
             this.touch()
 
             break
@@ -130,7 +130,7 @@ export class TextAreaStore<T extends object> extends ComponentFormFieldStore<HTM
     StoreLogger.verbose(this.id, 'onBlur', 'The focused state has been set to false.')
 
     this.isTouchTriggerBlur && this.touch()
-    this.update()
+    this.dispatch()
   }
 
   /**
@@ -140,14 +140,14 @@ export class TextAreaStore<T extends object> extends ComponentFormFieldStore<HTM
     this.focused = true
     StoreLogger.verbose(this.id, 'onFocus', `The focused state has been set to true.`)
 
-    this.update()
+    this.dispatch()
   }
 
   resetQuery(): void {
     this.query = ''
     StoreLogger.debug(this.id, 'resetQuery', `The query has been reset.`)
 
-    this.update()
+    this.dispatch()
   }
 
   resetValue(): void {

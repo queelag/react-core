@@ -36,7 +36,7 @@ export class OnboardingStore extends ComponentStore {
     this.activeItemIndex = NumberUtils.limit(this.activeItemIndex - 1, 0)
     StoreLogger.debug(this.id, 'onClickPrevious', `The active item index has been set to ${this.activeItemIndex}.`)
 
-    this.update()
+    this.dispatch()
   }
 
   /**
@@ -53,7 +53,7 @@ export class OnboardingStore extends ComponentStore {
     this.activeItemIndex += 1
     StoreLogger.debug(this.id, 'onClickNext', `The active item index has been set to ${this.activeItemIndex}.`)
 
-    this.update()
+    this.dispatch()
   }
 
   /**

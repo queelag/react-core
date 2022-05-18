@@ -50,6 +50,7 @@ export class ComponentStore<T extends Element = HTMLDivElement> {
   size: Size | number | string
 
   constructor(name: string, props: ComponentStoreProps<T>) {
+    this.dispatch = props.dispatch || noop
     this.id = props.id || Configuration.isComponentStoreGeneratingIDOnConstruction ? IDUtils.prefixed(name) : ''
     this.layer = props.layer || Layer.ZERO
     this.life = ComponentLifeCycle.CONSTRUCTED
@@ -59,7 +60,6 @@ export class ComponentStore<T extends Element = HTMLDivElement> {
     this.ref = (props.ref as any) || Dummy.ref
     this.shape = props.shape || Shape.NONE
     this.size = props.size || Size.MEDIUM
-    this.update = props.update || noop
   }
 
   /**
@@ -77,9 +77,9 @@ export class ComponentStore<T extends Element = HTMLDivElement> {
   }
 
   /**
-   * Forces a re-render.
+   * Forces a re-render if the component is mounted.
    */
-  update(): void {}
+  dispatch(): void {}
 
   /**
    * Returns a DOM element from the ref.

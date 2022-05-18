@@ -39,7 +39,7 @@ export function Image(props: ImageProps) {
     props.onLoadStart && props.onLoadStart(event)
   }
 
-  useEffect(() => WindowUtils.addEventListenerAndReturnRemover('resize', () => store.update()), [])
+  useEffect(() => WindowUtils.addEventListenerAndReturnRemover('resize', () => store.dispatch()), [])
   useEffect(() => () => rv(() => store.deleteEmptyFromCache()), [])
 
   return (

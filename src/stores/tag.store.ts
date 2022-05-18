@@ -46,7 +46,7 @@ export class TagStore extends ComponentStore {
 
     this.onDestroy()
 
-    this.update()
+    this.dispatch()
   }
 
   get isDestroyable(): boolean {

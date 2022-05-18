@@ -3,7 +3,7 @@ import { useEffect, useMemo } from 'react'
 import { ComponentStoreProps } from '../definitions/interfaces'
 import { ComponentStore } from '../modules/component.store'
 import { Configuration } from '../modules/configuration'
-import { useForceUpdate } from './use.force.update'
+import { useDispatch } from './use.dispatch'
 import { useID } from './use.id'
 import { useSafeRef } from './use.safe.ref'
 
@@ -19,9 +19,9 @@ export const useComponentStore = <
   keys: (keyof S & keyof P)[] = [],
   tagName: K = 'div' as K
 ): S => {
+  const dispatch = useDispatch()
   const ref = useSafeRef(tagName)
-  const update = useForceUpdate()
-  const store = useMemo(() => new Store({ ...props, ref, update }), [])
+  const store = useMemo(() => new Store({ ...props, dispatch, ref }), [])
   const id = useID(store.name, props.id, Configuration.isComponentStoreGeneratingIDOnConstruction ? store.id : undefined)
 
   useEffect(() => {
@@ -31,11 +31,11 @@ export const useComponentStore = <
 
   useEffect(() => {
     store.id = id
-    store.update()
+    store.dispatch()
   }, [id])
 
   useEffect(() => {
-    StoreUtils.updateKeys(store, props, [...(KEYS as any), ...keys], update)
+    StoreUtils.updateKeys(store, props, [...(KEYS as any), ...keys], dispatch)
   }, [props])
 
   useEffect(() => {

@@ -36,9 +36,9 @@ export interface ColorPickerConfiguration {
 }
 
 export interface ComponentStoreProps<T extends Element = HTMLDivElement> extends WithGetStore<T, any>, WithLayer, WithOrientation, WithShape, WithSize {
+  dispatch?: () => void
   id?: ID
   ref?: LegacyRef<T> | MutableRefObject<T>
-  update?: () => void
 }
 
 export interface ConfigurationData {

@@ -84,7 +84,7 @@ export class ComponentFormFieldStore<T extends Element, U extends object> extend
     this.validation = this.schema.validate(this.value)
     ModuleLogger.debug(this.id, 'validate', `The value has been validated against the schema.`, this.validation, this.schema, this.value)
 
-    this.update()
+    this.dispatch()
   }
 
   /**

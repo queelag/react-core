@@ -87,7 +87,7 @@ export class VirtualizedListStore<T> extends ComponentStore<HTMLUListElement> {
         break
     }
 
-    this.update()
+    this.dispatch()
   }
 
   /**
@@ -114,7 +114,7 @@ export class VirtualizedListStore<T> extends ComponentStore<HTMLUListElement> {
             this.parentElementWidth = width
             StoreLogger.verbose(this.id, 'readElementHeightOrWidth', this.orientation, `The parent element width has been set to ${width}.`)
 
-            return this.update()
+            return this.dispatch()
           }
 
           break
@@ -128,7 +128,7 @@ export class VirtualizedListStore<T> extends ComponentStore<HTMLUListElement> {
             this.parentElementHeight = height
             StoreLogger.verbose(this.id, 'readElementHeightOrWidth', this.orientation, `The parent element height has been set to ${height}.`)
 
-            return this.update()
+            return this.dispatch()
           }
 
           break

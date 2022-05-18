@@ -97,7 +97,7 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
             this.query = event.target.value
             StoreLogger.debug(this.id, 'onChange', this.type, this.mode, `The query has been set to ${this.query}.`)
 
-            this.update()
+            this.dispatch()
 
             break
           case InputMode.SINGLE:
@@ -147,7 +147,7 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
                 this.query = ''
                 StoreLogger.debug(this.id, 'onKeyUp', `The query has been reset.`)
 
-                this.update()
+                this.dispatch()
                 this.touch()
 
                 break
@@ -200,7 +200,7 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
     StoreLogger.verbose(this.id, 'onBlur', 'The focused state has been set to false.')
 
     this.isTouchTriggerBlur && this.touch()
-    this.update()
+    this.dispatch()
   }
 
   /**
@@ -210,7 +210,7 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
     this.focused = true
     StoreLogger.verbose(this.id, 'onFocus', `The focused state has been set to true.`)
 
-    this.update()
+    this.dispatch()
   }
 
   /**
@@ -225,14 +225,14 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
       StoreLogger.verbose(this.id, 'onClickToggleObscuration', `The element type has been set to ${this.element.type}.`)
     }
 
-    this.update()
+    this.dispatch()
   }
 
   resetQuery(): void {
     this.query = ''
     StoreLogger.debug(this.id, 'resetQuery', `The query has been reset.`)
 
-    this.update()
+    this.dispatch()
   }
 
   resetValue(): void {
