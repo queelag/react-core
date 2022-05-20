@@ -8,11 +8,11 @@ import { useLifeCycle } from './use.life.cycle'
  * @category Hook
  */
 export function useDispatch(): () => void {
-  const cycle = useLifeCycle()
+  const life = useLifeCycle()
   const reducer = useReducer(() => ({}), {})
 
   const dispatch = () => {
-    switch (cycle) {
+    switch (life.current) {
       case ComponentLifeCycle.CONSTRUCTED:
       case ComponentLifeCycle.UNMOUNTED:
         break

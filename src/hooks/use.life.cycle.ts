@@ -1,7 +1,12 @@
-import { useEffect, useRef } from 'react'
+import { MutableRefObject, useEffect, useRef } from 'react'
 import { ComponentLifeCycle } from '../definitions/enums'
 
-export function useLifeCycle(): ComponentLifeCycle {
+/**
+ * Returns the life cycle of a component.
+ *
+ * @category Hook
+ */
+export function useLifeCycle(): MutableRefObject<ComponentLifeCycle> {
   const value = useRef<ComponentLifeCycle>(ComponentLifeCycle.CONSTRUCTED)
 
   useEffect(() => {
@@ -11,5 +16,5 @@ export function useLifeCycle(): ComponentLifeCycle {
     }
   })
 
-  return value.current
+  return value
 }

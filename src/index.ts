@@ -26,6 +26,7 @@ export * from './definitions/constants'
 export {
   ButtonVariant,
   Color,
+  ComponentLifeCycle,
   ComponentName,
   Direction,
   DirectionHorizontal,
@@ -59,6 +60,7 @@ export * from './hooks/use.component.form.field.store'
 export * from './hooks/use.component.store'
 export * from './hooks/use.dispatch'
 export * from './hooks/use.id'
+export * from './hooks/use.life.cycle'
 export * from './hooks/use.observer'
 export * from './hooks/use.safe.ref'
 export { ModuleLogger as ReactCoreModuleLogger } from './loggers/module.logger'
