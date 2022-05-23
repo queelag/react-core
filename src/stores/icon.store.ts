@@ -1,4 +1,5 @@
 import { Environment, tcp } from '@queelag/core'
+import { sanitize } from 'dompurify'
 import { Color, ComponentName } from '../definitions/enums'
 import { ComponentStoreProps } from '../definitions/interfaces'
 import { IconProps } from '../definitions/props'
@@ -47,7 +48,9 @@ export class IconStore extends ComponentStore<SVGSVGElement> {
    * Strips the raw svg of its parent element.
    */
   get html(): string {
-    return this.svg.replace(/<svg[^<]+>/m, '').replace(/<\/svg>/m, '')
+    return sanitize(this.svg)
+      .replace(/<svg[^<]+>/m, '')
+      .replace(/<\/svg>/m, '')
   }
 
   /**

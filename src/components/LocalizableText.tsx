@@ -1,4 +1,5 @@
 import { Localization, ObjectUtils } from '@queelag/core'
+import { sanitize } from 'dompurify'
 import React, { ForwardedRef } from 'react'
 import { LOCALIZABLE_TEXT_PROPS_KEYS } from '../definitions/constants'
 import { HTMLElementProps, LocalizableTextProps } from '../definitions/props'
@@ -11,7 +12,7 @@ export const LocalizableText = forwardRef(<T extends object>(props: HTMLElementP
     <props.element
       {...ObjectUtils.omit(props, LOCALIZABLE_TEXT_PROPS_KEYS)}
       className={ReactUtils.joinClassNames(props.className, ColorPicker.textByString(props.color || '', props.layer))}
-      dangerouslySetInnerHTML={{ __html: Localization.get(props.path as string, props.inject) }}
+      dangerouslySetInnerHTML={{ __html: sanitize(Localization.get(props.path as string, props.inject)) }}
       ref={ref}
       style={{ whiteSpace: 'pre-wrap', ...props.style }}
     />
