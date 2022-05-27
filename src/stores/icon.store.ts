@@ -1,7 +1,7 @@
 import { Environment, tcp } from '@queelag/core'
-import { sanitize } from 'dompurify'
+import { Config as SanitizeConfig, sanitize } from 'dompurify'
 import { Color, ComponentName } from '../definitions/enums'
-import { ComponentStoreProps } from '../definitions/interfaces'
+import { ComponentStoreProps, Sanitize } from '../definitions/interfaces'
 import { IconProps } from '../definitions/props'
 import { StoreLogger } from '../loggers/store.logger'
 import { Cache } from '../modules/cache'
@@ -19,6 +19,10 @@ export class IconStore extends ComponentStore<SVGSVGElement> {
   /** @internal */
   private _src: string = ''
   /**
+   * A {@link Sanitize} which determines how the svg is sanitized.
+   */
+  sanitize: Sanitize<SanitizeConfig & { RETURN_DOM?: false | undefined; RETURN_DOM_FRAGMENT?: false | undefined }>
+  /**
    * A string which contains the raw svg.
    */
   svg: string
@@ -31,6 +35,7 @@ export class IconStore extends ComponentStore<SVGSVGElement> {
     super(ComponentName.ICON, props)
 
     this.color = props.color || Color.MONO
+    this.sanitize = { config: { ...props.sanitizeConfig, RETURN_DOM: false, RETURN_DOM_FRAGMENT: false } }
     this.size = props.size || 0
     this.svg = '<svg viewbox="0 0 0 0"></svg>'
     this.src = props.src || ''
@@ -48,7 +53,7 @@ export class IconStore extends ComponentStore<SVGSVGElement> {
    * Strips the raw svg of its parent element.
    */
   get html(): string {
-    return sanitize(this.svg)
+    return sanitize(this.svg, this.sanitize.config)
       .replace(/<svg[^<]+>/m, '')
       .replace(/<\/svg>/m, '')
   }

@@ -1,4 +1,5 @@
 import { ID } from '@queelag/core'
+import { Config as SanitizeConfig } from 'dompurify'
 import { LegacyRef, MutableRefObject, ReactElement, ReactNode } from 'react'
 import type { ComponentStore } from '../modules/component.store'
 import type { Color, FeedbackType, Layer, Orientation, Shape, Size, Theme } from './enums'
@@ -67,6 +68,10 @@ export interface InputFileItem {
 }
 
 export interface OnboardingItem extends WithDescription, WithIcon, WithImage, WithTitle {}
+
+export interface Sanitize<T extends SanitizeConfig = SanitizeConfig> {
+  config: T
+}
 
 export interface SelectOption {
   label: string
@@ -146,6 +151,10 @@ export interface WithOrientation {
 
 export interface WithRoute<T> {
   route?: T
+}
+
+export interface WithSanitize {
+  sanitizeConfig?: SanitizeConfig
 }
 
 export interface WithShape {

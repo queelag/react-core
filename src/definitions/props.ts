@@ -37,6 +37,7 @@ import {
   WithLayer,
   WithLocalizationProps,
   WithOrientation,
+  WithSanitize,
   WithShape,
   WithSize,
   WithTitle,
@@ -177,7 +178,12 @@ export interface HTMLUListProps extends OmitLegacyRef<JSX.IntrinsicElements['ul'
 export interface HTMLVideoProps extends OmitLegacyRef<JSX.IntrinsicElements['video']> {}
 
 /** @category Prop */
-export interface IconProps extends Omit<SVGElementProps, 'fill' | 'orientation' | 'stroke'>, WithColor, WithGetStore<SVGSVGElement, IconStore>, WithLayer {
+export interface IconProps
+  extends Omit<SVGElementProps, 'fill' | 'orientation' | 'stroke'>,
+    WithColor,
+    WithGetStore<SVGSVGElement, IconStore>,
+    WithLayer,
+    WithSanitize {
   fill?: boolean | string
   size?: number
   src?: string
@@ -223,7 +229,7 @@ export interface LocalizableParagraphProps<T extends object> extends HTMLParagra
 export interface LocalizableSpanProps<T extends object> extends HTMLSpanProps, Omit<LocalizableTextProps<T>, 'element'> {}
 
 /** @category Prop */
-export interface LocalizableTextProps<T extends object> extends WithColor, WithLocalizationProps<T> {
+export interface LocalizableTextProps<T extends object> extends WithColor, WithLocalizationProps<T>, WithSanitize {
   element: (props: any) => JSX.Element
 }
 
