@@ -1,5 +1,5 @@
 import { Environment, tcp } from '@queelag/core'
-import { Config as SanitizeConfig, sanitize } from 'dompurify'
+import { Config as SanitizeConfig, sanitize } from 'isomorphic-dompurify'
 import { Color, ComponentName } from '../definitions/enums'
 import { ComponentStoreProps, Sanitize } from '../definitions/interfaces'
 import { IconProps } from '../definitions/props'

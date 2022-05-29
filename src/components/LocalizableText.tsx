@@ -1,5 +1,5 @@
 import { Localization, ObjectUtils } from '@queelag/core'
-import { Config as SanitizeConfig, sanitize } from 'dompurify'
+import { Config as SanitizeConfig, sanitize } from 'isomorphic-dompurify'
 import React, { ForwardedRef, useMemo } from 'react'
 import { LOCALIZABLE_TEXT_PROPS_KEYS } from '../definitions/constants'
 import { HTMLElementProps, LocalizableTextProps } from '../definitions/props'

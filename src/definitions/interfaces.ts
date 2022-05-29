@@ -1,5 +1,5 @@
 import { ID } from '@queelag/core'
-import { Config as SanitizeConfig } from 'dompurify'
+import { Config as SanitizeConfig } from 'isomorphic-dompurify'
 import { LegacyRef, MutableRefObject, ReactElement, ReactNode } from 'react'
 import type { ComponentStore } from '../modules/component.store'
 import type { Color, FeedbackType, Layer, Orientation, Shape, Size, Theme } from './enums'
