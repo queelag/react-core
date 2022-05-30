@@ -169,6 +169,10 @@ export interface WithTitle {
   title?: ReactNode
 }
 
+export interface WithTooltip {
+  tooltip?: ReactNode
+}
+
 export interface WizardStep {
   canGoBack: () => boolean
   canGoNext: () => boolean

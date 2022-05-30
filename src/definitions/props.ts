@@ -41,6 +41,7 @@ import {
   WithShape,
   WithSize,
   WithTitle,
+  WithTooltip,
   WizardStepPartial
 } from './interfaces'
 import { OmitLegacyRef, OmitTitle, StatisticValue, WizardOnStepChange } from './types'
@@ -95,7 +96,8 @@ export interface ButtonProps
     WithIcon,
     WithShape,
     WithSize,
-    WithTitle {
+    WithTitle,
+    WithTooltip {
   spinning?: boolean
   variant?: ButtonVariant
 }

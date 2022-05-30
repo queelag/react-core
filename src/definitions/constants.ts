@@ -115,6 +115,7 @@ export const BUTTON_PROPS_KEYS: (keyof ButtonProps)[] = [
   'size',
   'spinning',
   'title',
+  'tooltip',
   'variant'
 ]
 
