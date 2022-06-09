@@ -395,12 +395,52 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
     return this.type === InputType.BUFFER
   }
 
+  get isTypeDate(): boolean {
+    return this.type === InputType.DATE
+  }
+
+  get isTypeDateTime(): boolean {
+    return this.type === InputType.DATE_TIME
+  }
+
+  get isTypeEmail(): boolean {
+    return this.type === InputType.EMAIL
+  }
+
+  get isTypeMonth(): boolean {
+    return this.type === InputType.MONTH
+  }
+
   get isTypeNumber(): boolean {
     return this.type === InputType.NUMBER
   }
 
   get isTypePassword(): boolean {
     return this.type === InputType.PASSWORD
+  }
+
+  get isTypeSearch(): boolean {
+    return this.type === InputType.SEARCH
+  }
+
+  get isTypeTel(): boolean {
+    return this.type === InputType.TEL
+  }
+
+  get isTypeText(): boolean {
+    return this.type === InputType.TEXT
+  }
+
+  get isTypeTime(): boolean {
+    return this.type === InputType.TIME
+  }
+
+  get isTypeURL(): boolean {
+    return this.type === InputType.URL
+  }
+
+  get isTypeWeek(): boolean {
+    return this.type === InputType.WEEK
   }
 
   get isTypeBufferOrPassword(): boolean {
