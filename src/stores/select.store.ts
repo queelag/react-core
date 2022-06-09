@@ -82,9 +82,9 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
   }
 
   /**
-   * Clears query and value.
+   * Resets query and store[path].
    */
-  onClickClear = (): void => {
+  onClear = (): void => {
     this.resetQuery()
     this.resetValue()
   }
