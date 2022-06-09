@@ -81,6 +81,14 @@ export class SelectStore<T extends object> extends ComponentFormFieldStore<HTMLD
     }
   }
 
+  /**
+   * Clears query and value.
+   */
+  onClickClear = (): void => {
+    this.resetQuery()
+    this.resetValue()
+  }
+
   onChangeQuery = (event: ChangeEvent<HTMLInputElement>): void => {
     this.query = event.target.value
     StoreLogger.debug(this.id, 'onChangeQuery', `The query has been set to ${this.query}.`)

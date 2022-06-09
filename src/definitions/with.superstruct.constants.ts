@@ -40,7 +40,7 @@ export const INPUT_FILE_PROPS_KEYS: (keyof InputFileProps<any>)[] = [...WITH_FOR
 export const INPUT_FILE_STORE_KEYS: (keyof InputFileProps<any> & keyof InputFileStore<any>)[] = ['mode']
 
 /** @category Constant */
-export const SELECT_PROPS_KEYS: (keyof SelectProps<any>)[] = [...WITH_FORM_FIELD_PROPS_KEYS, 'mode', 'options']
+export const SELECT_PROPS_KEYS: (keyof SelectProps<any>)[] = [...WITH_FORM_FIELD_PROPS_KEYS, 'clearable', 'mode', 'options']
 
 /** @category Constant */
 export const SELECT_STORE_KEYS: (keyof SelectProps<any> & keyof SelectStore<any>)[] = ['mode', 'options']

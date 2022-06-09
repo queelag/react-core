@@ -1,5 +1,5 @@
 import { NumberUtils, TextCodec } from '@queelag/core'
-import { ChangeEvent, KeyboardEvent } from 'react'
+import { ChangeEvent, HTMLInputTypeAttribute, KeyboardEvent } from 'react'
 import { ComponentName, InputMode, InputTouchTrigger, InputType } from '../definitions/enums'
 import { ComponentFormFieldStoreProps } from '../definitions/with.superstruct.interfaces'
 import { InputProps } from '../definitions/with.superstruct.props'
@@ -79,8 +79,17 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
 
         break
       case InputType.DATE:
-        this.store[this.path] = 0 as any
-        StoreLogger.debug(this.id, 'onChange', this.type, `The value has been set to ${this.value}.`)
+      case InputType.DATE_TIME:
+      case InputType.EMAIL:
+      case InputType.MONTH:
+      case InputType.PASSWORD:
+      case InputType.SEARCH:
+      case InputType.TEL:
+      case InputType.TIME:
+      case InputType.URL:
+      case InputType.WEEK:
+        this.store[this.path] = event.target.value as any
+        StoreLogger.debug(this.id, 'onChange', this.type, this.mode, `The value has been set to ${this.value}.`)
 
         break
       case InputType.NUMBER:
@@ -88,9 +97,6 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
         StoreLogger.debug(this.id, 'onChange', this.type, `The value has been set to ${this.value}.`)
 
         break
-      case InputType.EMAIL:
-      case InputType.PASSWORD:
-      case InputType.TEL:
       case InputType.TEXT:
         switch (this.mode) {
           case InputMode.MULTIPLE:
@@ -106,11 +112,6 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
 
             break
         }
-
-        break
-      case InputType.URL:
-        this.store[this.path] = event.target.value as any
-        StoreLogger.debug(this.id, 'onChange', this.type, `The value has been set to ${this.value}.`)
 
         break
     }
@@ -242,16 +243,21 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
         StoreLogger.debug(this.id, 'resetValue', this.type, this.mode, `The value has been set to undefined.`)
         break
       case InputType.DATE:
+      case InputType.DATE_TIME:
+      case InputType.EMAIL:
+      case InputType.MONTH:
+      case InputType.PASSWORD:
+      case InputType.SEARCH:
+      case InputType.TEL:
+      case InputType.TIME:
+      case InputType.URL:
+      case InputType.WEEK:
+        this.store[this.path] = '' as any
+        StoreLogger.debug(this.id, 'resetValue', this.type, this.mode, `The value has been set to an empty string.`)
+        break
       case InputType.NUMBER:
         this.store[this.path] = 0 as any
         StoreLogger.debug(this.id, 'resetValue', this.type, this.mode, `The value has been set to 0.`)
-        break
-      case InputType.EMAIL:
-      case InputType.PASSWORD:
-      case InputType.TEL:
-      case InputType.URL:
-        this.store[this.path] = '' as any
-        StoreLogger.debug(this.id, 'resetValue', this.type, this.mode, `The value has been set to an empty string.`)
         break
       case InputType.TEXT:
         switch (this.mode) {
@@ -273,23 +279,33 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
   /**
    * Makes the type readable by the DOM.
    */
-  get lowercaseType(): string {
+  get lowercaseType(): HTMLInputTypeAttribute {
     switch (this.type) {
       case InputType.DATE:
         return 'date'
+      case InputType.DATE_TIME:
+        return 'datetime-local'
       case InputType.EMAIL:
         return 'email'
+      case InputType.MONTH:
+        return 'month'
       case InputType.NUMBER:
         return 'number'
       case InputType.BUFFER:
       case InputType.PASSWORD:
         return this.obscured ? 'password' : 'text'
+      case InputType.SEARCH:
+        return 'search'
       case InputType.TEL:
         return 'tel'
       case InputType.TEXT:
         return 'text'
+      case InputType.TIME:
+        return 'time'
       case InputType.URL:
         return 'url'
+      case InputType.WEEK:
+        return 'week'
     }
   }
 
@@ -300,13 +316,18 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
     switch (this.type) {
       case InputType.BUFFER:
         return undefined
-      case InputType.DATE:
       case InputType.NUMBER:
         return (this.store[this.path] as any) || 0
+      case InputType.DATE:
+      case InputType.DATE_TIME:
       case InputType.EMAIL:
+      case InputType.MONTH:
       case InputType.PASSWORD:
+      case InputType.SEARCH:
       case InputType.TEL:
+      case InputType.TIME:
       case InputType.URL:
+      case InputType.WEEK:
         return (this.store[this.path] as any) || ''
       case InputType.TEXT:
         switch (this.mode) {

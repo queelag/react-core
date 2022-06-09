@@ -28,6 +28,14 @@ export function VirtualizedList<T>(props: VirtualizedListProps<T>) {
   const innerRef = useSafeRef('div')
   const store = useComponentStore<VirtualizedListStore<T>>(VirtualizedListStore, { ...props, dummyRef, innerRef }, VIRTUALIZED_LIST_STORE_KEYS, 'ul')
 
+  const onItemsRendered = () => {
+    if (innerRef.current.className === props.innerClassName) {
+      return
+    }
+
+    innerRef.current.className = props.innerClassName || ''
+  }
+
   useEffect(() => {
     store.readItemElementHeightOrWidth()
     store.readParentElementHeightOrWidth()
@@ -44,10 +52,6 @@ export function VirtualizedList<T>(props: VirtualizedListProps<T>) {
 
     return () => window.removeEventListener('resize', listener)
   }, [])
-
-  useEffect(() => {
-    innerRef.current.className = props.innerClassName || ''
-  }, [props.innerClassName, innerRef])
 
   return (
     <ul
@@ -68,6 +72,7 @@ export function VirtualizedList<T>(props: VirtualizedListProps<T>) {
           itemKey={store.itemKey}
           itemSize={store.itemElementHeight}
           layout={store.orientation.toLowerCase() as Layout}
+          onItemsRendered={onItemsRendered}
           width={store.elementWidth}
         >
           {({ index, style }: ListChildComponentProps) => (

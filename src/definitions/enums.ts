@@ -119,12 +119,17 @@ export enum InputTouchTrigger {
 export enum InputType {
   BUFFER = 'BUFFER',
   DATE = 'DATE',
+  DATE_TIME = 'DATE_TIME',
   EMAIL = 'EMAIL',
+  MONTH = 'MONTH',
   NUMBER = 'NUMBER',
   PASSWORD = 'PASSWORD',
+  SEARCH = 'SEARCH',
   TEL = 'TEL',
   TEXT = 'TEXT',
-  URL = 'URL'
+  TIME = 'TIME',
+  URL = 'URL',
+  WEEK = 'WEEK'
 }
 
 export enum Layer {

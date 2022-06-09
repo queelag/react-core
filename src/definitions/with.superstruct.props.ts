@@ -41,6 +41,7 @@ export interface InputFileProps<T extends object> extends HTMLInputProps, WithFo
 
 /** @category Prop */
 export interface SelectProps<T extends object> extends HTMLDivProps, WithFormFieldProps<HTMLDivElement, SelectStore<T>, T> {
+  clearable?: boolean
   mode?: SelectMode
   options?: SelectOption[]
 }
