@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { MouseEvent, ReactNode } from 'react'
 import type { ComponentFormFieldStore } from '../modules/component.form.field.store'
 import type { CheckBoxStore } from '../stores/check.box.store'
 import type { InputFileStore } from '../stores/input.file.store'
@@ -12,7 +12,9 @@ import { HTMLDivProps, HTMLInputProps, HTMLLabelProps, HTMLSpanProps, HTMLTextAr
 import { WithFormFieldProps } from './with.superstruct.interfaces'
 
 /** @category Prop */
-export interface CheckBoxProps<T extends object> extends HTMLDivProps, WithFormFieldProps<HTMLDivElement, CheckBoxStore<T>, T> {}
+export interface CheckBoxProps<T extends object> extends HTMLDivProps, WithFormFieldProps<HTMLDivElement, CheckBoxStore<T>, T> {
+  onClick?: (event: MouseEvent<HTMLDivElement>, value?: boolean) => any
+}
 
 /** @category Prop */
 export interface FormFieldLabelProps<T extends ComponentFormFieldStore<U, V>, U extends Element, V extends object> extends HTMLLabelProps, WithIcon {
@@ -47,7 +49,9 @@ export interface SelectProps<T extends object> extends HTMLDivProps, WithFormFie
 }
 
 /** @category Prop */
-export interface SwitchProps<T extends object> extends HTMLDivProps, WithFormFieldProps<HTMLDivElement, SwitchStore<T>, T> {}
+export interface SwitchProps<T extends object> extends HTMLDivProps, WithFormFieldProps<HTMLDivElement, SwitchStore<T>, T> {
+  onClick?: (event: MouseEvent<HTMLDivElement>, value?: boolean) => any
+}
 
 /** @category Prop */
 export interface TextAreaProps<T extends object>
