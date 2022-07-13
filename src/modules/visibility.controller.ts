@@ -8,16 +8,11 @@ import { ModuleLogger } from '../loggers/module.logger'
  * ```typescript
  * import React, { useEffect } from 'react'
  * import { ModalProps, VisibilityController } from '@queelag/react-core'
- * import { makeObservable, observer } from 'mobx'
+ * import { observe } from '@queelag/state-manager'
+ * import { observer } from '@queelag/state-manager-react'
  *
- * class _ModalController extends VisibilityController {
- *   constructor() {
- *     super()
- *     makeObservable(this, { data: observable })
- *   }
- * }
- *
- * const ModalController = new _ModalController()
+ * const ModalController = new VisibilityController()
+ * observe(ModalController, ['data'])
  *
  * const Modal = observer((props: ModalProps) => {
  *   const onClickBackdrop = () => ModalController.hide(props.name)
@@ -36,7 +31,7 @@ import { ModuleLogger } from '../loggers/module.logger'
  *       <div className="content" style={{ position: 'absolute' }} />
  *     </div>
  *   )
- * })
+ * }, [ModalController])
  * ```
  *
  * @category Module
