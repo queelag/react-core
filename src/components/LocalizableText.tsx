@@ -10,26 +10,16 @@ import { ReactUtils } from '../utils/react.utils'
 export const LocalizableText = forwardRef(<T extends object>(props: HTMLElementProps & LocalizableTextProps<T>, ref: ForwardedRef<any>) => {
   const SANITIZE_CONFIG = useMemo<SanitizeConfig>(() => ({ ADD_ATTR: ['target'], ...props.sanitizeConfig }), [props.sanitizeConfig])
 
-  const renderLocalized = () => (
+  return (
     <props.element
       {...ObjectUtils.omit(props, LOCALIZABLE_TEXT_PROPS_KEYS)}
+      children={typeof props.path !== 'string' ? props.path || props.children : undefined}
       className={ReactUtils.joinClassNames(props.className, ColorPicker.textByString(props.color || '', props.layer))}
-      dangerouslySetInnerHTML={{ __html: sanitize(Localization.get(props.path as string, props.inject), SANITIZE_CONFIG) }}
+      dangerouslySetInnerHTML={
+        typeof props.path === 'string' ? { __html: sanitize(Localization.get(props.path as string, props.inject), SANITIZE_CONFIG) } : undefined
+      }
       ref={ref}
       style={{ whiteSpace: 'pre-wrap', ...props.style }}
     />
   )
-
-  const renderChildren = () => (
-    <props.element
-      {...ObjectUtils.omit(props, LOCALIZABLE_TEXT_PROPS_KEYS)}
-      className={ReactUtils.joinClassNames(props.className, ColorPicker.textByString(props.color || '', props.layer))}
-      ref={ref}
-      style={{ whiteSpace: 'pre-wrap', ...props.style }}
-    >
-      {props.path || props.children}
-    </props.element>
-  )
-
-  return typeof props.path === 'string' ? renderLocalized() : renderChildren()
 })
