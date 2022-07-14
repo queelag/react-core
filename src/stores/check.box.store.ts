@@ -12,7 +12,7 @@ import { ComponentFormFieldStore } from '../modules/component.form.field.store'
  */
 export class CheckBoxStore<T extends object> extends ComponentFormFieldStore<HTMLDivElement, T> {
   constructor(props: CheckBoxProps<T> & ComponentFormFieldStoreProps<HTMLDivElement, T>) {
-    super(ComponentName.CHECKBOX, props)
+    super(ComponentName.CHECK_BOX, props)
 
     this.validate()
   }

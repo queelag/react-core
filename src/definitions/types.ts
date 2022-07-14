@@ -1,5 +1,7 @@
-import { ClassAttributes, RefAttributes } from 'react'
+import { ClassAttributes, ReactElement, RefAttributes } from 'react'
 import type { DirectionHorizontal } from './enums'
+
+export type OmitElement<T extends { element?: (props: any) => ReactElement }> = Omit<T, 'element'>
 
 export type OmitLegacyRef<U extends ClassAttributes<T>, T = any> = Omit<U, 'ref'> & RefAttributes<T>
 

@@ -33,7 +33,7 @@ export enum ComponentName {
   BADGE = 'BADGE',
   BOTTOM_TABBER = 'BOTTOM_TABBER',
   BUTTON = 'BUTTON',
-  CHECKBOX = 'CHECKBOX',
+  CHECK_BOX = 'CHECK_BOX',
   DIVIDER = 'DIVIDER',
   FORM = 'FORM',
   ICON = 'ICON',

@@ -8,7 +8,7 @@ import type { SwitchStore } from '../stores/switch.store'
 import type { TextAreaStore } from '../stores/text.area.store'
 import type { InputFileMode, InputMode, InputTouchTrigger, InputType, SelectMode, TextAreaMode, TextAreaTouchTrigger } from './enums'
 import { SelectOption, WithIcon } from './interfaces'
-import { HTMLDivProps, HTMLInputProps, HTMLLabelProps, HTMLSpanProps, HTMLTextAreaProps } from './props'
+import { HTMLDivProps, HTMLInputProps, HTMLLabelProps, HTMLSpanProps, HTMLTextAreaProps, IconProps } from './props'
 import { WithFormFieldProps } from './with.superstruct.interfaces'
 
 /** @category Prop */
@@ -17,7 +17,9 @@ export interface CheckBoxProps<T extends object> extends HTMLDivProps, WithFormF
 }
 
 /** @category Prop */
-export interface FormFieldLabelProps<T extends ComponentFormFieldStore<U, V>, U extends Element, V extends object> extends HTMLLabelProps, WithIcon {
+export interface FormFieldLabelProps<T extends ComponentFormFieldStore<U, V>, U extends Element, V extends object, IP = IconProps>
+  extends HTMLLabelProps,
+    WithIcon<IP> {
   store?: T
   value?: string
 }

@@ -7,7 +7,6 @@ import { forwardRef } from '../modules/forward.ref'
 import { AvatarStore } from '../stores/avatar.store'
 import { ReactUtils } from '../utils/react.utils'
 import { ShapeUtils } from '../utils/shape.utils'
-import { Image } from './Image'
 
 /**
  * A component that can display an icon, image or text.
@@ -55,12 +54,12 @@ export const Avatar = forwardRef((props: AvatarProps, ref: ForwardedRef<HTMLDivE
           style={{ ...props.iconProps?.style, position: 'absolute' }}
         />
       )}
-      {props.image && <Image {...props.imageProps} size={store.size} src={props.image} style={{ ...props.imageProps?.style, zIndex: 10 }} />}
+      {props.image && <props.image {...props.imageProps} size={store.size} style={{ zIndex: 10, ...props.imageProps?.style }} />}
       {props.text && (
         <span
           {...props.textProps}
           className={ReactUtils.joinClassNames(props.textProps?.className, store.color)}
-          style={{ fontSize: store.textSize, textTransform: 'uppercase', ...props.textProps?.style, position: 'absolute' }}
+          style={{ fontSize: store.textSize, textTransform: 'uppercase', position: 'absolute', ...props.textProps?.style }}
         >
           {props.text}
         </span>

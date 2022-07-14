@@ -58,7 +58,7 @@ export class FormStore extends ComponentStore<HTMLFormElement> {
    * An array of child CheckBox stores.
    */
   get checkBoxStores(): CheckBoxStore<any>[] {
-    return [...this.element.querySelectorAll(`[id^='${ComponentName.CHECKBOX}']`)]
+    return [...this.element.querySelectorAll(`[id^='${ComponentName.CHECK_BOX}']`)]
       .map((v: Element) => CheckBoxCollector.get(v.id))
       .filter((v: CheckBoxStore<any>) => v instanceof CheckBoxStore)
   }

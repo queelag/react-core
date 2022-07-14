@@ -3,18 +3,18 @@ import { Config as SanitizeConfig } from 'isomorphic-dompurify'
 import { LegacyRef, MutableRefObject, ReactElement, ReactNode } from 'react'
 import type { ComponentStore } from '../modules/component.store'
 import type { Color, FeedbackType, Layer, Orientation, Shape, Size, Theme } from './enums'
-import { IconProps, WizardStepContentProps } from './props'
+import { AvatarProps, IconProps, ImageProps, WizardStepContentProps } from './props'
 import { SelectOptionValue } from './types'
 
 export interface AppearanceData {
   theme: Theme
 }
 
-export interface BottomSheetItem<T> extends WithDescription, WithIcon, WithRoute<T>, WithTitle {
+export interface BottomSheetItem<T, IP = IconProps> extends WithColor, WithDescription, WithIcon<IP>, WithRoute<T>, WithTitle {
   onClick?: () => any
 }
 
-export interface BottomTabberItem<T> extends WithIcon, Required<WithRoute<T>> {}
+export interface BottomTabberItem<T, IP = IconProps> extends WithIcon<IP>, Required<WithRoute<T>> {}
 
 export interface ColorPickerConfigurationValue {
   any: (color: Color) => [string, string, string, string]
@@ -48,11 +48,11 @@ export interface ConfigurationData {
   }
 }
 
-export interface ContextMenuItem<T> extends WithIcon, WithRoute<T>, WithTitle {
+export interface ContextMenuItem<T, IP = IconProps> extends WithIcon<IP>, WithRoute<T>, WithTitle {
   onClick?: () => any
 }
 
-export interface DisclosureItem extends WithDescription, WithIcon, WithTitle {
+export interface DisclosureItem<IP = IconProps> extends WithDescription, WithIcon<IP>, WithTitle {
   children?: ReactNode
   expanded?: boolean
 }
@@ -67,7 +67,7 @@ export interface InputFileItem {
   type: string
 }
 
-export interface OnboardingItem extends WithDescription, WithIcon, WithImage, WithTitle {}
+export interface OnboardingItem<ICP = IconProps, IMP = ImageProps> extends WithDescription, WithIcon<ICP>, WithImage<IMP>, WithTitle {}
 
 export interface Sanitize<T extends SanitizeConfig = SanitizeConfig> {
   config: T
@@ -78,16 +78,16 @@ export interface SelectOption {
   value: SelectOptionValue
 }
 
-export interface SidebarItem<T> extends WithIcon, Required<WithRoute<T>> {}
+export interface SidebarItem<T, IP = IconProps> extends WithIcon<IP>, Required<WithRoute<T>> {}
 
 export interface TopTabberItem {
   children: ReactNode
   name: string
 }
 
-export interface WithAvatar {
-  avatar?: string
-  avatarProps?: string
+export interface WithAvatar<P = AvatarProps> {
+  avatar?: (props: P) => ReactElement
+  avatarProps?: P
 }
 
 export interface WithBackground extends WithLayer {
@@ -122,14 +122,14 @@ export interface WithHeader {
   header?: ReactNode
 }
 
-export interface WithIcon {
-  icon?: (props: IconProps) => JSX.Element
-  iconProps?: IconProps
+export interface WithIcon<P = IconProps> {
+  icon?: (props: P) => ReactElement
+  iconProps?: P
 }
 
-export interface WithImage<T = any> {
-  image?: string
-  imageProps?: T
+export interface WithImage<P = ImageProps> {
+  image?: (props: P) => ReactElement
+  imageProps?: P
 }
 
 export interface WithLayer {

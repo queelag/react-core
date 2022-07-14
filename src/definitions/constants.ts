@@ -30,6 +30,7 @@ import {
   DividerProps,
   EmptyProps,
   FormProps,
+  HeaderProps,
   IconProps,
   ImageProps,
   ListItemProps,
@@ -151,6 +152,9 @@ export const FORM_PROPS_KEYS: (keyof FormProps)[] = ['disabled', 'getStore']
 
 /** @category Constant */
 export const FORM_STORE_KEYS: (keyof FormProps & keyof FormStore)[] = ['disabled', 'onSubmit']
+
+/** @category Constant */
+export const HEADER_PROPS_KEYS: (keyof HeaderProps)[] = ['canNavigateBack', 'description', 'logo', 'onClickBack', 'title']
 
 /** @category Constant */
 export const ICON_PROPS_KEYS: (keyof IconProps)[] = ['color', 'getStore', 'layer', 'size', 'src', 'thickness']

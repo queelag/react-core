@@ -1,4 +1,4 @@
-import { FormEvent, MutableRefObject, ReactNode } from 'react'
+import { FormEvent, MutableRefObject, ReactElement, ReactNode } from 'react'
 import type { AvatarStore } from '../stores/avatar.store'
 import type { BadgeStore } from '../stores/badge.store'
 import type { BottomTabberStore } from '../stores/bottom.tabber.store'
@@ -44,7 +44,7 @@ import {
   WithTooltip,
   WizardStepPartial
 } from './interfaces'
-import { OmitLegacyRef, OmitTitle, StatisticValue, WizardOnStepChange } from './types'
+import { OmitElement, OmitLegacyRef, OmitTitle, StatisticValue, WizardOnStepChange } from './types'
 
 /** @category Prop */
 export interface AlertProps extends OmitTitle<HTMLDivProps>, WithDescription, WithFeedbackType, WithTitle {}
@@ -56,13 +56,13 @@ export interface AlertDialogProps extends DialogProps, WithDestructive {
 }
 
 /** @category Prop */
-export interface AvatarProps
+export interface AvatarProps<ICP = IconProps, IMP = ImageProps>
   extends HTMLDivProps,
     WithBackground,
     WithColor,
     WithGetStore<HTMLDivElement, AvatarStore>,
-    WithIcon,
-    WithImage<ImageProps>,
+    WithIcon<ICP>,
+    WithImage<IMP>,
     WithShape {
   size?: number
   text?: string
@@ -87,13 +87,13 @@ export interface BottomTabberProps<T> extends HTMLDivProps, WithGetStore<HTMLDiv
 }
 
 /** @category Prop */
-export interface ButtonProps
+export interface ButtonProps<IP = IconProps>
   extends OmitTitle<HTMLButtonProps>,
     WithBackground,
     WithColor,
     WithDestructive,
     WithGetStore<HTMLButtonElement, ButtonStore>,
-    WithIcon,
+    WithIcon<IP>,
     WithShape,
     WithSize,
     WithTitle,
@@ -103,7 +103,7 @@ export interface ButtonProps
 }
 
 /** @category Prop */
-export interface CardProps<T = any> extends OmitTitle<HTMLDivProps>, WithDescription, WithFooter, WithHeader, WithImage<T>, WithTitle {}
+export interface CardProps<IP = ImageProps> extends OmitTitle<HTMLDivProps>, WithDescription, WithFooter, WithHeader, WithImage<IP>, WithTitle {}
 
 /** @category Prop */
 export interface ColorableDivProps extends HTMLDivProps, WithLayer {
@@ -134,7 +134,7 @@ export interface DisclosureProps extends HTMLDListProps {
 export interface DividerProps extends HTMLDivProps, WithColor, WithGetStore<HTMLDivElement, DividerStore>, WithOrientation {}
 
 /** @category Prop */
-export interface EmptyProps extends OmitTitle<HTMLDivProps>, WithDescription, WithIcon, WithTitle {}
+export interface EmptyProps<IP = IconProps> extends OmitTitle<HTMLDivProps>, WithDescription, WithIcon<IP>, WithTitle {}
 
 /** @category Prop */
 export interface FormProps extends Omit<HTMLFormProps, 'onSubmit'>, WithGetStore<HTMLFormElement, FormStore> {
@@ -143,7 +143,16 @@ export interface FormProps extends Omit<HTMLFormProps, 'onSubmit'>, WithGetStore
 }
 
 /** @category Prop */
+export interface HeaderProps extends OmitTitle<HTMLDivProps>, WithDescription, WithTitle {
+  canNavigateBack?: boolean
+  logo?: ReactElement
+  onClickBack?: () => any
+}
+
+/** @category Prop */
 export interface HTMLAnchorProps extends OmitLegacyRef<JSX.IntrinsicElements['a']> {}
+/** @category Prop */
+export interface HTMLBoldProps extends OmitLegacyRef<JSX.IntrinsicElements['b']> {}
 /** @category Prop */
 export interface HTMLButtonProps extends OmitLegacyRef<JSX.IntrinsicElements['button']> {}
 /** @category Prop */
@@ -211,28 +220,31 @@ export interface ListProps<T> extends HTMLUListProps, WithGetStore<HTMLUListElem
 }
 
 /** @category Prop */
-export interface ListItemProps<T> extends OmitTitle<HTMLLIProps>, WithAvatar, WithDescription, WithImage<T>, WithTitle {}
+export interface ListItemProps<AP = AvatarProps, IP = ImageProps> extends OmitTitle<HTMLLIProps>, WithAvatar<AP>, WithDescription, WithImage<IP>, WithTitle {}
 
 /** @category Prop */
 export interface LoadingProps extends OmitTitle<HTMLDivProps>, WithDescription, WithTitle {}
 
 /** @category Prop */
-export interface LocalizableHeadingProps<T extends object> extends HTMLHeadingProps, Omit<LocalizableTextProps<T>, 'element'> {
+export interface LocalizableBoldProps<T extends object> extends HTMLBoldProps, OmitElement<LocalizableTextProps<T>> {}
+
+/** @category Prop */
+export interface LocalizableHeadingProps<T extends object> extends HTMLHeadingProps, OmitElement<LocalizableTextProps<T>> {
   variant?: HeadingVariant
 }
 
 /** @category Prop */
-export interface LocalizableLabelProps<T extends object> extends HTMLLabelProps, Omit<LocalizableTextProps<T>, 'element'> {}
+export interface LocalizableLabelProps<T extends object> extends HTMLLabelProps, OmitElement<LocalizableTextProps<T>> {}
 
 /** @category Prop */
-export interface LocalizableParagraphProps<T extends object> extends HTMLParagraphProps, Omit<LocalizableTextProps<T>, 'element'> {}
+export interface LocalizableParagraphProps<T extends object> extends HTMLParagraphProps, OmitElement<LocalizableTextProps<T>> {}
 
 /** @category Prop */
-export interface LocalizableSpanProps<T extends object> extends HTMLSpanProps, Omit<LocalizableTextProps<T>, 'element'> {}
+export interface LocalizableSpanProps<T extends object> extends HTMLSpanProps, OmitElement<LocalizableTextProps<T>> {}
 
 /** @category Prop */
 export interface LocalizableTextProps<T extends object> extends WithColor, WithLocalizationProps<T>, WithSanitize {
-  element: (props: any) => JSX.Element
+  element: (props: any) => ReactElement
 }
 
 export interface MeterProps extends HTMLDivProps, WithColor, WithShape, WithSize {
@@ -254,12 +266,12 @@ export interface ParentProps {
 }
 
 /** @category Prop */
-export interface ResultProps extends OmitTitle<HTMLDivProps>, WithDescription, WithFeedbackType, WithIcon, WithTitle {}
+export interface ResultProps<IP = IconProps> extends OmitTitle<HTMLDivProps>, WithDescription, WithFeedbackType, WithIcon<IP>, WithTitle {}
 
 /** @category Prop */
 export interface RouterRendererProps extends HTMLDivProps {
-  fallback?: () => JSX.Element
-  map: Map<string, () => JSX.Element>
+  fallback?: () => ReactElement
+  map: Map<string, () => ReactElement>
   route: string
 }
 
@@ -280,7 +292,7 @@ export interface SidebarProps<T> extends OmitTitle<HTMLDivProps>, WithFooter, Wi
 export interface SpinnerProps extends IconProps {}
 
 /** @category Prop */
-export interface StatisticProps extends OmitTitle<HTMLDivProps>, WithFeedbackType, WithIcon, WithTitle {
+export interface StatisticProps<IP = IconProps> extends OmitTitle<HTMLDivProps>, WithFeedbackType, WithIcon<IP>, WithTitle {
   progress?: number
   reference?: StatisticValue
   value?: StatisticValue
@@ -290,7 +302,7 @@ export interface StatisticProps extends OmitTitle<HTMLDivProps>, WithFeedbackTyp
 export interface SVGElementProps extends OmitLegacyRef<JSX.IntrinsicElements['svg']> {}
 
 /** @category Prop */
-export interface TagProps extends HTMLDivProps, WithBackground, WithColor, WithGetStore<HTMLDivElement, TagStore>, WithIcon, WithLayer {
+export interface TagProps<IP = IconProps> extends HTMLDivProps, WithBackground, WithColor, WithGetStore<HTMLDivElement, TagStore>, WithIcon<IP>, WithLayer {
   destroyable?: boolean
   destroyed?: boolean
   onDestroy?: () => any
@@ -311,7 +323,7 @@ export interface VirtualizedListProps<T> extends HTMLUListProps, WithGetStore<HT
   itemParentProps?: HTMLDivProps
   items?: T[]
   size?: number
-  renderItem?: (v: T, k: number) => JSX.Element
+  renderItem?: (value: T, key: number) => ReactElement
 }
 
 export interface VirtualizedListStoreProps<T> extends VirtualizedListProps<T> {
