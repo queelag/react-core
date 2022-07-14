@@ -1,6 +1,6 @@
 import { NumberUtils, TextCodec } from '@queelag/core'
 import { ChangeEvent, HTMLInputTypeAttribute, KeyboardEvent } from 'react'
-import { ComponentName, InputMode, InputTouchTrigger, InputType } from '../definitions/enums'
+import { ComponentLifeCycle, ComponentName, InputMode, InputTouchTrigger, InputType } from '../definitions/enums'
 import { ComponentFormFieldStoreProps } from '../definitions/with.superstruct.interfaces'
 import { InputProps } from '../definitions/with.superstruct.props'
 import { StoreLogger } from '../loggers/store.logger'
@@ -46,6 +46,14 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
     this.query = ''
     this.touchTrigger = props.touchTrigger || InputTouchTrigger.BLUR
     this.type = props.type || InputType.TEXT
+
+    this.mount = () => {
+      if (this.isTypeBuffer) {
+        this.detachInputFromReact(props)
+      }
+
+      this.life = ComponentLifeCycle.MOUNTED
+    }
   }
 
   /** @internal */
@@ -60,10 +68,11 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
     input.type = this.lowercaseType
 
     input.addEventListener('blur', this.onBlur)
-    input.addEventListener('change', this.onChange as any)
     input.addEventListener('focus', this.onFocus)
+    input.addEventListener('input', this.onChange as any)
 
     this.element.replaceWith(input)
+    this.ref.current = input
 
     props.autoFocus && input.focus()
   }
@@ -75,7 +84,7 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
     switch (this.type) {
       case InputType.BUFFER:
         this.store[this.path] = TextCodec.encode(event.target.value) as any
-        StoreLogger.debug(this.id, 'onChange', this.type, `The value has been set.`, this.value)
+        StoreLogger.debug(this.id, 'onChange', this.type, `The value has been set.`, this.store[this.path])
 
         break
       case InputType.DATE:
@@ -219,11 +228,11 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
    */
   onClickToggleObscuration = (): void => {
     this.obscured = !this.obscured
-    StoreLogger.verbose(this.id, 'onClickToggleObscuration', `The obscuration has been set to ${this.obscured}.`)
+    StoreLogger.debug(this.id, 'onClickToggleObscuration', `The obscuration has been set to ${this.obscured}.`)
 
     if (this.isTypeBuffer) {
-      this.element.type = this.obscured ? 'password' : 'text'
-      StoreLogger.verbose(this.id, 'onClickToggleObscuration', `The element type has been set to ${this.element.type}.`)
+      this.element.type = this.isObscured ? 'password' : 'text'
+      StoreLogger.debug(this.id, 'onClickToggleObscuration', `The element type has been set to ${this.element.type}.`)
     }
 
     this.dispatch()
@@ -293,7 +302,7 @@ export class InputStore<T extends object> extends ComponentFormFieldStore<HTMLIn
         return 'number'
       case InputType.BUFFER:
       case InputType.PASSWORD:
-        return this.obscured ? 'password' : 'text'
+        return this.isObscured ? 'password' : 'text'
       case InputType.SEARCH:
         return 'search'
       case InputType.TEL:
